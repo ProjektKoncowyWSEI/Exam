@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "font-awesome": "4.7.0",
+    "jquery": "^3.1.1",
+    "jquery-lazyload": "^1.9.7",
+    "jquery-validation": "^1.19.0",
+    "jquery-validation-unobtrusive": "^3.2.11",
+    "jquery-geolocate": "0.1.4",
+    "shufflejs": "^4.0.2",
+    "bootstrap": "3.3.7"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-concat-css": "^3.1.0",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-install": "^1.1.0",
+    "gulp-less": "^3.1.0",
+    "gulp-minify": "^3.1.0",
+    "gulp-npm-dist": "^0.1.6",
+    "gulp-rename": "^1.2.2",
+    "pump": "^1.0.1",
+    "bootstrap": "3.3.7"
+  }
+}
