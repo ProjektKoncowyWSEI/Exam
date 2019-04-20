@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exam", "Exam\Exam.csproj", "{48440E2B-6201-42DC-B24D-FC7CA2DB52E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exam", "Exam\Exam.csproj", "{48440E2B-6201-42DC-B24D-FC7CA2DB52E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamMailSenderAPI", "ExamMailSenderAPI\ExamMailSenderAPI.csproj", "{901EF860-D15C-4F65-A31A-B0780D996C81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamTutorialsAPI", "ExamTutorialsAPI\ExamTutorialsAPI.csproj", "{819A0CC8-9B73-40D9-9E01-9DF29F8E85E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamMainDataBaseAPI", "ExamMainDataBaseAPI\ExamMainDataBaseAPI.csproj", "{D44DAB3A-7889-40EE-BC24-DF8639C872B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{48440E2B-6201-42DC-B24D-FC7CA2DB52E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48440E2B-6201-42DC-B24D-FC7CA2DB52E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48440E2B-6201-42DC-B24D-FC7CA2DB52E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{901EF860-D15C-4F65-A31A-B0780D996C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{901EF860-D15C-4F65-A31A-B0780D996C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{901EF860-D15C-4F65-A31A-B0780D996C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{901EF860-D15C-4F65-A31A-B0780D996C81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{819A0CC8-9B73-40D9-9E01-9DF29F8E85E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{819A0CC8-9B73-40D9-9E01-9DF29F8E85E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{819A0CC8-9B73-40D9-9E01-9DF29F8E85E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{819A0CC8-9B73-40D9-9E01-9DF29F8E85E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D44DAB3A-7889-40EE-BC24-DF8639C872B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D44DAB3A-7889-40EE-BC24-DF8639C872B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D44DAB3A-7889-40EE-BC24-DF8639C872B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D44DAB3A-7889-40EE-BC24-DF8639C872B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
