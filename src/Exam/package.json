@@ -7,9 +7,10 @@
     "jquery-validation-unobtrusive": "^3.2.11",
     "jquery-geolocate": "0.1.4",
     "shufflejs": "^4.0.2",
-    "bootstrap": "3.3.7"
+    "bootstrap": "4.3.1"
   },
   "devDependencies": {
+    "bootstrap": "4.3.1",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-concat-css": "^3.1.0",
@@ -19,7 +20,6 @@
     "gulp-minify": "^3.1.0",
     "gulp-npm-dist": "^0.1.6",
     "gulp-rename": "^1.2.2",
-    "pump": "^1.0.1",
-    "bootstrap": "3.3.7"
+    "pump": "^1.0.1"
   }
 }
