@@ -28,8 +28,7 @@ namespace ExamMainDataBaseAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=ExamQuestionsDb;Trusted_Connection=True;ConnectRetryCount=0";
-            services.AddDbContext<ExamQuestionsDbContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<ExamQuestionsDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
