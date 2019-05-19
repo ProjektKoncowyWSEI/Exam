@@ -26,7 +26,7 @@ namespace ExamMainDataBaseAPI.Services
 
         public async Task DeleteQuestion(int id)
         {
-            var questions = await this.context.Questions.FindAsync(id);
+            var questions = await context.Questions.FindAsync(id);
             if (questions != null)
             {
                 context.Questions.Remove(questions);

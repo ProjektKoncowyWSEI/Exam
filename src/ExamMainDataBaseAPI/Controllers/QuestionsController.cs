@@ -38,24 +38,24 @@ namespace ExamMainDataBaseAPI.Controllers
             return questions;
         }
 
-        //// PUT: api/Questions/5
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> UpdateQuestion(int id, Questions questions)
-        //{
-        //    if (id == questions.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+        // PUT: api/Questions/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateQuestion(int id, Questions questions)
+        {
+            if (id == questions.Id)
+            {
+                return BadRequest();
+            }
 
-        //    await _questionsServices.UdpateQuestion(id, questions);
-          
+            await _questionsServices.UpdateQuestion(id, questions);
 
-        //    return NoContent();
-        //}
+
+            return NoContent();
+        }
 
         // POST: api/Questions
         [HttpPost]
-        public async Task<ActionResult<Questions>> PostQuestions(Questions questions)
+        public async Task<ActionResult<Questions>> AddQuestions(Questions questions)
         {
             await _questionsServices.AddQuestion(questions);
 
@@ -64,9 +64,10 @@ namespace ExamMainDataBaseAPI.Controllers
 
         // DELETE: api/Questions/5
         [HttpDelete("{id}")]
-        public async Task DeleteQuestions(int id)
+        public async Task<ActionResult> DeleteQuestions(int id)
         {
             await _questionsServices.DeleteQuestion(id);
+            return Content("OK");
         }
     }
 }
