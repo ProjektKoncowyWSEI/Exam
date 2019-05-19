@@ -13,11 +13,11 @@ namespace ExamMainDataBaseAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class QuestionsController : ControllerBase
+    public class QuestionsController : Controller
     {
         private IQuestionsServices _questionsServices;
 
-        public QuestionsController(QuestionsServices questionsServices)
+        public QuestionsController(IQuestionsServices questionsServices)
         {
             _questionsServices = questionsServices;
         }

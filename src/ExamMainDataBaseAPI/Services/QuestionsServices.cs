@@ -20,8 +20,8 @@ namespace ExamMainDataBaseAPI.Services
 
         public async Task AddQuestion(Questions questions)
         {
-            this.context.Questions.Add(questions);
-            await this.context.SaveChangesAsync();
+            context.Questions.Add(questions);
+            await context.SaveChangesAsync();
         }
 
         public async Task DeleteQuestion(int id)
@@ -29,29 +29,29 @@ namespace ExamMainDataBaseAPI.Services
             var questions = await this.context.Questions.FindAsync(id);
             if (questions != null)
             {
-                this.context.Questions.Remove(questions);
-                await this.context.SaveChangesAsync();
+                context.Questions.Remove(questions);
+                await context.SaveChangesAsync();
             }
         }
 
         public Task<Questions> GetQuestion(int id)
         {
-            return this.context.Questions.FindAsync(id);
+            return context.Questions.FindAsync(id);
         }
 
         public async Task<List<Questions>> GetQuestions()
         {
-            return await this.context.Questions.ToListAsync();
+            return await context.Questions.ToListAsync();
         }
 
         public bool QuestionExists(int id)
         {
-            return this.context.Questions.Any(e => e.Id == id);
+            return context.Questions.Any(e => e.Id == id);
         }
 
         public async Task UpdateQuestion(int id, Questions item)
         {
-            var question = await this.context.Questions.FindAsync(id);
+            var question = await context.Questions.FindAsync(id);
             if (question != null)
             {
                 question.Question = item.Question;
@@ -59,7 +59,7 @@ namespace ExamMainDataBaseAPI.Services
                 question.Image = item.Image;
                 question.QuestionAnswer = item.QuestionAnswer;
 
-                this.context.Entry(question).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                context.Entry(question).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 await this.context.SaveChangesAsync();
             }
         }

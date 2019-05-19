@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ExamMainDataBaseAPI.Services.Interface
 {
-    interface IQuestionsServices
+   public interface IQuestionsServices
     {
         Task AddQuestion(Questions questions);
 

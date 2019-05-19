@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -12,10 +13,10 @@ namespace ExamMainDataBaseAPI.Models
         {
         }
 
-        public virtual DbSet<Answer> Answer { get; set; }
-        public virtual DbSet<AnswersType> AnswersType { get; set; }
-        public virtual DbSet<QuestionAnswer> QuestionAnswer { get; set; }
-        public virtual DbSet<Questions> Questions { get; set; }
+        public DbSet<Answer> Answer { get; set; }
+        public DbSet<AnswersType> AnswersType { get; set; }
+        public DbSet<QuestionAnswer> QuestionAnswer { get; set; }
+        public DbSet<Questions> Questions { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
