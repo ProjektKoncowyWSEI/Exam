@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ExamMainDataBaseAPI.Models;
+using ExamMainDataBaseAPI.Services;
+using ExamMainDataBaseAPI.Services.Interface;
 
 namespace ExamMainDataBaseAPI.Controllers
 {
@@ -13,93 +15,58 @@ namespace ExamMainDataBaseAPI.Controllers
     [ApiController]
     public class QuestionsController : ControllerBase
     {
-        private readonly ExamQuestionsDbContext _context;
+        private IQuestionsServices _questionsServices;
 
-        public QuestionsController(ExamQuestionsDbContext context)
+        public QuestionsController(QuestionsServices questionsServices)
         {
-            _context = context;
+            _questionsServices = questionsServices;
         }
 
         // GET: api/Questions
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Questions>>> GetQuestions()
         {
-            return await _context.Questions.ToListAsync();
+            return await _questionsServices.GetQuestions();
         }
 
         // GET: api/Questions/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Questions>> GetQuestions(int id)
+        public async Task<ActionResult<Questions>> GetQuestion(int id)
         {
-            var questions = await _context.Questions.FindAsync(id);
-
-            if (questions == null)
-            {
-                return NotFound();
-            }
+            var questions = await _questionsServices.GetQuestion(id);
 
             return questions;
         }
 
-        // PUT: api/Questions/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutQuestions(int id, Questions questions)
-        {
-            if (id != questions.Id)
-            {
-                return BadRequest();
-            }
+        //// PUT: api/Questions/5
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> UpdateQuestion(int id, Questions questions)
+        //{
+        //    if (id == questions.Id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            _context.Entry(questions).State = EntityState.Modified;
+        //    await _questionsServices.UdpateQuestion(id, questions);
+          
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!QuestionsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         // POST: api/Questions
         [HttpPost]
         public async Task<ActionResult<Questions>> PostQuestions(Questions questions)
         {
-            _context.Questions.Add(questions);
-            await _context.SaveChangesAsync();
+            await _questionsServices.AddQuestion(questions);
 
             return CreatedAtAction("GetQuestions", new { id = questions.Id }, questions);
         }
 
         // DELETE: api/Questions/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Questions>> DeleteQuestions(int id)
+        public async Task DeleteQuestions(int id)
         {
-            var questions = await _context.Questions.FindAsync(id);
-            if (questions == null)
-            {
-                return NotFound();
-            }
-
-            _context.Questions.Remove(questions);
-            await _context.SaveChangesAsync();
-
-            return questions;
-        }
-
-        private bool QuestionsExists(int id)
-        {
-            return _context.Questions.Any(e => e.Id == id);
+            await _questionsServices.DeleteQuestion(id);
         }
     }
 }

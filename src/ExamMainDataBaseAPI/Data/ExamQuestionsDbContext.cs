@@ -6,9 +6,6 @@ namespace ExamMainDataBaseAPI.Models
 {
     public partial class ExamQuestionsDbContext : DbContext
     {
-        public ExamQuestionsDbContext()
-        {
-        }
 
         public ExamQuestionsDbContext(DbContextOptions<ExamQuestionsDbContext> options)
             : base(options)
@@ -20,14 +17,6 @@ namespace ExamMainDataBaseAPI.Models
         public virtual DbSet<QuestionAnswer> QuestionAnswer { get; set; }
         public virtual DbSet<Questions> Questions { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ExamQuestionsDb;Trusted_Connection=True;");
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
