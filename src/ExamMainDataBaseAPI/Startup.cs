@@ -33,7 +33,8 @@ namespace ExamMainDataBaseAPI
                 .AddJsonFormatters()
                 .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
             services.AddDbContext<ExamQuestionsDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<IQuestionsServices, QuestionsServices>();
+            services.AddScoped<IQuestionsServices, QuestionsServices>();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
            
             
         }
