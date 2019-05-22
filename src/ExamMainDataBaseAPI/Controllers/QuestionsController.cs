@@ -55,7 +55,7 @@ namespace ExamMainDataBaseAPI.Controllers
 
         // POST: api/Questions
         [HttpPost]
-        public async Task<ActionResult<Questions>> AddQuestions(Questions questions)
+        public async Task<ActionResult> AddQuestions(Questions questions)
         {
             await _questionsServices.AddQuestion(questions);
 

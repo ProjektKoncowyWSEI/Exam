@@ -49,9 +49,9 @@ namespace ExamMainDataBaseAPI.Services
             return context.Questions.Any(e => e.Id == id);
         }
 
-        public async Task UpdateQuestion(int id, Questions item)
+        public async Task UpdateQuestion(int id,Questions item)
         {
-            var question = await context.Questions.FindAsync(id);
+            var question = await context.Questions.FindAsync(item.Id);
             if (question != null)
             {
                 question.Question = item.Question;
