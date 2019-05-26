@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExamMainDataBaseAPI.Models
 {
@@ -9,7 +10,7 @@ namespace ExamMainDataBaseAPI.Models
         {
             QuestionAnswer = new HashSet<QuestionAnswer>();
         }
-
+        
         public int Id { get; set; }
         public string Answer1 { get; set; }
 

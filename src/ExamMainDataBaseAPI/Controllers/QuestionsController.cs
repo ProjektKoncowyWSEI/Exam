@@ -15,26 +15,29 @@ namespace ExamMainDataBaseAPI.Controllers
     [ApiController]
     public class QuestionsController : Controller
     {
-        private IQuestionsServices _questionsServices;
+        private Repository_Unit_of_Work uow = null;
 
-        public QuestionsController(IQuestionsServices questionsServices)
+        public QuestionsController(DbContextOptions<ExamQuestionsDbContext> options)
         {
-            _questionsServices = questionsServices;
+            uow = new Repository_Unit_of_Work(options);
         }
-
+     
         // GET: api/Questions
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Questions>>> GetQuestions()
         {
-            return await _questionsServices.GetQuestions();
+            return await uow.QuestionsRepository.GetQuestions();
         }
 
         // GET: api/Questions/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Questions>> GetQuestion(int id)
         {
-            var questions = await _questionsServices.GetQuestion(id);
-
+            var questions = await uow.QuestionsRepository.GetQuestion(id);
+            if (questions == null)
+            {
+                return NotFound();
+            }
             return questions;
         }
 
@@ -47,18 +50,18 @@ namespace ExamMainDataBaseAPI.Controllers
                 return BadRequest();
             }
 
-            await _questionsServices.UpdateQuestion(id, questions);
+            await uow.QuestionsRepository.UpdateQuestion(id, questions);
+            uow.SaveChanges();
 
-
-            return NoContent();
+            return Content("PutSucces");
         }
 
         // POST: api/Questions
         [HttpPost]
         public async Task<ActionResult<Questions>> AddQuestions(Questions questions)
         {
-            await _questionsServices.AddQuestion(questions);
-
+            await uow.QuestionsRepository.AddQuestion(questions);
+            uow.SaveChanges();
             return CreatedAtAction("GetQuestions", new { id = questions.Id }, questions);
         }
 
@@ -66,8 +69,9 @@ namespace ExamMainDataBaseAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteQuestions(int id)
         {
-            await _questionsServices.DeleteQuestion(id);
-            return Content("OK");
+            await uow.QuestionsRepository.DeleteQuestion(id);
+            uow.SaveChanges();
+            return Content("DeleteSucces");
         }
     }
 }
