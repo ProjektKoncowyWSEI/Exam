@@ -1,4 +1,5 @@
 ﻿using ExamMainDataBaseAPI.DAL.Interface;
+using ExamMainDataBaseAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
