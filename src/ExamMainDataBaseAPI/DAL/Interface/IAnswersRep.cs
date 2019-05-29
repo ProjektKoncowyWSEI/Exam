@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExamMainDataBaseAPI.DAL.Interface
 {
-    interface IAnswersRep : IRepository<Answer>
+   public interface IAnswersRep : IRepository<Answer>
     {
     }
 }
