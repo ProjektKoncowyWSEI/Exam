@@ -19,7 +19,7 @@ namespace ExamMainDataBaseAPI.Services.Interface
 
          bool QuestionExists(int id);
 
-         Task UpdateQuestion(int id,Questions item);
+         Task UpdateQuestion(int id, Questions item);
     }
 }
 

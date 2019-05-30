@@ -8,33 +8,41 @@ using Microsoft.EntityFrameworkCore;
 using ExamMainDataBaseAPI.Models;
 using ExamMainDataBaseAPI.Services;
 using ExamMainDataBaseAPI.Services.Interface;
+using ExamMainDataBaseAPI.DAL;
+using ExamMainDataBaseAPI.DAL.Interface;
+using System.Linq.Expressions;
 
 namespace ExamMainDataBaseAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class QuestionsController : Controller
+    public class QuestionsController : Controller /*, IRepository<Questions>*/
     {
-        private IQuestionsServices _questionsServices;
+        private UnitOfWork uow = null;
 
-        public QuestionsController(IQuestionsServices questionsServices)
+        public QuestionsController(ExamQuestionsDbContext context)
+
         {
-            _questionsServices = questionsServices;
+            this.uow = new UnitOfWork(context);
         }
+
 
         // GET: api/Questions
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Questions>>> GetQuestions()
+        public IEnumerable<Questions> GetAll()
         {
-            return await _questionsServices.GetQuestions();
+            return uow.Questions.GetAll();
         }
 
         // GET: api/Questions/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Questions>> GetQuestion(int id)
+        public async Task<ActionResult<Questions>> Get(int id)
         {
-            var questions = await _questionsServices.GetQuestion(id);
-
+            var questions =  uow.Questions.Get(id);
+            if (questions == null)
+            {
+                return NotFound();
+            }
             return questions;
         }
 
@@ -47,27 +55,56 @@ namespace ExamMainDataBaseAPI.Controllers
                 return BadRequest();
             }
 
-            await _questionsServices.UpdateQuestion(id, questions);
+            var result =  uow.Questions.Get(id);
+            
+            
 
-
-            return NoContent();
+            return Content("PutSucces");
         }
 
-        // POST: api/Questions
-        [HttpPost]
-        public async Task<ActionResult> AddQuestions(Questions questions)
-        {
-            await _questionsServices.AddQuestion(questions);
+        //// POST: api/Questions
+        //[HttpPost]
+        //public async Task<ActionResult<Questions>> AddQuestions(Questions questions)
+        //{
+        //    await uow.QuestionsRepository.AddQuestion(questions);
+        //    uow.SaveChanges();
+        //    return CreatedAtAction("GetQuestions", new { id = questions.Id }, questions);
+        //}
 
-            return CreatedAtAction("GetQuestions", new { id = questions.Id }, questions);
-        }
+        //// DELETE: api/Questions/5
+        //[HttpDelete("{id}")]
+        //public async Task<ActionResult> DeleteQuestions(int id)
+        //{
+        //    await uow.QuestionsRepository.DeleteQuestion(id);
+        //    uow.SaveChanges();
+        //    return Content("DeleteSucces");
+        //}
 
-        // DELETE: api/Questions/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteQuestions(int id)
-        {
-            await _questionsServices.DeleteQuestion(id);
-            return Content("OK");
-        }
+       
+
+        //public IEnumerable<Questions> Find(Expression<Func<Questions, bool>> predicate)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public void Add(Questions entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public void AddRange(IEnumerable<Questions> entities)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public void Remove(Questions entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public void RemoveRange(IEnumerable<Questions> entities)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

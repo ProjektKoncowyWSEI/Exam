@@ -20,8 +20,7 @@ namespace ExamMainDataBaseAPI.Services
 
         public async Task AddQuestion(Questions questions)
         {
-            context.Questions.Add(questions);
-            await context.SaveChangesAsync();
+             context.Questions.Add(questions);
         }
 
         public async Task DeleteQuestion(int id)
@@ -30,7 +29,6 @@ namespace ExamMainDataBaseAPI.Services
             if (questions != null)
             {
                 context.Questions.Remove(questions);
-                await context.SaveChangesAsync();
             }
         }
 
@@ -49,9 +47,9 @@ namespace ExamMainDataBaseAPI.Services
             return context.Questions.Any(e => e.Id == id);
         }
 
-        public async Task UpdateQuestion(int id,Questions item)
+        public async Task UpdateQuestion(int id, Questions item)
         {
-            var question = await context.Questions.FindAsync(item.Id);
+            var question = await context.Questions.FindAsync(id);
             if (question != null)
             {
                 question.Question = item.Question;
@@ -60,7 +58,7 @@ namespace ExamMainDataBaseAPI.Services
                 question.QuestionAnswer = item.QuestionAnswer;
 
                 context.Entry(question).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                await this.context.SaveChangesAsync();
+                
             }
         }
     }

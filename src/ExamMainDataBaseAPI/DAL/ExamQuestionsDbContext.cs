@@ -7,11 +7,13 @@ namespace ExamMainDataBaseAPI.Models
 {
     public partial class ExamQuestionsDbContext : DbContext
     {
+     
         public ExamQuestionsDbContext(DbContextOptions<ExamQuestionsDbContext> options)
-            : base(options)
+           : base(options)
         {
         }
-
+       
+       
         public DbSet<Answer> Answer { get; set; }
         public DbSet<AnswersType> AnswersType { get; set; }
         public DbSet<QuestionAnswer> QuestionAnswer { get; set; }
