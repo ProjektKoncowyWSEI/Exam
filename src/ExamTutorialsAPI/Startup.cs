@@ -21,14 +21,14 @@ namespace ExamTutorialsAPI
         public Startup(IConfiguration configuration)
         {
             this.configuration = configuration;
-            StaticValues.ConnectionHelper = configuration.GetConnectionString("SQLiteConnection");
+            StaticValues.ConnectionHelper = configuration.GetConnectionString("SQLConnection");
         }
 
         
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ExamTutorialsApiContext>(o => o.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ExamTutorialsApiContext>(o => o.UseSqlServer(configuration.GetConnectionString("SQLConnection")));
             services.AddHttpContextAccessor();
 
             services
