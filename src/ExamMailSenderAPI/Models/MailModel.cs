@@ -1,37 +1,43 @@
-﻿using System;
+﻿using ExamMailSenderAPI.Data;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Helpers;
 
 namespace ExamMailSenderAPI.Models
 {
     [Serializable]
-    public class MailModel
+    public class MailModel : Entity
     {
         public MailModel()
         {
             Attachments = new HashSet<Attachment>();
         }
-        public int Id { get; set; }
         public string Title { get; set; }
         public string From { get; set; }
+        private string toStr;
+        public string ToStr
+        {
+            get
+            {
+
+                return toStr ?? To.ListToString();
+            }
+            set
+            {
+                if (To != null && To.Count > 0)                
+                    toStr = To.ListToString();                
+                else
+                    toStr = value;
+            }
+        }
+        [NotMapped]
         public List<string> To { get; set; }
         public string Body { get; set; }
         public string HtmlBody { get; set; }
         public DateTime? Date { get; set; }
-        public HashSet<Attachment> Attachments { get; set; }
-        public class Attachment
-        {
-            public Attachment()
-            {
-            }
-            public Attachment(string fileName, byte[] content)
-            {
-                FileName = fileName;
-                Content = content;
-            }
-            public string FileName { get; set; }
-            public byte[] Content { get; set; }
-        }
+        public virtual ICollection<Attachment> Attachments { get; set; }
     }
 }

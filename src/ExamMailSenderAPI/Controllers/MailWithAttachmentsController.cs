@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using ExamMailSenderAPI.Data;
+using ExamMailSenderAPI.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace ExamMailSenderAPI.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class MailWithAttachmentsController : ControllerBase
+    {
+        private readonly UnitOfWork uow;
+
+        public MailWithAttachmentsController(UnitOfWork uow)
+        {
+            this.uow = uow;
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<MailModel>> Get(int id)
+        {
+            return await uow.GetMailWithAttachments(id);
+        }
+    }
+}

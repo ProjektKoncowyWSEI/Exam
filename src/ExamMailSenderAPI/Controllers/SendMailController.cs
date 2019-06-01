@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExamMailSenderAPI.Data;
 using ExamMailSenderAPI.Models;
 using ExamMailSenderAPI.Services;
 using Microsoft.AspNetCore.Http;
@@ -12,13 +13,15 @@ namespace ExamMailSenderAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MailController : ControllerBase
+    public class SendMailController : ControllerBase
     {
-        private readonly IConfiguration configuration;
-        private IMailService Mail;
-        public MailController(IConfiguration configuration)
+        private readonly IMailService Mail;
+        private readonly UnitOfWork uow;
+
+        public SendMailController(IMailService mail, UnitOfWork uow)
         {
-            this.configuration = configuration;
+            Mail = mail;
+            this.uow = uow;
         }
 
         [HttpPost]
@@ -26,10 +29,20 @@ namespace ExamMailSenderAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                Mail = new MailService(model, configuration);
-                string message = await Mail.Send();
+                string message = await Mail.Send(model);
                 if (message == "Wysłano")
+                {
+                    try
+                    {
+                        await uow.SaveMailWithAttachments(model);
+                    }
+                    catch (Exception)
+                    {
+                        message += " - Nie udało się zapisać";
+                    }
                     return Ok(message);
+                }
+
                 return StatusCode(500, message);
             }
             return BadRequest(model);
