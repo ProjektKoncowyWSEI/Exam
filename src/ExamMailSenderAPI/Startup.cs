@@ -20,6 +20,8 @@ namespace ExamMailSenderAPI
 {
     public class Startup
     {
+        const string SQLite = "SQLite";
+        const string SQL = "SQL";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,8 +31,15 @@ namespace ExamMailSenderAPI
                 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Context>(o => o.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
-            //services.AddDbContext<Context>(o => o.UseSqlite(Configuration.GetConnectionString("SQLiteConnection"));
+            switch (Configuration.GetSection("UseDatabase").Value)
+            {
+                case SQLite:
+                    services.AddDbContext<Context>(o => o.UseSqlite(Configuration.GetConnectionString("SQLiteConnection")));
+                    break;
+                case SQL:
+                    services.AddDbContext<Context>(o => o.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
+                    break;                
+            }  
 
             services
                 .AddMvcCore()
