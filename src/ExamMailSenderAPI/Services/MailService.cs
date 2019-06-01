@@ -11,21 +11,19 @@ using System.Threading.Tasks;
 namespace ExamMailSenderAPI.Services
 {
     public class MailService : IMailService
-    {
-        private readonly MailModel model;
+    {        
         private readonly IConfiguration configuration;
-
-        public MailService(MailModel model, IConfiguration configuration)
-        {
-            this.model = model;
+        public MailService(IConfiguration configuration)
+        {            
             this.configuration = configuration;
         }
-        public async Task<string> Send()
+        public async Task<string> Send(MailModel model)
         {
             try
             {
                 IConvertable converter = new Converter();
-                var apiKey = configuration.GetSection("SENDGRID_API_KEY").Value;
+                //var apiKey = configuration.GetSection("SENDGRID_API_KEY").Value; Jeśli chcemy trzymać w konfiguracji
+                var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY"); // Jeśli chcemy mieć zapamiętane w systemie
                 var client = new SendGridClient(apiKey);
                 var from = new EmailAddress(model.From, model.From);
                 List<EmailAddress> tos = new List<EmailAddress>();
@@ -35,7 +33,7 @@ namespace ExamMailSenderAPI.Services
                 model.Attachments.ToList().ForEach(a =>
                 {
                     msg.AddAttachment(
-                        new Attachment()
+                        new SendGrid.Helpers.Mail.Attachment()
                         {
                             Content = converter.GetStringBase64(a.Content),
                             Disposition = "attachment",
