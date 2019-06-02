@@ -28,7 +28,7 @@ namespace ExamMainDataBaseAPI.Models
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.Answer1)
+                entity.Property(e => e.answer)
                     .IsRequired()
                     .HasColumnName("Answer");
             });

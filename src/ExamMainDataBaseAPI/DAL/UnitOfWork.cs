@@ -12,22 +12,22 @@ namespace ExamMainDataBaseAPI.DAL
     {
 
         private readonly ExamQuestionsDbContext context;
+        public IQuestionsRep Questions { get; private set; }
+        public IAnswersRep Answers { get; private set; }
+
+        public IQuestionAnswerRepo Qa { get; private set; }
 
         public UnitOfWork(ExamQuestionsDbContext context) {
             this.context = context;
             Questions = new QuestionsRep(context);
             Answers = new AnswersRepo(context);
+            Qa = new QuestionAnswerRepo(context);            
         }
 
-        public IQuestionsRep Questions { get; private set; }
-
-        public IAnswersRep Answers { get; private set; }
-
-        public int Complete()
+        public int SaveChanges()
         {
            return context.SaveChanges();
-        }
-
+        }     
         public void Dispose()
         {
             context.Dispose();

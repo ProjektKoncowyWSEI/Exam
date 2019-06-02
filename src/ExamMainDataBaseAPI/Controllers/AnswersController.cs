@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExamMainDataBaseAPI.DAL;
+using ExamMainDataBaseAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ExamMainDataBaseAPI.Models;
 
 namespace ExamMainDataBaseAPI.Controllers
 {
@@ -13,93 +13,58 @@ namespace ExamMainDataBaseAPI.Controllers
     [ApiController]
     public class AnswersController : ControllerBase
     {
-        private Repository_Unit_of_Work uow = null;
+        private UnitOfWork uow = null;
 
-        public AnswersController(DbContextOptions<ExamQuestionsDbContext> options)
+        public AnswersController(ExamQuestionsDbContext context)
+
         {
-            uow = new Repository_Unit_of_Work(options);
+            this.uow = new UnitOfWork(context);
         }
 
-        //// GET: api/Answers
-        //[HttpGet]
-        //public List<Answer> GetAnswer()
-        //{
-        //    return  uow.AnswersServices.GetAnswers().ToList();
-        //}
-
-        //// GET: api/Answers/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Answer>> GetAnswer(int id)
-        //{
-        //    var answer = await uow.AnswersServices.FindAsync(id);
-
-        //    if (answer == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return answer;
-        //}
-
-        //// PUT: api/Answers/5
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutAnswer(int id, Answer answer)
-        //{
-        //    if (id != answer.Id)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    _context.Entry(answer).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!AnswerExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
-
-        //// POST: api/Answers
-        //[HttpPost]
-        //public async Task<ActionResult<Answer>> PostAnswer(Answer answer)
-        //{
-        //    _context.Answer.Add(answer);
-        //    await _context.SaveChangesAsync();
-
-        //    return CreatedAtAction("GetAnswer", new { id = answer.Id }, answer);
-        //}
-
-        //// DELETE: api/Answers/5
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult<Answer>> DeleteAnswer(int id)
-        //{
-        //    var answer = await _context.Answer.FindAsync(id);
-        //    if (answer == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.Answer.Remove(answer);
-        //    await _context.SaveChangesAsync();
-
-        //    return answer;
-        //}
-
-        //private bool AnswerExists(int id)
-        //{
-        //    return _context.Answer.Any(e => e.Id == id);
-        //}
+        // GET: api/Answer
+        [HttpGet]
+        public Task<IEnumerable<Answer>> GetAll()
+        {
+            return uow.Answers.GetAll();
+        }
+        // GET: api/Answer/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Answer>> Get(int id)
+        {
+            return await uow.Answers.GetAsync(id);
+        }
+        // PUT: api/Answer/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, Answer answer)
+        {
+            if (id != answer.Id)
+            {
+                return BadRequest();
+            }
+            await uow.Answers.UpdateAsync(answer);
+            uow.SaveChanges();
+            return Content("PutSucces");
+        }
+        // POST: api/Answer
+        [HttpPost]
+        public async Task<ActionResult<Answer>> Post(Answer answer)
+        {
+            await uow.Answers.Add(answer);
+            uow.SaveChanges();
+            return CreatedAtAction("Get", new { id = answer.Id }, answer);
+        }
+        // DELETE: api/Answer/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var answer = await uow.Answers.GetAsync(id);
+            if (answer == null)
+            {
+                return NotFound();
+            }
+            await uow.Answers.RemoveAsync(answer);
+            uow.SaveChanges();
+            return Content("DeleteSucces");
+        }
     }
 }

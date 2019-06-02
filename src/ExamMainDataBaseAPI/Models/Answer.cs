@@ -12,7 +12,7 @@ namespace ExamMainDataBaseAPI.Models
         }
         
         public int Id { get; set; }
-        public string Answer1 { get; set; }
+        public string answer { get; set; }
 
         public virtual ICollection<QuestionAnswer> QuestionAnswer { get; set; }
     }

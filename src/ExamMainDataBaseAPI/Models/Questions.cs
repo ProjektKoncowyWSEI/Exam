@@ -17,8 +17,8 @@ namespace ExamMainDataBaseAPI.Models
         public string AnswerType { get; set; }
 
         public virtual ICollection<QuestionAnswer> QuestionAnswer { get; set; }
-        
-     
+
+
 
     }
 }
