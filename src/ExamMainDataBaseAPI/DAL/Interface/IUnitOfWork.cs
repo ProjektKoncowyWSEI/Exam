@@ -9,6 +9,7 @@ namespace ExamMainDataBaseAPI.DAL.Interface
     {
         IQuestionsRep Questions { get; }
         IAnswersRep Answers { get; }
+        IQuestionAnswerRepo Qa { get; }
         int SaveChanges();
     }
 }

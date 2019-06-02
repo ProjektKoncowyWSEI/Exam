@@ -15,10 +15,13 @@ namespace ExamMainDataBaseAPI.DAL
         public IQuestionsRep Questions { get; private set; }
         public IAnswersRep Answers { get; private set; }
 
+        public IQuestionAnswerRepo Qa { get; private set; }
+
         public UnitOfWork(ExamQuestionsDbContext context) {
             this.context = context;
             Questions = new QuestionsRep(context);
             Answers = new AnswersRepo(context);
+            Qa = new QuestionAnswerRepo(context);
         }
 
         public int SaveChanges()

@@ -8,12 +8,12 @@ namespace ExamMainDataBaseAPI.Models
     {
         public Answer()
         {
-            QuestionAnswer = new HashSet<QuestionAnswer>();
+            //QuestionAnswer = new HashSet<QuestionAnswer>();
         }
         
         public int Id { get; set; }
-        public string Answer1 { get; set; }
+        public string answer { get; set; }
 
-        public virtual ICollection<QuestionAnswer> QuestionAnswer { get; set; }
+        //public virtual ICollection<QuestionAnswer> QuestionAnswer { get; set; }
     }
 }
