@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ExamMainDataBaseAPI.Models;
-using ExamMainDataBaseAPI.Services;
-using ExamMainDataBaseAPI.Services.Interface;
 using ExamMainDataBaseAPI.DAL;
 using ExamMainDataBaseAPI.DAL.Interface;
 using System.Linq.Expressions;
@@ -16,7 +14,7 @@ namespace ExamMainDataBaseAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class QuestionsController : Controller /*, IRepository<Questions>*/
+    public class QuestionsController : Controller 
     {
         private UnitOfWork uow = null;
 
@@ -26,85 +24,50 @@ namespace ExamMainDataBaseAPI.Controllers
             this.uow = new UnitOfWork(context);
         }
 
-
         // GET: api/Questions
         [HttpGet]
-        public IEnumerable<Questions> GetAll()
+        public Task <IEnumerable<Questions>> GetAll()
         {
             return uow.Questions.GetAll();
         }
-
         // GET: api/Questions/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Questions>> Get(int id)
         {
-            var questions =  uow.Questions.Get(id);
-            if (questions == null)
-            {
-                return NotFound();
-            }
-            return questions;
+            return await uow.Questions.GetAsync(id);      
         }
-
         // PUT: api/Questions/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateQuestion(int id, Questions questions)
+        public async Task<IActionResult> Put(int id, Questions question)
         {
-            if (id == questions.Id)
+            if (id != question.Id)
             {
                 return BadRequest();
             }
-
-            var result =  uow.Questions.Get(id);
-            
-            
-
+            await uow.Questions.UpdateAsync(question);
+            uow.SaveChanges();
             return Content("PutSucces");
         }
-
-        //// POST: api/Questions
-        //[HttpPost]
-        //public async Task<ActionResult<Questions>> AddQuestions(Questions questions)
-        //{
-        //    await uow.QuestionsRepository.AddQuestion(questions);
-        //    uow.SaveChanges();
-        //    return CreatedAtAction("GetQuestions", new { id = questions.Id }, questions);
-        //}
-
-        //// DELETE: api/Questions/5
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult> DeleteQuestions(int id)
-        //{
-        //    await uow.QuestionsRepository.DeleteQuestion(id);
-        //    uow.SaveChanges();
-        //    return Content("DeleteSucces");
-        //}
-
-       
-
-        //public IEnumerable<Questions> Find(Expression<Func<Questions, bool>> predicate)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void Add(Questions entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void AddRange(IEnumerable<Questions> entities)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void Remove(Questions entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void RemoveRange(IEnumerable<Questions> entities)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        // POST: api/Questions
+        [HttpPost]
+        public async Task<ActionResult<Questions>> Post(Questions question)
+        {
+            await uow.Questions.Add(question);
+            uow.SaveChanges();
+            return CreatedAtAction("Get", new { id = question.Id }, question);
+        }
+        // DELETE: api/Questions/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var question = await uow.Questions.GetAsync(id);
+            if (question == null)
+            {
+                return NotFound();
+            }
+            await uow.Questions.RemoveAsync(question);
+            uow.SaveChanges();
+            return Content("DeleteSucces");
+        }
     }
 }

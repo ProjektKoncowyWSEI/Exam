@@ -12,6 +12,8 @@ namespace ExamMainDataBaseAPI.DAL
     {
 
         private readonly ExamQuestionsDbContext context;
+        public IQuestionsRep Questions { get; private set; }
+        public IAnswersRep Answers { get; private set; }
 
         public UnitOfWork(ExamQuestionsDbContext context) {
             this.context = context;
@@ -19,15 +21,10 @@ namespace ExamMainDataBaseAPI.DAL
             Answers = new AnswersRepo(context);
         }
 
-        public IQuestionsRep Questions { get; private set; }
-
-        public IAnswersRep Answers { get; private set; }
-
-        public int Complete()
+        public int SaveChanges()
         {
            return context.SaveChanges();
-        }
-
+        }     
         public void Dispose()
         {
             context.Dispose();

@@ -8,14 +8,15 @@ namespace ExamMainDataBaseAPI.DAL.Interface
 {
    public interface IRepository<TEntity> where TEntity:class
     {
-        TEntity Get(int id);
-        IEnumerable<TEntity> GetAll();
+        Task<TEntity> GetAsync(int id);
+        Task <IEnumerable<TEntity>> GetAll();
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
-
-        void Add(TEntity entity);
+        Task<bool> UpdateAsync(TEntity entity);
+        Task<bool> Add(TEntity entity);
         void AddRange(IEnumerable<TEntity> entities);
 
-        void Remove(TEntity entity);
+        Task<bool> RemoveAsync(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
+
     }
 }

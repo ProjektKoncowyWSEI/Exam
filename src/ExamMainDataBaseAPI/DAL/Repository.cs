@@ -17,35 +17,64 @@ namespace ExamMainDataBaseAPI.DAL
         {
             this.context = context;
         }
-
-        public void Add(TEntity entity)
+        public async Task<bool> Add(TEntity entity)
         {
-            context.Set<TEntity>().Add(entity);
+            try
+            {
+                await context.Set<TEntity>().AddAsync(entity);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
-
         public void AddRange(IEnumerable<TEntity> entities)
         {
             context.Set<TEntity>().AddRange(entities);
         }
-
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
             return context.Set<TEntity>().Where(predicate);
         }
-
-        public TEntity Get(int id)
+        public async Task<bool> UpdateAsync(TEntity entity)
         {
-            return context.Set<TEntity>().Find(id);
+            try
+            {
+                await Task.Run(() => context.Update<TEntity>(entity));
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public async Task<TEntity> GetAsync(int id)
+        {
+            return await context.Set<TEntity>().FindAsync(id);
+        }
+        public async Task<IEnumerable<TEntity>> GetAll()
+        {
+            return await context.Set<TEntity>().ToListAsync();
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public async Task<bool> RemoveAsync(TEntity entity)
         {
-            return context.Set<TEntity>().ToList();
-        }
+            
+            if (entity != null)
+            {
+                try
+                {
+                    await Task.Run(() => context.Set<TEntity>().Remove(entity));
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
 
-        public void Remove(TEntity entity)
-        {
-            context.Set<TEntity>().Remove(entity);
+            return false;
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)

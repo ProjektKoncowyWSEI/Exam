@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using ExamMainDataBaseAPI.DAL;
 using ExamMainDataBaseAPI.DAL.Interface;
 using ExamMainDataBaseAPI.Models;
-using ExamMainDataBaseAPI.Services;
-using ExamMainDataBaseAPI.Services.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
