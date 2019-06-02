@@ -51,17 +51,17 @@ namespace ExamMainDataBaseAPI.Models
 
                 entity.Property(e => e.QuestionId).HasColumnName("QuestionID");
 
-                //entity.HasOne(d => d.Answer)
-                //    .WithMany(p => p.QuestionAnswer)
-                //    .HasForeignKey(d => d.AnswerId)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_QuestionAnswer_Answer");
+                entity.HasOne(d => d.Answer)
+                    .WithMany(p => p.QuestionAnswer)
+                    .HasForeignKey(d => d.AnswerId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_QuestionAnswer_Answer");
 
-                //entity.HasOne(d => d.Question)
-                //    .WithMany(p => p.QuestionAnswer)
-                //    .HasForeignKey(d => d.QuestionId)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_QuestionAnswer_Questions");
+                entity.HasOne(d => d.Question)
+                    .WithMany(p => p.QuestionAnswer)
+                    .HasForeignKey(d => d.QuestionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_QuestionAnswer_Questions");
             });
 
             modelBuilder.Entity<Questions>(entity =>

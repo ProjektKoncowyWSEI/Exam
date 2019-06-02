@@ -33,9 +33,9 @@ namespace ExamMainDataBaseAPI.DAL
         {
             context.Set<TEntity>().AddRange(entities);
         }
-        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        public IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
-            return context.Set<TEntity>().Where(predicate);
+            return context.Set<TEntity>().Where(predicate).AsQueryable();
         }
         public async Task<bool> UpdateAsync(TEntity entity)
         {
@@ -55,7 +55,7 @@ namespace ExamMainDataBaseAPI.DAL
         }
         public async Task<IEnumerable<TEntity>> GetAll()
         {
-            return await context.Set<TEntity>().ToListAsync();
+            return await context.Set<TEntity>().AsNoTracking().ToListAsync();
         }
 
         public async Task<bool> RemoveAsync(TEntity entity)

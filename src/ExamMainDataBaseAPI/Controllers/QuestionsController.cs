@@ -34,7 +34,7 @@ namespace ExamMainDataBaseAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Questions>> Get(int id)
         {
-            return await uow.Questions.GetAsync(id);      
+            return await uow.Questions.GetAsync(id);
         }
         // PUT: api/Questions/5
         [HttpPut("{id}")]

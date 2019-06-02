@@ -10,7 +10,7 @@ namespace ExamMainDataBaseAPI.DAL.Interface
     {
         Task<TEntity> GetAsync(int id);
         Task <IEnumerable<TEntity>> GetAll();
-        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
+        IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
         Task<bool> UpdateAsync(TEntity entity);
         Task<bool> Add(TEntity entity);
         void AddRange(IEnumerable<TEntity> entities);

@@ -1,0 +1,59 @@
+﻿@URL = https://exammaindatabaseapi.azurewebsites.net/api
+
+###
+GET {{URL}}/Questions
+
+###
+GET {{URL}}/Questions/2
+
+###
+
+POST {{URL}}/Questions
+content-type: application/json
+{
+    "question": "doTestowania",
+    "image": null,
+    "answerType": "wielokrotny"
+}
+###
+
+PUT {{URL}}/Questions/3
+content-type: application/json
+{
+    "id":3,
+    "question": "doTestowania",
+    "image": null,
+    "answerType": "wielokrotny"
+}
+
+###
+
+Delete {{URL}}/Questions/3
+
+###
+
+###
+GET {{URL}}/Answers
+
+###
+GET {{URL}}/Answers/2
+
+###
+
+POST {{URL}}/Answers
+content-type: application/json
+{
+    "answer": "nie",
+}
+###
+
+PUT {{URL}}/Answers/3
+content-type: application/json
+{
+    "id":3,
+    "answer": "nie",
+}
+
+###
+
+Delete {{URL}}/Answers/3

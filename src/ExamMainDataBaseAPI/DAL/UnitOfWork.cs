@@ -21,7 +21,7 @@ namespace ExamMainDataBaseAPI.DAL
             this.context = context;
             Questions = new QuestionsRep(context);
             Answers = new AnswersRepo(context);
-            Qa = new QuestionAnswerRepo(context);
+            Qa = new QuestionAnswerRepo(context);            
         }
 
         public int SaveChanges()
