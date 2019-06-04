@@ -11,13 +11,13 @@ namespace ExamMainDataBaseAPI.DAL
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity:class 
     {
-        protected DbContext context;
+        protected ExamQuestionsDbContext context;
 
-        public Repository(DbContext context)
+        public Repository(ExamQuestionsDbContext context)
         {
             this.context = context;
         }
-        public async Task<bool> Add(TEntity entity)
+        public async Task<bool> AddAsync(TEntity entity)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace ExamMainDataBaseAPI.DAL
         {
             context.Set<TEntity>().AddRange(entities);
         }
-        public IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        public IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate)
         {
             return context.Set<TEntity>().Where(predicate).AsQueryable();
         }
@@ -53,7 +53,7 @@ namespace ExamMainDataBaseAPI.DAL
         {
             return await context.Set<TEntity>().FindAsync(id);
         }
-        public async Task<IEnumerable<TEntity>> GetAll()
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
             return await context.Set<TEntity>().AsNoTracking().ToListAsync();
         }
