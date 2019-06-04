@@ -21,9 +21,9 @@ namespace ExamMainDataBaseAPI.Controllers
         }
 
         [HttpGet]
-        public Task<IEnumerable<Answer>> GetAll()
+        public async Task<IEnumerable<Answer>> GetAll()
         {
-            return uow.AnswersRepo.GetAllAsync();
+            return await uow.AnswersRepo.GetAllAsync();
         }
       
         [HttpGet("{id}")]
