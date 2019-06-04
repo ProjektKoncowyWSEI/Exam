@@ -10,6 +10,7 @@ GET {{URL}}/Questions/2
 
 POST {{URL}}/Questions
 content-type: application/json
+
 {
     "question": "doTestowania",
     "image": null,
@@ -19,6 +20,7 @@ content-type: application/json
 
 PUT {{URL}}/Questions/3
 content-type: application/json
+
 {
     "id":3,
     "question": "doTestowania",
@@ -42,6 +44,7 @@ GET {{URL}}/Answers/2
 
 POST {{URL}}/Answers
 content-type: application/json
+
 {
     "answer": "nie",
 }
@@ -49,9 +52,10 @@ content-type: application/json
 
 PUT {{URL}}/Answers/3
 content-type: application/json
+
 {
     "id":3,
-    "answer": "nie",
+    "answer": "chyba nie",
 }
 
 ###
