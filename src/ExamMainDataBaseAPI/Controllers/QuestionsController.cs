@@ -16,27 +16,24 @@ namespace ExamMainDataBaseAPI.Controllers
     [ApiController]
     public class QuestionsController : Controller 
     {
-        private UnitOfWork uow = null;
+        private IUnitOfWork uow = null;
 
-        public QuestionsController(ExamQuestionsDbContext context)
-
+        public QuestionsController(IUnitOfWork uow)
         {
-            this.uow = new UnitOfWork(context);
+            this.uow = uow;
         }
-
-        // GET: api/Questions
         [HttpGet]
-        public Task <IEnumerable<Questions>> GetAll()
+        public async Task<IEnumerable<Questions>> GetAll()
         {
-            return uow.Questions.GetAll();
+            return await uow.QuestionRepo.GetAllAsync();
         }
-        // GET: api/Questions/5
+       
         [HttpGet("{id}")]
         public async Task<ActionResult<Questions>> Get(int id)
         {
-            return await uow.Questions.GetAsync(id);
+            return await uow.QuestionRepo.GetAsync(id);
         }
-        // PUT: api/Questions/5
+       
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, Questions question)
         {
@@ -44,30 +41,30 @@ namespace ExamMainDataBaseAPI.Controllers
             {
                 return BadRequest();
             }
-            await uow.Questions.UpdateAsync(question);
-            uow.SaveChanges();
-            return Content("PutSucces");
+            await uow.QuestionRepo.UpdateAsync(question);
+            await uow.SaveChangesAsync();
+            return NoContent();
         }
         // POST: api/Questions
         [HttpPost]
         public async Task<ActionResult<Questions>> Post(Questions question)
         {
-            await uow.Questions.Add(question);
-            uow.SaveChanges();
+            await uow.QuestionRepo.AddAsync(question);
+            await uow.SaveChangesAsync();
             return CreatedAtAction("Get", new { id = question.Id }, question);
         }
         // DELETE: api/Questions/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult<Questions>> Delete(int id)
         {
-            var question = await uow.Questions.GetAsync(id);
+            var question = await uow.QuestionRepo.GetAsync(id);
             if (question == null)
             {
                 return NotFound();
             }
-            await uow.Questions.RemoveAsync(question);
-            uow.SaveChanges();
-            return Content("DeleteSucces");
+            await uow.QuestionRepo.RemoveAsync(question);
+            await uow.SaveChangesAsync();
+            return question;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ExamMainDataBaseAPI.DAL;
+using ExamMainDataBaseAPI.DAL.Interface;
 using ExamMainDataBaseAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,27 +14,24 @@ namespace ExamMainDataBaseAPI.Controllers
     [ApiController]
     public class AnswersController : ControllerBase
     {
-        private UnitOfWork uow = null;
-
-        public AnswersController(ExamQuestionsDbContext context)
-
+        private IUnitOfWork uow = null;
+        public AnswersController(IUnitOfWork uow)
         {
-            this.uow = new UnitOfWork(context);
+            this.uow = uow;
         }
 
-        // GET: api/Answer
         [HttpGet]
-        public Task<IEnumerable<Answer>> GetAll()
+        public async Task<IEnumerable<Answer>> GetAll()
         {
-            return uow.Answers.GetAll();
+            return await uow.AnswersRepo.GetAllAsync();
         }
-        // GET: api/Answer/5
+      
         [HttpGet("{id}")]
         public async Task<ActionResult<Answer>> Get(int id)
         {
-            return await uow.Answers.GetAsync(id);
+            return await uow.AnswersRepo.GetAsync(id);
         }
-        // PUT: api/Answer/5
+       
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, Answer answer)
         {
@@ -41,30 +39,30 @@ namespace ExamMainDataBaseAPI.Controllers
             {
                 return BadRequest();
             }
-            await uow.Answers.UpdateAsync(answer);
-            uow.SaveChanges();
-            return Content("PutSucces");
+            await uow.AnswersRepo.UpdateAsync(answer);
+            await uow.SaveChangesAsync();
+            return NoContent();
         }
-        // POST: api/Answer
+       
         [HttpPost]
         public async Task<ActionResult<Answer>> Post(Answer answer)
         {
-            await uow.Answers.Add(answer);
-            uow.SaveChanges();
-            return CreatedAtAction("Get", new { id = answer.Id }, answer);
+            await uow.AnswersRepo.AddAsync(answer);
+            await uow.SaveChangesAsync();
+            return CreatedAtAction(nameof(Get), new { id = answer.Id }, answer);
         }
-        // DELETE: api/Answer/5
+       
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult<Answer>> Delete(int id)
         {
-            var answer = await uow.Answers.GetAsync(id);
+            var answer = await uow.AnswersRepo.GetAsync(id);
             if (answer == null)
             {
                 return NotFound();
             }
-            await uow.Answers.RemoveAsync(answer);
-            uow.SaveChanges();
-            return Content("DeleteSucces");
+            await uow.AnswersRepo.RemoveAsync(answer);
+            await uow.SaveChangesAsync();
+            return answer;
         }
     }
 }

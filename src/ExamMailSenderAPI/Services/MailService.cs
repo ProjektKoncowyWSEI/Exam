@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 namespace ExamMailSenderAPI.Services
 {
     public class MailService : IMailService
-    {        
+    {
         private readonly IConfiguration configuration;
         public MailService(IConfiguration configuration)
-        {            
+        {
             this.configuration = configuration;
         }
         public async Task<string> Send(MailModel model)
@@ -29,17 +29,21 @@ namespace ExamMailSenderAPI.Services
                 List<EmailAddress> tos = new List<EmailAddress>();
                 model.To.ForEach(m => tos.Add(new EmailAddress(m)));
 
-                var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, tos, model.Title, model.Body, model.HtmlBody, true);
-                model.Attachments.ToList().ForEach(a =>
+                var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, tos, model.Title, model.Body, model.HtmlBody, false);
+                if (model.Attachments != null)
                 {
-                    msg.AddAttachment(
-                        new SendGrid.Helpers.Mail.Attachment()
-                        {
-                            Content = converter.GetStringBase64(a.Content),
-                            Disposition = "attachment",
-                            Filename = a.FileName
-                        });
-                });
+                    model.Attachments.ToList().ForEach(a =>
+                                   {
+                                       msg.AddAttachment(
+                                           new SendGrid.Helpers.Mail.Attachment()
+                                           {
+                                               Content = converter.GetStringBase64(a.Content),
+                                               Disposition = "attachment",
+                                               Filename = a.FileName
+                                           });
+                                   });
+                }
+
                 var response = await client.SendEmailAsync(msg);
                 if (response.StatusCode == System.Net.HttpStatusCode.Accepted)
                     return "Wysłano";
