@@ -1,4 +1,4 @@
-﻿using ExamMailSenderAPI.Models;
+﻿using ExamContract.MailingModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

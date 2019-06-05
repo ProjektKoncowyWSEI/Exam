@@ -1,4 +1,4 @@
-﻿using ExamMailSenderAPI.Models;
+﻿using ExamContract.MailingModels;
 using FileConverter;
 using Microsoft.Extensions.Configuration;
 using SendGrid;

@@ -1,4 +1,4 @@
-﻿/// <binding BeforeBuild='a_copy:libs, b_bundle_js, c_bundle_css, d_compress_js, e_compress_css' />
+﻿/// <binding AfterBuild='a_copy:libs, b_bundle_js, b_sass, c_bundle_css, d_compress_js, e_compress_css' />
 
 const gulp = require('gulp');
 const npmDist = require('gulp-npm-dist');
@@ -7,6 +7,8 @@ const concat = require('gulp-concat');
 const minify = require('gulp-minify');
 const cssmin = require('gulp-cssmin');
 const concatCss = require('gulp-concat-css');
+const sass = require('gulp-sass');
+sass.compiler = require('node-sass');
 
 // kopiowanie bibliotek
 gulp.task('a_copy:libs', function () {
@@ -25,6 +27,18 @@ gulp.task('b_bundle_js', function () {
         .pipe(gulp.dest('./wwwroot/js/bundle'))
 });
 //css
+
+
+gulp.task('b_sass', function () {
+    return gulp.src('./wwwroot/css/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('./wwwroot/css/'));
+});
+
+//gulp.task('b_sass:watch', function () {
+//    gulp.watch('./wwwroot/css/*.scss', ['sass']);
+//});
+
 gulp.task('c_bundle_css', function () {
     return gulp.src('./wwwroot/css/*.css')
         .pipe(concatCss("site.css"))

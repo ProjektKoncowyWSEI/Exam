@@ -75,7 +75,7 @@ namespace Exam.Areas.Identity.Pages.Account
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
-                { //Tu jeśli uzytkownik poda prawidłowe hasło powinniśmy sprawdzić czy ma jakieś role i jakie
+                { 
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }

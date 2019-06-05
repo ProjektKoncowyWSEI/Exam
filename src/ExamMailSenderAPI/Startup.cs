@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExamContract.MailingModels;
 using ExamMailSenderAPI.Data;
 using ExamMailSenderAPI.Middleware;
-using ExamMailSenderAPI.Models;
 using ExamMailSenderAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
