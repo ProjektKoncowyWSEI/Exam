@@ -22,6 +22,21 @@ namespace ExamMainDataBaseAPI.DAL
             this.AnswersRepo = answersRepo;
             this.QuestionAnswerRepo = questionAnswerRepo;
         }
+
+        public async Task<Questions> GetQuestionWithAnswer(int id)
+        {
+            var question = await QuestionRepo.GetAsync(id);
+            var answersQuestion = await QuestionAnswerRepo.FindBy(q => q.QuestionId == id).ToListAsync();
+            var answers = new List<Answer>();
+
+            foreach (var item in answersQuestion)
+            {
+                answers.Add(await AnswersRepo.GetAsync(item.AnswerId));
+            }
+
+            question.answers = answers;
+            return question;
+        }
         public async Task SaveChangesAsync()
         {
             await context.SaveChangesAsync();

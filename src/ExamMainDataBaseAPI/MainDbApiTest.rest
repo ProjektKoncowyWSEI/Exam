@@ -62,3 +62,8 @@ content-type: application/json
 ###
 
 Delete {{URL}}/Answers/3
+
+###
+GET {{URL}}/QuestionWithAnswers/7
+
+###

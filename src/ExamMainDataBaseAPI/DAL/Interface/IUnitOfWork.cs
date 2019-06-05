@@ -11,6 +11,7 @@ namespace ExamMainDataBaseAPI.DAL.Interface
         IRepository<Questions> QuestionRepo { get; }
         IRepository<Answer> AnswersRepo { get; }
         IRepository<QuestionAnswer> QuestionAnswerRepo { get; }
+        Task<Questions> GetQuestionWithAnswer(int id);
         Task SaveChangesAsync();
     }
 }

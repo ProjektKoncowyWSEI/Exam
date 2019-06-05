@@ -29,7 +29,7 @@ namespace ExamMainDataBaseAPI.Controllers
         }
        
         [HttpGet("{id}")]
-        public async Task<ActionResult<Questions>> Get(int id)
+        public async Task<Questions> Get(int id)
         {
             return await uow.QuestionRepo.GetAsync(id);
         }
