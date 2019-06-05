@@ -3,6 +3,17 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Aplikacja Exam</h1>
+    @if (User.IsInRole(RoleEnum.admin))
+    {
+        <p class="textColor">Posiadasz rolę admin</p>
+    }
+    @if (User.IsInRole(RoleEnum.teacher))
+    {
+        <p class="textColor">Posiadasz rolę teacher</p>
+    }
+    @if (User.IsInRole(RoleEnum.student))
+    {
+        <p class="textColor">Posiadasz rolę student</p>
+    }
 </div>

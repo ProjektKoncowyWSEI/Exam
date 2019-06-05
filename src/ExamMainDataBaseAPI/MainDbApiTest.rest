@@ -1,4 +1,5 @@
-﻿@URL = https://exammaindatabaseapi.azurewebsites.net/api
+﻿//@URL = https://exammaindatabaseapi.azurewebsites.net/api
+@URL = https://localhost:44399/api
 
 ###
 GET {{URL}}/Questions
@@ -23,7 +24,7 @@ content-type: application/json
 
 {
     "id":3,
-    "question": "doTestowania",
+    "question": "do Testowania",
     "image": null,
     "answerType": "wielokrotny"
 }

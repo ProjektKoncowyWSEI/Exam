@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Text;
 
 namespace Helpers
@@ -19,6 +21,18 @@ namespace Helpers
                 return sb.ToString();
             }
             return "";
+        }
+        public static string ToRoleString(this RoleEnum[] roles)
+        {
+            var result = "";       
+            if (roles.Length > 0 && !roles.Any(r => r == RoleEnum.admin))
+                result = $"{RoleEnum.admin.ToString()},";
+            result += string.Join(",", roles);
+            return result;
+        }
+        public static bool IsInRole(this ClaimsPrincipal user, RoleEnum role)
+        {
+            return user.IsInRole(role.ToString());
         }
     }
 }

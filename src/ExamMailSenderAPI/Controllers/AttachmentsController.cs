@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ExamMailSenderAPI.Data;
-using ExamMailSenderAPI.Models;
+using ExamContract.MailingModels;
 
 namespace ExamMailSenderAPI.Controllers
 {

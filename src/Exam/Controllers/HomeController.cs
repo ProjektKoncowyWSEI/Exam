@@ -5,6 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Exam.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Exam.Filters;
+using Helpers;
 
 namespace Exam.Controllers
 {
@@ -12,6 +16,20 @@ namespace Exam.Controllers
     {
         public IActionResult Index()
         {
+            return View();
+        }
+        [AuthorizeByRoles(RoleEnum.student)]
+        public IActionResult About()
+        {
+            ViewData["Message"] = "Your application description page.";
+
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            ViewData["Message"] = "Your contact page.";
+
             return View();
         }
 

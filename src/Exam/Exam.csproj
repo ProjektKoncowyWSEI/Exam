@@ -13,4 +13,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\ExamContract\ExamContract.csproj" />
+    <ProjectReference Include="..\Helpers\Helpers.csproj" />
+  </ItemGroup>
+
 </Project>

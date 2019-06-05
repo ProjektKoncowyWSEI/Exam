@@ -13,39 +13,53 @@ using Microsoft.EntityFrameworkCore;
 using Exam.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Exam.Services;
+using Helpers;
+using Exam.Filters;
 
 namespace Exam
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }          
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            Configuration = configuration;           
         }
-
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                    options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("UsersConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddDefaultIdentity<IdentityUser>(config =>
+            {
+                config.SignIn.RequireConfirmedEmail = false; // TODO jesli uznamy że konieczne jest potwierdzenie E-mail
+            })
+              .AddRoles<IdentityRole>()
+              .AddDefaultUI(UIFramework.Bootstrap4)
+              .AddEntityFrameworkStores<ApplicationDbContext>()
+              .AddDefaultTokenProviders();
+
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<UserInitializer>();
+
+            services.ConfigureApplicationCookie(o => {
+                o.ExpireTimeSpan = TimeSpan.FromDays(5);
+                o.SlidingExpiration = true;
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -55,7 +69,8 @@ namespace Exam
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");             
+                app.UseExceptionHandler("/Home/Error");
+
                 app.UseHsts();
             }
 
@@ -71,6 +86,13 @@ namespace Exam
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-        }
+
+            var serviceProvider = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider;
+            var userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
+            var roleMenager = serviceProvider.GetService<RoleManager<IdentityRole>>();
+            var initializer = new UserInitializer(roleMenager, userManager, Configuration);
+            initializer.CreateRolesAsync().Wait();
+            initializer.CreateDefaultUser().Wait();
+        }       
     }
 }
