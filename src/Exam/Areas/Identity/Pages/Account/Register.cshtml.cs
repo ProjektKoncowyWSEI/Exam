@@ -14,8 +14,8 @@ using Microsoft.Extensions.Logging;
 
 namespace Exam.Areas.Identity.Pages.Account
 {
-    //[AuthorizeByRoles(RoleEnum.admin)]
-    [AllowAnonymous]
+    [AuthorizeByRoles(RoleEnum.admin)]
+    //[AllowAnonymous]
     public class RegisterModel : PageModel
     {
         private readonly RoleManager<IdentityRole> _roleManager;
