@@ -1,0 +1,52 @@
+.textColor {
+  color: #ff7f28;
+  text-shadow: 3px 1px 3px white; }
+
+.mainImage-defaults, .mainImage-index, .mainImage-manage, .mainImage-account {
+  position: absolute;
+  left: 0;
+  top: 0; }
+
+.mainImage, .mainImage-index, .mainImage-manage, .mainImage-account {
+  z-index: -1;
+  position: fixed;
+  height: 100%;
+  min-width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #d0cece;
+  opacity: 0.2; }
+
+.mainImage-index {
+  background-image: url(../images/main.jpg);
+  opacity: 0.2; }
+
+.mainImage-manage {
+  background-image: url(../images/manage.jpg); }
+
+.mainImage-account {
+  background-image: url(../images/account.jpg); }
+
+.nav-link {
+  color: #ff7f28 !important; }
+
+.nav-link.active {
+  background-color: #ff7f28 !important;
+  color: white !important; }
+
+.btn-link, a {
+  color: #ff7f28 !important; }
+
+.nav-link.active {
+  background-color: #ff7f28 !important; }
+
+.btn-primary {
+  background-color: #ff7f28 !important;
+  border-color: #ff7f28 !important;
+  color: white !important; }
+
+a:hover, .nav-link:hover, .btn-link:hover, button:hover {
+  color: black !important;
+  text-decoration-style: none !important;
+  transform: scale(1.05); }

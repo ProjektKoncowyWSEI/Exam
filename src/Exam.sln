@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamMainDataBaseAPI", "Exam
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileConverter", "FileConverter\FileConverter.csproj", "{C20FB0E8-1A19-4C46-A153-24D3FA8DDB35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{5F96A006-7798-4D83-9A51-A25D4A616B6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpers", "Helpers\Helpers.csproj", "{5F96A006-7798-4D83-9A51-A25D4A616B6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamContract", "ExamContract\ExamContract.csproj", "{8994ABB3-7DF3-436C-8A24-DE14A1F8879A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{5F96A006-7798-4D83-9A51-A25D4A616B6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F96A006-7798-4D83-9A51-A25D4A616B6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F96A006-7798-4D83-9A51-A25D4A616B6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8994ABB3-7DF3-436C-8A24-DE14A1F8879A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8994ABB3-7DF3-436C-8A24-DE14A1F8879A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8994ABB3-7DF3-436C-8A24-DE14A1F8879A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8994ABB3-7DF3-436C-8A24-DE14A1F8879A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

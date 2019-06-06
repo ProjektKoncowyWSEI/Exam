@@ -8,25 +8,38 @@ using System.Threading.Tasks;
 
 namespace ExamMainDataBaseAPI.DAL
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
-
         private readonly ExamQuestionsDbContext context;
-        public IQuestionsRep Questions { get; private set; }
-        public IAnswersRep Answers { get; private set; }
+        public IRepository<Questions> QuestionRepo { get; private set; }
+        public IRepository<Answer> AnswersRepo { get; private set; }
+        public IRepository<QuestionAnswer> QuestionAnswerRepo { get; private set; }
 
-        public IQuestionAnswerRepo Qa { get; private set; }
-
-        public UnitOfWork(ExamQuestionsDbContext context) {
+        public UnitOfWork(ExamQuestionsDbContext context, IRepository<Questions> questionRepo,
+                IRepository<Answer> answersRepo, IRepository<QuestionAnswer> questionAnswerRepo) {
             this.context = context;
-            Questions = new QuestionsRep(context);
-            Answers = new AnswersRepo(context);
-            Qa = new QuestionAnswerRepo(context);            
+            this.QuestionRepo = questionRepo;
+            this.AnswersRepo = answersRepo;
+            this.QuestionAnswerRepo = questionAnswerRepo;
         }
 
-        public int SaveChanges()
+        public async Task<Questions> GetQuestionWithAnswer(int id)
         {
-           return context.SaveChanges();
+            var question = await QuestionRepo.GetAsync(id);
+            var answersQuestion = await QuestionAnswerRepo.FindBy(q => q.QuestionId == id).ToListAsync();
+            var answers = new List<Answer>();
+
+            foreach (var item in answersQuestion)
+            {
+                answers.Add(await AnswersRepo.GetAsync(item.AnswerId));
+            }
+
+            question.answers = answers;
+            return question;
+        }
+        public async Task SaveChangesAsync()
+        {
+            await context.SaveChangesAsync();
         }     
         public void Dispose()
         {

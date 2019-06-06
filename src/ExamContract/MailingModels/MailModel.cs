@@ -1,15 +1,14 @@
-﻿using ExamMailSenderAPI.Data;
+﻿using ExamContract;
+using ExamContract.MailingModels;
+using Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-using Helpers;
+using System.Text;
 
-namespace ExamMailSenderAPI.Models
-{
-    [Serializable]
-    public class MailModel : Entity
+namespace ExamContract.MailingModels
+{   
+    public partial class MailModel : Entity
     {
         public MailModel()
         {
@@ -27,8 +26,8 @@ namespace ExamMailSenderAPI.Models
             }
             set
             {
-                if (To != null && To.Count > 0)                
-                    toStr = To.ListToString();                
+                if (To != null && To.Count > 0)
+                    toStr = To.ListToString();
                 else
                     toStr = value;
             }

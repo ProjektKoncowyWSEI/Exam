@@ -1,10 +1,8 @@
-﻿using ExamMailSenderAPI.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace ExamMailSenderAPI.Models
+namespace ExamContract.MailingModels
 {
     public partial class Attachment : Entity
     {
@@ -15,7 +13,7 @@ namespace ExamMailSenderAPI.Models
         {
             FileName = fileName;
             Content = content;
-        }      
+        }
         public string FileName { get; set; }
         public byte[] Content { get; set; }
         public int MailModelId { get; set; }

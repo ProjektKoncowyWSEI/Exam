@@ -8,7 +8,7 @@ namespace ExamMainDataBaseAPI.Models
     {
         public Questions()
         {
-            QuestionAnswer = new HashSet<QuestionAnswer>();
+            //QuestionAnswer = new HashSet<QuestionAnswer>();
         }
         
         public int Id { get; set; }
@@ -16,7 +16,10 @@ namespace ExamMainDataBaseAPI.Models
         public byte[] Image { get; set; }
         public string AnswerType { get; set; }
 
-        public virtual ICollection<QuestionAnswer> QuestionAnswer { get; set; }
+        //public virtual ICollection<QuestionAnswer> QuestionAnswer { get; set; }
+        [NotMapped]
+        public ICollection<Answer> answers { get; set; }
+       
 
 
 
