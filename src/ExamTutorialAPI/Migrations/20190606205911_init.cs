@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ExamTutorialsAPI.Migrations
 {
-    public partial class initConnection : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -38,7 +38,7 @@ namespace ExamTutorialsAPI.Migrations
                 name: "Tutorials",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 100, nullable: false),
                     Image = table.Column<byte[]>(nullable: true),
@@ -47,7 +47,7 @@ namespace ExamTutorialsAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tutorials", x => x.ID);
+                    table.PrimaryKey("PK_Tutorials", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Tutorials_Categories_CategoryId",
                         column: x => x.CategoryId,

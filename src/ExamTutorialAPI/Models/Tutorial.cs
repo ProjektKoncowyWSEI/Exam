@@ -1,13 +1,13 @@
-﻿using System;
+﻿using ExamTutorialsAPI.DAL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExamTutorialsAPI.Models
 {
-    public class Tutorial
-    {
-        public int ID { get; set; }
+    public class Tutorial : Entity
+    {      
         [MaxLength(100)]
         [Required]
         public string Name { get; set; }

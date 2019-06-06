@@ -7,15 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exam", "Exam\Exam.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamMailSenderAPI", "ExamMailSenderAPI\ExamMailSenderAPI.csproj", "{901EF860-D15C-4F65-A31A-B0780D996C81}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamTutorialsAPI", "ExamTutorialsAPI\ExamTutorialsAPI.csproj", "{819A0CC8-9B73-40D9-9E01-9DF29F8E85E1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamMainDataBaseAPI", "ExamMainDataBaseAPI\ExamMainDataBaseAPI.csproj", "{D44DAB3A-7889-40EE-BC24-DF8639C872B2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileConverter", "FileConverter\FileConverter.csproj", "{C20FB0E8-1A19-4C46-A153-24D3FA8DDB35}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpers", "Helpers\Helpers.csproj", "{5F96A006-7798-4D83-9A51-A25D4A616B6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamContract", "ExamContract\ExamContract.csproj", "{8994ABB3-7DF3-436C-8A24-DE14A1F8879A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamContract", "ExamContract\ExamContract.csproj", "{8994ABB3-7DF3-436C-8A24-DE14A1F8879A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamTutorialAPI", "ExamTutorialAPI\ExamTutorialAPI.csproj", "{973088FA-C7A2-48C4-A36A-F87171DA113B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +31,6 @@ Global
 		{901EF860-D15C-4F65-A31A-B0780D996C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{901EF860-D15C-4F65-A31A-B0780D996C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{901EF860-D15C-4F65-A31A-B0780D996C81}.Release|Any CPU.Build.0 = Release|Any CPU
-		{819A0CC8-9B73-40D9-9E01-9DF29F8E85E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{819A0CC8-9B73-40D9-9E01-9DF29F8E85E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{819A0CC8-9B73-40D9-9E01-9DF29F8E85E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{819A0CC8-9B73-40D9-9E01-9DF29F8E85E1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D44DAB3A-7889-40EE-BC24-DF8639C872B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D44DAB3A-7889-40EE-BC24-DF8639C872B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D44DAB3A-7889-40EE-BC24-DF8639C872B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +47,10 @@ Global
 		{8994ABB3-7DF3-436C-8A24-DE14A1F8879A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8994ABB3-7DF3-436C-8A24-DE14A1F8879A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8994ABB3-7DF3-436C-8A24-DE14A1F8879A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{973088FA-C7A2-48C4-A36A-F87171DA113B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{973088FA-C7A2-48C4-A36A-F87171DA113B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{973088FA-C7A2-48C4-A36A-F87171DA113B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{973088FA-C7A2-48C4-A36A-F87171DA113B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

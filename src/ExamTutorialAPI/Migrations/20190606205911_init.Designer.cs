@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamTutorialsAPI.Migrations
 {
     [DbContext(typeof(ExamTutorialsApiContext))]
-    [Migration("20190601201800_initConnection")]
-    partial class initConnection
+    [Migration("20190606205911_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,7 +49,7 @@ namespace ExamTutorialsAPI.Migrations
 
             modelBuilder.Entity("ExamTutorialsAPI.Models.Tutorial", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -64,7 +64,7 @@ namespace ExamTutorialsAPI.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
