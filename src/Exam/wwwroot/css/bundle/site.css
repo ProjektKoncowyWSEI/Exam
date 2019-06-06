@@ -24,12 +24,12 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #d0cece;
-  opacity: 0.3;
+  opacity: 0.2;
 }
 
 .mainImage-index {
   background-image: url("../images/main.jpg");
-  opacity: 0.5;
+  opacity: 0.2;
 }
 
 .mainImage-manage {
@@ -38,6 +38,39 @@
 
 .mainImage-account {
   background-image: url("../images/account.jpg");
+}
+
+.nav-link {
+  color: #ff7f28 !important;
+}
+
+.nav-link.active {
+  background-color: #ff7f28 !important;
+  color: white !important;
+}
+
+.btn-link,
+a {
+  color: #ff7f28 !important;
+}
+
+.nav-link.active {
+  background-color: #ff7f28 !important;
+}
+
+.btn-primary {
+  background-color: #ff7f28 !important;
+  border-color: #ff7f28 !important;
+  color: white !important;
+}
+
+a:hover,
+.nav-link:hover,
+.btn-link:hover,
+button:hover {
+  color: black !important;
+  text-decoration-style: none !important;
+  transform: scale(1.05);
 }
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */

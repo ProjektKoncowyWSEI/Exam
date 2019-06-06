@@ -1,8 +1,10 @@
 ﻿$defaultColor: rgba(255,127,40,1);
-
+$textShadow: 3px 1px 3px white;
+.textShadow {
+    text-shadow: $textShadow;
+}
 .textColor {
-    color : $defaultColor;
-    text-shadow: 3px 1px 3px white;
+    color : $defaultColor;    
 }
 .mainImage-defaults {
     position: absolute;
