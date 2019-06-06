@@ -17,20 +17,26 @@ namespace ExamTutorialsAPI
 {
     public class Startup
     {
-        private readonly IConfiguration configuration;
+        const string SQLite = "SQLite";
+        const string SQL = "SQLConnection";
         public Startup(IConfiguration configuration)
         {
-            this.configuration = configuration;
-            StaticValues.ConnectionHelper = configuration.GetConnectionString("SQLConnection");
+            Configuration = configuration;
         }
 
-        
-        // This method gets called by the runtime. Use this method to add services to the container.
+        public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ExamTutorialsApiContext>(o => o.UseSqlServer(configuration.GetConnectionString("SQLConnection")));
-            services.AddHttpContextAccessor();
-
+            switch (Configuration.GetSection("UseDatabase").Value)
+            {
+                case SQLite:
+                    services.AddDbContext<ExamTutorialsApiContext>(o => o.UseSqlite(Configuration.GetConnectionString("SQLiteConnection")));
+                    break;
+                case SQL:
+                    services.AddDbContext<ExamTutorialsApiContext>(o => o.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
+                    break;
+            }
             services
                 .AddMvcCore()
                 .AddDataAnnotations()
