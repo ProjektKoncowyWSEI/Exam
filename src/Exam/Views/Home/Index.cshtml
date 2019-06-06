@@ -1,19 +1,19 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+<div class="mainImage-index"></div>
 <div class="text-center">
     <h1 class="display-4">Aplikacja Exam</h1>
     @if (User.IsInRole(RoleEnum.admin))
     {
-        <p class="textColor">Posiadasz rolę admin</p>
+        <h3 class="textColor">Posiadasz rolę admin</h3>
     }
     @if (User.IsInRole(RoleEnum.teacher))
     {
-        <p class="textColor">Posiadasz rolę teacher</p>
+        <h3 class="textColor">Posiadasz rolę teacher</h3>
     }
     @if (User.IsInRole(RoleEnum.student))
     {
-        <p class="textColor">Posiadasz rolę student</p>
+        <h3 class="textColor">Posiadasz rolę student</h3>
     }
 </div>

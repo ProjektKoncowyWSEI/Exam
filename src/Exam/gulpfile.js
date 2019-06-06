@@ -35,9 +35,7 @@ gulp.task('b_sass', function () {
         .pipe(gulp.dest('./wwwroot/css/'));
 });
 
-//gulp.task('b_sass:watch', function () {
-//    gulp.watch('./wwwroot/css/*.scss', ['sass']);
-//});
+
 
 gulp.task('c_bundle_css', function () {
     return gulp.src('./wwwroot/css/*.css')
@@ -64,4 +62,8 @@ gulp.task('e_compress_css', function () {
         .pipe(cssmin())
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest('./wwwroot/css/min'));
+});
+
+gulp.task('b_sass:watch', function () {
+    gulp.watch('./wwwroot/css/*.scss', ['b_sass']);
 });
