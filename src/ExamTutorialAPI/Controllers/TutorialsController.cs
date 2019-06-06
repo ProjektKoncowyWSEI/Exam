@@ -41,7 +41,7 @@ namespace ExamTutorialsAPI.Controllers
         {
             try
             {
-                var tutorial = db.Tutorials.Include(a => a.Category).SingleOrDefault(a => a.ID == id);
+                var tutorial = db.Tutorials.Include(a => a.Category).SingleOrDefault(a => a.Id == id);
                 if (tutorial == null)
                 {
                     return NotFound($"Id:{id} wasn't found");
@@ -66,7 +66,7 @@ namespace ExamTutorialsAPI.Controllers
                     db.Tutorials.Add(tutorial);
                     db.SaveChanges();
 
-                    return CreatedAtAction(nameof(GetTutorials), new { id = tutorial.ID }, tutorial);
+                    return CreatedAtAction(nameof(GetTutorials), new { id = tutorial.Id }, tutorial);
                 }
                 return BadRequest("Invalid input data");
             }

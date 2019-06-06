@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExamTutorialsAPI.DAL;
 using ExamTutorialsAPI.Helpers;
+using ExamTutorialsAPI.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,12 +15,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace ExamTutorialsAPI
+
+
+namespace ExamTutorialAPI
 {
     public class Startup
     {
         const string SQLite = "SQLite";
-        const string SQL = "SQLConnection";
+        const string SQL = "SQL";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -31,7 +35,7 @@ namespace ExamTutorialsAPI
             switch (Configuration.GetSection("UseDatabase").Value)
             {
                 case SQLite:
-                    services.AddDbContext<ExamTutorialsApiContext>(o => o.UseSqlite(Configuration.GetConnectionString("SQLiteConnection")));
+                    //services.AddDbContext<ExamTutorialsApiContext>(o => o.UseSqlite(Configuration.GetConnectionString("SQLiteConnection")));
                     break;
                 case SQL:
                     services.AddDbContext<ExamTutorialsApiContext>(o => o.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
@@ -41,8 +45,12 @@ namespace ExamTutorialsAPI
                 .AddMvcCore()
                 .AddDataAnnotations()
                 .AddJsonFormatters()
-                .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented)
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
+                //.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSingleton(Configuration);
+            services.AddTransient<Repository<Category>>();
+            services.AddTransient<Repository<Tutorial>>();
+            //services.AddTransient<UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,11 +60,11 @@ namespace ExamTutorialsAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-            //else
-            //{
-            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            //    app.UseHsts();
-            //}
+            else
+            {
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
             app.UseMvc();
