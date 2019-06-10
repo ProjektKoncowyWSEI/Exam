@@ -6,6 +6,7 @@ using ExamMainDataBaseAPI.DAL.Interface;
 using ExamMainDataBaseAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace ExamMainDataBaseAPI.Controllers
 {
@@ -14,15 +15,18 @@ namespace ExamMainDataBaseAPI.Controllers
     public class QuestionWithAnswersController : ControllerBase
     {
         private IUnitOfWork uow = null;
-        
-        public QuestionWithAnswersController(IUnitOfWork uow)
+        private readonly ILogger _logger;
+
+        public QuestionWithAnswersController(IUnitOfWork uow,ILogger logger)
         {
             this.uow = uow;
+            _logger = logger;
         }
         [HttpGet("{id}")]
         public async Task<Questions> Get(int id)
         {
-            return await uow.GetQuestionWithAnswer(id);
+            _logger.LogError("ERROR");
+            return await uow.GetQuestionWithAnswer(id); 
         }
     }
 }

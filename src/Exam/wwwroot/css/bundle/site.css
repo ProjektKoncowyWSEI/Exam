@@ -1,6 +1,9 @@
+.textShadow {
+  text-shadow: 3px 1px 3px white;
+}
+
 .textColor {
   color: #ff7f28;
-  text-shadow: 3px 1px 3px white;
 }
 
 .mainImage-defaults,
