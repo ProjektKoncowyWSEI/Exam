@@ -9,13 +9,23 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Exam.Filters;
 using Helpers;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Localization;
+using System.Threading;
 
 namespace Exam.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IStringLocalizer<SharedResource> localizer;
+
+        public HomeController(IStringLocalizer<SharedResource> localizer)
+        {
+            this.localizer = localizer;
+        }
         public IActionResult Index()
         {
+            ViewBag.X = localizer["Name"];
             return View();
         }
         [AuthorizeByRoles(RoleEnum.student)]
@@ -42,6 +52,18 @@ namespace Exam.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );       
+           
+            return LocalRedirect(returnUrl);
         }
     }
 }

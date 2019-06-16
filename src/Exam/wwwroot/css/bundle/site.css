@@ -75,6 +75,18 @@ button:hover {
   text-decoration-style: none !important;
   transform: scale(1.05);
 }
+
+.language {
+  display: inline-flex;
+}
+
+.marginLeft10 {
+  margin-left: 10px;
+}
+
+.submitImage:hover {
+  transform: scale(1.1);
+}
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 

@@ -61,4 +61,12 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover {
     text-decoration-style: none !important;
     transform:scale(1.05);
 }
-
+.language {
+    display: inline-flex;
+}
+.marginLeft10 {
+    margin-left: 10px;
+}
+.submitImage:hover {
+    transform: scale(1.1);
+}

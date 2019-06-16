@@ -17,6 +17,10 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Exam.Services;
 using Helpers;
 using Exam.Filters;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Localization;
 
 namespace Exam
 {
@@ -56,7 +60,29 @@ namespace Exam
                 o.ExpireTimeSpan = TimeSpan.FromDays(5);
                 o.SlidingExpiration = true;
             });
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+            services.AddMvc()
+                .AddViewLocalization(
+                    LanguageViewLocationExpanderFormat.Suffix,
+                    opts => { opts.ResourcesPath = "Resources"; })
+                .AddDataAnnotationsLocalization(options => options
+                    .DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(SharedResource)))
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportCultures = new List<CultureInfo>
+                {
+                    new CultureInfo("en-US"),
+                    new CultureInfo("pl-PL")
+                };
+
+                options.DefaultRequestCulture = new RequestCulture("en-US", "en-US");
+                options.SupportedCultures = supportCultures;
+                options.SupportedUICultures = supportCultures;
+            });
         }
 
         
@@ -70,10 +96,10 @@ namespace Exam
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-
                 app.UseHsts();
             }
 
+            app.UseRequestLocalization();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

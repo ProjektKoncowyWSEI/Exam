@@ -31,8 +31,9 @@
 
         <footer class="border-top footer text-muted">
             <div class="container">
-                &copy; 2019 - Exam - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
+                &copy; 2019 - Exam - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>               
+                @await Html.PartialAsync("_SelectLanguagePartial")
+            </div>           
         </footer>
         <script src="~/libs/jquery/jquery.min.js"></script>
         <script src="~/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
