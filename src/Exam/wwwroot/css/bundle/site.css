@@ -84,6 +84,11 @@ button:hover {
   margin-left: 10px;
 }
 
+.selectedLanguage {
+  border: 2px solid #ff7f28;
+  border-radius: 5px;
+}
+
 .submitImage:hover {
   transform: scale(1.1);
 }

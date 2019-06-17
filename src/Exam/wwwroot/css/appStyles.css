@@ -59,5 +59,12 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover {
 .marginLeft10 {
   margin-left: 10px; }
 
+.selectedLanguage {
+  border: 2px solid #ff7f28;
+  border-radius: 5px; }
+
+.submitImage {
+  margin-top: 10px; }
+
 .submitImage:hover {
   transform: scale(1.1); }

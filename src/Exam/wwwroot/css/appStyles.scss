@@ -67,6 +67,13 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover {
 .marginLeft10 {
     margin-left: 10px;
 }
+.selectedLanguage{
+    border: 2px solid $defaultColor;
+    border-radius:5px;
+}
+.submitImage{
+    margin-top:10px;
+}
 .submitImage:hover {
     transform: scale(1.1);
 }

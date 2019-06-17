@@ -13,19 +13,17 @@
     //    .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
     //    .ToList();
     var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
+    string selectedPl = requestCulture.RequestCulture.UICulture.Name == "pl-PL" ? "selectedLanguage" : "";
+    string selectedEn = requestCulture.RequestCulture.UICulture.Name == "en-US" ? "selectedLanguage" : "";
 }
 
     <div class="language pull-right" title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
-        <form id="selectLanguage" asp-controller="Home"
-              asp-action="SetLanguage" asp-route-returnUrl="@returnUrl"
-              method="post" class="form-inline" role="form">
-            @*<label asp-for="@requestCulture.RequestCulture.UICulture.Name">@Localizer["Language:"]</label>
-        <select name="culture" onchange="this.form.submit();" asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems"></select>*@
+        <form id="selectLanguagePl" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" class="form-inline" role="form">       
             <input type="hidden" name="culture" value="pl-PL" asp-for="@requestCulture.RequestCulture.UICulture.Name" />
-            <input class="submitImage" type="image" src="~/images/pl.png" border="0" alt="PL" title="Poland"/>
+            <input class="@selectedPl submitImage" type="image" src="~/images/pl.png" border="0" alt="PL" title="Poland" /> 
         </form>
-        <form id="selectLanguage" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" class="form-inline marginLeft10" role="form">    
+        <form id="selectLanguageEn" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" class="form-inline marginLeft10" role="form">    
             <input type="hidden" name="culture" value="en-US" asp-for="@requestCulture.RequestCulture.UICulture.Name" />
-            <input class="submitImage" type="image" src="~/images/en.png" border="0" alt="EN" title="United-Kingdom" />
-        </form>        
+            <input class="@selectedEn submitImage" type="image" src="~/images/en.png" border="0" alt="EN" title="United-Kingdom" />   
+        </form> 
     </div>
