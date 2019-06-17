@@ -89,6 +89,10 @@ button:hover {
   border-radius: 5px;
 }
 
+.submitImage {
+  margin-top: 10px;
+}
+
 .submitImage:hover {
   transform: scale(1.1);
 }
