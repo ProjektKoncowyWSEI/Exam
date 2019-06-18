@@ -1,12 +1,15 @@
 ﻿@page
 @model ConfirmEmailModel
+@inject  IHtmlLocalizer<SharedResource> Localizer
 @{
-    ViewData["Title"] = "Confirm email";
+    ViewData["Title"] = Localizer["Confirm Email"];
+   
 }
     <div class="mainImage-account"></div>
 <h1>@ViewData["Title"]</h1>
 <div>
     <p>
-        Thank you for confirming your email.
+        
+        class="text-danger"@Localizer["Thank you for confirming your email."]
     </p>
 </div>

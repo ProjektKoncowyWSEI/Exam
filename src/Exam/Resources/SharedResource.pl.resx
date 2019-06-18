@@ -120,6 +120,9 @@
   <data name="Access denied" xml:space="preserve">
     <value>Odmowa dostępu</value>
   </data>
+  <data name="Confirm Email" xml:space="preserve">
+    <value>Potwierdź Email</value>
+  </data>
   <data name="Forgot your password?" xml:space="preserve">
     <value>Nie pamiętasz hasła?</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="Remember me?" xml:space="preserve">
     <value>Zapamietaj mnie?</value>
+  </data>
+  <data name="Thank you for confirming your email." xml:space="preserve">
+    <value>Dziękujemy za potwierdzenie adresu e-mail.</value>
   </data>
   <data name="Use a local account to log in." xml:space="preserve">
     <value>Użyj lokalnego konta aby się zalogować.</value>
