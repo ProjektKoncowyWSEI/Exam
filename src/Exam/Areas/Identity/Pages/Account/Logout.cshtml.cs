@@ -38,7 +38,8 @@ namespace Exam.Areas.Identity.Pages.Account
             //{
             //    return Page();
             //}
-            return Page();
+            return Redirect("Logout");
+            //return RedirectToAction(nameof(OnGet));
         }
     }
 }

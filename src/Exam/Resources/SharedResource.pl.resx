@@ -142,7 +142,7 @@
     <value>Zaloguj się</value>
   </data>
   <data name="Log out" xml:space="preserve">
-    <value>Wyloguj</value>
+    <value>Wylogowano</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Imię</value>
@@ -156,8 +156,8 @@
   <data name="Thank you for confirming your email." xml:space="preserve">
     <value>Dziękujemy za potwierdzenie adresu e-mail.</value>
   </data>
-  <data name="To konto zostało zablokowane. Spróbuj ponownie później" xml:space="preserve">
-    <value>This account has been locked out, please try again later</value>
+  <data name="This account has been locked out, please try again later" xml:space="preserve">
+    <value>To konto zostało zablokowane. Spróbuj ponownie później</value>
   </data>
   <data name="Use a local account to log in." xml:space="preserve">
     <value>Użyj lokalnego konta aby się zalogować.</value>
@@ -165,7 +165,7 @@
   <data name="You do not have access to this resource." xml:space="preserve">
     <value>Nie masz dostępu do danych</value>
   </data>
-  <data name="You have successfully logged out of the application" xml:space="preserve">
+  <data name="You have successfully logged out of the application." xml:space="preserve">
     <value>Pomyślnie wylogowałeś się z aplikacji</value>
   </data>
 </root>
