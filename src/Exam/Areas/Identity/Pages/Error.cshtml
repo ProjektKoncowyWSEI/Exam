@@ -1,11 +1,12 @@
 ﻿@page
 @model ErrorModel
+@inject  IHtmlLocalizer<SharedResource> Localizer
 @{
-    ViewData["Title"] = "Error";
+    ViewData["Title"] = @Localizer["Error"];
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<h1 class="text-danger">@Localizer["Error."]</h1>
+<h2 class="text-danger">@Localizer["An error occurred while processing your request."]</h2>
 
 @if (Model.ShowRequestId)
 {

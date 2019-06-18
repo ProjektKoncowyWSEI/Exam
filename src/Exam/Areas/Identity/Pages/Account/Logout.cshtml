@@ -1,10 +1,11 @@
 ﻿@page
 @model LogoutModel
+@inject IHtmlLocalizer<SharedResource> Localizer
 @{
-    ViewData["Title"] = "Log out";
+    ViewData["Title"] =Localizer ["Log out"];
 }
     <div class="mainImage-account"></div>
 <header>
     <h1>@ViewData["Title"]</h1>
-    <p>You have successfully logged out of the application.</p>
+    <p class="text-danger">@Localizer["You have successfully logged out of the application."]</p>
 </header>

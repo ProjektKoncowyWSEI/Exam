@@ -120,8 +120,14 @@
   <data name="Access denied" xml:space="preserve">
     <value>Odmowa dostępu</value>
   </data>
+  <data name="An error occurred while processing your request" xml:space="preserve">
+    <value>Podczas przetwarzania żądania wystąpił błąd</value>
+  </data>
   <data name="Confirm Email" xml:space="preserve">
     <value>Potwierdź Email</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Błąd</value>
   </data>
   <data name="Forgot your password?" xml:space="preserve">
     <value>Nie pamiętasz hasła?</value>
@@ -131,6 +137,9 @@
   </data>
   <data name="Log in" xml:space="preserve">
     <value>Zaloguj się</value>
+  </data>
+  <data name="Log out" xml:space="preserve">
+    <value>Wyloguj</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Imię</value>
@@ -152,5 +161,8 @@
   </data>
   <data name="You do not have access to this resource." xml:space="preserve">
     <value>Nie masz dostępu do danych</value>
+  </data>
+  <data name="You have successfully logged out of the application" xml:space="preserve">
+    <value>Pomyślnie wylogowałeś się z aplikacji</value>
   </data>
 </root>
