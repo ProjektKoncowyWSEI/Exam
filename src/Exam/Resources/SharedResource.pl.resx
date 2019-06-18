@@ -126,6 +126,9 @@
   <data name="Forgot your password?" xml:space="preserve">
     <value>Nie pamiętasz hasła?</value>
   </data>
+  <data name="Locked out" xml:space="preserve">
+    <value>Zablokowany</value>
+  </data>
   <data name="Log in" xml:space="preserve">
     <value>Zaloguj się</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="Thank you for confirming your email." xml:space="preserve">
     <value>Dziękujemy za potwierdzenie adresu e-mail.</value>
+  </data>
+  <data name="To konto zostało zablokowane. Spróbuj ponownie później" xml:space="preserve">
+    <value>This account has been locked out, please try again later</value>
   </data>
   <data name="Use a local account to log in." xml:space="preserve">
     <value>Użyj lokalnego konta aby się zalogować.</value>
