@@ -95,7 +95,7 @@ namespace Exam.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, localizer["Invalid login attempt."]);
                     return Page();
                 }
             }
