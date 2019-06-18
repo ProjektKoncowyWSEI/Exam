@@ -132,6 +132,9 @@
   <data name="Forgot your password?" xml:space="preserve">
     <value>Nie pamiętasz hasła?</value>
   </data>
+  <data name="Invalid login attempt." xml:space="preserve">
+    <value>Nie prawidłowa próba logowania.</value>
+  </data>
   <data name="Locked out" xml:space="preserve">
     <value>Zablokowany</value>
   </data>
