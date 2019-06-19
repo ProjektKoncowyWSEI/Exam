@@ -9,6 +9,9 @@ using ExamMainDataBaseAPI.Models;
 using ExamMainDataBaseAPI.DAL;
 using ExamMainDataBaseAPI.DAL.Interface;
 using System.Linq.Expressions;
+using Logger;
+using Microsoft.Extensions.Logging;
+using Logger.Data;
 
 namespace ExamMainDataBaseAPI.Controllers
 {
@@ -17,6 +20,7 @@ namespace ExamMainDataBaseAPI.Controllers
     public class QuestionsController : Controller 
     {
         private IUnitOfWork uow = null;
+        private readonly ILogger logger = new ExamLogger();
 
         public QuestionsController(IUnitOfWork uow)
         {
@@ -25,6 +29,7 @@ namespace ExamMainDataBaseAPI.Controllers
         [HttpGet]
         public async Task<IEnumerable<Questions>> GetAll()
         {
+            logger.LogInformation("cos");
             return await uow.QuestionRepo.GetAllAsync();
         }
        
