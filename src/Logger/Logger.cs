@@ -26,7 +26,7 @@ namespace ExamLogger
             try
             {
                 File.AppendAllText(Path.Combine("D://bledy/", "błędy"),
-                    $"{Environment.NewLine} Data: {DateTime.Now} Błąd: {state.ToString()+"A"} Exeption {exception} ");
+                    $"{logLevel.ToString()} {Environment.NewLine} Data: {DateTime.Now} Błąd: {state.ToString()} Exeption {exception} ");
             }
             catch (Exception ex)
             {

@@ -15,17 +15,14 @@ namespace ExamMainDataBaseAPI.Controllers
     public class QuestionWithAnswersController : ControllerBase
     {
         private IUnitOfWork uow = null;
-        private readonly ILogger _logger;
 
-        public QuestionWithAnswersController(IUnitOfWork uow,ILogger logger)
+        public QuestionWithAnswersController(IUnitOfWork uow)
         {
             this.uow = uow;
-            _logger = logger;
         }
         [HttpGet("{id}")]
         public async Task<Questions> Get(int id)
         {
-            _logger.LogError("ERROR");
             return await uow.GetQuestionWithAnswer(id); 
         }
     }

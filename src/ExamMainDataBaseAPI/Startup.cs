@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ExamLogger;
 using ExamMainDataBaseAPI.DAL;
 using ExamMainDataBaseAPI.DAL.Interface;
 using ExamMainDataBaseAPI.Models;
@@ -38,7 +37,6 @@ namespace ExamMainDataBaseAPI
             services.AddTransient<IRepository<Questions>, Repository<Questions>>();
             services.AddTransient<IRepository<QuestionAnswer>, Repository<QuestionAnswer>>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<ILogger, ExamLogger.Logger>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
