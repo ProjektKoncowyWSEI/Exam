@@ -39,12 +39,12 @@ namespace Exam.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "The {0} field is required.")]
+            [EmailAddress(ErrorMessage ="The {0} field is not a valid e-mail address.")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "The {0} field is required.")]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -73,7 +73,7 @@ namespace Exam.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
-
+            ViewData["Title"] = localizer["Log in"];
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
