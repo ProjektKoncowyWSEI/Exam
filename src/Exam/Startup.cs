@@ -22,6 +22,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Localization;
 using Microsoft.Extensions.Logging;
+using Exam.Areas.Identity.Pages.Account;
 
 namespace Exam
 {
@@ -61,6 +62,7 @@ namespace Exam
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<UserInitializer>();
             services.AddScoped<ILogger, Logger.ExamLogger>();
+            services.AddScoped<ILogger<LoginModel>, Logger.ExamLogger<LoginModel>>();
 
             services.ConfigureApplicationCookie(o => {
                 o.ExpireTimeSpan = TimeSpan.FromDays(5);

@@ -67,4 +67,30 @@ namespace Logger
             }
         }
     }
+    public class ExamLogger<T> : ILogger<T>
+    {
+        private LoggerDbContext _context;
+        private readonly IEmailSender _emailSender;
+        private ExamLogger examLogger;
+        public ExamLogger(LoggerDbContext context, IEmailSender emailSender)
+        {
+            _context = context;
+            _emailSender = emailSender;
+            examLogger = new ExamLogger(context, emailSender);
+        }
+        public IDisposable BeginScope<TState>(TState state)
+        {
+            return examLogger.BeginScope(state);
+        }
+
+        public bool IsEnabled(LogLevel logLevel)
+        {
+            return examLogger.IsEnabled(logLevel);
+        }
+
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        {
+            examLogger.Log(logLevel, eventId, state, exception, formatter);
+        }
+    }
 }
