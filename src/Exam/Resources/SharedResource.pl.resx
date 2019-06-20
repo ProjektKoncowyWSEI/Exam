@@ -303,22 +303,4 @@
   <data name="Your password has been reset. Please" xml:space="preserve">
     <value>Twoje hasło zostało zmienione. Proszę </value>
   </data>
-  <data name="Hello" xml:space="preserve">
-    <value>Witaj</value>
-  </data>
-  <data name="Home" xml:space="preserve">
-    <value>Start</value>
-  </data>
-  <data name="Login" xml:space="preserve">
-    <value>Zaloguj się</value>
-  </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Wyloguj się</value>
-  </data>
-  <data name="The {0} field is not a valid e-mail address." xml:space="preserve">
-    <value>Pole {0} nie jest prawidłowym adresem e-mail.</value>
-  </data>
-  <data name="The {0} field is required." xml:space="preserve">
-    <value>Pole {0} jest wyamagane.</value>
-  </data>
 </root>
