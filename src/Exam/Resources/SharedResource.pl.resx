@@ -123,8 +123,35 @@
   <data name="An error occurred while processing your request" xml:space="preserve">
     <value>Podczas przetwarzania żądania wystąpił błąd</value>
   </data>
+  <data name="and restarting the application." xml:space="preserve">
+    <value> a następnie zrestartowanie aplikacji</value>
+  </data>
+  <data name="as it can result in sensitive information from exceptions being displayed to end users. For local debugging, development environment can be enabled by setting the" xml:space="preserve">
+    <value>ponieważ może skutkować przekazaniem danych wrażliwych dotyczących pojawiających się wyjątków wyświetlanych użytkownikom końcowym. Dla uruchomienia lokalnego, środowisko deweloperskie może zostać udostępniome poprzez ustawienie </value>
+  </data>
+  <data name="click here to log in" xml:space="preserve">
+    <value>kliknij tutaj aby się zalogować</value>
+  </data>
   <data name="Confirm Email" xml:space="preserve">
     <value>Potwierdź Email</value>
+  </data>
+  <data name="Create a new account" xml:space="preserve">
+    <value>Utwórz nowe konto</value>
+  </data>
+  <data name="Development environment should not be enabled in deployed applications" xml:space="preserve">
+    <value>Środowisko deweloperskie nie powinno być dostępne w aplikacjach wdrożonych/zainstalowanych, </value>
+  </data>
+  <data name="Development Mode" xml:space="preserve">
+    <value>Tryb deweloperski</value>
+  </data>
+  <data name="Don't have access to your authenticator device? You can" xml:space="preserve">
+    <value>Nie masz dostępu do dodatkowej autoryzacji? Możesz</value>
+  </data>
+  <data name="Enter your email." xml:space="preserve">
+    <value>Wprowadź swój email</value>
+  </data>
+  <data name="environment variable to" xml:space="preserve">
+    <value> zmiennej środowiskowej na </value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Błąd</value>
@@ -141,6 +168,9 @@
   <data name="Log in" xml:space="preserve">
     <value>Zaloguj się</value>
   </data>
+  <data name="log in with a recovery code" xml:space="preserve">
+    <value>zalogować się przy pomocy kodu odzyskiwania</value>
+  </data>
   <data name="Log out" xml:space="preserve">
     <value>Wylogowano</value>
   </data>
@@ -150,8 +180,32 @@
   <data name="Password" xml:space="preserve">
     <value>Hasło</value>
   </data>
+  <data name="Recovery code verification" xml:space="preserve">
+    <value>Weryfikacja przy pomocy kodu odzyskiwania</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Zarejestruj się</value>
+  </data>
   <data name="Remember me?" xml:space="preserve">
     <value>Zapamietaj mnie?</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Zmień</value>
+  </data>
+  <data name="Reset password" xml:space="preserve">
+    <value>Zmień hasło</value>
+  </data>
+  <data name="Reset password confirmation" xml:space="preserve">
+    <value>Potwierdzenie zmiany hasła</value>
+  </data>
+  <data name="Reset your password" xml:space="preserve">
+    <value>Zmień hasło</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Wyślij</value>
+  </data>
+  <data name="Swapping to Development environment will display more detailed information about the error that occurred." xml:space="preserve">
+    <value>Zmieniając na środowisko deweloperskie, otrzymasz szczegółowe informację dotyczące błedu, który wystąpił.</value>
   </data>
   <data name="Thank you for confirming your email." xml:space="preserve">
     <value>Dziękujemy za potwierdzenie adresu e-mail.</value>
@@ -159,13 +213,25 @@
   <data name="This account has been locked out, please try again later" xml:space="preserve">
     <value>To konto zostało zablokowane. Spróbuj ponownie później</value>
   </data>
+  <data name="Two-factor authentication" xml:space="preserve">
+    <value>Dwustopniowe uwierzytelnienie</value>
+  </data>
   <data name="Use a local account to log in." xml:space="preserve">
     <value>Użyj lokalnego konta aby się zalogować.</value>
   </data>
   <data name="You do not have access to this resource." xml:space="preserve">
     <value>Nie masz dostępu do danych</value>
   </data>
+  <data name="You have requested to log in with a recovery code. This login will not be remembered until you provide an authenticator app code at log in or disable 2FA and log in again." xml:space="preserve">
+    <value>Zażądałeś zalogowania przy użyciu kodu odzywskiwania. Ten login nie zostanie zapamiętany, dopóki nie wprowadzić kodu dodatkowej autoryzacji podczas logowania, lub dezaktywujesz 2FA i zalogujesz się raz jeszcze.</value>
+  </data>
   <data name="You have successfully logged out of the application." xml:space="preserve">
     <value>Pomyślnie wylogowałeś się z aplikacji</value>
+  </data>
+  <data name="Your login is protected with an authenticator app. Enter your authenticator code below." xml:space="preserve">
+    <value>Twój login jest chroniony dodatkową autoryzacją. Wpisz kod autoryzacji poniżej.</value>
+  </data>
+  <data name="Your password has been reset. Please" xml:space="preserve">
+    <value>Twoje hasło zostało zmienione. Proszę </value>
   </data>
 </root>
