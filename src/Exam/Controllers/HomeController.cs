@@ -12,19 +12,23 @@ using Helpers;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Localization;
 using System.Threading;
+using Microsoft.Extensions.Logging;
 
 namespace Exam.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IStringLocalizer<SharedResource> localizer;
+        private readonly ILogger logger;
 
-        public HomeController(IStringLocalizer<SharedResource> localizer)
+        public HomeController(IStringLocalizer<SharedResource> localizer, ILogger logger)
         {
             this.localizer = localizer;
+            this.logger = logger;
         }
         public IActionResult Index()
         {
+            logger.LogInformation("Index"); // TODO Usunąć to
             ViewBag.X = localizer["Name"];
             return View();
         }

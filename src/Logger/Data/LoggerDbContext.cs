@@ -7,13 +7,16 @@ using System.Text;
 
 namespace Logger.Data
 {
-    public class LoggerDbContext : DbContext
+    public class LoggerDbContext : DbContext         
     {
-       
-        public DbSet<EventLog> EventLog { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public LoggerDbContext(DbContextOptions<LoggerDbContext> options)
+             : base(options)
         {
-            optionsBuilder.UseSqlite(@"Data Source=ExamLogger.db");
         }
+        public DbSet<EventLog> EventLog { get; set; }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlite(@"Data Source=ExamLogger.db");
+        //}
     }
 }

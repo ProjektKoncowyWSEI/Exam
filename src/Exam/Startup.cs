@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Localization;
+using Microsoft.Extensions.Logging;
 
 namespace Exam
 {
@@ -44,6 +45,10 @@ namespace Exam
                 options.UseSqlServer(
                     Configuration.GetConnectionString("UsersConnection")));
 
+            services.AddDbContext<Logger.Data.LoggerDbContext>(options =>
+               options.UseSqlite(
+                   Configuration.GetConnectionString("LoggerConnection")));
+
             services.AddDefaultIdentity<IdentityUser>(config =>
             {
                 config.SignIn.RequireConfirmedEmail = false; // TODO jesli uznamy że konieczne jest potwierdzenie E-mail
@@ -55,6 +60,7 @@ namespace Exam
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<UserInitializer>();
+            services.AddScoped<ILogger, Logger.ExamLogger>();
 
             services.ConfigureApplicationCookie(o => {
                 o.ExpireTimeSpan = TimeSpan.FromDays(5);

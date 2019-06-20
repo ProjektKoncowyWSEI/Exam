@@ -1,5 +1,6 @@
 ﻿using Logger.Data;
 using Logger.Model;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,16 @@ using System.Text;
 
 namespace Logger
 {
-   public class ExamLogger : ILogger
+    public class ExamLogger : ILogger
     {
-        private LoggerDbContext _context = new LoggerDbContext();
+        public ExamLogger(LoggerDbContext context, IEmailSender emailSender)
+        {
+            _context = context;
+            _emailSender = emailSender;
+        }
+        private LoggerDbContext _context;
+        private readonly IEmailSender _emailSender;
+
         public IDisposable BeginScope<TState>(TState state)
         {
             return null;
@@ -26,7 +34,7 @@ namespace Logger
             {
                 return;
             }
-           
+
             if (formatter == null)
             {
                 throw new ArgumentNullException(nameof(formatter));
@@ -49,10 +57,14 @@ namespace Logger
                     EventId = eventId.Id,
                     LogLevel = logLevel.ToString(),
                     CreatedTime = DateTime.UtcNow
-                }) ;
+                });
                 _context.SaveChanges();
             }
-            catch {}
+            catch (Exception ex)
+            {
+                _emailSender.SendEmailAsync("lnew84@gmail.com", "Exam error", ex.Message).Wait();
+                _emailSender.SendEmailAsync("krzysztof.sauermann@gmail.com", "Exam error", ex.Message).Wait();
+            }
         }
     }
 }
