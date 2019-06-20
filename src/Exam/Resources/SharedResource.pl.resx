@@ -303,4 +303,115 @@
   <data name="Your password has been reset. Please" xml:space="preserve">
     <value>Twoje hasło zostało zmienione. Proszę </value>
   </data>
+  <data name="About" xml:space="preserve">
+    <value>O nas</value>
+  </data>
+  <data name="Add authenticator app" xml:space="preserve">
+    <value>Dodaj aplikację autoryzacji</value>
+  </data>
+  <data name="Authenticator app" xml:space="preserve">
+    <value>Aplikacja autoryzacji</value>
+  </data>
+  <data name="before you can log in with a recovery code." xml:space="preserve">
+    <value>zanim zalogujesz się przy użyciu kodu ozdyskiwania.</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
+  <data name="Forget this browser" xml:space="preserve">
+    <value>Zapomnij tą wyszukiwarkę</value>
+  </data>
+  <data name="Forgot password confirmation" xml:space="preserve">
+    <value>Potwierdzenie zmiany hasła</value>
+  </data>
+  <data name="generate a new set of recovery codes" xml:space="preserve">
+    <value>wygenerować nowy zestaw kodów odzyskiwania </value>
+  </data>
+  <data name="Generate Recovery Codes" xml:space="preserve">
+    <value>Wygeneruj kody odzyskiwania</value>
+  </data>
+  <data name="Generate two-factor authentication (2FA) recovery codes" xml:space="preserve">
+    <value>Wygeneruj kody dwustopniowej autoryzacji (2FA)</value>
+  </data>
+  <data name="Generating new recovery codes does not change the keys used in authenticator apps. If you wish to change the key used in an authenticator app you should" xml:space="preserve">
+    <value>Wygenerowanie nowych kodów odzyskiwania nie zmieni kluczy w aplikacji autoryzacji. Jeśli chcesz zmienić klucz używany w aplikacji autoryzacji powinieneś </value>
+  </data>
+  <data name="If you lose your device and don't have the recovery codes you will lose access to your account." xml:space="preserve">
+    <value>Gdy zgubisz urządzenie i kody odzyskiwania utracisz dostęp do swojego konta.</value>
+  </data>
+  <data name="If you reset your authenticator key your authenticator app will not work until you reconfigure it." xml:space="preserve">
+    <value>Jeśli zresetujesz klucz autoryzacji, twoja aplikacja autoryzacji nie będzie działać, dopóki nie skonfigurujesz jej od nowa.</value>
+  </data>
+  <data name="Manage your external logins" xml:space="preserve">
+    <value>Zarządzaj zewnętrznymi loginami</value>
+  </data>
+  <data name="Please check your email to reset your password." xml:space="preserve">
+    <value>Proszę sprawdź e-mail aby zresetować hasło.</value>
+  </data>
+  <data name="Privacy Policy" xml:space="preserve">
+    <value>Polityka prywatności</value>
+  </data>
+  <data name="Put these codes in a safe place." xml:space="preserve">
+    <value>Zachowaj kody w bezpiecznym miejscu</value>
+  </data>
+  <data name="recovery codes left." xml:space="preserve">
+    <value>kodów odzyskania, jakie Ci pozostały do wykorzystania.</value>
+  </data>
+  <data name="Registered Logins" xml:space="preserve">
+    <value>Zarejestrowane loginy</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
+  <data name="Reset authenticator app" xml:space="preserve">
+    <value>Zresetuj aplikację autoryzacji</value>
+  </data>
+  <data name="Reset authenticator key" xml:space="preserve">
+    <value>Zresetuj klucz autoryzacji</value>
+  </data>
+  <data name="Reset recovery codes" xml:space="preserve">
+    <value>Zresetuj kody odzyskiwania</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Zapisz</value>
+  </data>
+  <data name="Send verification email" xml:space="preserve">
+    <value>Wyślij mail weryfikacyjny</value>
+  </data>
+  <data name="Set password" xml:space="preserve">
+    <value>Ustaw hasło</value>
+  </data>
+  <data name="Setup authenticator app" xml:space="preserve">
+    <value>Skonfigurujaplikację autoryzacji</value>
+  </data>
+  <data name="This process disables 2FA until you verify your authenticator app. If you do not complete your authenticator app configuration you may lose access to your account." xml:space="preserve">
+    <value>Ten proces wyłącza 2FA do momentu weryfikacji aplikacji autoryzacji. Jeśli nie uzupełnisz konfiguracji twojej aplikacji autoryzacji możesz stracić dostęp do konta.</value>
+  </data>
+  <data name="Two-factor authentication (2FA)" xml:space="preserve">
+    <value>Autoryzacja dwustpniowa (2FA)</value>
+  </data>
+  <data name="You can" xml:space="preserve">
+    <value>Możesz </value>
+  </data>
+  <data name="You do not have a local username/password for this site. Add a local account so you can log in without an external login." xml:space="preserve">
+    <value>Nie masz jeszcze konta na tej stronie, Załóż kontro abyuzyskać login i hasło.</value>
+  </data>
+  <data name="You have" xml:space="preserve">
+    <value>Masz</value>
+  </data>
+  <data name="You have 1 recovery code left." xml:space="preserve">
+    <value>Pozostał Ci 1 kod odzyskiwania.</value>
+  </data>
+  <data name="You have no recovery codes left." xml:space="preserve">
+    <value>Nie masz już kodów odzyskiwania.</value>
+  </data>
+  <data name="You must" xml:space="preserve">
+    <value>Musisz </value>
+  </data>
+  <data name="You should" xml:space="preserve">
+    <value>Powinieneś </value>
+  </data>
+  <data name="Your account contains personal data that you have given us. This page allows you to download or delete that data." xml:space="preserve">
+    <value>Twoje konto zawiera dane osobowe, które wprowadziłeś/wprowadziłaś. Na tej stronie możesz pobrać lub usunąć te dane.</value>
+  </data>
 </root>
