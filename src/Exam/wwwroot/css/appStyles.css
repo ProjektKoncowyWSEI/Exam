@@ -68,3 +68,6 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover {
 
 .submitImage:hover {
   transform: scale(1.1); }
+
+.maxWidth {
+  width: 100%; }

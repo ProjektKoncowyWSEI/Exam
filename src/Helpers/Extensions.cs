@@ -24,7 +24,7 @@ namespace Helpers
         }
         public static string ToRoleString(this RoleEnum[] roles)
         {
-            var result = "";       
+            var result = "";
             if (roles.Length > 0 && !roles.Any(r => r == RoleEnum.admin))
                 result = $"{RoleEnum.admin.ToString()},";
             result += string.Join(",", roles);
@@ -33,6 +33,22 @@ namespace Helpers
         public static bool IsInRole(this ClaimsPrincipal user, RoleEnum role)
         {
             return user.IsInRole(role.ToString());
+        }
+        public static string CurrentRole(this ClaimsPrincipal user)
+        {
+            if (user.IsInRole(RoleEnum.admin))
+            {
+                return RoleEnum.admin.ToString();
+            }
+            if (user.IsInRole(RoleEnum.teacher))
+            {
+                return RoleEnum.teacher.ToString();
+            }
+            if (user.IsInRole(RoleEnum.student))
+            {
+                return RoleEnum.student.ToString();
+            }
+            return "";
         }
     }
 }

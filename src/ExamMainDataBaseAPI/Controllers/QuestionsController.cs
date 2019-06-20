@@ -30,7 +30,7 @@ namespace ExamMainDataBaseAPI.Controllers
         [HttpGet]
         public async Task<IEnumerable<Questions>> GetAll()
         {
-            logger.LogInformation("cos");
+            //logger.LogInformation("cos");
             return await uow.QuestionRepo.GetAllAsync();
         }
        

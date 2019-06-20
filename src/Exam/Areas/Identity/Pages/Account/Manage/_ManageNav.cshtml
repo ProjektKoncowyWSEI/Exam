@@ -1,5 +1,5 @@
 ﻿@inject SignInManager<IdentityUser> SignInManager
-@inject IHtmlLocalizer<SharedResource> Localizer
+
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

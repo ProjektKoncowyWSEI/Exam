@@ -1,22 +1,8 @@
-﻿@inject IHtmlLocalizer<SharedResource> Localizer
+﻿
 
 @{
     ViewData["Title"] = Localizer["Name"];
 }
 
 <div class="mainImage-index"></div>
-<div class="text-center">
-    <h1 class="display-4">@ViewBag.X</h1>
-    @if (User.IsInRole(RoleEnum.admin))
-    {
-        <h3 class="textColor">Posiadasz rolę admin</h3>
-    }
-    @if (User.IsInRole(RoleEnum.teacher))
-    {
-        <h3 class="textColor">Posiadasz rolę teacher</h3>
-    }
-    @if (User.IsInRole(RoleEnum.student))
-    {
-        <h3 class="textColor">Posiadasz rolę student</h3>
-    }
-</div>
+<img class="maxWidth" src="~/images/coffee.jpg" />
