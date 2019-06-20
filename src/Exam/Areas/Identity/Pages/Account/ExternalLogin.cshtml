@@ -1,9 +1,10 @@
 ﻿@page
 @model ExternalLoginModel
+@inject IHtmlLocalizer<SharedResource> Localizer
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = @Localizer["Register"];
 }
-    <div class="mainImage-account"></div>
+<div class="mainImage-account"></div>
 <h1>@ViewData["Title"]</h1>
 <h4>Associate your @Model.LoginProvider account.</h4>
 <hr />
@@ -23,7 +24,7 @@
                 <input asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary">@Localizer["Register"]</button>
         </form>
     </div>
 </div>
