@@ -20,11 +20,12 @@ namespace ExamMainDataBaseAPI.Controllers
     public class QuestionsController : Controller 
     {
         private IUnitOfWork uow = null;
-        private readonly ILogger logger = new ExamLogger();
+        private readonly ILogger logger;
 
-        public QuestionsController(IUnitOfWork uow)
+        public QuestionsController(IUnitOfWork uow,ILogger logger)
         {
             this.uow = uow;
+            this.logger = logger;
         }
         [HttpGet]
         public async Task<IEnumerable<Questions>> GetAll()
