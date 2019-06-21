@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 
 namespace Exam.Areas.Identity.Pages.Account.Manage
@@ -16,15 +17,18 @@ namespace Exam.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<TwoFactorAuthenticationModel> _logger;
+        private readonly IStringLocalizer<SharedResource> localizer;
 
         public TwoFactorAuthenticationModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            ILogger<TwoFactorAuthenticationModel> logger)
+            ILogger<TwoFactorAuthenticationModel> logger,
+            IStringLocalizer<SharedResource> localizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            this.localizer = localizer;
         }
 
         public bool HasAuthenticator { get; set; }
@@ -64,7 +68,7 @@ namespace Exam.Areas.Identity.Pages.Account.Manage
             }
 
             await _signInManager.ForgetTwoFactorClientAsync();
-            StatusMessage = "The current browser has been forgotten. When you login again from this browser you will be prompted for your 2fa code.";
+            StatusMessage = localizer["The current browser has been forgotten. When you login again from this browser you will be prompted for your 2fa code."];
             return RedirectToPage();
         }
     }

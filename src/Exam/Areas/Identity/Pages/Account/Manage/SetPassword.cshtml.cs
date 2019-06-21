@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 
 namespace Exam.Areas.Identity.Pages.Account.Manage
 {
@@ -13,13 +14,16 @@ namespace Exam.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IStringLocalizer<SharedResource> localizer;
 
         public SetPasswordModel(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager,
+            IStringLocalizer<SharedResource> localizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            this.localizer = localizer;
         }
 
         [BindProperty]
@@ -84,7 +88,7 @@ namespace Exam.Areas.Identity.Pages.Account.Manage
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your password has been set.";
+            StatusMessage = localizer["Your password has been set."];
 
             return RedirectToPage();
         }

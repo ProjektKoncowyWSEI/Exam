@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 namespace Exam.Areas.Identity.Pages.Account.Manage
 {
@@ -14,15 +15,20 @@ namespace Exam.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<ChangePasswordModel> _logger;
+        private readonly IStringLocalizer<SharedResource> localizer;
+        
 
         public ChangePasswordModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            ILogger<ChangePasswordModel> logger)
+            ILogger<ChangePasswordModel> logger,
+            IStringLocalizer<SharedResource> localizer
+             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            this.localizer = localizer;
         }
 
         [BindProperty]
@@ -92,7 +98,7 @@ namespace Exam.Areas.Identity.Pages.Account.Manage
 
             await _signInManager.RefreshSignInAsync(user);
             _logger.LogInformation("User changed their password successfully.");
-            StatusMessage = "Your password has been changed.";
+            StatusMessage = localizer["Your password has been changed."];
 
             return RedirectToPage();
         }

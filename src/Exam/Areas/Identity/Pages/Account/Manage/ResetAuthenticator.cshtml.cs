@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 
 namespace Exam.Areas.Identity.Pages.Account.Manage
@@ -14,15 +15,18 @@ namespace Exam.Areas.Identity.Pages.Account.Manage
         UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         ILogger<ResetAuthenticatorModel> _logger;
+        private readonly IStringLocalizer<SharedResource> localizer;
 
         public ResetAuthenticatorModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            ILogger<ResetAuthenticatorModel> logger)
+            ILogger<ResetAuthenticatorModel> logger,
+            IStringLocalizer<SharedResource> localizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            this.localizer = localizer;
         }
 
         [TempData]
@@ -52,7 +56,7 @@ namespace Exam.Areas.Identity.Pages.Account.Manage
             _logger.LogInformation("User with ID '{UserId}' has reset their authentication app key.", user.Id);
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your authenticator app key has been reset, you will need to configure your authenticator app using the new key.";
+            StatusMessage = localizer["Your authenticator app key has been reset, you will need to configure your authenticator app using the new key."];
 
             return RedirectToPage("./EnableAuthenticator");
         }

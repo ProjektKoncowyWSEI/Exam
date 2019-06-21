@@ -303,6 +303,9 @@
   <data name="Your password has been reset. Please" xml:space="preserve">
     <value>Twoje hasło zostało zmienione. Proszę </value>
   </data>
+  <data name="2fa has been disabled. You can reenable 2fa when you setup an authenticator app" xml:space="preserve">
+    <value>2FA został wyłączone. Możesz wznowić działanie 2FA jeśli uruchomisz aplikację autoryzacji.</value>
+  </data>
   <data name="About" xml:space="preserve">
     <value>O nas</value>
   </data>
@@ -314,6 +317,12 @@
   </data>
   <data name="before you can log in with a recovery code." xml:space="preserve">
     <value>zanim zalogujesz się przy użyciu kodu ozdyskiwania.</value>
+  </data>
+  <data name="Confirm new password" xml:space="preserve">
+    <value>Potwierdź nowe hasło</value>
+  </data>
+  <data name="Current password" xml:space="preserve">
+    <value>Aktualne hasło</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Usuń</value>
@@ -344,6 +353,12 @@
   </data>
   <data name="Manage your external logins" xml:space="preserve">
     <value>Zarządzaj zewnętrznymi loginami</value>
+  </data>
+  <data name="New password" xml:space="preserve">
+    <value>Nowe hasło</value>
+  </data>
+  <data name="Phone number" xml:space="preserve">
+    <value>Numer Telefonu</value>
   </data>
   <data name="Please check your email to reset your password." xml:space="preserve">
     <value>Proszę sprawdź e-mail aby zresetować hasło.</value>
@@ -384,11 +399,23 @@
   <data name="Setup authenticator app" xml:space="preserve">
     <value>Skonfigurujaplikację autoryzacji</value>
   </data>
+  <data name="The current browser has been forgotten. When you login again from this browser you will be prompted for your 2fa code." xml:space="preserve">
+    <value>Aktualna wyszukiwarka została zapomniana. Jeśli raz jeszcze zalogujesz się z tej wyszukiwarki zostaniesz poproszony o 2FA kod.</value>
+  </data>
+  <data name="The external login was added." xml:space="preserve">
+    <value>Zewnętrzny login został dodany.</value>
+  </data>
+  <data name="The external login was removed." xml:space="preserve">
+    <value>Zewnętrzny login został usunięty.</value>
+  </data>
   <data name="This process disables 2FA until you verify your authenticator app. If you do not complete your authenticator app configuration you may lose access to your account." xml:space="preserve">
     <value>Ten proces wyłącza 2FA do momentu weryfikacji aplikacji autoryzacji. Jeśli nie uzupełnisz konfiguracji twojej aplikacji autoryzacji możesz stracić dostęp do konta.</value>
   </data>
   <data name="Two-factor authentication (2FA)" xml:space="preserve">
     <value>Autoryzacja dwustpniowa (2FA)</value>
+  </data>
+  <data name="Verification email sent. Please check your email." xml:space="preserve">
+    <value>Mail weryfikacyjny został wysłany. Sprawdź swoją skrzynkę e-mail.</value>
   </data>
   <data name="You can" xml:space="preserve">
     <value>Możesz </value>
@@ -402,6 +429,9 @@
   <data name="You have 1 recovery code left." xml:space="preserve">
     <value>Pozostał Ci 1 kod odzyskiwania.</value>
   </data>
+  <data name="You have generated new recovery codes." xml:space="preserve">
+    <value>Wygenerowałeś nowe kody odzyskiwania.</value>
+  </data>
   <data name="You have no recovery codes left." xml:space="preserve">
     <value>Nie masz już kodów odzyskiwania.</value>
   </data>
@@ -413,5 +443,17 @@
   </data>
   <data name="Your account contains personal data that you have given us. This page allows you to download or delete that data." xml:space="preserve">
     <value>Twoje konto zawiera dane osobowe, które wprowadziłeś/wprowadziłaś. Na tej stronie możesz pobrać lub usunąć te dane.</value>
+  </data>
+  <data name="Your authenticator app has been verified." xml:space="preserve">
+    <value>Twoja aplikacja autoryzacji została zweryfikowana.</value>
+  </data>
+  <data name="Your authenticator app key has been reset, you will need to configure your authenticator app using the new key." xml:space="preserve">
+    <value>Klucze twojej aplikacji autoryzacji zostałyzresetowane, musisz skonfigurować aplikację autoryzacji przy użyciu nowego klucza.</value>
+  </data>
+  <data name="Your password has been set." xml:space="preserve">
+    <value>Twoje hasłozostało ustawione.</value>
+  </data>
+  <data name="Your profile has been updated" xml:space="preserve">
+    <value>Twój profil został zaktualizowany</value>
   </data>
 </root>
