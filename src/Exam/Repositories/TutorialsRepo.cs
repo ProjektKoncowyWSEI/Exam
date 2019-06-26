@@ -18,9 +18,43 @@ namespace Exam.Repositories
 
         public TutorialsRepo()
         {
-            //nie wiem jaki ma być adres?
-            client.BaseAddress = new Uri("");
+            //nie jestem pewna adresu?
+            client.BaseAddress = new Uri("http://localhost:52039/api/tutorials");
             
+        }
+
+        public async Task<Tutorial> Add(Tutorial item)
+        {
+            try
+            {
+                var response = await client.PostAsJsonAsync(TutorialsUri, item);
+                if (response.IsSuccessStatusCode)
+                {
+                    return item;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            try
+            {
+                var response = await client.DeleteAsync($"{TutorialsUri}/{id}");
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public async Task<Tutorial> Get(int id)
@@ -46,6 +80,77 @@ namespace Exam.Repositories
             return result;
 
         }
+
+        public async Task<List<Tutorial>> GetList(int page = 1, int? pageLocalSize = null)
+        {
+            page = page < 1 ? 1 : page;
+            int size = pageLocalSize ?? 0;
+            var result = new List<Tutorial>();
+            try
+            {
+                var response = await client.GetAsync(TutorialsUri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    result = JsonConvert.DeserializeObject<List<Tutorial>>(content);
+                    TotalItems = result.Count();
+                    if (pageLocalSize != null)
+                        result = result.Skip((page - 1) * size).Take(size).ToList();
+                }
+                else
+                {
+                    throw new Exception(response.StatusCode.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return result;
+        }
+
+        public async Task<List<Tutorial>> GetList()
+        {
+            var result = new List<Tutorial>();
+            try
+            {
+                var response = await client.GetAsync(TutorialsUri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    result = JsonConvert.DeserializeObject<List<Tutorial>>(content);
+                }
+                else
+                {
+                    throw new Exception(response.StatusCode.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return result;
+        }
+
+        public async Task<bool> Update(Tutorial item)
+        {
+            try
+            {
+                var response = await client.PutAsJsonAsync($"{TutorialsUri}/{item.Id}", item);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
+
 
 
     }
