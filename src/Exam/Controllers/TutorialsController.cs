@@ -75,8 +75,8 @@ namespace Exam.Controllers
             
             if (ModelState.IsValid)
             {
-                //koment bo wywala mi błąd? 
-               // await tutorial.Add(tutorial);
+                 
+                await tutorialsRepo.Add(tutorial);
                 return RedirectToAction(nameof(Index));
             }
             
@@ -129,7 +129,7 @@ namespace Exam.Controllers
                 try
                 {
                     await convertToBase64Async(tutorial);
-                    //await tutorial.Update(tutorial); - wywala tu błąd? 
+                    await tutorialsRepo.Update(tutorial);  
                 }
                 catch (DbUpdateConcurrencyException)
                 {
