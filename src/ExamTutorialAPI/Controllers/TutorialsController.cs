@@ -25,7 +25,7 @@ namespace ExamTutorialsAPI.Controllers
         {
             try
             {
-                return Ok(db.Tutorials.Include(async => async.Category).ToList());
+                return Ok(db.Tutorials.ToList());
 
             }
             catch (Exception ex)

@@ -23,6 +23,8 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Localization;
 using Microsoft.Extensions.Logging;
 using Exam.Areas.Identity.Pages.Account;
+using Exam.IRepositories;
+using Exam.Repositories;
 
 namespace Exam
 {
@@ -63,6 +65,7 @@ namespace Exam
             services.AddTransient<UserInitializer>();
             services.AddScoped<ILogger, Logger.ExamLogger>();
             services.AddScoped<ILogger<LoginModel>, Logger.ExamLogger<LoginModel>>();
+            services.AddTransient<ITutorialsRepo, TutorialsRepo>();
 
             services.ConfigureApplicationCookie(o => {
                 o.ExpireTimeSpan = TimeSpan.FromDays(5);
