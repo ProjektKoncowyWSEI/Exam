@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ExamContract.MainDbModels;
-using ExamMainDataBaseAPI.DAL.Interface;
+using ExamMainDataBaseAPI.DAL;
 using ExamMainDataBaseAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,9 +15,9 @@ namespace ExamMainDataBaseAPI.Controllers
     [ApiController]
     public class QuestionWithAnswersController : ControllerBase
     {
-        private IUnitOfWork uow = null;
+        private UnitOfWork uow = null;
 
-        public QuestionWithAnswersController(IUnitOfWork uow)
+        public QuestionWithAnswersController(UnitOfWork uow)
         {
             this.uow = uow;
         }

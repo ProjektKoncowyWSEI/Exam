@@ -1,5 +1,4 @@
 ﻿using ExamContract.MainDbModels;
-using ExamMainDataBaseAPI.DAL.Interface;
 using ExamMainDataBaseAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace ExamMainDataBaseAPI.DAL
 {
-    public class UnitOfWork : IUnitOfWork, IDisposable
+    public class UnitOfWork  : IDisposable
     {
         private readonly ExamQuestionsDbContext context;
-        public IRepository<Question> QuestionRepo { get; private set; }
-        public IRepository<Answer> AnswersRepo { get; private set; }
-        public IRepository<QuestionAnswer> QuestionAnswerRepo { get; private set; }
+        public Repository<Question> QuestionRepo { get; private set; }
+        public Repository<Answer> AnswersRepo { get; private set; }
+        public QuestionAnswerRepository QuestionAnswerRepo { get; private set; }
 
-        public UnitOfWork(ExamQuestionsDbContext context, IRepository<Question> questionRepo,
-                IRepository<Answer> answersRepo, IRepository<QuestionAnswer> questionAnswerRepo) {
+        public UnitOfWork(ExamQuestionsDbContext context, Repository<Question> questionRepo,
+                Repository<Answer> answersRepo, QuestionAnswerRepository questionAnswerRepo) {
             this.context = context;
             this.QuestionRepo = questionRepo;
             this.AnswersRepo = answersRepo;

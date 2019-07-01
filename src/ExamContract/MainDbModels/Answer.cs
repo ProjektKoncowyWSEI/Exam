@@ -4,16 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExamContract.MainDbModels
 {
-    public partial class Answer
+    public partial class Answer: Entity
     {
-        public Answer()
-        {
-            //QuestionAnswer = new HashSet<QuestionAnswer>();
-        }
-        
-        public int Id { get; set; }
-        public string answer { get; set; }
-
-        //public virtual ICollection<QuestionAnswer> QuestionAnswer { get; set; }
+        public string Name { get; set; }
     }
 }

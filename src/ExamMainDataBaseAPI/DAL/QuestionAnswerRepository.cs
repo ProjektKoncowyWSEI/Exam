@@ -1,4 +1,5 @@
 ﻿using ExamContract;
+using ExamContract.MainDbModels;
 using ExamMainDataBaseAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,38 +10,38 @@ using System.Threading.Tasks;
 
 namespace ExamMainDataBaseAPI.DAL
 {
-    public class Repository<T> : IDisposable where T : Entity
+    public class QuestionAnswerRepository
     {
         private readonly ExamQuestionsDbContext context;
-        private DbSet<T> dbSet = null;
+        private DbSet<QuestionAnswer> dbSet = null;
 
-        public Repository(ExamQuestionsDbContext context)
+        public QuestionAnswerRepository(ExamQuestionsDbContext context)
         {
             this.context = context;
-            dbSet = context.Set<T>();
+            dbSet = context.Set<QuestionAnswer>();
         }
-        public async Task<T> GetAsync(int id)
+        public async Task<QuestionAnswer> GetAsync(int questionId, int answerId)
         {
-            return await dbSet.FindAsync(id);
+            return await dbSet.Where(a => a.QuestionId == questionId && a.AnswerId == answerId).FirstOrDefaultAsync();
         }
-        public async Task<List<T>> GetListAsync()
+        public async Task<List<QuestionAnswer>> GetListAsync()
         {
             return await dbSet.AsNoTracking().ToListAsync();
         }
-        public async Task<int> AddAsync(T item)
+        public async Task<bool> AddAsync(QuestionAnswer item)
         {
             try
             {
                 await dbSet.AddAsync(item);
-                return item.Id;
+                return true;
             }
             catch (Exception ex)
             {
-                return -1;
+                return false;
             }
 
         }
-        public async Task<bool> UpdateAsync(T item)
+        public async Task<bool> UpdateAsync(QuestionAnswer item)
         {
             try
             {
@@ -52,9 +53,9 @@ namespace ExamMainDataBaseAPI.DAL
                 return false;
             }
         }
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int questionId, int answerId)
         {
-            var item = await GetAsync(id);
+            var item = await GetAsync(questionId, answerId);
             if (item != null)
             {
                 try
@@ -69,7 +70,7 @@ namespace ExamMainDataBaseAPI.DAL
             }
             return false;
         }
-        public IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
+        public IQueryable<QuestionAnswer> FindBy(Expression<Func<QuestionAnswer, bool>> predicate)
         {
             return dbSet.Where(predicate).AsQueryable();
         }

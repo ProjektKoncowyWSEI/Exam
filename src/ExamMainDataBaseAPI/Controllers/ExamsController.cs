@@ -5,19 +5,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ExamContract.MainDbModels;
 using ExamMainDataBaseAPI.Models;
 using ExamMainDataBaseAPI.DAL;
-using System.Linq.Expressions;
-using Microsoft.Extensions.Logging;
-using ExamContract.MainDbModels;
 
 namespace ExamMainDataBaseAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class QuestionsController : MyBaseController<Question>
+    public class ExamsController : MyBaseController<Exam>
     {
-        public QuestionsController(Repository<Question> repo) : base(repo)
+        public ExamsController(Repository<Exam> repo) : base(repo)
         {
         }
     }

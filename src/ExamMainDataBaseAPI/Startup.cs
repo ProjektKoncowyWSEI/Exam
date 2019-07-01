@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using ExamContract.MainDbModels;
 using ExamMainDataBaseAPI.DAL;
-using ExamMainDataBaseAPI.DAL.Interface;
 using ExamMainDataBaseAPI.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,10 +33,11 @@ namespace ExamMainDataBaseAPI
                 .AddJsonFormatters()
                 .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
             services.AddDbContext<ExamQuestionsDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<IRepository<Answer>, Repository<Answer>>();
-            services.AddTransient<IRepository<Question>, Repository<Question>>();
-            services.AddTransient<IRepository<QuestionAnswer>, Repository<QuestionAnswer>>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();            
+            services.AddTransient<Repository<Answer>>();
+            services.AddTransient<Repository<Question>>();           
+            services.AddTransient<Repository<Exam>>();
+            services.AddTransient<UnitOfWork>();
+            services.AddTransient<QuestionAnswerRepository>(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
