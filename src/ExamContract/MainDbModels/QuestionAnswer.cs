@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ExamMainDataBaseAPI.Models
+namespace ExamContract.MainDbModels
 {
     public partial class QuestionAnswer
     {

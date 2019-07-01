@@ -1,5 +1,5 @@
 ﻿//@URL = https://exammaindatabaseapi.azurewebsites.net/api
-@URL = http://localhost:3922/api
+@URL = https://localhost:44399/api
 
 ###
 GET {{URL}}/Questions

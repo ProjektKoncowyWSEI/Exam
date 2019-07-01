@@ -1,4 +1,5 @@
-﻿using ExamMainDataBaseAPI.Models;
+﻿using ExamContract.MainDbModels;
+using ExamMainDataBaseAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

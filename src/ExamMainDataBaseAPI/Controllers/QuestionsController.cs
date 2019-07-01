@@ -9,9 +9,8 @@ using ExamMainDataBaseAPI.Models;
 using ExamMainDataBaseAPI.DAL;
 using ExamMainDataBaseAPI.DAL.Interface;
 using System.Linq.Expressions;
-using Logger;
 using Microsoft.Extensions.Logging;
-using Logger.Data;
+using ExamContract.MainDbModels;
 
 namespace ExamMainDataBaseAPI.Controllers
 {
@@ -19,18 +18,15 @@ namespace ExamMainDataBaseAPI.Controllers
     [ApiController]
     public class QuestionsController : Controller 
     {
-        private IUnitOfWork uow = null;
-        private readonly ILogger logger;
+        private IUnitOfWork uow = null;     
 
-        public QuestionsController(IUnitOfWork uow,ILogger logger)
+        public QuestionsController(IUnitOfWork uow)
         {
-            this.uow = uow;
-            this.logger = logger;
+            this.uow = uow;          
         }
         [HttpGet]
         public async Task<IEnumerable<Questions>> GetAll()
-        {
-            //logger.LogInformation("cos");
+        {            
             return await uow.QuestionRepo.GetAllAsync();
         }
        

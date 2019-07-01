@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExamContract.MainDbModels;
 using ExamMainDataBaseAPI.DAL;
 using ExamMainDataBaseAPI.DAL.Interface;
 using ExamMainDataBaseAPI.Models;

@@ -1,4 +1,5 @@
 ﻿using System;
+using ExamContract.MainDbModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
