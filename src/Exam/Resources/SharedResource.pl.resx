@@ -474,4 +474,13 @@
   <data name="The {0} field is required." xml:space="preserve">
     <value>Pole {0} jest wymagane.</value>
   </data>
+  <data name="Back to List" xml:space="preserve">
+    <value>Wróć na listę</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Utwórz</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edytuj</value>
+  </data>
 </root>

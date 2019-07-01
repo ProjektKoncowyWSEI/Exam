@@ -1,0 +1,15 @@
+﻿@model IEnumerable<ExamTutorialsAPI.Models.Tutorial>
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-default">Add</a>
+</p>
+
+<partial name="_TutorialsTable" model="@Model" />
+<ul page-model="@ViewBag.PageInfo" page-action="Index" page-item-css="page-item" page-link-css="page-link"></ul>
+

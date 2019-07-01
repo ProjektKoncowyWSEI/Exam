@@ -14,7 +14,10 @@ namespace ExamTutorialsAPI.Models
         public string Name { get; set; }
         public string Image { get; set; }
         [Required(ErrorMessage = "Description is required!")]
+
+        [NotMapped]
         public IFormFile ImageFile { get; set; }
+        public byte[] File { get; set; }
         public string Description { get; set; }
         public virtual Category Category { get; set; }
         public int CategoryId { get; set; }
