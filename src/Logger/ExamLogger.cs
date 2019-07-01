@@ -1,9 +1,12 @@
 ﻿using Logger.Data;
 using Logger.Model;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Logger
@@ -12,6 +15,17 @@ namespace Logger
     {
         public ExamLogger(LoggerDbContext context, IEmailSender emailSender)
         {
+            var dbFilePath = context.Database.GetDbConnection().ConnectionString.Replace("Filename=","");
+            if (!File.Exists(dbFilePath))
+            {
+                var dir = new FileInfo(dbFilePath).Directory.FullName;
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+                File.Create(dbFilePath).Close();
+                context.Database.Migrate();
+            }          
             _context = context;
             _emailSender = emailSender;
         }
@@ -62,7 +76,7 @@ namespace Logger
             }
             catch (Exception ex)
             {
-                _emailSender.SendEmailAsync("lnew84@gmail.com", "Exam error", ex.Message).Wait();
+                //_emailSender.SendEmailAsync("lnew84@gmail.com", "Exam error", ex.Message).Wait();
                 _emailSender.SendEmailAsync("krzysztof.sauermann@gmail.com", "Exam error", ex.Message).Wait();
             }
         }

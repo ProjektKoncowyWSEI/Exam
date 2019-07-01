@@ -25,6 +25,7 @@ using Microsoft.Extensions.Logging;
 using Exam.Areas.Identity.Pages.Account;
 using Exam.IRepositories;
 using Exam.Repositories;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Exam
 {
@@ -65,7 +66,7 @@ namespace Exam
             services.AddTransient<UserInitializer>();
             services.AddScoped<ILogger, Logger.ExamLogger>();
             services.AddScoped<ILogger<LoginModel>, Logger.ExamLogger<LoginModel>>();
-            services.AddTransient<ITutorialsRepo, TutorialsRepo>();
+            services.AddTransient<ITutorialsRepo, TutorialsRepo>();           
 
             services.ConfigureApplicationCookie(o => {
                 o.ExpireTimeSpan = TimeSpan.FromDays(5);

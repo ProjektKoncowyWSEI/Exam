@@ -330,3 +330,4 @@ ASALocalRun/
 .mfractor/
 /src/ExamMailSenderAPI/Data/EMails.db
 /src/ExamMainDataBaseAPI/appsettings.json
+Logs
