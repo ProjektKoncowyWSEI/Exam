@@ -12,11 +12,11 @@ namespace ExamMainDataBaseAPI.DAL
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly ExamQuestionsDbContext context;
-        public IRepository<Questions> QuestionRepo { get; private set; }
+        public IRepository<Question> QuestionRepo { get; private set; }
         public IRepository<Answer> AnswersRepo { get; private set; }
         public IRepository<QuestionAnswer> QuestionAnswerRepo { get; private set; }
 
-        public UnitOfWork(ExamQuestionsDbContext context, IRepository<Questions> questionRepo,
+        public UnitOfWork(ExamQuestionsDbContext context, IRepository<Question> questionRepo,
                 IRepository<Answer> answersRepo, IRepository<QuestionAnswer> questionAnswerRepo) {
             this.context = context;
             this.QuestionRepo = questionRepo;
@@ -24,7 +24,7 @@ namespace ExamMainDataBaseAPI.DAL
             this.QuestionAnswerRepo = questionAnswerRepo;
         }
 
-        public async Task<Questions> GetQuestionWithAnswer(int id)
+        public async Task<Question> GetQuestionWithAnswer(int id)
         {
             var question = await QuestionRepo.GetAsync(id);
             var answersQuestion = await QuestionAnswerRepo.FindBy(q => q.QuestionId == id).ToListAsync();
@@ -35,7 +35,7 @@ namespace ExamMainDataBaseAPI.DAL
                 answers.Add(await AnswersRepo.GetAsync(item.AnswerId));
             }
 
-            question.answers = answers;
+            question.Answers = answers;
             return question;
         }
         public async Task SaveChangesAsync()

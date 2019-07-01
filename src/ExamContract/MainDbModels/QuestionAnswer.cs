@@ -9,6 +9,6 @@ namespace ExamContract.MainDbModels
         public int AnswerId { get; set; }
 
         public virtual Answer Answer { get; set; }
-        public virtual Questions Question { get; set; }
+        public virtual Question Question { get; set; }
     }
 }

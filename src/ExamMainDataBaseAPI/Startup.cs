@@ -35,7 +35,7 @@ namespace ExamMainDataBaseAPI
                 .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
             services.AddDbContext<ExamQuestionsDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IRepository<Answer>, Repository<Answer>>();
-            services.AddTransient<IRepository<Questions>, Repository<Questions>>();
+            services.AddTransient<IRepository<Question>, Repository<Question>>();
             services.AddTransient<IRepository<QuestionAnswer>, Repository<QuestionAnswer>>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();            
         }

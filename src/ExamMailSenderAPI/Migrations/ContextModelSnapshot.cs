@@ -3,7 +3,6 @@ using System;
 using ExamMailSenderAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExamMailSenderAPI.Migrations
@@ -15,21 +14,20 @@ namespace ExamMailSenderAPI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
 
-            modelBuilder.Entity("ExamMailSenderAPI.Models.Attachment", b =>
+            modelBuilder.Entity("ExamContract.MailingModels.Attachment", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<byte[]>("Content");
 
                     b.Property<string>("FileName");
 
-                    b.Property<int?>("MailModelId");
+                    b.Property<string>("Login");
+
+                    b.Property<int>("MailModelId");
 
                     b.HasKey("Id");
 
@@ -38,11 +36,10 @@ namespace ExamMailSenderAPI.Migrations
                     b.ToTable("Attachments");
                 });
 
-            modelBuilder.Entity("ExamMailSenderAPI.Models.MailModel", b =>
+            modelBuilder.Entity("ExamContract.MailingModels.MailModel", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Body");
 
@@ -51,6 +48,8 @@ namespace ExamMailSenderAPI.Migrations
                     b.Property<string>("From");
 
                     b.Property<string>("HtmlBody");
+
+                    b.Property<string>("Login");
 
                     b.Property<string>("Title");
 
@@ -61,11 +60,12 @@ namespace ExamMailSenderAPI.Migrations
                     b.ToTable("Mails");
                 });
 
-            modelBuilder.Entity("ExamMailSenderAPI.Models.Attachment", b =>
+            modelBuilder.Entity("ExamContract.MailingModels.Attachment", b =>
                 {
-                    b.HasOne("ExamMailSenderAPI.Models.MailModel")
+                    b.HasOne("ExamContract.MailingModels.MailModel")
                         .WithMany("Attachments")
-                        .HasForeignKey("MailModelId");
+                        .HasForeignKey("MailModelId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

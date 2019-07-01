@@ -25,19 +25,19 @@ namespace ExamMainDataBaseAPI.Controllers
             this.uow = uow;          
         }
         [HttpGet]
-        public async Task<IEnumerable<Questions>> GetAll()
+        public async Task<IEnumerable<Question>> GetAll()
         {            
             return await uow.QuestionRepo.GetAllAsync();
         }
        
         [HttpGet("{id}")]
-        public async Task<Questions> Get(int id)
+        public async Task<Question> Get(int id)
         {
             return await uow.QuestionRepo.GetAsync(id);
         }
        
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Questions question)
+        public async Task<IActionResult> Put(int id, Question question)
         {
             if (id != question.Id)
             {
@@ -47,17 +47,17 @@ namespace ExamMainDataBaseAPI.Controllers
             await uow.SaveChangesAsync();
             return NoContent();
         }
-        // POST: api/Questions
+        // POST: api/Question
         [HttpPost]
-        public async Task<ActionResult<Questions>> Post(Questions question)
+        public async Task<ActionResult<Question>> Post(Question question)
         {
             await uow.QuestionRepo.AddAsync(question);
             await uow.SaveChangesAsync();
             return CreatedAtAction("Get", new { id = question.Id }, question);
         }
-        // DELETE: api/Questions/5
+        // DELETE: api/Question/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Questions>> Delete(int id)
+        public async Task<ActionResult<Question>> Delete(int id)
         {
             var question = await uow.QuestionRepo.GetAsync(id);
             if (question == null)

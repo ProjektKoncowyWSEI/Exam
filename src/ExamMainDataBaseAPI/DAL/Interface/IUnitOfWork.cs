@@ -9,10 +9,10 @@ namespace ExamMainDataBaseAPI.DAL.Interface
 {
     public interface IUnitOfWork : IDisposable
     {
-        IRepository<Questions> QuestionRepo { get; }
+        IRepository<Question> QuestionRepo { get; }
         IRepository<Answer> AnswersRepo { get; }
         IRepository<QuestionAnswer> QuestionAnswerRepo { get; }
-        Task<Questions> GetQuestionWithAnswer(int id);
+        Task<Question> GetQuestionWithAnswer(int id);
         Task SaveChangesAsync();
     }
 }

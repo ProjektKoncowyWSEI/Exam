@@ -19,44 +19,78 @@ namespace ExamMainDataBaseAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ExamMainDataBaseAPI.Models.Answer", b =>
+            modelBuilder.Entity("ExamContract.MainDbModels.Answer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ID")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Answer1")
-                        .IsRequired()
-                        .HasColumnName("Answer");
-
-                    b.Property<int?>("QuestionsId");
+                    b.Property<string>("answer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("QuestionsId");
 
                     b.ToTable("Answer");
                 });
 
-            modelBuilder.Entity("ExamMainDataBaseAPI.Models.AnswersType", b =>
+            modelBuilder.Entity("ExamContract.MainDbModels.AnswersType", b =>
                 {
                     b.Property<string>("AnswerType")
-                        .HasMaxLength(50);
+                        .ValueGeneratedOnAdd();
 
-                    b.HasKey("AnswerType")
-                        .HasName("PK_AnswerType");
+                    b.HasKey("AnswerType");
 
                     b.ToTable("AnswersType");
                 });
 
-            modelBuilder.Entity("ExamMainDataBaseAPI.Models.QuestionAnswer", b =>
+            modelBuilder.Entity("ExamContract.MainDbModels.Exam", b =>
                 {
-                    b.Property<int>("AnswerId")
-                        .HasColumnName("AnswerID");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("QuestionId")
-                        .HasColumnName("QuestionID");
+                    b.Property<int>("DurationMinutes");
+
+                    b.Property<string>("Login");
+
+                    b.Property<decimal>("MaxPoints");
+
+                    b.Property<DateTime>("MaxStart");
+
+                    b.Property<DateTime>("MinStart");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Exams");
+                });
+
+            modelBuilder.Entity("ExamContract.MainDbModels.Question", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AnswerType");
+
+                    b.Property<byte[]>("Image");
+
+                    b.Property<string>("Login");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Questions");
+                });
+
+            modelBuilder.Entity("ExamContract.MainDbModels.QuestionAnswer", b =>
+                {
+                    b.Property<int>("AnswerId");
+
+                    b.Property<int>("QuestionId");
 
                     b.HasKey("AnswerId", "QuestionId");
 
@@ -65,45 +99,27 @@ namespace ExamMainDataBaseAPI.Migrations
                     b.ToTable("QuestionAnswer");
                 });
 
-            modelBuilder.Entity("ExamMainDataBaseAPI.Models.Questions", b =>
+            modelBuilder.Entity("ExamContract.MainDbModels.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Login")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AnswerType")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    b.HasKey("Login");
 
-                    b.Property<byte[]>("Image");
-
-                    b.Property<string>("Question")
-                        .IsRequired()
-                        .IsUnicode(false);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Questions");
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ExamMainDataBaseAPI.Models.Answer", b =>
+            modelBuilder.Entity("ExamContract.MainDbModels.QuestionAnswer", b =>
                 {
-                    b.HasOne("ExamMainDataBaseAPI.Models.Questions")
-                        .WithMany("Answers")
-                        .HasForeignKey("QuestionsId");
-                });
-
-            modelBuilder.Entity("ExamMainDataBaseAPI.Models.QuestionAnswer", b =>
-                {
-                    b.HasOne("ExamMainDataBaseAPI.Models.Answer", "Answer")
-                        .WithMany("QuestionAnswer")
+                    b.HasOne("ExamContract.MainDbModels.Answer", "Answer")
+                        .WithMany()
                         .HasForeignKey("AnswerId")
-                        .HasConstraintName("FK_QuestionAnswer_Answer");
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ExamMainDataBaseAPI.Models.Questions", "Question")
-                        .WithMany("QuestionAnswer")
+                    b.HasOne("ExamContract.MainDbModels.Question", "Question")
+                        .WithMany()
                         .HasForeignKey("QuestionId")
-                        .HasConstraintName("FK_QuestionAnswer_Questions");
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -7,5 +7,6 @@ namespace ExamContract
     public class Entity
     {
         public int Id { get; set; }
+        public string Login { get; set; }
     }
 }
