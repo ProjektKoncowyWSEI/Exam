@@ -14,8 +14,7 @@
     var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
     string selectedPl = requestCulture.RequestCulture.UICulture.Name == "pl-PL" ? "selectedLanguage" : "";
     string selectedEn = requestCulture.RequestCulture.UICulture.Name == "en-US" ? "selectedLanguage" : "";
-}
-
+}   
 <div class="language pull-right" title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
     <form id="selectLanguagePl" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" class="form-inline" role="form">
         <input type="hidden" name="culture" value="pl-PL" asp-for="@requestCulture.RequestCulture.UICulture.Name" />

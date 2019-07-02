@@ -6,6 +6,7 @@
     "jquery-validation": "^1.19.0",
     "jquery-validation-unobtrusive": "^3.2.11",
     "jquery-geolocate": "0.1.4",
+    "jquery-ui": "1.12.1",
     "shufflejs": "^4.0.2",
     "bootstrap": "4.3.1"
   },

@@ -232,7 +232,7 @@
     <value>Weryfikacja przy pomocy kodu odzyskiwania</value>
   </data>
   <data name="Register" xml:space="preserve">
-    <value>Zarejestruj się</value>
+    <value>Zarejestruj</value>
   </data>
   <data name="Remember me?" xml:space="preserve">
     <value>Zapamietaj mnie?</value>
@@ -482,5 +482,17 @@
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Edytuj</value>
+  </data>
+  <data name="Exams" xml:space="preserve">
+    <value>Egzaminy</value>
+  </data>
+  <data name="All exams" xml:space="preserve">
+    <value>Wszystkie egzaminy</value>
+  </data>
+  <data name="Your exams" xml:space="preserve">
+    <value>Twoje egzaminy</value>
+  </data>
+  <data name="Manage your account" xml:space="preserve">
+    <value>Ustawienia konta</value>
   </data>
 </root>

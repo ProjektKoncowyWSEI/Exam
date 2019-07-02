@@ -50,5 +50,21 @@ namespace Helpers
             }
             return "";
         }
+        public static RoleEnum CurrentRoleEnum(this ClaimsPrincipal user)
+        {
+            if (user.IsInRole(RoleEnum.admin))
+            {
+                return RoleEnum.admin;
+            }
+            if (user.IsInRole(RoleEnum.teacher))
+            {
+                return RoleEnum.teacher;
+            }
+            if (user.IsInRole(RoleEnum.student))
+            {
+                return RoleEnum.student;
+            }
+            return RoleEnum.lack;
+        }
     }
 }

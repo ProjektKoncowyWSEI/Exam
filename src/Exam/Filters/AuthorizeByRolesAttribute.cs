@@ -1,7 +1,7 @@
 ﻿using Helpers;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Exam.Filters
+namespace Exam
 {
     public class AuthorizeByRolesAttribute : AuthorizeAttribute
     {

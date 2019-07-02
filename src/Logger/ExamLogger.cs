@@ -15,17 +15,20 @@ namespace Logger
     {
         public ExamLogger(LoggerDbContext context, IEmailSender emailSender)
         {
-            var dbFilePath = context.Database.GetDbConnection().ConnectionString.Replace("Filename=","");
-            if (!File.Exists(dbFilePath))
+            if (context != null)
             {
-                var dir = new FileInfo(dbFilePath).Directory.FullName;
-                if (!Directory.Exists(dir))
+                var dbFilePath = context.Database.GetDbConnection().ConnectionString.Replace("Filename=", "");
+                if (!File.Exists(dbFilePath))
                 {
-                    Directory.CreateDirectory(dir);
+                    var dir = new FileInfo(dbFilePath).Directory.FullName;
+                    if (!Directory.Exists(dir))
+                    {
+                        Directory.CreateDirectory(dir);
+                    }
+                    File.Create(dbFilePath).Close();
+                    context.Database.Migrate();
                 }
-                File.Create(dbFilePath).Close();
-                context.Database.Migrate();
-            }          
+            }           
             _context = context;
             _emailSender = emailSender;
         }
@@ -43,7 +46,7 @@ namespace Logger
         }
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
-        {
+        {            
             if (!IsEnabled(logLevel))
             {
                 return;
@@ -65,6 +68,7 @@ namespace Logger
             }
             try
             {
+                //throw new Exception("test");
                 _context.EventLog.Add(new EventLog
                 {
                     Message = message,

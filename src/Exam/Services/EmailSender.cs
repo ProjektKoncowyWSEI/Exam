@@ -1,5 +1,7 @@
 ﻿using ExamContract.MailingModels;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +14,16 @@ namespace Exam.Services
     public class EmailSender : IEmailSender
     {
         HttpClient client = new HttpClient();
+        private readonly ILogger logger;
+
         public bool IsSent { get; set; }
-        public EmailSender()
+        public EmailSender(IConfiguration configuration)
         {
-            client.BaseAddress = new Uri("https://exammailsender.azurewebsites.net/api/sendmail");
+            client.BaseAddress = new Uri(configuration.GetConnectionString("EmailSenderConnection"));
             //client.BaseAddress = new Uri("https://localhost:44371/api/sendmail");
             client.DefaultRequestHeaders
                 .Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("api-key", "mailKey");
+            client.DefaultRequestHeaders.Add("api-key", configuration.GetValue<string>("MailKey"));            
         }
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
@@ -34,7 +38,7 @@ namespace Exam.Services
                 Attachments = null
             };
             try
-            {
+            {                
                 var response = await client.PostAsJsonAsync(client.BaseAddress, input);
                 if (response.IsSuccessStatusCode)
                 {
@@ -44,8 +48,7 @@ namespace Exam.Services
             }
             catch (Exception ex)
             {
-                IsSent = false;
-                //TODO zalogować
+                IsSent = false;               
             }
         }
     }
