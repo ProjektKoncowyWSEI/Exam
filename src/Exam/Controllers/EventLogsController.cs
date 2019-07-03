@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Logger.Data;
 using Logger.Model;
+using Helpers;
 
 namespace Exam.Controllers
 {
@@ -20,12 +21,14 @@ namespace Exam.Controllers
         }
 
         // GET: EventLogs
+        [AuthorizeByRoles(RoleEnum.admin)]
         public async Task<IActionResult> Index()
         {
             return View(await _context.EventLog.ToListAsync());
         }
 
         // GET: EventLogs/Details/5
+        [AuthorizeByRoles(RoleEnum.admin)]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,6 +46,7 @@ namespace Exam.Controllers
             return View(eventLog);
         }
         // GET: EventLogs/Delete/5
+        [AuthorizeByRoles(RoleEnum.admin)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -61,6 +65,7 @@ namespace Exam.Controllers
         }
 
         // POST: EventLogs/Delete/5
+        [AuthorizeByRoles(RoleEnum.admin)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -71,6 +76,7 @@ namespace Exam.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [AuthorizeByRoles(RoleEnum.admin)]
         private bool EventLogExists(int id)
         {
             return _context.EventLog.Any(e => e.id == id);

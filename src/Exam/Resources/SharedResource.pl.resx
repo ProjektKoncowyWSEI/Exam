@@ -475,7 +475,7 @@
     <value>Pole {0} jest wymagane.</value>
   </data>
   <data name="Back to List" xml:space="preserve">
-    <value>Wróć na listę</value>
+    <value>Powrót do listy</value>
   </data>
   <data name="Create" xml:space="preserve">
     <value>Utwórz</value>
@@ -498,7 +498,25 @@
   <data name="Application errors" xml:space="preserve">
     <value>Błędy aplikacji</value>
   </data>
+  <data name="CreatedTime" xml:space="preserve">
+    <value>Czas utworzenia</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Szczegóły</value>
+  </data>
+  <data name="EventId" xml:space="preserve">
+    <value>Identyfikator</value>
+  </data>
+  <data name="LogLevel" xml:space="preserve">
+    <value>Rodzaj</value>
+  </data>
   <data name="Logs" xml:space="preserve">
     <value>Logi</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Wiadomość</value>
+  </data>
+  <data name="Are you sure you want to delete this?" xml:space="preserve">
+    <value>Czy na pewno chcesz to usunąć?</value>
   </data>
 </root>

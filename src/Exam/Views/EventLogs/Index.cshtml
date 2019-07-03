@@ -4,22 +4,22 @@
     ViewData["Title"] = Localizer["Application errors"];
 }
 
-<h2>@Localizer["Application errors"]</h2>
+<h2>@Localizer["Application errors"] :</h2>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Message)
+                @Localizer["Message"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EventId)
+                @Localizer["EventId"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LogLevel)
+                @Localizer["LogLevel"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedTime)
+                @Localizer["CreatedTime"]
             </th>
             <th></th>
         </tr>
@@ -40,8 +40,8 @@
                 @Html.DisplayFor(modelItem => item.CreatedTime)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.id">@Localizer["Details"]</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">@Localizer["Delete"]</a>
             </td>
         </tr>
 }
