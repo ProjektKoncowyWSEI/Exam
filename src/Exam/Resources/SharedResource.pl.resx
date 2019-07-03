@@ -495,4 +495,10 @@
   <data name="Manage your account" xml:space="preserve">
     <value>Ustawienia konta</value>
   </data>
+  <data name="Application errors" xml:space="preserve">
+    <value>Błędy aplikacji</value>
+  </data>
+  <data name="Logs" xml:space="preserve">
+    <value>Logi</value>
+  </data>
 </root>
