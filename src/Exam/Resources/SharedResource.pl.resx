@@ -519,4 +519,7 @@
   <data name="Are you sure you want to delete this?" xml:space="preserve">
     <value>Czy na pewno chcesz to usunąć?</value>
   </data>
+  <data name="Application events" xml:space="preserve">
+    <value>Zdarzenia aplikacji</value>
+  </data>
 </root>
