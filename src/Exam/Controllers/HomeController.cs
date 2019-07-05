@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Localization;
 using System.Threading;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace Exam.Controllers
 {
@@ -28,11 +29,8 @@ namespace Exam.Controllers
         }
         public IActionResult Index()
         {
-            logger.LogInformation("Index"); // TODO Usunąć to
-            ViewBag.X = localizer["Name"];
             return View();
-        }
-        [AuthorizeByRoles(RoleEnum.student)]
+        }     
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -55,6 +53,11 @@ namespace Exam.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
+            var exceptionHandlerPathFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            ViewBag.Message = exceptionHandlerPathFeature.Error.Message;
+            ViewBag.InnerException = exceptionHandlerPathFeature.Error.InnerException;
+            ViewBag.Path = exceptionHandlerPathFeature.Path;
+            logger.LogError($"{User.Identity.Name}{Environment.NewLine}{ViewBag.Message}{Environment.NewLine}{ViewBag.InnerException}{Environment.NewLine}{ViewBag.Path}");
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 

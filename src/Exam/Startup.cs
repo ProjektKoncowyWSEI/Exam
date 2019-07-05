@@ -31,17 +31,17 @@ namespace Exam
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }          
+        public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;           
+            Configuration = configuration;
         }
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-                    options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
@@ -66,9 +66,10 @@ namespace Exam
             services.AddTransient<UserInitializer>();
             services.AddScoped<ILogger, Logger.ExamLogger>();
             services.AddScoped<ILogger<LoginModel>, Logger.ExamLogger<LoginModel>>();
-            services.AddTransient<ITutorialsRepo, TutorialsRepo>();           
+            services.AddTransient<ITutorialsRepo, TutorialsRepo>();
 
-            services.ConfigureApplicationCookie(o => {
+            services.ConfigureApplicationCookie(o =>
+            {
                 o.ExpireTimeSpan = TimeSpan.FromDays(5);
                 o.SlidingExpiration = true;
             });
@@ -97,7 +98,7 @@ namespace Exam
             });
         }
 
-        
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -107,8 +108,8 @@ namespace Exam
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
+            app.UseExceptionHandler("/Home/Error");
+            app.UseHsts();
             }
 
             app.UseRequestLocalization();
@@ -131,6 +132,6 @@ namespace Exam
             var initializer = new UserInitializer(roleMenager, userManager, Configuration);
             initializer.CreateRolesAsync().Wait();
             initializer.CreateDefaultUser().Wait();
-        }       
+        }
     }
 }
