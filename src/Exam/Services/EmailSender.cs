@@ -1,4 +1,5 @@
-﻿using ExamContract.MailingModels;
+﻿using ExamContract;
+using ExamContract.MailingModels;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -11,19 +12,13 @@ using System.Threading.Tasks;
 
 namespace Exam.Services
 {
-    public class EmailSender : IEmailSender
+    public class EmailSender : WebApiClient<Entity>, IEmailSender
     {
-        HttpClient client = new HttpClient();
         private readonly ILogger logger;
-
         public bool IsSent { get; set; }
-        public EmailSender(IConfiguration configuration)
+        public EmailSender(ILogger logger, IConfiguration configuration) : base(logger, configuration, "EmailSenderConnection", "", "MailKey")
         {
-            client.BaseAddress = new Uri(configuration.GetConnectionString("EmailSenderConnection"));
-            //client.BaseAddress = new Uri("https://localhost:44371/api/sendmail");
-            client.DefaultRequestHeaders
-                .Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("api-key", configuration.GetValue<string>("MailKey"));            
+            this.logger = logger;
         }
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
@@ -38,8 +33,8 @@ namespace Exam.Services
                 Attachments = null
             };
             try
-            {                
-                var response = await client.PostAsJsonAsync(client.BaseAddress, input);
+            {
+                var response = await Client.PostAsJsonAsync(Client.BaseAddress, input);
                 if (response.IsSuccessStatusCode)
                 {
                     IsSent = true;
@@ -48,7 +43,8 @@ namespace Exam.Services
             }
             catch (Exception ex)
             {
-                IsSent = false;               
+                logger.LogError(ex, "SendEmailAsync");
+                IsSent = false;
             }
         }
     }

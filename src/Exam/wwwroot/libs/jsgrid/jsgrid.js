@@ -2543,11 +2543,11 @@ MyDateField.prototype = new jsGrid.Field({
     },
 
     insertValue: function () {
-        return this._insertPicker.datepicker("getDate");
+        return this._insertPicker.val()
     },
 
     editValue: function () {
-        return this._editPicker.datepicker("getDate");
+        return this._editPicker.val();
     }
 });
 

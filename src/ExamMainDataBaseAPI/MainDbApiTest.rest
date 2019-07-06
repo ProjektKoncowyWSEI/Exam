@@ -1,11 +1,30 @@
 ﻿//@URL = https://exammaindatabaseapi.azurewebsites.net/api
-@URL = https://localhost:44399/api
+@URL = http://localhost:51037/api
 
 ###
 GET {{URL}}/Questions
 
 ###
+GET {{URL}}/Exams
+
+###
+
+###
 GET {{URL}}/Questions/2
+
+###
+
+POST {{URL}}/Exams
+content-type: application/json
+
+{
+    "name": "Test",
+    "MaxPoints": 2,
+    "MinStart": "2019-01-01 20:21",
+    "MaxStart": "2019-01-02 05:20",
+    "DurationMinutes": 90,
+    "Login": "ja"
+}
 
 ###
 
@@ -61,7 +80,7 @@ content-type: application/json
 
 ###
 
-Delete {{URL}}/Answers/3
+Delete {{URL}}/exams/3
 
 ###
 GET {{URL}}/QuestionWithAnswers/7

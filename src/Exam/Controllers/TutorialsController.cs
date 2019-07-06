@@ -9,16 +9,19 @@ using System.IO;
 using Exam.TagHelpers;
 using ExamTutorialsAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Exam.Controllers
 {
     public class TutorialsController : Controller
     {
         private readonly ITutorialsRepo tutorialsRepo;
+        private readonly ILogger logger;
 
-        public TutorialsController(ITutorialsRepo tutorialsRepo)
+        public TutorialsController(ITutorialsRepo tutorialsRepo,ILogger logger)
         {
             this.tutorialsRepo = tutorialsRepo;
+            this.logger = logger;
         }
         // GET: Tutorials
         public async Task <IActionResult> Index( int pageId = 1, int? pageSizeLocal = 2)
@@ -36,12 +39,13 @@ namespace Exam.Controllers
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "Index");
                 return View(null);
             }
         }
 
         // GET: Tutorials/Details/5
-        public async Task <IActionResult> Details(int id)
+        public async Task <IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -98,7 +102,7 @@ namespace Exam.Controllers
         }
 
         // GET: Tutorials/Edit/5
-        public async Task <IActionResult> Edit(int id)
+        public async Task <IActionResult> Edit(int? id)
         {
             if (id == null)
             {

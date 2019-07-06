@@ -1,81 +1,84 @@
-﻿@model ExamContract.MainDbModels.Exam
-@using Microsoft.AspNetCore.Localization
+﻿@model IEnumerable<ExamContract.MainDbModels.Exam>
+
 @{
-    ViewData["Title"] = Localizer["Exams"];
-    var requestCulture = Context.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+    ViewData["Title"] = Localizer["Exams"];   
 }
 
 <h3>@ViewBag.Message</h3>
-<div id="examsGrid"></div>
+<div id="examsGrid">
+    <partial name="_ExamsGrid" model="Model" />
+</div>
+
+
 @section scripts {
-    <script>
-        $(function () {
-            $("#examsGrid").jsGrid({
-                width: "100%",
-                filtering: true,
-                inserting: true,
-                editing: true,
-                sorting: true,
-                paging: true,
-                autoload: true,
+    @*<script>
+            $(function () {
+                $("#examsGrid").jsGrid({
+                    width: "100%",
+                    filtering: true,
+                    inserting: true,
+                    editing: true,
+                    sorting: true,
+                    paging: true,
+                    autoload: true,
 
-                pageSize: 10,
-                pageButtonCount: 5,
+                    pageSize: 10,
+                    pageButtonCount: 5,
 
-                deleteConfirm: "Do you really want to delete client?",
+                    deleteConfirm: "Do you really want to delete client?",
 
-                controller: {
-                    loadData: function (filter) {
-                        return $.ajax({
-                            type: "GET",
-                            url: "/api/data",
-                            data: filter,
-                            dataType: "json"
-                        });
+                    controller: {
+                        loadData: function (filter) {
+                            return $.ajax({
+                                type: "GET",
+                                url: "api/Exams/",
+                                data: null,
+                                dataType: "json"
+                            });
+                        },
+
+                        insertItem: function (item) {
+                            return $.ajax({
+                                type: "POST",
+                                url: "/api/data",
+                                data: item,
+                                dataType: "json"
+                            });
+                        },
+
+                        updateItem: function (item) {
+                            return $.ajax({
+                                type: "PUT",
+                                url: "/api/data/" + item.ID,
+                                data: item,
+                                dataType: "json"
+                            });
+                        },
+
+                        deleteItem: function (item) {
+                            return $.ajax({
+                                type: "DELETE",
+                                url: "/api/data/" + item.ID,
+                                dataType: "json"
+                            });
+                        }
                     },
 
-                    insertItem: function (item) {
-                        return $.ajax({
-                            type: "POST",
-                            url: "/api/data",
-                            data: item,
-                            dataType: "json"
-                        });
-                    },
+                    fields: [
+                        { name: '@nameof(Model.Name)', title: '@Localizer[Html.DisplayNameFor(m => m.Name)]', type: "text", width: 150 },
+                        { name: '@nameof(Model.MaxPoints)', title: '@Localizer[Html.DisplayNameFor(m => m.MaxPoints)]', type: "number" },
+                        { name: '@nameof(Model.MinStart)', title: '@Localizer[Html.DisplayNameFor(m => m.MinStart)]', type: "date", filtering: true, width: 200 },
+                        { name: '@nameof(Model.MaxStart)', title: '@Localizer[Html.DisplayNameFor(m => m.MaxStart)]', type: "date", readOnly: true , width: 200},
+                        { name: '@nameof(Model.DurationMinutes)', title: '@Localizer[Html.DisplayNameFor(m => m.DurationMinutes)]', type: "number" },
+                        { type: "control" }
+                    ]
+                });
 
-                    updateItem: function (item) {
-                        return $.ajax({
-                            type: "PUT",
-                            url: "/api/data/" + item.ID,
-                            data: item,
-                            dataType: "json"
-                        });
-                    },
-
-                    deleteItem: function (item) {
-                        return $.ajax({
-                            type: "DELETE",
-                            url: "/api/data/" + item.ID,
-                            dataType: "json"
-                        });
-                    }
-                },
-
-                fields: [
-                    { name: '@Localizer[Html.DisplayNameFor(m => m.Name)]', type: "text", width: 150 },
-                    { name: '@Localizer[Html.DisplayNameFor(m => m.MaxPoints)]', type: "number" },
-                    { name: '@Localizer[Html.DisplayNameFor(m => m.MinStart)]', type: "date", filtering: true, width: 200 },
-                    { name: '@Localizer[Html.DisplayNameFor(m => m.MaxStart)]', type: "date", readOnly: true , width: 200},
-                    { name: '@Localizer[Html.DisplayNameFor(m => m.DurationMinutes)]', type: "number" },
-                    { type: "control" }
-                ]
             });
-
-        });
-    </script>
-    <script src="~/libs/jsgrid/i18n/jsgrid-pl.js"></script>
-    @if (requestCulture == "pl-PL")
-    {
-        <script>jsGrid.locale("pl");</script>
-    }
+        </script>
+        <script src="~/libs/jsgrid/i18n/jsgrid-pl.js"></script>
+        @if (requestCulture == "pl-PL")
+        {
+            <script>jsGrid.locale("pl");</script>
+        }*@
 }

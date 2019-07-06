@@ -1,5 +1,6 @@
 ﻿using Exam.IRepositories;
 using ExamTutorialsAPI.Models;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,13 +15,15 @@ namespace Exam.Repositories
     {
         HttpClient client = new HttpClient();
         const string TutorialsUri = "Tutorials";
+        private readonly ILogger logger;
+
         public int TotalItems { get; set; }
 
-        public TutorialsRepo()
+        public TutorialsRepo(ILogger logger)
         {
             //nie jestem pewna adresu?
             client.BaseAddress = new Uri("http://localhost:52039/api/tutorials");
-            
+            this.logger = logger;
         }
 
         public async Task<Tutorial> Add(Tutorial item)
@@ -36,6 +39,7 @@ namespace Exam.Repositories
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "Add");
                 throw;
             }
         }
@@ -53,6 +57,7 @@ namespace Exam.Repositories
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "Add");
                 throw;
             }
         }
@@ -75,6 +80,7 @@ namespace Exam.Repositories
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "Get");
                 throw;
             }
             return result;
@@ -104,6 +110,7 @@ namespace Exam.Repositories
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "GetList");
                 throw;
             }
             return result;
@@ -127,6 +134,7 @@ namespace Exam.Repositories
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "GetList");
                 throw;
             }
             return result;
@@ -145,6 +153,7 @@ namespace Exam.Repositories
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "Update");
                 throw;
             }
         }

@@ -13,7 +13,7 @@ namespace Logger
 {
     public class ExamLogger : ILogger
     {
-        public ExamLogger(LoggerDbContext context, IEmailSender emailSender)
+        public ExamLogger(LoggerDbContext context) //, IEmailSender emailSender)
         {
             if (context != null)
             {
@@ -28,9 +28,9 @@ namespace Logger
                     File.Create(dbFilePath).Close();
                     context.Database.Migrate();
                 }
-            }           
+            }
             _context = context;
-            _emailSender = emailSender;
+            //_emailSender = emailSender;
         }
         private LoggerDbContext _context;
         private readonly IEmailSender _emailSender;
@@ -46,7 +46,7 @@ namespace Logger
         }
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
-        {            
+        {
             if (!IsEnabled(logLevel))
             {
                 return;
@@ -78,10 +78,11 @@ namespace Logger
                 });
                 _context.SaveChanges();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                throw;
                 //_emailSender.SendEmailAsync("lnew84@gmail.com", "Exam error", ex.Message).Wait();
-                _emailSender.SendEmailAsync("krzysztof.sauermann@gmail.com", "Exam error", ex.Message).Wait();
+                //_emailSender.SendEmailAsync("krzysztof.sauermann@gmail.com", "Exam error", ex.Message).Wait();
             }
         }
     }
@@ -90,11 +91,11 @@ namespace Logger
         private LoggerDbContext _context;
         private readonly IEmailSender _emailSender;
         private ExamLogger examLogger;
-        public ExamLogger(LoggerDbContext context, IEmailSender emailSender)
+        public ExamLogger(LoggerDbContext context)
         {
             _context = context;
-            _emailSender = emailSender;
-            examLogger = new ExamLogger(context, emailSender);
+            //_emailSender = emailSender;
+            examLogger = new ExamLogger(context);
         }
         public IDisposable BeginScope<TState>(TState state)
         {

@@ -19,9 +19,9 @@
                 @Localizer["LogLevel"]
             </th>
             <th>
-                @Localizer["CreatedTime"]
+                @Localizer["Date"]
             </th>
-            <th></th>
+            <th>#</th>
         </tr>
     </thead>
     <tbody>
@@ -39,9 +39,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedTime)
             </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.id">@Localizer["Details"]</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">@Localizer["Delete"]</a>
+            <td class="command">
+                <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.id">@Localizer["Details"]</a> 
+                <a class="btn btn-primary btn-sm" asp-action="Delete" asp-route-id="@item.id">@Localizer["Delete"]</a>
             </td>
         </tr>
 }

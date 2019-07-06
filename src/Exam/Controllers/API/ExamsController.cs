@@ -1,46 +1,82 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
+//using Exam.Services;
+//using Microsoft.AspNetCore.Http;
+//using Microsoft.AspNetCore.Mvc;
+//using EXAM = ExamContract.MainDbModels.Exam;
 
-namespace Exam.Controllers.API
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ExamsController : ControllerBase
-    {
-        // GET: api/Exams
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+//namespace Exam.Controllers.API
+//{
+//    [Route("api/[controller]")]
+//    [ApiController]
+//    public class ExamsController : ControllerBase
+//    {
+//        private readonly ExamsApiClient service;
 
-        // GET: api/Exams/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+//        public ExamsController(ExamsApiClient service)
+//        {
+//            this.service = service;
+//        }
+//        [HttpGet]
+//        public async Task<ActionResult<List<EXAM>>> Get()
+//        {
+//            return await service.GetListAsync();
+//        }
 
-        // POST: api/Exams
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+//        [HttpGet("{id}", Name = "Get")]
+//        public async Task<ActionResult<EXAM>> Get(int id)
+//        {
+//            var item = await service.GetAsync(id);
+//            if (item == null)
+//                return NotFound();
+//            return item;
+//        }
 
-        // PUT: api/Exams/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+//        [HttpPost]
+//        public async Task<ActionResult<EXAM>> Post(EXAM item)
+//        {
+//            await service.AddAsync(item);
+//            return CreatedAtAction(nameof(Get), new { id = item.Id }, item);
+//        }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-    }
-}
+//        [HttpPut("{id}")]
+//        public async Task<IActionResult> Put(int id, EXAM item)
+//        {
+//            if (id != item.Id)
+//            {
+//                return BadRequest();
+//            }
+
+//            try
+//            {
+//                await service.UpdateAsync(item);
+//            }
+//            catch (Exception)
+//            {
+//                if (await service.GetAsync(id) == null)
+//                {
+//                    return NotFound();
+//                }
+//                else
+//                {
+//                    throw;
+//                }
+//            }
+//            return NoContent();
+//        }
+
+//        [HttpDelete("{id}")]
+//        public async Task<ActionResult<EXAM>> Delete(int id)
+//        {
+//            var item = await service.GetAsync(id);
+//            if (item == null)
+//            {
+//                return NotFound();
+//            }
+//            await service.DeleteAsync(item.Id);
+//            return item;
+//        }
+//    }
+//}

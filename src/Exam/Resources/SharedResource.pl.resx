@@ -522,4 +522,7 @@
   <data name="Application events" xml:space="preserve">
     <value>Zdarzenia aplikacji</value>
   </data>
+  <data name="Date" xml:space="preserve">
+    <value>Data</value>
+  </data>
 </root>

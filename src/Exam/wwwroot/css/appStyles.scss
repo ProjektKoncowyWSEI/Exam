@@ -56,10 +56,10 @@ $textShadow: 3px 1px 3px white;
     border-color: $defaultColor !important;
     color: white !important;
 }
-a:hover, .nav-link:hover, .btn-link:hover, button:hover {
+a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
     color: black !important;
     text-decoration-style: none !important;
-    transform:scale(1.05);
+    transform: scale(1.05);
 }
 .language {
     display: inline-flex;
@@ -79,4 +79,7 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover {
 }
 .maxWidth {
     width: 100%;
+}
+.command{
+    min-width:200px;
 }
