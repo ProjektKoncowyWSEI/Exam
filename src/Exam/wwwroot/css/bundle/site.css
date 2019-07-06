@@ -70,7 +70,8 @@ a {
 a:hover,
 .nav-link:hover,
 .btn-link:hover,
-button:hover {
+button:hover,
+.btn-primary:hover {
   color: black !important;
   text-decoration-style: none !important;
   transform: scale(1.05);
@@ -99,6 +100,10 @@ button:hover {
 
 .maxWidth {
   width: 100%;
+}
+
+.command {
+  min-width: 200px;
 }
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
