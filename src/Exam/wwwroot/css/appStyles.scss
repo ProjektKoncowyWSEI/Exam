@@ -55,6 +55,7 @@ $textShadow: 3px 1px 3px white;
     background-color: $defaultColor !important;
     border-color: $defaultColor !important;
     color: white !important;
+    margin-left:3px;
 }
 a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
     color: black !important;
@@ -80,6 +81,16 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
 .maxWidth {
     width: 100%;
 }
-.command{
-    min-width:200px;
+.command {
+    min-width: 100px;    
+    display:inline-flex;   
+}
+.table {
+    border: 1px solid #dee2e6;
+}
+.table td, .table th {
+    padding: 2px 4px 1px 4px !important;
+    text-align: left;
+    justify-content: center;
+    border: 1px solid #dee2e6;   
 }

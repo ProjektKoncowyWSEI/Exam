@@ -26,6 +26,7 @@ using Exam.Areas.Identity.Pages.Account;
 using Exam.IRepositories;
 using Exam.Repositories;
 using Microsoft.EntityFrameworkCore.Migrations;
+using ExamContract.MainDbModels;
 
 namespace Exam
 {
@@ -67,7 +68,9 @@ namespace Exam
             services.AddScoped<ILogger, Logger.ExamLogger>();
             services.AddScoped<ILogger<LoginModel>, Logger.ExamLogger<LoginModel>>();
             services.AddTransient<ITutorialsRepo, TutorialsRepo>();
-            services.AddTransient<ExamsApiClient>();
+            services.AddTransient<WebApiClient<ExamContract.MainDbModels.Exam>, ExamsApiClient>();
+            services.AddTransient<WebApiClient<Question>, QuestionsApiClient>();
+            
 
             services.ConfigureApplicationCookie(o =>
             {

@@ -18,32 +18,35 @@
             <th>
                 @Localizer["LogLevel"]
             </th>
-            <th>
+            <th style="min-width:150px">
                 @Localizer["Date"]
             </th>
-            <th>#</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Message)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LogLevel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedTime)
-            </td>
-            <td class="command">
-                <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.id">@Localizer["Details"]</a> 
-                <a class="btn btn-primary btn-sm" asp-action="Delete" asp-route-id="@item.id">@Localizer["Delete"]</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Message)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LogLevel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedTime)
+                </td>
+                <td>
+                    <div class="command">
+                        <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.id">@Localizer["Details"]</a>
+                        <a class="btn btn-primary btn-sm" asp-action="Delete" asp-route-id="@item.id">@Localizer["Delete"]</a>
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -1,3 +1,6 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
     <div class="container">
         <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
@@ -16,9 +19,12 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Exams" asp-action="Index">@Localizer["Exams"]</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="EventLogs" asp-action="Index">@Localizer["Logs"]</a>
-                </li>
+                @if (User.IsInRole(RoleEnum.admin))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="EventLogs" asp-action="Index">@Localizer["Logs"]</a>
+                    </li>
+                }                    
             </ul>
         </div>
     </div>

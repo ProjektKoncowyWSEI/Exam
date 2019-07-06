@@ -1,4 +1,4 @@
-﻿@model ExamContract.MainDbModels.Exam
+﻿@model ExamContract.MainDbModels.Question
 
 @{
     ViewData["Title"] = Localizer["Details"];
@@ -15,17 +15,11 @@
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.MinStart)
+                    @Html.DisplayNameFor(model => model.Image)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.MaxStart)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DurationMinutes)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MaxPoints)
-                </th>
+                    @Html.DisplayNameFor(model => model.AnswerType)
+                </th>          
                 <th>
                     @Html.DisplayNameFor(model => model.Login)
                 </th>
@@ -38,17 +32,11 @@
                     @Html.DisplayFor(model => model.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => model.MinStart)
+                    @Html.DisplayFor(model => model.Image)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => model.MaxStart)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.DurationMinutes)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.MaxPoints)
-                </td>
+                    @Html.DisplayFor(model => model.AnswerType)
+                </td>                
                 <td>
                     @Html.DisplayFor(model => model.Login)
                 </td>

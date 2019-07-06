@@ -25,8 +25,7 @@ namespace ExamMailSenderAPI.Controllers
         {
             return await repo.GetListAsync();
         }
-
-        // GET: api/Mails/5
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<T>> Get(int id)
         {

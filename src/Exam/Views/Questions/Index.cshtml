@@ -1,0 +1,14 @@
+﻿@model IEnumerable<ExamContract.MainDbModels.Question>
+
+@{
+    ViewData["Title"] = Localizer["Questions"];   
+}
+
+<div id="questionsGrid">
+    <partial name="_QuestionsGrid" model="Model" />
+</div>
+
+
+@section scripts {
+  
+}

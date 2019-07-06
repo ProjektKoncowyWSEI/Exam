@@ -1,7 +1,7 @@
 ﻿@model ExamContract.MainDbModels.Exam
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = Localizer["Edit"];
 }
 
     <h1>@Localizer["Edit"]</h1>
@@ -36,12 +36,7 @@
                 <input asp-for="MaxPoints" class="form-control" />
                 <span asp-validation-for="MaxPoints" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="Id" />
-            @*<div class="form-group">
-                <label asp-for="Login" class="control-label"></label>
-                <input asp-for="Login" class="form-control" />
-                <span asp-validation-for="Login" class="text-danger"></span>
-            </div>*@
+            <input type="hidden" asp-for="Id" />        
             <div class="form-group">
                 <input type="submit" value="@Localizer["Save"]" class="btn btn-primary btn-sm" />
             </div>

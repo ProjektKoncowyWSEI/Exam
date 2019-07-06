@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Helpers;
 using Microsoft.EntityFrameworkCore;
 using ExamContract.MailingModels;
+using Microsoft.Extensions.Logging;
 
 namespace ExamMailSenderAPI.Data
 {
@@ -12,11 +13,13 @@ namespace ExamMailSenderAPI.Data
     {
         private readonly Repository<MailModel> mailsRepo;
         private readonly Repository<Attachment> attachmentsRepo;
+        private readonly ILogger logger;
 
-        public UnitOfWork(Repository<MailModel> mailsRepo, Repository<Attachment> attachmentsRepo)
+        public UnitOfWork(Repository<MailModel> mailsRepo, Repository<Attachment> attachmentsRepo, ILogger logger)
         {
             this.mailsRepo = mailsRepo;
             this.attachmentsRepo = attachmentsRepo;
+            this.logger = logger;
         }
         public async Task<bool> SaveMailWithAttachments(MailModel item)
         {
@@ -32,6 +35,7 @@ namespace ExamMailSenderAPI.Data
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, item.Login);
                 throw;
             }
         }

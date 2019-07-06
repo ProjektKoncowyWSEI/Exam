@@ -33,7 +33,7 @@ namespace Logger
             //_emailSender = emailSender;
         }
         private LoggerDbContext _context;
-        private readonly IEmailSender _emailSender;
+        //private readonly IEmailSender _emailSender;
 
         public IDisposable BeginScope<TState>(TState state)
         {
@@ -89,7 +89,7 @@ namespace Logger
     public class ExamLogger<T> : ILogger<T>
     {
         private LoggerDbContext _context;
-        private readonly IEmailSender _emailSender;
+        //private readonly IEmailSender _emailSender;
         private ExamLogger examLogger;
         public ExamLogger(LoggerDbContext context)
         {
