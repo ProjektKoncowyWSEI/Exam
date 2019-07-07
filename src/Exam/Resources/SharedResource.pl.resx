@@ -214,7 +214,7 @@
     <value>Wylogowano</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Imię</value>
+    <value>Nazwa</value>
   </data>
   <data name="Once you have scanned the QR code or input the key above, your two factor authentication app will provide you with a unique code. Enter the code in the confirmation box below." xml:space="preserve">
     <value>Jeśli raz zeskanujesz kod QR lub wprowadziśz powyższy klucz, twoja aplikacja dwustopniowej autoryzacji (2FA) dostarczy Ci unikadowy kod weryfikacyjny. Wpisz kod do okienka poniżej.</value>
@@ -462,9 +462,6 @@
   <data name="Home" xml:space="preserve">
     <value>Start</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>Zaloguj się</value>
-  </data>
   <data name="Logout" xml:space="preserve">
     <value>Wyloguj się</value>
   </data>
@@ -551,5 +548,23 @@
   </data>
   <data name="Teacher" xml:space="preserve">
     <value>Nauczyciel</value>
+  </data>
+  <data name="Answer Type" xml:space="preserve">
+    <value>Typ odpowiedzi</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Zawartość</value>
+  </data>
+  <data name="Duration (minutes)" xml:space="preserve">
+    <value>Czas trwania (min)</value>
+  </data>
+  <data name="Max points" xml:space="preserve">
+    <value>Max punktów</value>
+  </data>
+  <data name="Confirm new password" xml:space="preserve">
+    <value>Potwierdź nowe hasło</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Pobierz</value>
   </data>
 </root>

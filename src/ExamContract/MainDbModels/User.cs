@@ -9,6 +9,7 @@ namespace ExamContract.MainDbModels
     {
         [Key]
         [MaxLength(256)]
+        [Display(Name = "Login")]
         public string Login { get; set; }
     }
 }

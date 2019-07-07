@@ -1,3 +1,7 @@
+.body {
+  margin: 0 10% 0 10%;
+}
+
 .textShadow {
   text-shadow: 3px 1px 3px white;
 }
@@ -109,7 +113,7 @@ button:hover,
 }
 
 .table {
-  border: 1px solid #dee2e6;
+  border: 1px solid black;
 }
 
 .table td,
@@ -125,6 +129,10 @@ button:hover,
   max-width: 600px;
   position: fixed;
   right: 0;
+}
+
+.margin5px {
+  margin: 5px;
 }
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */

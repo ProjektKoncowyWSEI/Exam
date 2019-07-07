@@ -8,9 +8,12 @@ namespace ExamContract.MainDbModels
     public partial class Answer: Entity
     {
         [MaxLength(200)]
+        [Display(Name = "Name")]
         public string Name { get; set; }
+        [Display(Name = "Content")]
         public string Content { get; set; }
-        public decimal Points { get; set; }
+        [Display(Name = "Points")]
+        public decimal Points { get; set; }        
         public int QuestionId { get; set; }
     }
 }

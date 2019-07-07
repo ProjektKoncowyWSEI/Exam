@@ -9,6 +9,7 @@ namespace ExamContract
     {
         public int Id { get; set; }
         [MaxLength(256)]
+        [Display(Name = "Login")]
         public string Login { get; set; }
     }
 }

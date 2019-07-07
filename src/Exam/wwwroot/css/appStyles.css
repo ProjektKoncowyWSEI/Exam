@@ -1,3 +1,6 @@
+.body {
+  margin: 0 10% 0 10%; }
+
 .textShadow {
   text-shadow: 3px 1px 3px white; }
 
@@ -84,10 +87,13 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
   padding: 2px 4px 1px 4px !important;
   text-align: left;
   justify-content: center;
-  border: 1px solid #dee2e6;
+  /*border: 1px solid #dee2e6;*/
   vertical-align: inherit !important; }
 
 .alertPosition {
   max-width: 600px;
   position: fixed;
   right: 0; }
+
+.margin5px {
+  margin: 5px; }

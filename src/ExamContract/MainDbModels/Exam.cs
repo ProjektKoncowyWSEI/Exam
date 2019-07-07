@@ -14,10 +14,15 @@ namespace ExamContract.MainDbModels
         }
         [Required]
         [MaxLength(200)]
+        [Display(Name = "Name")]
         public string Name { get; set; }
+        [Display(Name = "Min start")]
         public DateTime MinStart { get; set; }
+        [Display(Name = "Max start")]
         public DateTime MaxStart { get; set; }
+        [Display(Name = "Duration (minutes)")]
         public int DurationMinutes { get; set; }
+        [Display(Name = "Max points")]
         public decimal MaxPoints { get; set; }
         public ICollection<Question> Questions { get; set; }
         public ICollection<User> Users { get; set; }

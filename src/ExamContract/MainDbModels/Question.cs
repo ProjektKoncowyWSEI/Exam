@@ -14,10 +14,14 @@ namespace ExamContract.MainDbModels
         }
         public int? ExamId { get; set; }
         [MaxLength(200)]
+        [Display(Name = "Name")]
         public string Name { get; set; }
+        [Display(Name = "Content")]
         public string Content { get; set; }
+        [Display(Name = "Answer Type")]
         public int AnswerType { get; set; }
         [NotMapped]
+        [Display(Name = "Answer Type")]
         public AnswerTypesEnum AnswerTypesEnum
         {
             get
