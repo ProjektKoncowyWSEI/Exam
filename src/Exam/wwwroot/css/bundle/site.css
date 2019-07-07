@@ -31,16 +31,16 @@
 }
 
 .mainImage-index {
-  background-image: url("../images/main.jpg");
+  background-image: url("../../../../../../../images/main.jpg");
   opacity: 0.2;
 }
 
 .mainImage-manage {
-  background-image: url("../images/manage.jpg");
+  background-image: url("../../../../../../../images/manage.jpg");
 }
 
 .mainImage-account {
-  background-image: url("../images/account.jpg");
+  background-image: url("../../../../../../../images/account.jpg");
 }
 
 .nav-link {
@@ -118,6 +118,7 @@ button:hover,
   text-align: left;
   justify-content: center;
   border: 1px solid #dee2e6;
+  vertical-align: inherit !important;
 }
 
 .alertPosition {

@@ -25,18 +25,18 @@ $textShadow: 3px 1px 3px white;
 .mainImage-index {
     @extend .mainImage;
     @extend .mainImage-defaults;
-    background-image: url(../images/main.jpg);
+    background-image: url(/images/main.jpg);
     opacity: 0.2;
 }
 .mainImage-manage {
     @extend .mainImage;
     @extend .mainImage-defaults;
-    background-image: url(../images/manage.jpg);  
+    background-image: url(/images/manage.jpg);  
 }
 .mainImage-account {
     @extend .mainImage;
     @extend .mainImage-defaults;
-    background-image: url(../images/account.jpg);
+    background-image: url(/images/account.jpg);
 }
 .nav-link {
     color: $defaultColor !important;

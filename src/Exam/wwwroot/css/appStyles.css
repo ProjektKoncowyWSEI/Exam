@@ -21,14 +21,14 @@
   opacity: 0.2; }
 
 .mainImage-index {
-  background-image: url(../images/main.jpg);
+  background-image: url(/images/main.jpg);
   opacity: 0.2; }
 
 .mainImage-manage {
-  background-image: url(../images/manage.jpg); }
+  background-image: url(/images/manage.jpg); }
 
 .mainImage-account {
-  background-image: url(../images/account.jpg); }
+  background-image: url(/images/account.jpg); }
 
 .nav-link {
   color: #ff7f28 !important; }
