@@ -13,13 +13,13 @@ namespace ExamContract.MainDbModels
             Users = new HashSet<User>();
         }
         [Required]
-        [MaxLength(100)]
+        [MaxLength(200)]
         public string Name { get; set; }
         public DateTime MinStart { get; set; }
         public DateTime MaxStart { get; set; }
         public int DurationMinutes { get; set; }
         public decimal MaxPoints { get; set; }
-        ICollection<Question> Questions { get; set; }
-        ICollection<User> Users { get; set; }
+        public ICollection<Question> Questions { get; set; }
+        public ICollection<User> Users { get; set; }
     }
 }

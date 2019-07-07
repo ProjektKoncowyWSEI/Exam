@@ -8,6 +8,7 @@ namespace ExamContract.MainDbModels
     public partial class User
     {
         [Key]
+        [MaxLength(256)]
         public string Login { get; set; }
     }
 }

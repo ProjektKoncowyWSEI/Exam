@@ -7,10 +7,11 @@
 <h3>@Localizer["Details"]: @Html.DisplayFor(model => model.Name)</h3>
 
 <div>
-    <hr />
+
     <table class="table">
         <thead>
             <tr>
+                <th></th>
                 <th>
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
@@ -34,6 +35,7 @@
         </thead>
         <tbody>
             <tr>
+                <td><i id="arrow" onclick="toggleTr('#questions', '#arrow')" class="fa fa-chevron-down"></i></td>
                 <td>
                     @Html.DisplayFor(model => model.Name)
                 </td>
@@ -55,12 +57,15 @@
                 <td class="command">
                     <a asp-action="Edit" class="btn btn-primary btn-sm" asp-route-id="@Model.Id">@Localizer["Edit"]</a>
                     <a asp-action="Index" class="btn btn-primary btn-sm">@Localizer["Back to List"]</a>
+                    <a asp-controller="Questions" asp-action="Index" asp-route-parentId="@Model.Id" class="btn btn-primary btn-sm">@Localizer["Questions"]</a>
                 </td>
+            </tr>
+            <tr id="questions" style="display:none">
+                <td></td>
+                <td colspan="7">hghgh</td>
             </tr>
         </tbody>
     </table>
 
 </div>
-<div>
 
-</div>

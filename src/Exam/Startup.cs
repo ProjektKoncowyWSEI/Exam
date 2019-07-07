@@ -27,6 +27,7 @@ using Exam.IRepositories;
 using Exam.Repositories;
 using Microsoft.EntityFrameworkCore.Migrations;
 using ExamContract.MainDbModels;
+using Exam.Data.UnitOfWork;
 
 namespace Exam
 {
@@ -45,10 +46,8 @@ namespace Exam
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("UsersConnection")));
+            string userConnection = Environment.GetEnvironmentVariable("EXAM_UsersConnection") ?? Configuration.GetConnectionString("UsersConnection");
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(userConnection));
 
             services.AddDbContext<Logger.Data.LoggerDbContext>(options =>
                options.UseSqlite(
@@ -70,7 +69,10 @@ namespace Exam
             services.AddTransient<ITutorialsRepo, TutorialsRepo>();
             services.AddTransient<WebApiClient<ExamContract.MainDbModels.Exam>, ExamsApiClient>();
             services.AddTransient<WebApiClient<Question>, QuestionsApiClient>();
-            
+            services.AddTransient<WebApiClient<Answer>, AnswersApiClient>();             
+            services.AddTransient<QuestionWithAnswersApiClient>(); //Wymagamy klasy konkretnej
+            services.AddTransient<Exams>();
+
 
             services.ConfigureApplicationCookie(o =>
             {

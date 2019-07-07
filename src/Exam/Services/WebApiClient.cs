@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -13,14 +14,15 @@ namespace Exam.Services
 {
     public abstract class WebApiClient<T> where T : Entity
     {
-        private readonly ILogger logger;
-        private readonly string uri;
+        protected ILogger logger;
+        protected string uri;
         protected HttpClient Client;
         public WebApiClient(ILogger logger, IConfiguration configuration, string connectionName, string uri, string apiKey = null)
         {
+            string connStr = Environment.GetEnvironmentVariable(connectionName) ?? configuration.GetConnectionString(connectionName);
             Client = new HttpClient
-            {
-                BaseAddress = new Uri(configuration.GetConnectionString(connectionName))
+            {                
+                BaseAddress = new Uri(connStr)
             };
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             if (apiKey != null)
@@ -70,11 +72,11 @@ namespace Exam.Services
                 throw;
             }
         }
-        public async virtual Task<List<T>> GetListAsync(int page = 1, int? pageLocalSize = null)
+        public async virtual Task<List<T>> GetListAsync(int parrentId)
         {
             try
             {
-                var response = await Client.GetAsync($"{uri}/{page}/{pageLocalSize}");
+                var response = await Client.GetAsync($"{uri}/?parentId={parrentId}");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
@@ -87,10 +89,31 @@ namespace Exam.Services
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "GetListAsync(int page = 1, int? pageLocalSize = null)");
+                logger.LogError(ex, "GetListAsync()");
                 throw;
             }
         }
+        //public async virtual Task<List<T>> GetListAsync(int page = 1, int? pageLocalSize = null)
+        //{
+        //    try
+        //    {
+        //        var response = await Client.GetAsync($"{uri}/{page}/{pageLocalSize}");
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var content = await response.Content.ReadAsStringAsync();
+        //            return JsonConvert.DeserializeObject<List<T>>(content);
+        //        }
+        //        else
+        //        {
+        //            throw new Exception(response.StatusCode.ToString());
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logger.LogError(ex, "GetListAsync(int page = 1, int? pageLocalSize = null)");
+        //        throw;
+        //    }
+        //}
         public async virtual Task<T> AddAsync(T item)
         {
             try

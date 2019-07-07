@@ -8,42 +8,22 @@ using System.Threading.Tasks;
 
 namespace ExamMainDataBaseAPI.DAL
 {
-    public class UnitOfWork  : IDisposable
-    {
-        private readonly ExamQuestionsDbContext context;
+    public class UnitOfWork
+    {       
         public Repository<Question> QuestionRepo { get; private set; }
-        public Repository<Answer> AnswersRepo { get; private set; }
-        public QuestionAnswerRepository QuestionAnswerRepo { get; private set; }
+        public Repository<Answer> AnswersRepo { get; private set; }        
 
-        public UnitOfWork(ExamQuestionsDbContext context, Repository<Question> questionRepo,
-                Repository<Answer> answersRepo, QuestionAnswerRepository questionAnswerRepo) {
-            this.context = context;
+        public UnitOfWork(Repository<Question> questionRepo, Repository<Answer> answersRepo)
+        {         
             this.QuestionRepo = questionRepo;
-            this.AnswersRepo = answersRepo;
-            this.QuestionAnswerRepo = questionAnswerRepo;
+            this.AnswersRepo = answersRepo;          
         }
 
         public async Task<Question> GetQuestionWithAnswer(int id)
         {
-            var question = await QuestionRepo.GetAsync(id);
-            var answersQuestion = await QuestionAnswerRepo.FindBy(q => q.QuestionId == id).ToListAsync();
-            var answers = new List<Answer>();
-
-            foreach (var item in answersQuestion)
-            {
-                answers.Add(await AnswersRepo.GetAsync(item.AnswerId));
-            }
-
-            question.Answers = answers;
+            var question = await QuestionRepo.GetAsync(id); 
+            question.Answers = await AnswersRepo.FindBy(a=>a.QuestionId == id).ToListAsync();
             return question;
-        }
-        public async Task SaveChangesAsync()
-        {
-            await context.SaveChangesAsync();
-        }     
-        public void Dispose()
-        {
-            context.Dispose();
-        }
+        }   
     }
 }

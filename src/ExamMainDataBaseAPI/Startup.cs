@@ -32,12 +32,12 @@ namespace ExamMainDataBaseAPI
             services.AddMvcCore()
                 .AddJsonFormatters()
                 .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
-            services.AddDbContext<ExamQuestionsDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            string mainDbConnection = Environment.GetEnvironmentVariable("EXAM_MainDBConnection") ?? Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<ExamQuestionsDbContext>(options => options.UseSqlServer(mainDbConnection));
             services.AddTransient<Repository<Answer>>();
             services.AddTransient<Repository<Question>>();           
             services.AddTransient<Repository<Exam>>();
-            services.AddTransient<UnitOfWork>();
-            services.AddTransient<QuestionAnswerRepository>(); 
+            services.AddTransient<UnitOfWork>();       
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

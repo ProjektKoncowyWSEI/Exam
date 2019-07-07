@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ExamContract.MainDbModels.Exam>
 
 @{
-    ViewData["Title"] = Localizer["Exams"];   
+    ViewData["Title"] = Localizer["Exams"];
 }
 
 <h3>@ViewBag.Message</h3>
@@ -11,5 +11,10 @@
 
 
 @section scripts {
-  
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        toggleTr('#questions_@ViewBag.ExamId', '#arrow_@ViewBag.ExamId')
+    });
+    
+</script>   
 }

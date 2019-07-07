@@ -10,6 +10,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
+            <input asp-for="ExamId" type="hidden" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -17,14 +18,14 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
+                <label asp-for="Content" class="control-label"></label>
+                <textarea rows="4" asp-for="Content" class="form-control"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AnswerType" class="control-label"></label>
-                <input asp-for="AnswerType" class="form-control" />
-                <span asp-validation-for="AnswerType" class="text-danger"></span>
+                <label asp-for="AnswerTypesEnum" class="control-label"></label>
+                <select asp-for="AnswerTypesEnum" asp-items="Html.GetEnumSelectList<AnswerTypesEnum>()" class="form-control"></select>
+                <span asp-validation-for="AnswerTypesEnum" class="text-danger"></span>
             </div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -35,7 +36,7 @@
 </div>
 
 <div>
-    <a asp-action="Index" class="btn btn-primary btn-sm">@Localizer["Back to List"]</a>
+    <a asp-controller="Exams" asp-action="Index" asp-route-parentId="@Model.ExamId" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">@Localizer["Back to List"]</a>
 </div>
 
 @section Scripts {

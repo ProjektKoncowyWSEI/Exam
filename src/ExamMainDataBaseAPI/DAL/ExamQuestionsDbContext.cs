@@ -13,22 +13,9 @@ namespace ExamMainDataBaseAPI.Models
            : base(options)
         {
         }
-
-
         public DbSet<Exam> Exams { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Answer> Answer { get; set; }
-        public DbSet<AnswersType> AnswersType { get; set; }
-        public DbSet<QuestionAnswer> QuestionAnswer { get; set; }
-        public DbSet<Question> Questions { get; set; }
-
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<QuestionAnswer>(entity =>
-            {
-                entity.HasKey(e => new { e.AnswerId, e.QuestionId });
-            });
-        }
+        public DbSet<Answer> Answer { get; set; }      
+        public DbSet<Question> Questions { get; set; }       
     }
 }

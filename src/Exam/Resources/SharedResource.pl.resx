@@ -318,8 +318,8 @@
   <data name="before you can log in with a recovery code." xml:space="preserve">
     <value>zanim zalogujesz się przy użyciu kodu ozdyskiwania.</value>
   </data>
-  <data name="Confirm new password" xml:space="preserve">
-    <value>Potwierdź nowe hasło</value>
+  <data name="Confirm password" xml:space="preserve">
+    <value>Potwierdź hasło</value>
   </data>
   <data name="Current password" xml:space="preserve">
     <value>Aktualne hasło</value>
@@ -527,5 +527,23 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Ustawienia</value>
+  </data>
+  <data name="Add user" xml:space="preserve">
+    <value>Dodaj użytkownika</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>Pytania</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Rola</value>
+  </data>
+  <data name="Add answer" xml:space="preserve">
+    <value>Dodaj odpowiedź</value>
+  </data>
+  <data name="Add question" xml:space="preserve">
+    <value>Dodaj pytanie</value>
+  </data>
+  <data name="Item can not be deleted!" xml:space="preserve">
+    <value>Nie mozna usunąć elementu!</value>
   </data>
 </root>

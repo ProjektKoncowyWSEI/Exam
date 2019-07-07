@@ -9,7 +9,7 @@ namespace Exam.Services
 {
     public class QuestionsApiClient : WebApiClient<ExamContract.MainDbModels.Question>
     {
-        public QuestionsApiClient(ILogger logger, IConfiguration configuration) : base(logger, configuration, "MainDbConnection", "Questions")
+        public QuestionsApiClient(ILogger logger, IConfiguration configuration) : base(logger, configuration, "MainDbAPIConnection", "Questions")
         {
         }
     }

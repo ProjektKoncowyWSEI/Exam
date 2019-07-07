@@ -1,4 +1,17 @@
-// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+function toggleTr(id, sender) {
+    if ($(sender).hasClass('fa-chevron-down')) {
+        $(sender).removeClass('fa-chevron-down')
+        $(sender).addClass('fa-chevron-up')
+    } else {
+        $(sender).removeClass('fa-chevron-up')
+        $(sender).addClass('fa-chevron-down')
+    }
+    $(id).slideToggle();
+    try {
+        $('html, body').animate({
+            scrollTop: $(sender).offset().top - 150
+        }, 500);
+    } catch (e) {
 
-// Write your JavaScript code.
+    }
+}

@@ -25,7 +25,7 @@ namespace ExamMainDataBaseAPI.Controllers
         {
             return await repo.GetListAsync();
         }
-       
+
         [HttpGet("{id}")]
         public async Task<ActionResult<T>> Get(int id)
         {

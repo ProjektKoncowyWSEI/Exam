@@ -20,8 +20,11 @@ namespace Exam.Controllers
             Localizer = localizer;
             Service = service;
         }
-        public async virtual Task<IActionResult> Index()
-        {            
+        public async virtual Task<IActionResult> Index(int? parentId = null, string info = null, string warning = null, string error = null)
+        {
+            ViewBag.Error = error;
+            ViewBag.Warning = warning;
+            ViewBag.Info = info;
             return View(await Service.GetListAsync());
         }
         public async virtual Task<IActionResult> Details(int? id)
@@ -40,7 +43,7 @@ namespace Exam.Controllers
             return View(item);
         }
 
-        public IActionResult Create()
+        public virtual IActionResult Create(int? parentId = null)
         {
             return View();
         }
@@ -94,7 +97,7 @@ namespace Exam.Controllers
             return View(item);
         }
 
-        public async virtual Task<IActionResult> Delete(int? id)
+        public async virtual Task<IActionResult> Delete(int? id, int? parentId = null)
         {
             if (id == null)
             {
@@ -112,9 +115,11 @@ namespace Exam.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async virtual Task<IActionResult> DeleteConfirmed(int id)
+        public async virtual Task<IActionResult> DeleteConfirmed(int id, int? parentId = null)
         {
-            await Service.DeleteAsync(id);
+            var deleted = await Service.DeleteAsync(id);
+            if (!deleted)
+                return RedirectToAction(nameof(Index), new { error = Localizer["Item can not be deleted!"] });
             return RedirectToAction(nameof(Index));
         }
     }

@@ -14,7 +14,6 @@ namespace Exam.Services
 {
     public class EmailSender : WebApiClient<Entity>, IEmailSender
     {
-        private readonly ILogger logger;
         public bool IsSent { get; set; }
         public EmailSender(ILogger logger, IConfiguration configuration) : base(logger, configuration, "EmailSenderConnection", "", "MailKey")
         {

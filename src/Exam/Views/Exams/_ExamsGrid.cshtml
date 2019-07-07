@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<ExamContract.MainDbModels.Exam>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary btn-sm">@Localizer["Create"]</a>
+    <a asp-controller="Exams" asp-action="Create" class="btn btn-primary btn-sm">@Localizer["Create"]</a>
 </p>
 <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -31,6 +32,7 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td><button id="arrow_@item.Id" onclick="toggleTr('#questions_@item.Id', '#arrow_@item.Id')" class="btn btn-primary fa fa-chevron-down btn-sm"></button>   @Localizer["Questions"]</td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -52,9 +54,18 @@
                 <td>
                     <div class="command">
                         <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a>
-                        <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">@Localizer["Details"]</a>
+                        @*<a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">@Localizer["Details"]</a>*@
                         <a class="btn btn-primary btn-sm" asp-action="Delete" asp-route-id="@item.Id">@Localizer["Delete"]</a>
                     </div>
+                </td>
+            </tr>
+            <tr id="questions_@item.Id" style="display:none">
+                <td>
+                    
+                </td>
+                <td colspan="7">
+                    <p><a asp-controller="Questions" asp-action="Create" asp-route-parentId="@item.Id" class="btn btn-primary btn-sm">@Localizer["Add question"]</a></p>                   
+                    <partial name="_QuestionsGrid" model="@item.Questions">
                 </td>
             </tr>
         }

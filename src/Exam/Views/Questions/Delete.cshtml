@@ -15,16 +15,16 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
+            @Html.DisplayNameFor(model => model.Content)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Image)
+            @Html.DisplayFor(model => model.Content)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AnswerType)
+            @Html.DisplayNameFor(model => model.AnswerTypesEnum)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AnswerType)
+            @Html.DisplayFor(model => model.AnswerTypesEnum)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Login)
@@ -36,7 +36,8 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
+        <input type="hidden" name="parentId" value="@Model.ExamId" />
         <input type="submit" value="@Localizer["Delete"]" class="btn btn-danger btn-sm" />
-        <a asp-action="Index" class="btn btn-primary btn-sm">@Localizer["Back to List"]</a>
+        <a asp-controller="Exams" asp-action="Index" asp-route-parentId="@Model.ExamId" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">@Localizer["Back to List"]</a>
     </form>
 </div>

@@ -25,23 +25,23 @@ namespace ExamMainDataBaseAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Login");
+                    b.Property<string>("Content");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Login")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(200);
+
+                    b.Property<decimal>("Points");
+
+                    b.Property<int>("QuestionId");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("QuestionId");
+
                     b.ToTable("Answer");
-                });
-
-            modelBuilder.Entity("ExamContract.MainDbModels.AnswersType", b =>
-                {
-                    b.Property<string>("AnswerType")
-                        .ValueGeneratedOnAdd();
-
-                    b.HasKey("AnswerType");
-
-                    b.ToTable("AnswersType");
                 });
 
             modelBuilder.Entity("ExamContract.MainDbModels.Exam", b =>
@@ -52,7 +52,8 @@ namespace ExamMainDataBaseAPI.Migrations
 
                     b.Property<int>("DurationMinutes");
 
-                    b.Property<string>("Login");
+                    b.Property<string>("Login")
+                        .HasMaxLength(256);
 
                     b.Property<decimal>("MaxPoints");
 
@@ -62,7 +63,7 @@ namespace ExamMainDataBaseAPI.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(200);
 
                     b.HasKey("Id");
 
@@ -75,53 +76,60 @@ namespace ExamMainDataBaseAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AnswerType");
+                    b.Property<int>("AnswerType");
 
-                    b.Property<byte[]>("Image");
+                    b.Property<string>("Content");
 
-                    b.Property<string>("Login");
+                    b.Property<int?>("ExamId");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Login")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(200);
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ExamId");
+
                     b.ToTable("Questions");
-                });
-
-            modelBuilder.Entity("ExamContract.MainDbModels.QuestionAnswer", b =>
-                {
-                    b.Property<int>("AnswerId");
-
-                    b.Property<int>("QuestionId");
-
-                    b.HasKey("AnswerId", "QuestionId");
-
-                    b.HasIndex("QuestionId");
-
-                    b.ToTable("QuestionAnswer");
                 });
 
             modelBuilder.Entity("ExamContract.MainDbModels.User", b =>
                 {
                     b.Property<string>("Login")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(256);
+
+                    b.Property<int?>("ExamId");
 
                     b.HasKey("Login");
+
+                    b.HasIndex("ExamId");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ExamContract.MainDbModels.QuestionAnswer", b =>
+            modelBuilder.Entity("ExamContract.MainDbModels.Answer", b =>
                 {
-                    b.HasOne("ExamContract.MainDbModels.Answer", "Answer")
-                        .WithMany()
-                        .HasForeignKey("AnswerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ExamContract.MainDbModels.Question", "Question")
-                        .WithMany()
+                    b.HasOne("ExamContract.MainDbModels.Question")
+                        .WithMany("Answers")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ExamContract.MainDbModels.Question", b =>
+                {
+                    b.HasOne("ExamContract.MainDbModels.Exam")
+                        .WithMany("Questions")
+                        .HasForeignKey("ExamId");
+                });
+
+            modelBuilder.Entity("ExamContract.MainDbModels.User", b =>
+                {
+                    b.HasOne("ExamContract.MainDbModels.Exam")
+                        .WithMany("Users")
+                        .HasForeignKey("ExamId");
                 });
 #pragma warning restore 612, 618
         }

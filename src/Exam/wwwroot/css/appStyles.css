@@ -85,3 +85,8 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
   text-align: left;
   justify-content: center;
   border: 1px solid #dee2e6; }
+
+.alertPosition {
+  max-width: 600px;
+  position: fixed;
+  right: 0; }
