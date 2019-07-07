@@ -546,4 +546,10 @@
   <data name="Item can not be deleted!" xml:space="preserve">
     <value>Nie mozna usunąć elementu!</value>
   </data>
+  <data name="Lack" xml:space="preserve">
+    <value>Brak</value>
+  </data>
+  <data name="Teacher" xml:space="preserve">
+    <value>Nauczyciel</value>
+  </data>
 </root>
