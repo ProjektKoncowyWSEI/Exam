@@ -567,4 +567,13 @@
   <data name="Download" xml:space="preserve">
     <value>Pobierz</value>
   </data>
+  <data name="Active" xml:space="preserve">
+    <value>Aktywny</value>
+  </data>
+  <data name="Add exam" xml:space="preserve">
+    <value>Dodaj egzamin</value>
+  </data>
+  <data name="Points" xml:space="preserve">
+    <value>Punty</value>
+  </data>
 </root>

@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = Localizer["Exams"];
+    int? questionId = ViewBag.QuestionId;
 }
 
 <h3>@ViewBag.Message</h3>
@@ -12,8 +13,12 @@
 
 @section scripts {
 <script>
+    let questionId = @questionId
     window.addEventListener('DOMContentLoaded', (event) => {
         toggleTr('#questions_@ViewBag.ExamId', '#arrow_@ViewBag.ExamId')
+        if (questionId != null) {
+            toggleTr('#answers_@ViewBag.QuestionId', '#arrowQuestions_@ViewBag.QuestionId')
+        }
     });
     
 </script>   

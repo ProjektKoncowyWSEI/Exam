@@ -91,9 +91,11 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
   vertical-align: inherit !important; }
 
 .alertPosition {
-  max-width: 600px;
+  width: 60%;
   position: fixed;
-  right: 0; }
+  top: 10px;
+  left: 0;
+  margin-left: 20%; }
 
 .margin5px {
   margin: 5px; }

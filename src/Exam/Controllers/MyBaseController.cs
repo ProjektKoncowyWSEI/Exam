@@ -20,7 +20,7 @@ namespace Exam.Controllers
             Localizer = localizer;
             Service = service;
         }
-        public async virtual Task<IActionResult> Index(int? parentId = null, string info = null, string warning = null, string error = null)
+        public async virtual Task<IActionResult> Index(int? parentId = null, int? questionId = null, string info = null, string warning = null, string error = null)
         {
             ViewBag.Error = error;
             ViewBag.Warning = warning;

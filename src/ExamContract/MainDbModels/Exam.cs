@@ -23,7 +23,8 @@ namespace ExamContract.MainDbModels
         [Display(Name = "Duration (minutes)")]
         public int DurationMinutes { get; set; }
         [Display(Name = "Max points")]
-        public decimal MaxPoints { get; set; }
+        public decimal MaxPoints { get; set; }       
+       
         public ICollection<Question> Questions { get; set; }
         public ICollection<User> Users { get; set; }
     }

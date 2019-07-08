@@ -34,6 +34,10 @@ namespace Exam.Data.UnitOfWork
                 {
                     var qwa = await questionWithAnswers.GetAsync(q.Id);
                     q.Answers = qwa.Answers;
+                    foreach (var a in q.Answers)
+                    {
+                        a.ExamId = e.Id;
+                    }
                 }
             }
             return result;

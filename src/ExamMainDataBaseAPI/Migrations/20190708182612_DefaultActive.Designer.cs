@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamMainDataBaseAPI.Migrations
 {
     [DbContext(typeof(ExamQuestionsDbContext))]
-    [Migration("20190707135953_Init")]
-    partial class Init
+    [Migration("20190708182612_DefaultActive")]
+    partial class DefaultActive
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,6 +26,8 @@ namespace ExamMainDataBaseAPI.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active");
 
                     b.Property<string>("Content");
 
@@ -51,6 +53,8 @@ namespace ExamMainDataBaseAPI.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active");
 
                     b.Property<int>("DurationMinutes");
 
@@ -78,6 +82,8 @@ namespace ExamMainDataBaseAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Active");
+
                     b.Property<int>("AnswerType");
 
                     b.Property<string>("Content");
@@ -99,13 +105,20 @@ namespace ExamMainDataBaseAPI.Migrations
 
             modelBuilder.Entity("ExamContract.MainDbModels.User", b =>
                 {
-                    b.Property<string>("Login")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(256);
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active");
 
                     b.Property<int?>("ExamId");
 
-                    b.HasKey("Login");
+                    b.Property<string>("Login")
+                        .HasMaxLength(256);
+
+                    b.Property<decimal>("Points");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("ExamId");
 

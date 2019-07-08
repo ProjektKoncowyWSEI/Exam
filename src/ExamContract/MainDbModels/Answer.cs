@@ -14,6 +14,8 @@ namespace ExamContract.MainDbModels
         public string Content { get; set; }
         [Display(Name = "Points")]
         public decimal Points { get; set; }        
-        public int QuestionId { get; set; }
+        public int QuestionId { get; set; } 
+        [NotMapped]
+        public int ExamId { get; set; }
     }
 }

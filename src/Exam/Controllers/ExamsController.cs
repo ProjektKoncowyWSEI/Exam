@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Exam.Controllers
 {
-    [AuthorizeByRoles(RoleEnum.admin)]
+    [AuthorizeByRoles(RoleEnum.admin, RoleEnum.teacher)]
     public class ExamsController : MyBaseController<ExamContract.MainDbModels.Exam>
     {
         private readonly Exams uow;
@@ -15,7 +15,7 @@ namespace Exam.Controllers
         {
             this.uow = uow;
         }
-        public override async Task<IActionResult> Index(int? parentId = null, string info = null, string warning = null, string error = null)
+        public override async Task<IActionResult> Index(int? parentId = null, int? questionId = null, string info = null, string warning = null, string error = null)
         {
             var currentRole = User.CurrentRoleEnum();
             switch (currentRole)
@@ -34,7 +34,12 @@ namespace Exam.Controllers
             ViewBag.Warning = warning;
             ViewBag.Info = info;
             ViewBag.ExamId = parentId;
+            ViewBag.QuestionId = questionId;
             return View(await uow.GetList());
-        }       
+        }
+        public override async Task<IActionResult> Delete(int? id, int? parentId = null)
+        {
+            return RedirectToAction(nameof(Index), new { error = Localizer["Exams can not be removed, you can deactivate!"] });          
+        }
     }
 }

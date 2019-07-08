@@ -8,15 +8,16 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Exam.Controllers
 {
-    [AuthorizeByRoles(RoleEnum.admin)]
+    [AuthorizeByRoles(RoleEnum.admin, RoleEnum.teacher)]
     public class QuestionsController : MyBaseController<Question>
     {   
         public QuestionsController(IStringLocalizer<SharedResource> localizer, WebApiClient<Question> service) : base(localizer, service) {}
 
 
-        public override async Task<IActionResult> Index(int? parentId = null, string info = null, string warning = null, string error = null)
+        public override async Task<IActionResult> Index(int? parentId = null, int? questionId = null, string info = null, string warning = null, string error = null)
         {
             ViewBag.ExamId = parentId;
+            ViewBag.QuestionId = questionId;
             return await base.Index();
         }
 
@@ -29,6 +30,7 @@ namespace Exam.Controllers
         [ValidateAntiForgeryToken]
         public override async Task<IActionResult> Create(Question item)
         {
+            ViewBag.ExamId = item.ExamId;           
             if (ModelState.IsValid)
             {
                 item.Login = HttpContext.User.Identity.Name;
@@ -41,6 +43,7 @@ namespace Exam.Controllers
         [ValidateAntiForgeryToken]
         public override async Task<IActionResult> Edit(int id, Question item)
         {
+            ViewBag.ExamId = item.ExamId;          
             if (id != item.Id)
             {
                 return NotFound();
@@ -59,28 +62,7 @@ namespace Exam.Controllers
         }
         public override async Task<IActionResult> Delete(int? id, int? parentId = null)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-          
-            var item = await Service.GetAsync((int)id);
-            if (item == null)
-            {
-                return NotFound();
-            }
-            item.ExamId = parentId;
-            return View(item);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public override async Task<IActionResult> DeleteConfirmed(int id, int? parentId = null)
-        {
-            var deleted = await Service.DeleteAsync(id);
-            if (!deleted)
-                return RedirectToAction(nameof(Index), new { error = Localizer["Item can not be deleted!"] });
-            return RedirectToAction(nameof(Index), "Exams", new { parentId });
+            return RedirectToAction(nameof(Index), new { error = Localizer["Questions can not be removed, you can deactivate!"] });
         }
     }
 }

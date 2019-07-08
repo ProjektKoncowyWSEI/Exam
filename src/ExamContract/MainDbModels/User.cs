@@ -5,11 +5,9 @@ using System.Text;
 
 namespace ExamContract.MainDbModels
 {
-    public partial class User
+    public partial class User : Entity
     {
-        [Key]
-        [MaxLength(256)]
-        [Display(Name = "Login")]
-        public string Login { get; set; }
+        [Display(Name = "Points")]
+        public decimal Points { get; set; }
     }
 }

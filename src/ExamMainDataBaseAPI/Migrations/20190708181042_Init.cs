@@ -15,6 +15,7 @@ namespace ExamMainDataBaseAPI.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Login = table.Column<string>(maxLength: 256, nullable: true),
+                    Active = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(maxLength: 200, nullable: false),
                     MinStart = table.Column<DateTime>(nullable: false),
                     MaxStart = table.Column<DateTime>(nullable: false),
@@ -33,6 +34,7 @@ namespace ExamMainDataBaseAPI.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Login = table.Column<string>(maxLength: 256, nullable: true),
+                    Active = table.Column<bool>(nullable: false),
                     ExamId = table.Column<int>(nullable: true),
                     Name = table.Column<string>(maxLength: 200, nullable: true),
                     Content = table.Column<string>(nullable: true),
@@ -53,12 +55,16 @@ namespace ExamMainDataBaseAPI.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Login = table.Column<string>(maxLength: 256, nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Login = table.Column<string>(maxLength: 256, nullable: true),
+                    Active = table.Column<bool>(nullable: false),
+                    Points = table.Column<decimal>(nullable: false),
                     ExamId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Login);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Users_Exams_ExamId",
                         column: x => x.ExamId,
@@ -74,6 +80,7 @@ namespace ExamMainDataBaseAPI.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Login = table.Column<string>(maxLength: 256, nullable: true),
+                    Active = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(maxLength: 200, nullable: true),
                     Content = table.Column<string>(nullable: true),
                     Points = table.Column<decimal>(nullable: false),
