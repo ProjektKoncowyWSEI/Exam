@@ -21,8 +21,12 @@ namespace ExamMainDataBaseAPI.Controllers
             repo = repository;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<T>>> Get()
+        public async Task<ActionResult<IEnumerable<T>>> Get(bool? onlyActive = null)
         {
+            if (onlyActive == true)
+            {
+                return await repo.FindBy(a => a.Active == true).ToListAsync();
+            }
             return await repo.GetListAsync();
         }
 

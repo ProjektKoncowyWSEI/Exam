@@ -22,18 +22,26 @@ namespace Exam.Data.UnitOfWork
             this.answers = answers;
             this.questionWithAnswers = questionWithAnswers;
         }
-        public async Task<List<exam>> GetList(string login = null)
+        public async Task<List<exam>> GetList(string login = null, bool? onlyActive = null)
         {
             List<exam> result = new List<exam>();
-            result = await exams.GetListAsync();
-            var questionList = await questions.GetListAsync();          
+            result = await exams.GetListAsync(onlyActive);
+            var questionList = await questions.GetListAsync(onlyActive);          
             foreach (var e in result)
             {                
                 e.Questions = questionList.Where(x => x.ExamId == e.Id).ToList();
                 foreach (var q in e.Questions)
                 {
                     var qwa = await questionWithAnswers.GetAsync(q.Id);
-                    q.Answers = qwa.Answers;
+                    if (onlyActive == true)
+                    {
+                        q.Answers = qwa.Answers.Where(x=>x.Active == true).ToList();
+                    }
+                    else
+                    {
+                        q.Answers = qwa.Answers;
+                    }
+                   
                     foreach (var a in q.Answers)
                     {
                         a.ExamId = e.Id;

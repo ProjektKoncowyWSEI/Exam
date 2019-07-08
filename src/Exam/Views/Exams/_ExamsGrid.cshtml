@@ -1,77 +1,94 @@
 ﻿@model IEnumerable<ExamContract.MainDbModels.Exam>
-
-
-<a asp-controller="Exams" asp-action="Create" class="btn btn-primary btn-sm margin5px">@Localizer["Add exam"]</a>
-@if (Model != null && Model.Count() > 0)
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MinStart)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MaxStart)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DurationMinutes)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MaxPoints)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Login)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Active)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td><button id="arrow_@item.Id" onclick="toggleTr('#questions_@item.Id', '#arrow_@item.Id')" class="btn btn-primary fa fa-chevron-down btn-sm"></button></td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MinStart)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MaxStart)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DurationMinutes)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MaxPoints)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Login)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Active)
-                    </td>
-                    <td>
-                        <div class="command">
-                            <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a>
-                        </div>
-                    </td>
-                </tr>
-                <tr id="questions_@item.Id" style="display:none">
-                    <td></td>
-                    <td colspan="8">
-                        <a asp-controller="Questions" asp-action="Create" asp-route-parentId="@item.Id" class="btn btn-primary btn-sm margin5px">@Localizer["Add question"]</a>
-                        <partial name="_QuestionsGrid" model="@item.Questions">
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+@{ 
+    string chceked = ViewBag.OnlyActive ? "checked" : "";
 }
+    <div class="form-inline">
+        <a asp-controller="Exams" asp-action="Create" class="btn btn-primary btn-sm margin5px">@Localizer["Add exam"]</a>
+        <div class="marginLeft10 form-inline">
+            <form id="setActive" asp-action="SetActive">
+                <span for="active">@Localizer["Only active"]</span>
+                @if (ViewBag.OnlyActive)
+                {
+                    @Html.CheckBox("active", new { @class="form-control", @onchange = "document.getElementById('setActive').submit();", @checked = chceked })
+                }
+                else
+                {
+                    @Html.CheckBox("active", new { @class="form-control", @onchange = "document.getElementById('setActive').submit();" })
+                }
+
+            </form>
+        </div>
+    </div>
+        @if (Model != null && Model.Count() > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MinStart)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaxStart)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DurationMinutes)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaxPoints)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Login)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Active)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><button id="arrow_@item.Id" onclick="toggleTr('#questions_@item.Id', '#arrow_@item.Id')" class="btn btn-primary fa fa-chevron-down btn-sm"></button></td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MinStart)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MaxStart)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DurationMinutes)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MaxPoints)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Login)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Active)
+                            </td>
+                            <td>
+                                <div class="command">
+                                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr id="questions_@item.Id" style="display:none">
+                            <td></td>
+                            <td colspan="8">
+                                <a asp-controller="Questions" asp-action="Create" asp-route-parentId="@item.Id" class="btn btn-primary btn-sm margin5px">@Localizer["Add question"]</a>
+                                <partial name="_QuestionsGrid" model="@item.Questions">
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }

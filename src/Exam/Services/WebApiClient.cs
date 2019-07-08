@@ -51,11 +51,20 @@ namespace Exam.Services
                 throw;
             }
         }
-        public async virtual Task<List<T>> GetListAsync()
+        public async virtual Task<List<T>> GetListAsync(bool? onlyActive = null)
         {
             try
             {
-                var response = await Client.GetAsync(uri);
+                HttpResponseMessage response;
+                if (onlyActive == true)
+                {
+                    response = await Client.GetAsync($"{uri}?onlyActive={onlyActive}");
+                }
+                else
+                {
+                    response = await Client.GetAsync(uri);
+                }
+               
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();

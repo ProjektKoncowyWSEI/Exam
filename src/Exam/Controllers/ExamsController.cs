@@ -3,6 +3,7 @@ using Exam.Services;
 using Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using System;
 using System.Threading.Tasks;
 
 namespace Exam.Controllers
@@ -10,6 +11,7 @@ namespace Exam.Controllers
     [AuthorizeByRoles(RoleEnum.admin, RoleEnum.teacher)]
     public class ExamsController : MyBaseController<ExamContract.MainDbModels.Exam>
     {
+        const string ACTIVE = "OnlyActiveExams";
         private readonly Exams uow;
         public ExamsController(IStringLocalizer<SharedResource> localizer, WebApiClient<ExamContract.MainDbModels.Exam> service, Exams uow) : base(localizer, service)
         {
@@ -35,11 +37,18 @@ namespace Exam.Controllers
             ViewBag.Info = info;
             ViewBag.ExamId = parentId;
             ViewBag.QuestionId = questionId;
-            return View(await uow.GetList());
+            bool onlyActive = Convert.ToBoolean(Request.Cookies[ACTIVE]);
+            ViewBag.OnlyActive = onlyActive;
+            return View(await uow.GetList(onlyActive: onlyActive));
         }
         public override async Task<IActionResult> Delete(int? id, int? parentId = null)
         {
             return RedirectToAction(nameof(Index), new { error = Localizer["Exams can not be removed, you can deactivate!"] });          
+        }
+        public IActionResult SetActive(bool active)
+        {
+            Response.Cookies.Append(ACTIVE, active.ToString(), new Microsoft.AspNetCore.Http.CookieOptions());
+            return RedirectToAction(nameof(Index));
         }
     }
 }
