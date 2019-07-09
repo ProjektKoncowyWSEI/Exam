@@ -50,5 +50,10 @@ namespace Exam.Controllers
             Response.Cookies.Append(ACTIVE, active.ToString(), new Microsoft.AspNetCore.Http.CookieOptions());
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> Clone(int id)
+        {
+            await uow.Clone(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

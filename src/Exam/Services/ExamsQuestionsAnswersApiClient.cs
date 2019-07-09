@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Exam.Services
 {
-    public class QuestionWithAnswersApiClient : WebApiClient<Question>
+    public class ExamsQuestionsAnswersApiClient : WebApiClient<ExamContract.MainDbModels.Exam>
     {
-        public QuestionWithAnswersApiClient(ILogger logger, IConfiguration configuration) : base(logger, configuration, "MainDbAPIConnection", "QuestionWithAnswers")
+        public ExamsQuestionsAnswersApiClient(ILogger logger, IConfiguration configuration) : base(logger, configuration, "MainDbAPIConnection", "ExamsQuestionsAnswers")
         {
         }       
     }

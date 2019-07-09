@@ -21,7 +21,7 @@ namespace Exam.Services
         {
             string connStr = Environment.GetEnvironmentVariable(connectionName) ?? configuration.GetConnectionString(connectionName);
             Client = new HttpClient
-            {                
+            {
                 BaseAddress = new Uri(connStr)
             };
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -64,7 +64,7 @@ namespace Exam.Services
                 {
                     response = await Client.GetAsync(uri);
                 }
-               
+
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
@@ -127,9 +127,10 @@ namespace Exam.Services
         {
             try
             {
-                var response = await Client.PostAsJsonAsync(uri, item);
+                var response = await Client.PostAsJsonAsync(uri, item);             
                 if (response.IsSuccessStatusCode)
                 {
+                    item.Id = Convert.ToInt32(response.Headers.Location.Segments.LastOrDefault());
                     return item;
                 }
                 return null;

@@ -78,13 +78,14 @@
                             <td>
                                 <div class="command">
                                     <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a>
+                                    <a class="btn btn-primary btn-sm" asp-action="Clone" asp-route-id="@item.Id" onclick="this.disabled=true;" >@Localizer["Clone"]</a>
                                 </div>
                             </td>
                         </tr>
                         <tr id="questions_@item.Id" style="display:none">
                             <td></td>
                             <td colspan="8">
-                                <a asp-controller="Questions" asp-action="Create" asp-route-parentId="@item.Id" class="btn btn-primary btn-sm margin5px">@Localizer["Add question"]</a>
+                                <a asp-controller="Questions" asp-action="Create" asp-route-parentId="@item.Id" class="btn btn-primary btn-sm margin5px">@Localizer["Add question"]</a>                               
                                 <partial name="_QuestionsGrid" model="@item.Questions">
                             </td>
                         </tr>

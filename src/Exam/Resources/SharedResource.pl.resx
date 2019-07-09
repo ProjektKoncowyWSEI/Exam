@@ -579,4 +579,7 @@
   <data name="Only active" xml:space="preserve">
     <value>Tylko aktywne</value>
   </data>
+  <data name="Clone" xml:space="preserve">
+    <value>Klonuj</value>
+  </data>
 </root>

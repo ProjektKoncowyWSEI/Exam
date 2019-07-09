@@ -13,42 +13,41 @@ namespace Exam.Data.UnitOfWork
         private readonly WebApiClient<exam> exams;
         private readonly WebApiClient<Question> questions;
         private readonly WebApiClient<Answer> answers;
-        private readonly QuestionWithAnswersApiClient questionWithAnswers;
+        private readonly ExamsQuestionsAnswersApiClient examsWithAll;
 
-        public Exams(WebApiClient<exam> exams, WebApiClient<Question> questions, WebApiClient<Answer> answers, QuestionWithAnswersApiClient questionWithAnswers)
+        public Exams(WebApiClient<exam> exams, WebApiClient<Question> questions, WebApiClient<Answer> answers, ExamsQuestionsAnswersApiClient examsWithAll)
         {
             this.exams = exams;
             this.questions = questions;
             this.answers = answers;
-            this.questionWithAnswers = questionWithAnswers;
+            this.examsWithAll = examsWithAll;
         }
         public async Task<List<exam>> GetList(string login = null, bool? onlyActive = null)
         {
             List<exam> result = new List<exam>();
-            result = await exams.GetListAsync(onlyActive);
-            var questionList = await questions.GetListAsync(onlyActive);          
+            result = await exams.GetListAsync(onlyActive);                  
             foreach (var e in result)
-            {                
-                e.Questions = questionList.Where(x => x.ExamId == e.Id).ToList();
+            {
+                var exam = await examsWithAll.GetAsync(e.Id);
+                if (onlyActive == true)
+                    e.Questions = exam.Questions.Where(x => x.Active).ToList();
+                else
+                    e.Questions = exam.Questions;
+                
                 foreach (var q in e.Questions)
-                {
-                    var qwa = await questionWithAnswers.GetAsync(q.Id);
-                    if (onlyActive == true)
-                    {
-                        q.Answers = qwa.Answers.Where(x=>x.Active == true).ToList();
-                    }
-                    else
-                    {
-                        q.Answers = qwa.Answers;
-                    }
-                   
-                    foreach (var a in q.Answers)
-                    {
-                        a.ExamId = e.Id;
-                    }
+                {                  
+                    if (onlyActive == true)                   
+                        q.Answers = q.Answers.Where(x => x.Active).ToList();                   
+                    foreach (var a in q.Answers)                    
+                        a.ExamId = e.Id;                    
                 }
             }
             return result;
+        }
+        public async Task Clone(int id)
+        {
+            var item = await examsWithAll.GetAsync(id);
+            await examsWithAll.AddAsync(item);                     
         }
     }
 }
