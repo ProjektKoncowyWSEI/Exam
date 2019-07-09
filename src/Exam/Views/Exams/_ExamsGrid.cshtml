@@ -9,11 +9,11 @@
                 <span for="active">@Localizer["Only active"]</span>
                 @if (ViewBag.OnlyActive)
                 {
-                    @Html.CheckBox("active", new { @class="form-control", @onchange = "document.getElementById('setActive').submit();", @checked = chceked })
+                    @Html.CheckBox("active", new { @class="form-control", @onchange = "showLoader();document.getElementById('setActive').submit();", @checked = chceked })
                 }
                 else
                 {
-                    @Html.CheckBox("active", new { @class="form-control", @onchange = "document.getElementById('setActive').submit();" })
+                    @Html.CheckBox("active", new { @class="form-control", @onchange = "showLoader();document.getElementById('setActive').submit();" })
                 }
 
             </form>
@@ -78,7 +78,7 @@
                             <td>
                                 <div class="command">
                                     <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a>
-                                    <a class="btn btn-primary btn-sm" asp-action="Clone" asp-route-id="@item.Id" onclick="this.disabled=true;" >@Localizer["Clone"]</a>
+                                    <a id="clone_@item.Id" class="btn btn-primary btn-sm" asp-action="Clone" asp-route-id="@item.Id" onclick="hideElement('#clone_@item.Id')" >@Localizer["Clone"]</a>
                                 </div>
                             </td>
                         </tr>

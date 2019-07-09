@@ -18,10 +18,10 @@
 <div class="language pull-right" title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
     <form id="selectLanguagePl" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" class="form-inline" role="form">
         <input type="hidden" name="culture" value="pl-PL" asp-for="@requestCulture.RequestCulture.UICulture.Name" />
-        <input class="@selectedPl submitImage" type="image" src="~/images/pl.png" border="0" alt="PL" title="Poland" />
+        <input onclick="showLoader();" class="@selectedPl submitImage" type="image" src="~/images/pl.png" border="0" alt="PL" title="Poland" />
     </form>
     <form id="selectLanguageEn" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" class="form-inline marginLeft10" role="form">
         <input type="hidden" name="culture" value="en-US" asp-for="@requestCulture.RequestCulture.UICulture.Name" />
-        <input class="@selectedEn submitImage" type="image" src="~/images/en.png" border="0" alt="EN" title="United-Kingdom" />
+        <input onclick="showLoader();" class="@selectedEn submitImage" type="image" src="~/images/en.png" border="0" alt="EN" title="United-Kingdom" />
     </form>
 </div>

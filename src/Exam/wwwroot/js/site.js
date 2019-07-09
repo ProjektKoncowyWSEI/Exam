@@ -15,3 +15,10 @@
 
     }
 }
+function hideElement(id) {
+    showLoader();
+    $(id).hide();
+}
+function showLoader() {    
+    $('#loader').show();
+}

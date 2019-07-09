@@ -46,7 +46,7 @@ namespace ExamMainDataBaseAPI.DAL
                 MaxPoints = item.MaxPoints,
                 MaxStart = item.MaxStart,
                 MinStart = item.MinStart,
-                Name = $"{item.Name}(1)",
+                Name = $"{item.Name}({DateTime.Now})",
                 Questions = null,
                 Users = null
             };

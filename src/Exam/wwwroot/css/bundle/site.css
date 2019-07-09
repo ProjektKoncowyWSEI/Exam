@@ -126,13 +126,19 @@ button:hover,
 }
 
 .alertPosition {
-  max-width: 600px;
+  width: 60%;
   position: fixed;
-  right: 0;
+  top: 10px;
+  left: 0;
+  margin-left: 20%;
 }
 
 .margin5px {
   margin: 5px;
+}
+
+#loader {
+  display: none;
 }
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
