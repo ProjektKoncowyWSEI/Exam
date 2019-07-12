@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamMainDataBaseAPI.Migrations
 {
     [DbContext(typeof(ExamQuestionsDbContext))]
-    [Migration("20190708182612_DefaultActive")]
-    partial class DefaultActive
+    [Migration("20190712211718_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,6 +55,9 @@ namespace ExamMainDataBaseAPI.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Active");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(5);
 
                     b.Property<int>("DurationMinutes");
 
@@ -111,12 +114,10 @@ namespace ExamMainDataBaseAPI.Migrations
 
                     b.Property<bool>("Active");
 
-                    b.Property<int?>("ExamId");
+                    b.Property<int>("ExamId");
 
                     b.Property<string>("Login")
                         .HasMaxLength(256);
-
-                    b.Property<decimal>("Points");
 
                     b.HasKey("Id");
 
@@ -144,7 +145,8 @@ namespace ExamMainDataBaseAPI.Migrations
                 {
                     b.HasOne("ExamContract.MainDbModels.Exam")
                         .WithMany("Users")
-                        .HasForeignKey("ExamId");
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

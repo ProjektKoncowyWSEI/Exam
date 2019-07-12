@@ -7,7 +7,6 @@ namespace ExamContract.MainDbModels
 {
     public partial class User : Entity
     {
-        [Display(Name = "Points")]
-        public decimal Points { get; set; }
+        public int ExamId { get; set; }      
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using ExamContract;
 using ExamMainDataBaseAPI.DAL;
@@ -21,13 +22,22 @@ namespace ExamMainDataBaseAPI.Controllers
             repo = repository;
         }
         [HttpGet]
-        public virtual async Task<ActionResult<IEnumerable<T>>> Get(bool? onlyActive = null)
+        public virtual async Task<ActionResult<IEnumerable<T>>> Get(string login, bool? onlyActive = null)
         {
-            if (onlyActive == true)
+            Expression<Func<T, bool>> predicate = a => a.Active == true && a.Login == login;
+            if (onlyActive == true && login == null)
             {
-                return await repo.FindBy(a => a.Active == true).ToListAsync();
+                predicate = a => a.Active == true;
+            }            
+            else if (onlyActive != true && login != null)
+            {
+                predicate = a => a.Login == login;
             }
-            return await repo.GetListAsync();
+            else
+            {
+                return await repo.GetListAsync();
+            }
+            return await repo.FindBy(predicate).ToListAsync();            
         }
 
         [HttpGet("{id}")]

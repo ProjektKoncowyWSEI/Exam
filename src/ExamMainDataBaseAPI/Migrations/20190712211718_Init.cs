@@ -17,6 +17,7 @@ namespace ExamMainDataBaseAPI.Migrations
                     Login = table.Column<string>(maxLength: 256, nullable: true),
                     Active = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(maxLength: 200, nullable: false),
+                    Code = table.Column<string>(maxLength: 5, nullable: true),
                     MinStart = table.Column<DateTime>(nullable: false),
                     MaxStart = table.Column<DateTime>(nullable: false),
                     DurationMinutes = table.Column<int>(nullable: false),
@@ -59,8 +60,7 @@ namespace ExamMainDataBaseAPI.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Login = table.Column<string>(maxLength: 256, nullable: true),
                     Active = table.Column<bool>(nullable: false),
-                    Points = table.Column<decimal>(nullable: false),
-                    ExamId = table.Column<int>(nullable: true)
+                    ExamId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,7 +70,7 @@ namespace ExamMainDataBaseAPI.Migrations
                         column: x => x.ExamId,
                         principalTable: "Exams",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

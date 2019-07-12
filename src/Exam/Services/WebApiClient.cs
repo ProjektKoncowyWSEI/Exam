@@ -51,20 +51,18 @@ namespace Exam.Services
                 throw;
             }
         }
-        public async virtual Task<List<T>> GetListAsync(bool? onlyActive = null)
+        public async virtual Task<List<T>> GetListAsync(string login = null, bool? onlyActive = null)
         {
             try
             {
                 HttpResponseMessage response;
-                if (onlyActive == true)
-                {
-                    response = await Client.GetAsync($"{uri}?onlyActive={onlyActive}");
-                }
-                else
-                {
-                    response = await Client.GetAsync(uri);
-                }
-
+                string fullUri = uri;
+                if(login != null)
+                    fullUri += $"?login={login}";
+                if (onlyActive == true)                
+                    fullUri += $"?onlyActive=true";
+                
+                    response = await Client.GetAsync(fullUri);
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();

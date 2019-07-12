@@ -13,19 +13,21 @@ namespace Exam.Data.UnitOfWork
         private readonly WebApiClient<exam> exams;
         private readonly WebApiClient<Question> questions;
         private readonly WebApiClient<Answer> answers;
+        public readonly WebApiClient<User> Users;
         private readonly ExamsQuestionsAnswersApiClient examsWithAll;
 
-        public Exams(WebApiClient<exam> exams, WebApiClient<Question> questions, WebApiClient<Answer> answers, ExamsQuestionsAnswersApiClient examsWithAll)
+        public Exams(WebApiClient<exam> exams, WebApiClient<Question> questions, WebApiClient<Answer> answers, ExamsQuestionsAnswersApiClient examsWithAll, WebApiClient<User> users)
         {
             this.exams = exams;
             this.questions = questions;
             this.answers = answers;
             this.examsWithAll = examsWithAll;
+            Users = users;
         }
         public async Task<List<exam>> GetList(string login = null, bool? onlyActive = null)
         {
             List<exam> result = new List<exam>();
-            result = await exams.GetListAsync(onlyActive);                  
+            result = await exams.GetListAsync(login, onlyActive);                  
             foreach (var e in result)
             {
                 var exam = await examsWithAll.GetAsync(e.Id);
@@ -42,6 +44,16 @@ namespace Exam.Data.UnitOfWork
                         a.ExamId = e.Id;                    
                 }
             }
+            return result;
+        }
+        public async Task<List<exam>> GetMyExams(string login, bool? onlyActive = null)
+        {
+            var myExams = await Users.GetListAsync(login, onlyActive);
+            List<exam> result = new List<exam>();
+            myExams.ForEach(async a =>
+            {
+                result.Add(await exams.GetAsync(a.ExamId));
+            });
             return result;
         }
         public async Task Clone(int id)

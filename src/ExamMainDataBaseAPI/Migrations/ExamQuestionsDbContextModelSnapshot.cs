@@ -112,12 +112,10 @@ namespace ExamMainDataBaseAPI.Migrations
 
                     b.Property<bool>("Active");
 
-                    b.Property<int?>("ExamId");
+                    b.Property<int>("ExamId");
 
                     b.Property<string>("Login")
                         .HasMaxLength(256);
-
-                    b.Property<decimal>("Points");
 
                     b.HasKey("Id");
 
@@ -145,7 +143,8 @@ namespace ExamMainDataBaseAPI.Migrations
                 {
                     b.HasOne("ExamContract.MainDbModels.Exam")
                         .WithMany("Users")
-                        .HasForeignKey("ExamId");
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
