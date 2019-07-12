@@ -16,6 +16,10 @@ namespace ExamContract.MainDbModels
         [MaxLength(200)]
         [Display(Name = "Name")]
         public string Name { get; set; }
+
+        [Display(Name = "Code")]
+        [MaxLength(5)]
+        public string Code { get; set; }
         [Display(Name = "Min start")]
         public DateTime MinStart { get; set; }
         [Display(Name = "Max start")]

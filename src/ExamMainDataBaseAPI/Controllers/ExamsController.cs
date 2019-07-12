@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ExamContract.MainDbModels;
 using ExamMainDataBaseAPI.Models;
 using ExamMainDataBaseAPI.DAL;
+using Helpers;
 
 namespace ExamMainDataBaseAPI.Controllers
 {
@@ -15,8 +16,18 @@ namespace ExamMainDataBaseAPI.Controllers
     [ApiController]
     public class ExamsController : MyBaseController<Exam>
     {
-        public ExamsController(Repository<Exam> repo) : base(repo)
+        UnitOfWork uow;
+        public ExamsController(UnitOfWork uow) : base(uow.ExamRepo)
         {
+            this.uow = uow;
         }
+        [HttpPost]          
+        public override async Task<ActionResult<Exam>> Post(Exam item)
+        {
+            item.Code = await uow.GetNewGiud();
+            return await base.Post(item);
+        }
+
+       
     }
 }

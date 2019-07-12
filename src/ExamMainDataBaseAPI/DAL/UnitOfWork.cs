@@ -1,5 +1,6 @@
 ﻿using ExamContract.MainDbModels;
 using ExamMainDataBaseAPI.Models;
+using Helpers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,7 @@ namespace ExamMainDataBaseAPI.DAL
                 Questions = null,
                 Users = null
             };
+            newItem.Code = await GetNewGiud();
             var examId = await ExamRepo.AddAsync(newItem);
             foreach (var q in item.Questions)
             {
@@ -66,6 +68,13 @@ namespace ExamMainDataBaseAPI.DAL
                 }
             }
             await ExamRepo.SaveChangesAsync();
+        }
+        public async Task<string> GetNewGiud()
+        {
+            string guid = GlobalHelpers.GetShortGuid;
+            while (await ExamRepo.FindBy(a => a.Code == guid).CountAsync() > 0)
+                guid = GlobalHelpers.GetShortGuid;
+            return guid;
         }
     }
 }

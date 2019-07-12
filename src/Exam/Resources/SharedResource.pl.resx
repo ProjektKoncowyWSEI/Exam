@@ -582,4 +582,7 @@
   <data name="Clone" xml:space="preserve">
     <value>Klonuj</value>
   </data>
+  <data name="Code" xml:space="preserve">
+    <value>Kod</value>
+  </data>
 </root>

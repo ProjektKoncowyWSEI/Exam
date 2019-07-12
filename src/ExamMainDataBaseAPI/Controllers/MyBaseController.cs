@@ -12,7 +12,7 @@ namespace ExamMainDataBaseAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MyBaseController<T> : ControllerBase where T : Entity
+    public abstract class MyBaseController<T> : ControllerBase where T : Entity
     {
         private readonly Repository<T> repo;
 
@@ -21,7 +21,7 @@ namespace ExamMainDataBaseAPI.Controllers
             repo = repository;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<T>>> Get(bool? onlyActive = null)
+        public virtual async Task<ActionResult<IEnumerable<T>>> Get(bool? onlyActive = null)
         {
             if (onlyActive == true)
             {
@@ -31,7 +31,7 @@ namespace ExamMainDataBaseAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<T>> Get(int id)
+        public virtual async Task<ActionResult<T>> Get(int id)
         {
             var item = await repo.GetAsync(id);
             if (item == null)
@@ -40,7 +40,7 @@ namespace ExamMainDataBaseAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, T item)
+        public virtual async Task<IActionResult> Put(int id, T item)
         {
             if (id != item.Id)
             {
@@ -66,7 +66,7 @@ namespace ExamMainDataBaseAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<T>> Post(T item)
+        public virtual async Task<ActionResult<T>> Post(T item)
         {
             await repo.AddAsync(item);
             await repo.SaveChangesAsync();
@@ -74,7 +74,7 @@ namespace ExamMainDataBaseAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<T>> Delete(int id)
+        public virtual async Task<ActionResult<T>> Delete(int id)
         {
             var item = await repo.GetAsync(id);
             if (item == null)

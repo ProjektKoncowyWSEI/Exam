@@ -51,7 +51,7 @@
                 </tr>
                 <tr id="answers_@item.Id" style="display:none">                 
                     <td></td>
-                    <td colspan="7">
+                    <td colspan="8">
                         <a asp-controller="Answers" asp-action="Create" asp-route-parentId="@item.ExamId" asp-route-questionId="@item.Id" class="btn btn-primary btn-sm margin5px">@Localizer["Add answer"]</a>
                         <partial name="_AnswersGrid" model="@item.Answers">
                     </td>

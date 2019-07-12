@@ -46,45 +46,51 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Active)
                         </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Code)
+                        </th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td><button id="arrow_@item.Id" onclick="toggleTr('#questions_@item.Id', '#arrow_@item.Id')" class="btn btn-primary fa fa-chevron-down btn-sm"></button></td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MinStart)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MaxStart)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DurationMinutes)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MaxPoints)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Login)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Active)
-                            </td>
-                            <td>
-                                <div class="command">
-                                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a>
-                                    <a id="clone_@item.Id" class="btn btn-primary btn-sm" asp-action="Clone" asp-route-id="@item.Id" onclick="hideElement('#clone_@item.Id')" >@Localizer["Clone"]</a>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td><button id="arrow_@item.Id" onclick="toggleTr('#questions_@item.Id', '#arrow_@item.Id')" class="btn btn-primary fa fa-chevron-down btn-sm"></button></td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MinStart)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaxStart)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DurationMinutes)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaxPoints)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Login)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Active)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Code)
+                        </td>
+                        <td>
+                            <div class="command">
+                                <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a>
+                                <a id="clone_@item.Id" class="btn btn-primary btn-sm" asp-action="Clone" asp-route-id="@item.Id" onclick="hideElement('#clone_@item.Id')">@Localizer["Clone"]</a>
+                            </div>
+                        </td>
+                    </tr>
                         <tr id="questions_@item.Id" style="display:none">
                             <td></td>
-                            <td colspan="8">
+                            <td colspan="9">
                                 <a asp-controller="Questions" asp-action="Create" asp-route-parentId="@item.Id" class="btn btn-primary btn-sm margin5px">@Localizer["Add question"]</a>                               
                                 <partial name="_QuestionsGrid" model="@item.Questions">
                             </td>
