@@ -1,0 +1,46 @@
+﻿@model ExamContract.ExamDTO.UserExamsDTO
+
+@{
+    ViewData["Title"] = Localizer["Exams"];
+    int? questionId = ViewBag.QuestionId;
+    string ch = ViewBag.OnlyActive ? "checked" : "";
+}
+<h3>@ViewBag.Message</h3>
+<div class="form-inline">
+    <div class="marginLeft10 form-inline">
+        <form id="setActive" asp-action="SetActive">
+            <span for="active">@Localizer["Only active"]</span>
+            @if (ViewBag.OnlyActive)
+            {
+                @Html.CheckBox("active", new { @class = "form-control", @onchange = "showLoader();document.getElementById('setActive').submit();", @checked = ch })
+            }
+            else
+            {
+                @Html.CheckBox("active", new { @class = "form-control", @onchange = "showLoader();document.getElementById('setActive').submit();" })
+            }
+
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-md-12">
+        <partial name="_MyExamsGrid" model="Model.MyExams" />
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <partial name="_AllExamsGrid" model="Model.AllExams" />
+    </div>
+</div>
+
+
+@*@section scripts {
+    <script>
+        let questionId = @questionId
+        window.addEventListener('DOMContentLoaded', (event) => {
+            toggleTr('#questions_@ViewBag.ExamId', '#arrow_@ViewBag.ExamId')
+            if (questionId != null) {
+                toggleTr('#answers_@ViewBag.QuestionId', '#arrowQuestions_@ViewBag.QuestionId')
+            }
+        });
+
+    </script>
+    }*@

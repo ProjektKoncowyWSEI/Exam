@@ -11,25 +11,33 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+            
             <partial name="_LoginPartial" />
             <ul class="navbar-nav flex-grow-1">
+                <li>
+                    @*@await Html.PartialAsync("_SelectLanguagePartial")*@
+                </li>
                 <li class="nav-item">
                     <a onclick="showLoader();" class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
                 </li>
                 <li class="nav-item">
+                    @if (User.IsInRole(RoleEnum.admin) || User.IsInRole(RoleEnum.teacher))
+                    {
                     <a onclick="showLoader();" class="nav-link text-dark" asp-area="" asp-controller="Exams" asp-action="Index">@Localizer["Exams"]</a>
-                </li>
-                @*<li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Questions" asp-action="Index">@Localizer["Questions"]</a>
-            </li>*@
+                    }
+                    else if (User.IsInRole(RoleEnum.student))
+                    {
+                    <a onclick="showLoader();" class="nav-link text-dark" asp-area="" asp-controller="UserExams" asp-action="Index">@Localizer["Exams"]</a>
+                    }
+                </li>         
                 @if (User.IsInRole(RoleEnum.admin))
                 {
-                    <li class="nav-item">
-                        <a onclick="showLoader();" class="nav-link text-dark" asp-area="" asp-controller="EventLogs" asp-action="Index">@Localizer["Logs"]</a>
-                    </li>
+                <li class="nav-item">
+                    <a onclick="showLoader();" class="nav-link text-dark" asp-area="" asp-controller="EventLogs" asp-action="Index">@Localizer["Logs"]</a>
+                </li>
                 }
-            </ul>          
-            <img id="loader" style="position:fixed;left:48%;" width="100" height="100" src="~/images/Loader.svg" />
+
+            </ul>
         </div>
     </div>
 </nav>

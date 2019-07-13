@@ -585,4 +585,19 @@
   <data name="Code" xml:space="preserve">
     <value>Kod</value>
   </data>
+  <data name="Sing up for exam" xml:space="preserve">
+    <value>Zapisz się na egzamin</value>
+  </data>
+  <data name="Join exam" xml:space="preserve">
+    <value>Dołącz do egzaminu</value>
+  </data>
+  <data name="Sign in" xml:space="preserve">
+    <value>Zapisz się</value>
+  </data>
+  <data name="Sign out" xml:space="preserve">
+    <value>Wypisz się</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Szukaj</value>
+  </data>
 </root>

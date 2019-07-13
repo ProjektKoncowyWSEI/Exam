@@ -1,4 +1,4 @@
-function filter(searchId, clearId, searchIn, searchWhat) {
+﻿function filter(searchId, clearId, searchIn, searchWhat) {
     let input = document.querySelector('#' + searchId).value
     if (input.length > 0) {
         document.querySelector('#' + clearId).classList.remove('hidden')
@@ -36,27 +36,3 @@ function clearFilter(searchId, clearId, searchIn, searchWhat) {
 //        }
 //    })
 //});
-function toggleTr(id, sender) {
-    if ($(sender).hasClass('fa-chevron-down')) {
-        $(sender).removeClass('fa-chevron-down')
-        $(sender).addClass('fa-chevron-up')
-    } else {
-        $(sender).removeClass('fa-chevron-up')
-        $(sender).addClass('fa-chevron-down')
-    }
-    $(id).slideToggle();
-    try {
-        $('html, body').animate({
-            scrollTop: $(sender).offset().top - 150
-        }, 500);
-    } catch (e) {
-
-    }
-}
-function hideElement(id) {
-    showLoader();
-    $(id).hide();
-}
-function showLoader() {    
-    $('#loader').show();
-}

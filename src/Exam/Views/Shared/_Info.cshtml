@@ -1,7 +1,7 @@
 @if (ViewBag.Error != null)
 {
     <div class="alert alert-danger alert-dismissible fade show alertPosition" role="alert">
-        <strong>@Localizer["Error"]</strong> @ViewBag.Error
+        <strong>@Localizer["Error"]:</strong> @ViewBag.Error
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -10,7 +10,7 @@
 @if (ViewBag.Warning != null)
 {
     <div class="alert alert-warning alert-dismissible fade show alertPosition" role="alert">
-        <strong>@Localizer["Error"]</strong> @ViewBag.Error
+        <strong>@Localizer["Warning"]:</strong> @ViewBag.Warning
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -19,7 +19,7 @@
 @if (ViewBag.Info != null)
 {
     <div class="alert alert-success alert-dismissible fade show alertPosition" role="alert">
-        <strong>@Localizer["Error"]</strong> @ViewBag.Error
+        <strong>@Localizer["Info"]:</strong> @ViewBag.Info
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>

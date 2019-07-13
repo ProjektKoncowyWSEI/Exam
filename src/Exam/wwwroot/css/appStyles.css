@@ -60,6 +60,10 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
 .language {
   display: inline-flex; }
 
+.right {
+  display: inline-flex;
+  float: right; }
+
 .marginLeft10 {
   margin-left: 10px; }
 
@@ -101,4 +105,33 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
   margin: 5px; }
 
 #loader {
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  position: absolute;
+  opacity: 0.85;
+  display: none;
+  z-index: 999999; }
+
+#loaderImage {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.hidden {
   display: none; }
+
+.searchPanel {
+  display: inline-flex;
+  float: right; }
+
+.clearBtn {
+  margin: 10px 0 0 -20px; }
+
+.longMessage {
+  word-wrap: break-word;
+  max-width: 300px; }
+
+.container {
+  max-width: 1440px !important; }

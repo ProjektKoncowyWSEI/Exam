@@ -1,52 +1,70 @@
 ﻿@model IEnumerable<Logger.Model.EventLog>
-
+<style>
+   
+</style>
 @{
     ViewData["Title"] = Localizer["Application events"];
+    SearchModel searchModel = new SearchModel();
+
+    searchModel.SearchID = "searchlogsGrid";
+    searchModel.ClearID = "clearlogsGrid";
+    searchModel.ClearOnClick = $"clearFilter('{searchModel.SearchID}', '{searchModel.ClearID}', '#logsGrid', 'tr')";
+    searchModel.Placeholder = Localizer.GetString("Search");
+    searchModel.SearchOnInput = $"filter('{searchModel.SearchID}', '{searchModel.ClearID}', '#logsGrid', 'tr')";
+    //searchModel.Autofocus = "";
 }
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-6">@Localizer["Application events"]</div>
+            <div class="col-6"><partial name="_Search" model="@searchModel"></div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Localizer["Message"]
+                    </th>
+                    <th>
+                        @Localizer["EventId"]
+                    </th>
+                    <th>
+                        @Localizer["LogLevel"]
+                    </th>
+                    <th style="min-width:150px">
+                        @Localizer["Date"]
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="logsGrid">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="longMessage">
+                            @Html.DisplayFor(modelItem => item.Message)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EventId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LogLevel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedTime)
+                        </td>
+                        <td>
+                            <div class="command">
+                                <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.id">@Localizer["Details"]</a>
+                                <a class="btn btn-primary btn-sm" asp-action="Delete" asp-route-id="@item.id">@Localizer["Delete"]</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
-<h2>@Localizer["Application events"] :</h2>
-
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>
-                @Localizer["Message"]
-            </th>
-            <th>
-                @Localizer["EventId"]
-            </th>
-            <th>
-                @Localizer["LogLevel"]
-            </th>
-            <th style="min-width:150px">
-                @Localizer["Date"]
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Message)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EventId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LogLevel)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedTime)
-                </td>
-                <td>
-                    <div class="command">
-                        <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.id">@Localizer["Details"]</a>
-                        <a class="btn btn-primary btn-sm" asp-action="Delete" asp-route-id="@item.id">@Localizer["Delete"]</a>
-                    </div>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>

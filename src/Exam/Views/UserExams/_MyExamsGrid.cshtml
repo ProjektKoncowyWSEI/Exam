@@ -1,0 +1,94 @@
+﻿@model IEnumerable<ExamContract.MainDbModels.User>
+@{
+    SearchModel searchModel = new SearchModel();
+
+    searchModel.SearchID = "searchMyExams";
+    searchModel.ClearID = "clearMyExams";
+    searchModel.ClearOnClick = $"clearFilter('{searchModel.SearchID}', '{searchModel.ClearID}', '#examsGrid', 'tr')";
+    searchModel.Placeholder = Localizer.GetString("Search");
+    searchModel.SearchOnInput = $"filter('{searchModel.SearchID}', '{searchModel.ClearID}', '#examsGrid', 'tr')";
+    searchModel.Autofocus = "";
+}
+    <div class="card">       
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6">@Localizer["Your exams"]</div>
+                <div class="col-6"><partial name="_Search" model="@searchModel"></div>
+            </div>
+        </div>
+        <div class="card-body">
+            @if (Model != null && Model.Count() > 0)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Exam.Name)
+                            </th>
+                            @*<th>
+                                @Html.DisplayNameFor(model => model.Exam.MinStart)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Exam.MaxStart)
+                            </th>*@
+                            <th>
+                                @Html.DisplayNameFor(model => model.Exam.Login)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Active)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Exam.Code)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="examsGrid">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Exam.Name)
+                                </td>
+                                @*<td>
+                                    @Html.DisplayFor(modelItem => item.Exam.MinStart)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Exam.MaxStart)
+                                </td>*@
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Exam.Login)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Active)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Exam.Code)
+                                </td>
+                                <td>
+                                    <div>
+                                        @if (item.Active)
+                                        {
+                                            <form asp-action="Edit">
+                                                <input type="hidden" name="id" value="@item.Id" />
+                                                <button onclick="showLoader()" class="btn btn-primary btn-sm">@Localizer["Sign out"]</button>
+                                            </form>
+                                        }
+                                        else
+                                        {
+                                            <form asp-action="Create">
+                                                <input type="hidden" name="id" value="@item.Exam.Id" />
+                                                <button onclick="showLoader()" class="btn btn-primary btn-sm">@Localizer["Sign in"]</button>
+                                            </form>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+
+

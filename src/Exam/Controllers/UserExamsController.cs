@@ -27,21 +27,8 @@ namespace Exam.Controllers
         }
         public async Task<IActionResult> Index(int? parentId = null, int? questionId = null, string info = null, string warning = null, string error = null)
         {
-            var currentRole = User.CurrentRoleEnum();
             var login = User.Identity.Name;
-            switch (currentRole)
-            {
-                case RoleEnum.teacher:
-                case RoleEnum.student:
-                    ViewBag.Message = localizer["Your exams"];
-                    break;
-                case RoleEnum.admin:
-                    ViewBag.Message = localizer["All exams"];
-                    login = null;
-                    break;
-                default:
-                    break;
-            }
+            ViewBag.Message = localizer["Join exam"];    
             ViewBag.Error = error;
             ViewBag.Warning = warning;
             ViewBag.Info = info;
@@ -49,7 +36,10 @@ namespace Exam.Controllers
             ViewBag.QuestionId = questionId;
             bool onlyActive = Convert.ToBoolean(Request.Cookies[GlobalHelpers.ACTIVE]);
             ViewBag.OnlyActive = onlyActive;
-            return View(await uow.GetMyExams(login, onlyActive));
+            var model = new ExamContract.ExamDTO.UserExamsDTO();
+            model.MyExams = await uow.GetMyExams(login, onlyActive);
+            model.AllExams = await uow.GetList(null, true);
+            return View(model);
         }
         public IActionResult SetActive(bool active)
         {
@@ -58,25 +48,57 @@ namespace Exam.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async virtual Task<IActionResult> Create(User item)
+        public async virtual Task<IActionResult> Create(int id)
         {
-            if (ModelState.IsValid)
+            if (id > 0)
             {
+                User item = new User
+                {
+                    ExamId = id,
+                    Login = HttpContext.User.Identity.Name
+                };
                 try
                 {
-                    item.Login = HttpContext.User.Identity.Name;
-                    if ((await uow.Users.GetListAsync(item.Login)).FirstOrDefault() != null)
-                        throw new Exception(localizer["User has exam on list"]);
+                    var dbItem = (await uow.Users.GetListAsync(item.Login)).Where(a => a.ExamId == item.ExamId).FirstOrDefault();
+                    if (dbItem != null)
+                    {
+                        dbItem.Active = true;
+                        await uow.Users.UpdateAsync(dbItem);
+                    }
+                    else
                         await uow.Users.AddAsync(item);
-                    return RedirectToAction(nameof(Index), new { info = localizer["Added"] });
+                    return RedirectToAction(nameof(Index), new { info = localizer["User signed into exam"] });
                 }
                 catch (Exception ex)
                 {
                     logger.LogError(ex, item.Login);
-                    return RedirectToAction(nameof(Index), new { info = ex.Message });
+                    return RedirectToAction(nameof(Index), new { error = ex.Message });
                 }
             }
-            return RedirectToAction(nameof(Index), new { info = localizer["Not added"] });
+            return RedirectToAction(nameof(Index), new { info = localizer["Exam id is not valid"] });
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async virtual Task<IActionResult> Edit(int id)
+        {
+            if (id > 0)
+            {               
+                try
+                {
+                    var item = await uow.Users.GetAsync(id);
+                    if (item == null)
+                        throw new Exception(localizer["Exam is not active for user"]);
+                    item.Active = false;
+                    await uow.Users.UpdateAsync(item);
+                    return RedirectToAction(nameof(Index), new { info = localizer["Deactivated"] });
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "");
+                    return RedirectToAction(nameof(Index), new { error = ex.Message });
+                }
+            }
+            return RedirectToAction(nameof(Index), new { info = localizer["Exam id is not valid"] });
         }
     }
 }

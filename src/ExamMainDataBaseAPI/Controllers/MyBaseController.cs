@@ -24,20 +24,16 @@ namespace ExamMainDataBaseAPI.Controllers
         [HttpGet]
         public virtual async Task<ActionResult<IEnumerable<T>>> Get(string login, bool? onlyActive = null)
         {
-            Expression<Func<T, bool>> predicate = a => a.Active == true && a.Login == login;
-            if (onlyActive == true && login == null)
-            {
-                predicate = a => a.Active == true;
-            }            
-            else if (onlyActive != true && login != null)
-            {
-                predicate = a => a.Login == login;
-            }
+            Expression<Func<T, bool>> predicate;
+            if (onlyActive == true && login == null)            
+                predicate = a => a.Active == true;            
+            else if (onlyActive != true && login != null)            
+                predicate = a => a.Login == login;            
+            else if (onlyActive == true && login != null)            
+                predicate = a => a.Active == true && a.Login == login;            
             else
-            {
                 return await repo.GetListAsync();
-            }
-            return await repo.FindBy(predicate).ToListAsync();            
+            return await repo.FindBy(predicate).ToListAsync();
         }
 
         [HttpGet("{id}")]

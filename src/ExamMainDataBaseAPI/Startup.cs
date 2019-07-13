@@ -37,6 +37,7 @@ namespace ExamMainDataBaseAPI
             services.AddTransient<Repository<Answer>>();
             services.AddTransient<Repository<Question>>();           
             services.AddTransient<Repository<Exam>>();
+            services.AddTransient<Repository<User>>();
             services.AddTransient<UnitOfWork>();       
         }
 

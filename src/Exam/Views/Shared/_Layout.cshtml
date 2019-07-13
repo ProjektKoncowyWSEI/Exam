@@ -7,36 +7,30 @@
 
     <link href="~/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    @*<link href="~/libs/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
-    <link href="~/libs/jquery-ui/jquery-ui.structure.min.css" rel="stylesheet" />
-    <link href="~/libs/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" />*@
-    <environment include="Development">
-        <link href="~/css/site.css" rel="stylesheet" />
-        <link href="~/css/appStyles.css" rel="stylesheet" />
-        <link href="~/libs/jsgrid/jsgrid.css" rel="stylesheet" />
-        <link href="~/libs/jsgrid/jsgrid-theme.css" rel="stylesheet" />
-    </environment>
+<environment include="Development">
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/appStyles.css" rel="stylesheet" />
+    <script src="~/js/search.js"></script>
+</environment>
     <environment exclude="Development">
         <link href="~/css/min/site.min.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/libs/jsgrid/jsgrid.min.css" rel="stylesheet" />
-        <link href="~/libs/jsgrid/jsgrid-theme.min.css" rel="stylesheet" />
     </environment>
 
 </head>
 <body>
-    <div>        
+    <div>
         <div class="mainImage"></div>
         <header>
             <partial name="_Nav" />
+            <partial name="_Loader" />
         </header>
-        <div class="container">            
+        <div class="container">
             <partial name="_Info" />
             <partial name="_CookieConsentPartial" />
             <main role="main" class="pb-3">
                 @RenderBody()
             </main>
-        </div>
-
+        </div>       
         <footer class="border-top footer text-muted">
             <div class="container">
                 &copy; 2019 - Exam

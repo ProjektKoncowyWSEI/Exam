@@ -1,5 +1,4 @@
-﻿/// <binding AfterBuild='a_copy:libs, b_bundle_js, b_sass, c_bundle_css, d_compress_js, e_compress_css' />
-
+/// <binding ProjectOpened='a_copy:libs, b_bundle_js, c_bundle_css, d_compress_js, e_compress_css, b_sass:watch' />
 const gulp = require('gulp');
 const npmDist = require('gulp-npm-dist');
 const rename = require('gulp-rename');

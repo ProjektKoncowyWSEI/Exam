@@ -57,9 +57,11 @@ namespace Exam.Services
             {
                 HttpResponseMessage response;
                 string fullUri = uri;
-                if(login != null)
+                if(login != null && onlyActive != true)
                     fullUri += $"?login={login}";
-                if (onlyActive == true)                
+                else if (login != null && onlyActive == true)                
+                    fullUri += $"?login={login}&onlyActive=true";
+                else if (login == null && onlyActive == true)                
                     fullUri += $"?onlyActive=true";
                 
                     response = await Client.GetAsync(fullUri);

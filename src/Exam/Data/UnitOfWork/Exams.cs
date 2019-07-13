@@ -46,15 +46,14 @@ namespace Exam.Data.UnitOfWork
             }
             return result;
         }
-        public async Task<List<exam>> GetMyExams(string login, bool? onlyActive = null)
+        public async Task<List<User>> GetMyExams(string login, bool? onlyActive = null)
         {
-            var myExams = await Users.GetListAsync(login, onlyActive);
-            List<exam> result = new List<exam>();
+            var myExams = await Users.GetListAsync(login, onlyActive);          
             myExams.ForEach(async a =>
             {
-                result.Add(await exams.GetAsync(a.ExamId));
+                a.Exam = await exams.GetAsync(a.ExamId);
             });
-            return result;
+            return myExams;
         }
         public async Task Clone(int id)
         {
