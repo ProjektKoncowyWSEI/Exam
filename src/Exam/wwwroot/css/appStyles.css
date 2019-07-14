@@ -80,6 +80,10 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
 .maxWidth {
   width: 100%; }
 
+.mainImageWidth {
+  width: 80%;
+  margin-left: 10%; }
+
 .command {
   min-width: 100px;
   display: inline-flex; }
