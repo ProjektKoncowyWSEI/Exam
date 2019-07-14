@@ -3,6 +3,7 @@ using Exam.Services;
 using ExamContract.MainDbModels;
 using Helpers;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
@@ -18,12 +19,14 @@ namespace Exam.Controllers
         private readonly IStringLocalizer<SharedResource> localizer;
         private readonly Exams uow;
         private readonly ILogger logger;
+        private readonly IEmailSender emailSender;
 
-        public UserExamsController(IStringLocalizer<SharedResource> localizer, Exams uow, ILogger logger)
+        public UserExamsController(IStringLocalizer<SharedResource> localizer, Exams uow, ILogger logger, IEmailSender emailSender)
         {
             this.localizer = localizer;
             this.uow = uow;
             this.logger = logger;
+            this.emailSender = emailSender;
         }
         public async Task<IActionResult> Index(int? parentId = null, int? questionId = null, string info = null, string warning = null, string error = null)
         {
@@ -59,16 +62,29 @@ namespace Exam.Controllers
                 logger.LogInformation($"item.ExamId = id;");
                 item.Login = HttpContext.User.Identity.Name;
                 logger.LogInformation($"item.Login = HttpContext.User.Identity.Name;");
+                User created = null;
                 try
                 {
-                    var dbItem = (await uow.Users.GetListAsync(item.Login)).Where(a => a.ExamId == item.ExamId).FirstOrDefault();
+                    var dbItem = (await uow.UsersRepo.GetListAsync(item.Login)).Where(a => a.ExamId == item.ExamId).FirstOrDefault();
                     if (dbItem != null)
                     {
                         dbItem.Active = true;
-                        await uow.Users.UpdateAsync(dbItem);
+                        await uow.UsersRepo.UpdateAsync(dbItem);
                     }
                     else
-                        await uow.Users.AddAsync(item);
+                        created = await uow.UsersRepo.AddAsync(item);
+                    string examName = "";
+                    string message = "";
+                    if (created != null)
+                    {
+                        var temp = await uow.ExamsRepo.GetAsync(id);
+                        if (temp != null)
+                        {
+                            examName = temp.Name;
+                            message = temp.ToString();
+                        }
+                    }
+                    await emailSender.SendEmailAsync(item.Login, localizer["User sing up for exam {0}", examName], message); //TODO Dodać link do egzaminu
                     return RedirectToAction(nameof(Index), new { info = localizer["User signed into exam"] });
                 }
                 catch (Exception ex)
@@ -87,11 +103,11 @@ namespace Exam.Controllers
             {
                 try
                 {
-                    var item = await uow.Users.GetAsync(id);
+                    var item = await uow.UsersRepo.GetAsync(id);
                     if (item == null)
                         throw new Exception(localizer["Exam is not active for user"]);
                     item.Active = false;
-                    await uow.Users.UpdateAsync(item);
+                    await uow.UsersRepo.UpdateAsync(item);
                     return RedirectToAction(nameof(Index), new { info = localizer["Deactivated"] });
                 }
                 catch (Exception ex)

@@ -10,27 +10,27 @@ namespace Exam.Data.UnitOfWork
 {
     public class Exams
     {
-        private readonly WebApiClient<exam> exams;
-        private readonly WebApiClient<Question> questions;
-        private readonly WebApiClient<Answer> answers;
-        public readonly WebApiClient<User> Users;
-        private readonly ExamsQuestionsAnswersApiClient examsWithAll;
+        public readonly WebApiClient<exam> ExamsRepo;
+        public readonly WebApiClient<Question> QuestionsRepo;
+        public readonly WebApiClient<Answer> AnswersRepo;
+        public readonly WebApiClient<User> UsersRepo;
+        public readonly ExamsQuestionsAnswersApiClient ExamsWithAllRepo;
 
         public Exams(WebApiClient<exam> exams, WebApiClient<Question> questions, WebApiClient<Answer> answers, ExamsQuestionsAnswersApiClient examsWithAll, WebApiClient<User> users)
         {
-            this.exams = exams;
-            this.questions = questions;
-            this.answers = answers;
-            this.examsWithAll = examsWithAll;
-            Users = users;
+            ExamsRepo = exams;
+            QuestionsRepo = questions;
+            AnswersRepo = answers;
+            ExamsWithAllRepo = examsWithAll;
+            UsersRepo = users;
         }
         public async Task<List<exam>> GetList(string login = null, bool? onlyActive = null)
         {
             List<exam> result = new List<exam>();
-            result = await exams.GetListAsync(login, onlyActive);                  
+            result = await ExamsRepo.GetListAsync(login, onlyActive);                  
             foreach (var e in result)
             {
-                var exam = await examsWithAll.GetAsync(e.Id);
+                var exam = await ExamsWithAllRepo.GetAsync(e.Id);
                 if (onlyActive == true)
                     e.Questions = exam.Questions.Where(x => x.Active).ToList();
                 else
@@ -48,17 +48,17 @@ namespace Exam.Data.UnitOfWork
         }
         public async Task<List<User>> GetMyExams(string login, bool? onlyActive = null)
         {
-            var myExams = await Users.GetListAsync(login, onlyActive);          
+            var myExams = await UsersRepo.GetListAsync(login, onlyActive);          
             myExams.ForEach(async a =>
             {
-                a.Exam = await exams.GetAsync(a.ExamId);
+                a.Exam = await ExamsRepo.GetAsync(a.ExamId);
             });
             return myExams;
         }
         public async Task Clone(int id)
         {
-            var item = await examsWithAll.GetAsync(id);
-            await examsWithAll.AddAsync(item);                     
+            var item = await ExamsWithAllRepo.GetAsync(id);
+            await ExamsWithAllRepo.AddAsync(item);                     
         }
     }
 }
