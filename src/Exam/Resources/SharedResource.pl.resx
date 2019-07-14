@@ -603,4 +603,13 @@
   <data name="User sing up for exam {0}" xml:space="preserve">
     <value>Uzytkownik zapisał się na egzamin {0}</value>
   </data>
+  <data name="Exam id is not valid" xml:space="preserve">
+    <value>Id egzaminu nie jest prawidłowe</value>
+  </data>
+  <data name="Exam is not active for user" xml:space="preserve">
+    <value>Egzamin nie jest aktywny dla użytkownika</value>
+  </data>
+  <data name="User signed into exam" xml:space="preserve">
+    <value>Użytkownik jest zapisany na egzamin</value>
+  </data>
 </root>
