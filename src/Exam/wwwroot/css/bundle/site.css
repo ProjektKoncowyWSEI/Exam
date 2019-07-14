@@ -112,6 +112,11 @@ button:hover,
   width: 100%;
 }
 
+.mainImageWidth {
+  width: 80%;
+  margin-left: 10%;
+}
+
 .command {
   min-width: 100px;
   display: inline-flex;
@@ -174,7 +179,7 @@ button:hover,
 
 .longMessage {
   word-wrap: break-word;
-  max-width: 300px;
+  max-width: 500px;
 }
 
 .container {
