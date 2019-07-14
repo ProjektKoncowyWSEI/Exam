@@ -603,6 +603,9 @@
   <data name="User sing up for exam {0}" xml:space="preserve">
     <value>Uzytkownik zapisał się na egzamin {0}</value>
   </data>
+  <data name="Deactivated" xml:space="preserve">
+    <value>Dezaktywowany</value>
+  </data>
   <data name="Exam id is not valid" xml:space="preserve">
     <value>Id egzaminu nie jest prawidłowe</value>
   </data>
