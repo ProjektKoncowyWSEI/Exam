@@ -1,5 +1,6 @@
 ﻿using Logger.Data;
 using Logger.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -13,7 +14,7 @@ namespace Logger
 {
     public class ExamLogger : ILogger
     {
-        public ExamLogger(LoggerDbContext context) //, IEmailSender emailSender)
+        public ExamLogger(LoggerDbContext context, IHttpContextAccessor httpContextAccessor) //, IEmailSender emailSender)
         {
             if (context != null)
             {
@@ -30,9 +31,12 @@ namespace Logger
                 }
             }
             _context = context;
+            this.httpContextAccessor = httpContextAccessor;
             //_emailSender = emailSender;
         }
         private LoggerDbContext _context;
+        private readonly IHttpContextAccessor httpContextAccessor;
+
         //private readonly IEmailSender _emailSender;
 
         public IDisposable BeginScope<TState>(TState state)
@@ -47,6 +51,7 @@ namespace Logger
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
+            string login = httpContextAccessor.HttpContext.User.Identity.Name;
             if (!IsEnabled(logLevel))
             {
                 return;
@@ -71,7 +76,7 @@ namespace Logger
                 //throw new Exception("test");
                 _context.EventLog.Add(new EventLog
                 {
-                    Message = message,
+                    Message = $"*** {login} ***{Environment.NewLine}{message}",
                     EventId = eventId.Id,
                     LogLevel = logLevel.ToString(),
                     CreatedTime = DateTime.UtcNow
@@ -91,11 +96,11 @@ namespace Logger
         private LoggerDbContext _context;
         //private readonly IEmailSender _emailSender;
         private ExamLogger examLogger;
-        public ExamLogger(LoggerDbContext context)
+        public ExamLogger(LoggerDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             //_emailSender = emailSender;
-            examLogger = new ExamLogger(context);
+            examLogger = new ExamLogger(context, httpContextAccessor);
         }
         public IDisposable BeginScope<TState>(TState state)
         {

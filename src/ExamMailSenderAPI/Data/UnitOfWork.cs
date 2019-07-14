@@ -35,7 +35,7 @@ namespace ExamMailSenderAPI.Data
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, item.Login);
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 throw;
             }
         }

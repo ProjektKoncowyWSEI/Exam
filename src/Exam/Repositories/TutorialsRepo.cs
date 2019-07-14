@@ -39,7 +39,7 @@ namespace Exam.Repositories
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Add");
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 throw;
             }
         }
@@ -57,7 +57,7 @@ namespace Exam.Repositories
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Add");
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 throw;
             }
         }
@@ -80,7 +80,7 @@ namespace Exam.Repositories
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Get");
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 throw;
             }
             return result;
@@ -110,7 +110,7 @@ namespace Exam.Repositories
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "GetList");
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 throw;
             }
             return result;
@@ -134,7 +134,7 @@ namespace Exam.Repositories
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "GetList");
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 throw;
             }
             return result;
@@ -153,14 +153,9 @@ namespace Exam.Repositories
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Update");
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 throw;
             }
         }
-
-
-
-
-
     }
 }

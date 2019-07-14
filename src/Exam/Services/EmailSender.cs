@@ -42,7 +42,7 @@ namespace Exam.Services
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "SendEmailAsync");
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 IsSent = false;
             }
         }

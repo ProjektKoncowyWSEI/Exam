@@ -27,9 +27,9 @@
                     <th>
                         @Localizer["Message"]
                     </th>
-                    <th>
+                    @*<th>
                         @Localizer["EventId"]
-                    </th>
+                    </th>*@
                     <th>
                         @Localizer["LogLevel"]
                     </th>
@@ -46,9 +46,9 @@
                         <td class="longMessage">
                             @Html.DisplayFor(modelItem => item.Message)
                         </td>
-                        <td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.EventId)
-                        </td>
+                        </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.LogLevel)
                         </td>

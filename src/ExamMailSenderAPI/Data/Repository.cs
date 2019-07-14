@@ -38,7 +38,7 @@ namespace ExamMailSenderAPI.Data
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, item.Login);
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 return -1;
             }
             
@@ -52,7 +52,7 @@ namespace ExamMailSenderAPI.Data
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, item.Login);
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 return false;
             }
         }
@@ -68,7 +68,7 @@ namespace ExamMailSenderAPI.Data
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, item.Login);
+                    logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                     return false;
                 }                
             }

@@ -28,7 +28,7 @@ namespace Exam.Controllers
         public async Task<IActionResult> Index(int? parentId = null, int? questionId = null, string info = null, string warning = null, string error = null)
         {
             var login = User.Identity.Name;
-            ViewBag.Message = localizer["Join exam"];    
+            ViewBag.Message = localizer["Join exam"];
             ViewBag.Error = error;
             ViewBag.Warning = warning;
             ViewBag.Info = info;
@@ -52,11 +52,13 @@ namespace Exam.Controllers
         {
             if (id > 0)
             {
-                User item = new User
-                {
-                    ExamId = id,
-                    Login = HttpContext.User.Identity.Name
-                };
+                logger.LogInformation($"Create, {id}");
+                User item = new User();
+                logger.LogInformation($"User item = new User();");
+                item.ExamId = id;
+                logger.LogInformation($"item.ExamId = id;");
+                item.Login = HttpContext.User.Identity.Name;
+                logger.LogInformation($"item.Login = HttpContext.User.Identity.Name;");
                 try
                 {
                     var dbItem = (await uow.Users.GetListAsync(item.Login)).Where(a => a.ExamId == item.ExamId).FirstOrDefault();
@@ -71,7 +73,7 @@ namespace Exam.Controllers
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, item.Login);
+                    logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                     return RedirectToAction(nameof(Index), new { error = ex.Message });
                 }
             }
@@ -82,7 +84,7 @@ namespace Exam.Controllers
         public async virtual Task<IActionResult> Edit(int id)
         {
             if (id > 0)
-            {               
+            {
                 try
                 {
                     var item = await uow.Users.GetAsync(id);
@@ -94,7 +96,7 @@ namespace Exam.Controllers
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, "");
+                    logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                     return RedirectToAction(nameof(Index), new { error = ex.Message });
                 }
             }

@@ -28,7 +28,7 @@ namespace Exam.Controllers
             this.logger = logger;
         }
         public IActionResult Index()
-        {
+        {           
             return View();
         }     
         public IActionResult About()
@@ -54,10 +54,11 @@ namespace Exam.Controllers
         public IActionResult Error()
         {
             var exceptionHandlerPathFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-            ViewBag.Message = exceptionHandlerPathFeature.Error.Message;
+            ViewBag.Message = exceptionHandlerPathFeature.Error.ToString();
             ViewBag.InnerException = exceptionHandlerPathFeature.Error.InnerException;
             ViewBag.Path = exceptionHandlerPathFeature.Path;
-            logger.LogError($"{User.Identity.Name}{Environment.NewLine}{ViewBag.Message}{Environment.NewLine}{ViewBag.InnerException}{Environment.NewLine}{ViewBag.Path}");
+            //logger.LogError($"{User.Identity.Name}{Environment.NewLine}{ViewBag.Message}{Environment.NewLine}{ViewBag.InnerException}{Environment.NewLine}{ViewBag.Path}");
+            logger.LogError($"{ViewBag.Message} * {ViewBag.InnerException} * {ViewBag.Path}");
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 

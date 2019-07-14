@@ -39,7 +39,7 @@ namespace Exam.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Index");
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 return View(null);
             }
         }

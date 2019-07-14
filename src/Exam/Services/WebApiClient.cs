@@ -47,7 +47,7 @@ namespace Exam.Services
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "GetAsync(int id)");
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 throw;
             }
         }
@@ -77,7 +77,7 @@ namespace Exam.Services
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "GetListAsync()");
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 throw;
             }
         }
@@ -137,7 +137,7 @@ namespace Exam.Services
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, item.Login);
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 throw;
             }
         }
@@ -154,7 +154,7 @@ namespace Exam.Services
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, item.Login);
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 throw;
             }
         }
@@ -171,7 +171,7 @@ namespace Exam.Services
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "DeleteAsync(int id)");
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 throw;
             }
         }

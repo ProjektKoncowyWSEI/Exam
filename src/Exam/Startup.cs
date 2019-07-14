@@ -28,6 +28,7 @@ using Exam.Repositories;
 using Microsoft.EntityFrameworkCore.Migrations;
 using ExamContract.MainDbModels;
 using Exam.Data.UnitOfWork;
+using Exam.Areas.Identity.Pages.Account.Manage;
 
 namespace Exam
 {
@@ -66,11 +67,12 @@ namespace Exam
             services.AddTransient<UserInitializer>();
             services.AddScoped<ILogger, Logger.ExamLogger>();
             services.AddScoped<ILogger<LoginModel>, Logger.ExamLogger<LoginModel>>();
+            services.AddScoped<ILogger<ChangePasswordModel>, Logger.ExamLogger<ChangePasswordModel>>();            
             services.AddTransient<ITutorialsRepo, TutorialsRepo>();
             services.AddTransient<WebApiClient<ExamContract.MainDbModels.Exam>, ExamsApiClient>();
             services.AddTransient<WebApiClient<Question>, QuestionsApiClient>();
             services.AddTransient<WebApiClient<Answer>, AnswersApiClient>();             
-            services.AddTransient<WebApiClient<ExamContract.MainDbModels.User>, UsersApiClient>();
+            services.AddTransient<WebApiClient<User>, UsersApiClient>();
             services.AddTransient<ExamsQuestionsAnswersApiClient>(); //Wymagamy klasy konkretnej
             services.AddTransient<Exams>();
 
@@ -82,7 +84,6 @@ namespace Exam
             });
 
             services.AddHttpContextAccessor();
-
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
             services.AddMvc()
