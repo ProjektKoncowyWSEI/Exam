@@ -50,7 +50,7 @@ namespace ExamTutorialAPI
             services.AddSingleton(Configuration);
             services.AddTransient<Repository<Category>>();
             services.AddTransient<Repository<Tutorial>>();
-            //services.AddTransient<UnitOfWork>();
+            services.AddTransient<UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

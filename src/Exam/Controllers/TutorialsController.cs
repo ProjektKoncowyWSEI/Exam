@@ -73,9 +73,9 @@ namespace Exam.Controllers
         [ValidateAntiForgeryToken]
         public async Task <IActionResult> Create(Tutorial tutorial)
         {
-            if (tutorial.ImageFile == null || tutorial.ImageFile.Length == 0)
-                return View(tutorial);
-            await convertToBase64Async(tutorial);
+            //if (tutorial.ImageFile == null || tutorial.ImageFile.Length == 0)
+            //    return View(tutorial);
+            //await convertToBase64Async(tutorial);
             
             if (ModelState.IsValid)
             {
@@ -87,19 +87,19 @@ namespace Exam.Controllers
             return View(tutorial);
         }
 
-        private static async Task convertToBase64Async(Tutorial tutorial)
-        {
-            var path = Path.Combine(
-                                    Directory.GetCurrentDirectory(), "wwwroot/images",
-                                    tutorial.ImageFile.FileName);
+        //private static async Task convertToBase64Async(Tutorial tutorial)
+        //{
+        //    var path = Path.Combine(
+        //                            Directory.GetCurrentDirectory(), "wwwroot/images",
+        //                            tutorial.ImageFile.FileName);
 
-            using (var stream = new FileStream(path, FileMode.Create))
-            {
-                await tutorial.ImageFile.CopyToAsync(stream);
-            }
-            var byteArray = await System.IO.File.ReadAllBytesAsync(path);
-            tutorial.Image = Convert.ToBase64String(byteArray);
-        }
+        //    using (var stream = new FileStream(path, FileMode.Create))
+        //    {
+        //        await tutorial.ImageFile.CopyToAsync(stream);
+        //    }
+        //    var byteArray = await System.IO.File.ReadAllBytesAsync(path);
+        //    tutorial.Image = Convert.ToBase64String(byteArray);
+        //}
 
         // GET: Tutorials/Edit/5
         public async Task <IActionResult> Edit(int? id)
@@ -132,7 +132,7 @@ namespace Exam.Controllers
             {
                 try
                 {
-                    await convertToBase64Async(tutorial);
+                    //await convertToBase64Async(tutorial);
                     await tutorialsRepo.Update(tutorial);  
                 }
                 catch (DbUpdateConcurrencyException)
