@@ -79,7 +79,7 @@ namespace Logger
                     Message = $"*** {login} ***{Environment.NewLine}{message}",
                     EventId = eventId.Id,
                     LogLevel = logLevel.ToString(),
-                    CreatedTime = DateTime.UtcNow
+                    CreatedTime = DateTime.Now
                 });
                 _context.SaveChanges();
             }
