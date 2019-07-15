@@ -5,6 +5,7 @@ using Microsoft.Extensions.Localization;
 using System.Threading.Tasks;
 using ExamContract.MainDbModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 namespace Exam.Controllers
 {
@@ -32,6 +33,10 @@ namespace Exam.Controllers
         {
             ViewBag.ExamId = item.ExamId;
             ViewBag.QuestionId = item.QuestionId;
+            if (item == null)
+            {
+                throw new ArgumentNullException("Item cannot be null");
+            }
             if (ModelState.IsValid)
             {
                 item.Login = HttpContext.User.Identity.Name;

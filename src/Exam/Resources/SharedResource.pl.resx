@@ -615,4 +615,7 @@
   <data name="User signed into exam" xml:space="preserve">
     <value>Użytkownik jest zapisany na egzamin</value>
   </data>
+  <data name="Item cannot be null" xml:space="preserve">
+    <value>Item nie może być null</value>
+  </data>
 </root>
