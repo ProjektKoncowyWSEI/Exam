@@ -2,14 +2,7 @@
 <div class="mainImage-index"></div>
 @{
     ViewData["Title"] = Localizer["Application events"];
-    SearchModel searchModel = new SearchModel();
-
-    searchModel.SearchID = "searchlogsGrid";
-    searchModel.ClearID = "clearlogsGrid";
-    searchModel.ClearOnClick = $"clearFilter('{searchModel.SearchID}', '{searchModel.ClearID}', '#logsGrid', 'tr')";
-    searchModel.Placeholder = Localizer.GetString("Search");
-    searchModel.SearchOnInput = $"filter('{searchModel.SearchID}', '{searchModel.ClearID}', '#logsGrid', 'tr')";
-    //searchModel.Autofocus = "";
+    SearchModel searchModel = new SearchModel("logsGrid", "tr", Localizer.GetString("Search"));  
 }
 <div class="card">
     <div class="card-header">

@@ -24,15 +24,12 @@ function hideBlock(item) {
     item.classList.add('hidden')
 }
 function clearFilter(searchId, clearId, searchIn, searchWhat) {
-    document.querySelector('#' + searchId).value = null   
+    document.querySelector('#' + searchId).value = null
     filter(searchId, clearId, searchIn, searchWhat)
     document.querySelector('#' + searchId).select();
 }
-//document.addEventListener("DOMContentLoaded", function () {
-//    document.addEventListener('keydown', function (evt) {
-//        evt = evt || window.event;
-//        if (evt.keyCode == 27) {
-//            clearFilter()
-//        }
-//    })
-//});
+function escapeSearch(event, searchId, clearId, searchIn, searchWhat) {    
+    if (event.keyCode == 27) {
+        clearFilter(searchId, clearId, searchIn, searchWhat)
+    }
+}

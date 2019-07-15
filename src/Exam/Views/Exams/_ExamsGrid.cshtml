@@ -1,12 +1,7 @@
 ﻿@model IEnumerable<ExamContract.MainDbModels.Exam>
 @{
     string ch = ViewBag.OnlyActive ? "checked" : "";
-    SearchModel searchModel = new SearchModel();
-    searchModel.SearchID = "searchExams";
-    searchModel.ClearID = "clearExams";
-    searchModel.ClearOnClick = $"clearFilter('{searchModel.SearchID}', '{searchModel.ClearID}', '#examsGrid', '.mainTr')";
-    searchModel.Placeholder = Localizer.GetString("Search");
-    searchModel.SearchOnInput = $"filter('{searchModel.SearchID}', '{searchModel.ClearID}', '#examsGrid', '.mainTr')";    
+    SearchModel searchModel = new SearchModel("examsGrid", ".mainTr", Localizer.GetString("Search"));      
 }
 <div class="card">
     <div class="card-header">

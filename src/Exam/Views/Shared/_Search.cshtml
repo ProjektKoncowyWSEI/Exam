@@ -1,5 +1,5 @@
 ﻿@model  SearchModel
 <div class="searchPanel">
-    <input id="@Model.SearchID" oninput="@Model.SearchOnInput" class="form-control" placeholder="@Model.Placeholder" @Model.Autofocus/>
+    <input id="@Model.SearchID" oninput="@Model.SearchOnInput" onkeydown="@Model.SearchOnKeyDown" class="form-control" placeholder="@Model.Placeholder" @Model.Autofocus/>
     <i id="@Model.ClearID" onclick="@Model.ClearOnClick" class="fa fa-times hidden clearBtn"></i>
 </div>

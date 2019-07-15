@@ -1,13 +1,6 @@
 ﻿@model IEnumerable<ExamContract.MainDbModels.User>
-@{
-    SearchModel searchModel = new SearchModel();
-
-    searchModel.SearchID = "searchMyExams";
-    searchModel.ClearID = "clearMyExams";
-    searchModel.ClearOnClick = $"clearFilter('{searchModel.SearchID}', '{searchModel.ClearID}', '#examsGrid', 'tr')";
-    searchModel.Placeholder = Localizer.GetString("Search");
-    searchModel.SearchOnInput = $"filter('{searchModel.SearchID}', '{searchModel.ClearID}', '#examsGrid', 'tr')";
-    searchModel.Autofocus = "";
+@{   
+     SearchModel searchModel = new SearchModel("examsGrid", "tr", Localizer.GetString("Search"));
 }
     <div class="card">       
         <div class="card-header">
