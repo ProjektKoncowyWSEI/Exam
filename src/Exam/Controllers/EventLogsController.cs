@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Logger.Data;
 using Logger.Model;
 using Helpers;
+using Microsoft.Extensions.Logging;
 
 namespace Exam.Controllers
 {
@@ -23,7 +24,7 @@ namespace Exam.Controllers
        
         public async Task<IActionResult> Index()
         {
-            return View(await _context.EventLog.ToListAsync());
+            return View(await _context.EventLog.OrderByDescending(o=>o.CreatedTime).ToArrayAsync());
         }
 
         public async Task<IActionResult> Details(int? id)
