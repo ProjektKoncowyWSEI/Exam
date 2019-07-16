@@ -27,7 +27,7 @@ namespace Exam.Tests.Controllers
             Mock<IConfiguration> configMock = new Mock<IConfiguration>();
             //var service = new AnswersApiClient(loggerMock.Object, configMock.Object);
             //Mock<AnswersApiClient> serviceMock = new Mock<AnswersApiClient>();
-            controller = new AnswersController(localizerMock.Object, null);
+            controller = new AnswersController(localizerMock.Object, null, null); 
         }
 
         [Test]

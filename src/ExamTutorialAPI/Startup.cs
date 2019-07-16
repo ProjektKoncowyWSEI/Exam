@@ -35,7 +35,7 @@ namespace ExamTutorialAPI
             switch (Configuration.GetSection("UseDatabase").Value)
             {
                 case SQLite:
-                    //services.AddDbContext<ExamTutorialsApiContext>(o => o.UseSqlite(Configuration.GetConnectionString("SQLiteConnection")));
+                    services.AddDbContext<ExamTutorialsApiContext>(o => o.UseSqlite(Configuration.GetConnectionString("SQLiteConnection")));
                     break;
                 case SQL:
                     services.AddDbContext<ExamTutorialsApiContext>(o => o.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
