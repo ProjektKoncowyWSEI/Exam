@@ -7,6 +7,7 @@ using ExamContract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Helpers;
+using Microsoft.Extensions.Logging;
 
 namespace Exam.Controllers
 {

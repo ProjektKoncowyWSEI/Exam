@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ExamContract.MainDbModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
+using Microsoft.Extensions.Logging;
 
 namespace Exam.Controllers
 {
@@ -14,11 +15,13 @@ namespace Exam.Controllers
     {
         private readonly IStringLocalizer<SharedResource> Localizer;
         private readonly WebApiClient<Answer> Service;
+        private readonly ILogger logger;
 
-        public AnswersController(IStringLocalizer<SharedResource> localizer, WebApiClient<Answer> service)
+        public AnswersController(IStringLocalizer<SharedResource> localizer, WebApiClient<Answer> service, ILogger logger)
         {
             Localizer = localizer;
             Service = service;
+            this.logger = logger;
         }
 
         public IActionResult Create(int? parentId, int? questionId)
@@ -41,6 +44,7 @@ namespace Exam.Controllers
             {
                 item.Login = HttpContext.User.Identity.Name;
                 await Service.AddAsync(item);
+                logger.LogInformation($"User create answer :  id {item.Id} , examId : {item.ExamId} , questionId : {item.QuestionId} , content : {item.Content} , points : {item.Points} , active ? : {item.Active}");
                 return RedirectToAction("Index", "Exams", new { parentId = item.ExamId, questionId = item.QuestionId});
             }
             return View(item);
@@ -78,6 +82,7 @@ namespace Exam.Controllers
                 bool updated = await Service.UpdateAsync(item);
                 if (updated)
                 {
+                    logger.LogInformation($"User edit answer :  id {item.Id} , examId : {item.ExamId} , questionId : {item.QuestionId} , content : {item.Content} , points : {item.Points} , active ? : {item.Active}");
                     return RedirectToAction("Index", "Exams", new { parentId = item.ExamId, questionId = item.QuestionId });
                 }
             }
@@ -85,7 +90,8 @@ namespace Exam.Controllers
         }
         public IActionResult Delete(int? id)
         {
-            return RedirectToAction("Index", "Exams", new { error = Localizer["Questions can not be removed, you can deactivate!"] });
+            logger.LogWarning(Localizer["Answers can not be removed, you can deactivate!"]);
+            return RedirectToAction("Index", "Exams", new { error = Localizer["Answers can not be removed, you can deactivate!"] });
         }
     }
 }

@@ -4,6 +4,7 @@ using Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -13,6 +14,7 @@ namespace Exam.Controllers
     public class ExamsController : MyBaseController<ExamContract.MainDbModels.Exam>
     {        
         private readonly Exams uow;
+        private readonly ILogger logger;
         public ExamsController(IStringLocalizer<SharedResource> localizer, WebApiClient<ExamContract.MainDbModels.Exam> service, Exams uow) : base(localizer, service)
         {
             this.uow = uow;
