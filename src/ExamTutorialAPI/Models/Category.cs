@@ -4,9 +4,8 @@ using System.Collections.Generic;
 
 namespace ExamTutorialsAPI.Models
 {
-    public class Category: Entity
-    {       
-       public int Id { get; set;  }
+    public class Category : Entity
+    {  
         public string Name { get; set; }
 
         public virtual ICollection <Tutorial> Tutorials { get; set; }
