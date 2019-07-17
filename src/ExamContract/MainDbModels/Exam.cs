@@ -12,7 +12,7 @@ namespace ExamContract.MainDbModels
             Questions = new HashSet<Question>();
             Users = new HashSet<User>();
         }
-        [Required]
+        [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(200)]
         [Display(Name = "Name")]
         public string Name { get; set; }

@@ -43,7 +43,7 @@ namespace Exam.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "The {0} field is required.")]
             [EmailAddress]
             public string Email { get; set; }
 

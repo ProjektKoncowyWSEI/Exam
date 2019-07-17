@@ -130,11 +130,13 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
 }
 
 .alertPosition {
-    width: 60%;
+    width: 25%;
+    height: 80px;
     position: fixed;
-    top: 10px;
-    left: 0;
-    margin-left: 20%;
+    top: 80px;
+    right: 0;
+    opacity: 0.8;
+    /*margin-left: 20%;*/
 }
 
 .margin5px {
