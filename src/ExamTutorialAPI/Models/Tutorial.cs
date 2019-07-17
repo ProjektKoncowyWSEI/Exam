@@ -12,7 +12,7 @@ namespace ExamTutorialsAPI.Models
         [MaxLength(100)]
         [Required]
         public string Name { get; set; }
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
 
         [Required(ErrorMessage = "Description is required!")]
         public string Description { get; set; }

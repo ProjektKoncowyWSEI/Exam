@@ -12,13 +12,13 @@ namespace ExamTutorialsAPI.DAL
         private  Repository<Tutorial> tutorialsRepo;
         private  Repository<Category> categoriesRepo;
 
-        public UnitOfWork(Repository<Tutorial> tutorialsRepo, Repository<Category> categoriesRepo)
+        public UnitOfWork(ExamTutorialsApiContext context, Repository<Tutorial> tutorialsRepo, Repository<Category> categoriesRepo)
         {
             this.tutorialsRepo = tutorialsRepo;
             this.categoriesRepo = categoriesRepo;
         }
 
-       
+      
 
     }
 }
