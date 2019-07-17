@@ -1,16 +1,19 @@
 ﻿@model IEnumerable<ExamContract.MainDbModels.User>
-@{   
-     SearchModel searchModel = new SearchModel("examsGrid", "tr", Localizer.GetString("Search"));
+@{
+    SearchModel searchModel = new SearchModel("examsGrid", "tr", Localizer.GetString("Search"));
+    int error = 0;
 }
-    <div class="card">       
-        <div class="card-header">
-            <div class="row">
-                <div class="col-6">@Localizer["Your exams"]</div>
-                <div class="col-6"><partial name="_Search" model="@searchModel"></div>
-            </div>
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-6">@Localizer["Your exams"]</div>
+            <div class="col-6"><partial name="_Search" model="@searchModel"></div>
         </div>
-        <div class="card-body">
-            @if (Model != null && Model.Count() > 0)
+    </div>
+    <div class="card-body">
+        @if (Model != null && Model.Count() > 0)
+        {
+            try
             {
                 <table class="table">
                     <thead>
@@ -39,56 +42,74 @@
                     <tbody id="examsGrid">
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Exam.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Exam.MinStart)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Exam.MaxStart)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Exam.Login)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Active)
-                                </td>
-                                <td>
-                                    @if (item.Active)
-                                    {
-                                        <a asp-controller="ExamApproaches" asp-action="Index" asp-route-code="@item.Exam.Code">@Html.DisplayFor(modelItem => item.Exam.Code)</a>
-                                    }
-                                    else
-                                    {
-                                        @Html.DisplayFor(modelItem => item.Exam.Code)
-                                    }
-                                </td>
-                                <td>
-                                    <div>
+                            if (item.Exam != null)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Exam.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Exam.MinStart)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Exam.MaxStart)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Exam.Login)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Active)
+                                    </td>
+                                    <td>
                                         @if (item.Active)
                                         {
-                                            <form asp-action="Edit">
-                                                <input type="hidden" name="id" value="@item.Id" />
-                                                <button onclick="showLoader()" class="btn btn-primary btn-sm">@Localizer["Sign out"]</button>
-                                            </form>
+                                            <a asp-controller="ExamApproaches" asp-action="Index" asp-route-code="@item.Exam.Code">@Html.DisplayFor(modelItem => item.Exam.Code)</a>
                                         }
                                         else
                                         {
-                                            <form asp-action="Create">
-                                                <input type="hidden" name="id" value="@item.Exam.Id" />
-                                                <button onclick="showLoader()" class="btn btn-primary btn-sm">@Localizer["Sign in"]</button>
-                                            </form>
+                                            @Html.DisplayFor(modelItem => item.Exam.Code)
                                         }
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            @if (item.Active)
+                                            {
+                                                <form asp-action="Edit">
+                                                    <input type="hidden" name="id" value="@item.Id" />
+                                                    <button onclick="showLoader()" class="btn btn-primary btn-sm">@Localizer["Sign out"]</button>
+                                                </form>
+                                            }
+                                            else
+                                            {
+                                                <form asp-action="Create">
+                                                    <input type="hidden" name="id" value="@item.Exam.Id" />
+                                                    <button onclick="showLoader()" class="btn btn-primary btn-sm">@Localizer["Sign in"]</button>
+                                                </form>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
                         }
                     </tbody>
                 </table>
             }
-        </div>
+            catch (Exception ex)
+            {            
+                if (error < 1)
+                {
+                    error++;
+                    <script>
+                        location.reload();
+                    </script>
+                }
+                else
+                {                   
+                    throw;
+                }                
+            }
+        }
     </div>
+</div>
 
 
