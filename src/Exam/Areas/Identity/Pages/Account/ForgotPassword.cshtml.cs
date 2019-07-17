@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 
 namespace Exam.Areas.Identity.Pages.Account
 {
@@ -16,11 +17,13 @@ namespace Exam.Areas.Identity.Pages.Account
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IEmailSender _emailSender;
+        private readonly ILogger _logger;
 
-        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender,ILogger logger)
         {
             _userManager = userManager;
             _emailSender = emailSender;
+            _logger = logger;
         }
 
         [BindProperty]
@@ -41,6 +44,7 @@ namespace Exam.Areas.Identity.Pages.Account
                 if (user == null) // TODO nie wymagamy potwierdzenia maila, żeby resetować hasło || !(await _userManager.IsEmailConfirmedAsync(user)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
+                    _logger.LogWarning($"Reset password failed | User :{Input.Email} user does not exist or is not confirmed");
                     return RedirectToPage("./ForgotPasswordConfirmation");
                 }
 
@@ -57,7 +61,7 @@ namespace Exam.Areas.Identity.Pages.Account
                     Input.Email,
                     "Reset Password",
                     $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
+                _logger.LogInformation($"User : {user} reset password");
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
 

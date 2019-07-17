@@ -53,6 +53,7 @@ namespace Exam.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
+                _logger.LogInformation($"Delete personal data failed | User : '{user}' | Unable to load user with ID '{_userManager.GetUserId(User)}.");
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
@@ -61,6 +62,7 @@ namespace Exam.Areas.Identity.Pages.Account.Manage
             {
                 if (!await _userManager.CheckPasswordAsync(user, Input.Password))
                 {
+                    _logger.LogInformation($"Delete personal data failed | User : '{user}' | Password not correct.");
                     ModelState.AddModelError(string.Empty, "Password not correct.");
                     return Page();
                 }
