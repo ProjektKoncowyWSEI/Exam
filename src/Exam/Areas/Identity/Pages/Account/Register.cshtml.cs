@@ -105,6 +105,7 @@ namespace Exam.Areas.Identity.Pages.Account
                 }
                 foreach (var error in result.Errors)
                 {
+                    _logger.LogError($"Create user : {user} failed | Error : {error.Description}");
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }

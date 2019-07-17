@@ -83,6 +83,7 @@ namespace Exam.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
+                _logger.LogInformation($"Reset password failed | Unable to load user with ID '{_userManager.GetUserId(User)} ");
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
@@ -91,13 +92,14 @@ namespace Exam.Areas.Identity.Pages.Account.Manage
             {
                 foreach (var error in changePasswordResult.Errors)
                 {
+                    _logger.LogError($"Change password failed ", error.Description);
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
                 return Page();
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            _logger.LogInformation("User changed their password successfully.");
+            _logger.LogInformation($"Changed password successfully.");
             StatusMessage = localizer["Your password has been changed."];
 
             return RedirectToPage();

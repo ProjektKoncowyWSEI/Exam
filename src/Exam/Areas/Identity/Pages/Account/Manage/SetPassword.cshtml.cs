@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
 
 namespace Exam.Areas.Identity.Pages.Account.Manage
 {
@@ -15,15 +16,18 @@ namespace Exam.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IStringLocalizer<SharedResource> localizer;
+        private readonly ILogger _logger;
 
         public SetPasswordModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            IStringLocalizer<SharedResource> localizer)
+            IStringLocalizer<SharedResource> localizer,
+            ILogger logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             this.localizer = localizer;
+            _logger = logger;
         }
 
         [BindProperty]
@@ -74,6 +78,7 @@ namespace Exam.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
+                _logger.LogWarning($"Set password unsuccess | Unable to load user with ID '{_userManager.GetUserId(User)}");
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
@@ -82,12 +87,14 @@ namespace Exam.Areas.Identity.Pages.Account.Manage
             {
                 foreach (var error in addPasswordResult.Errors)
                 {
+                    _logger.LogError($"Set password error",error.Description);
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
                 return Page();
             }
 
             await _signInManager.RefreshSignInAsync(user);
+            _logger.LogInformation($"Set password succes | User : '{user}'");
             StatusMessage = localizer["Your password has been set."];
 
             return RedirectToPage();

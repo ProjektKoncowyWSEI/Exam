@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 
 namespace Exam.Areas.Identity.Pages.Account
 {
@@ -14,10 +15,12 @@ namespace Exam.Areas.Identity.Pages.Account
     public class ResetPasswordModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly ILogger _logger;
 
-        public ResetPasswordModel(UserManager<IdentityUser> userManager)
+        public ResetPasswordModel(UserManager<IdentityUser> userManager,ILogger logger)
         {
             _userManager = userManager;
+            _logger = logger;
         }
 
         [BindProperty]
@@ -69,17 +72,20 @@ namespace Exam.Areas.Identity.Pages.Account
             if (user == null)
             {
                 // Don't reveal that the user does not exist
+                _logger.LogWarning($"Reset password | User : {Input.Email} Don't reveal that the user does not exist");
                 return RedirectToPage("./ResetPasswordConfirmation");
             }
 
             var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
             if (result.Succeeded)
             {
+                _logger.LogInformation($"Reset password confirmation | User : {Input.Email}");
                 return RedirectToPage("./ResetPasswordConfirmation");
             }
 
             foreach (var error in result.Errors)
             {
+                _logger.LogError($"Reset password error | User :{Input.Email} | Error : {error}");
                 ModelState.AddModelError(string.Empty, error.Description);
             }
             return Page();

@@ -46,6 +46,7 @@ namespace Exam.Controllers
         }
         public override async Task<IActionResult> Delete(int? id, int? parentId = null)
         {
+            logger.LogWarning(Localizer["Exams can not be removed, you can deactivate!"]);
             return RedirectToAction(nameof(Index), new { error = Localizer["Exams can not be removed, you can deactivate!"] });          
         }    
         public IActionResult SetActive(bool active)
