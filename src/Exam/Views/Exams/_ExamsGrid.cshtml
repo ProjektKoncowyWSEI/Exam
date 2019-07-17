@@ -91,7 +91,7 @@
                                 @Html.DisplayFor(modelItem => item.Active)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Code)
+                                <a asp-controller="ExamApproaches" asp-action="Index" asp-route-code="@item.Code">@Html.DisplayFor(modelItem => item.Code)</a>                               
                             </td>
                             <td>
                                 <div class="command">

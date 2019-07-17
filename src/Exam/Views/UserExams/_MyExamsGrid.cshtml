@@ -18,12 +18,12 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.Exam.Name)
                             </th>
-                            @*<th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.Exam.MinStart)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Exam.MaxStart)
-                            </th>*@
+                            </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Exam.Login)
                             </th>
@@ -43,12 +43,12 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Exam.Name)
                                 </td>
-                                @*<td>
+                                <td>
                                     @Html.DisplayFor(modelItem => item.Exam.MinStart)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Exam.MaxStart)
-                                </td>*@
+                                </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Exam.Login)
                                 </td>
@@ -56,7 +56,14 @@
                                     @Html.DisplayFor(modelItem => item.Active)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Exam.Code)
+                                    @if (item.Active)
+                                    {
+                                        <a asp-controller="ExamApproaches" asp-action="Index" asp-route-code="@item.Exam.Code">@Html.DisplayFor(modelItem => item.Exam.Code)</a>
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.Exam.Code)
+                                    }
                                 </td>
                                 <td>
                                     <div>
