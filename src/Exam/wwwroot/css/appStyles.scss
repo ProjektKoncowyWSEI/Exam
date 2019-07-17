@@ -31,6 +31,13 @@ $textShadow: 3px 1px 3px white;
     opacity: 0.2;
 }
 
+.mainImage-books {
+    @extend .mainImage;
+    @extend .mainImage-defaults;
+    background-image: url(/images/books.jpg);
+    opacity: 0.08;
+}
+
 .mainImage-index {
     @extend .mainImage;
     @extend .mainImage-defaults;

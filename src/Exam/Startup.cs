@@ -132,6 +132,14 @@ namespace Exam
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                   name: "exam",
+                   template: "StartExam/{code?}",
+                   defaults: new { controller = "ExamApproaches", action = "Index" });
+                routes.MapRoute(
+                   name: "egzamin",
+                   template: "Egzamin/{code?}",
+                   defaults: new { controller = "ExamApproaches", action = "Index" });
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
