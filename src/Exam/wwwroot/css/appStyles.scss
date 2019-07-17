@@ -31,6 +31,13 @@ $textShadow: 3px 1px 3px white;
     opacity: 0.2;
 }
 
+.mainImage-books {
+    @extend .mainImage;
+    @extend .mainImage-defaults;
+    background-image: url(/images/books.jpg);
+    opacity: 0.08;
+}
+
 .mainImage-index {
     @extend .mainImage;
     @extend .mainImage-defaults;
@@ -130,11 +137,13 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
 }
 
 .alertPosition {
-    width: 60%;
+    width: 25%;
+    height: 80px;
     position: fixed;
-    top: 10px;
-    left: 0;
-    margin-left: 20%;
+    top: 80px;
+    right: 0;
+    opacity: 0.8;
+    /*margin-left: 20%;*/
 }
 
 .margin5px {

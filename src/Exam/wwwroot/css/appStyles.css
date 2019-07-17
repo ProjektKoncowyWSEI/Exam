@@ -7,12 +7,12 @@
 .textColor {
   color: #ff7f28; }
 
-.mainImage-defaults, .mainImage-index, .mainImage-manage, .mainImage-account {
+.mainImage-defaults, .mainImage-books, .mainImage-index, .mainImage-manage, .mainImage-account {
   position: absolute;
   left: 0;
   top: 0; }
 
-.mainImage, .mainImage-index, .mainImage-manage, .mainImage-account {
+.mainImage, .mainImage-books, .mainImage-index, .mainImage-manage, .mainImage-account {
   z-index: -1;
   position: fixed;
   height: 100%;
@@ -22,6 +22,10 @@
   background-size: cover;
   background-color: #d0cece;
   opacity: 0.2; }
+
+.mainImage-books {
+  background-image: url(/images/books.jpg);
+  opacity: 0.08; }
 
 .mainImage-index {
   background-image: url(/images/main.jpg);
@@ -99,11 +103,13 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
   vertical-align: inherit !important; }
 
 .alertPosition {
-  width: 60%;
+  width: 25%;
+  height: 80px;
   position: fixed;
-  top: 10px;
-  left: 0;
-  margin-left: 20%; }
+  top: 80px;
+  right: 0;
+  opacity: 0.8;
+  /*margin-left: 20%;*/ }
 
 .margin5px {
   margin: 5px; }

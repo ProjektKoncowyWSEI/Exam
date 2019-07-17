@@ -332,3 +332,5 @@ ASALocalRun/
 /src/ExamMainDataBaseAPI/appsettings.json
 /src/ExamTutorialAPI/Data/ApiTutorials.db
 Logs
+bundle
+min

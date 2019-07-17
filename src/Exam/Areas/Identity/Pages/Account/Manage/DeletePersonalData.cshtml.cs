@@ -29,7 +29,7 @@ namespace Exam.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "The {0} field is required.")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
         }
