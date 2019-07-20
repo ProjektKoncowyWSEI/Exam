@@ -24,7 +24,13 @@ namespace ExamCourseAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services
+                .AddMvcCore()
+                .AddDataAnnotations()
+                .AddJsonFormatters()
+                .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
+                //.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSingleton(Configuration);            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,7 +40,7 @@ namespace ExamCourseAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
