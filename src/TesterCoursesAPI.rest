@@ -1,0 +1,26 @@
+//@URL = https://exammailsender.azurewebsites.net/api/
+@URL = http://localhost:22333/api
+
+###
+GET {{URL}}/courses
+//api-key: mailKey
+
+###
+GET {{URL}}/attachments/1
+api-key: mailKey
+
+###
+
+###
+GET {{URL}}/MailWithAttachments/1
+api-key: mailKey
+
+###
+
+POST {{URL}}/sendmail
+content-type: application/json
+api-key: mailKey
+
+{
+  "id": 0,
+}

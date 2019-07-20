@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExamContract.CourseModels;
 using ExamCourseAPI.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,6 +37,10 @@ namespace ExamCourseAPI
                     services.AddDbContext<Context>(o => o.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
                     break;
             }
+            services.AddTransient<Repository<Course>>();
+            services.AddTransient<Repository<User>>();
+            //services.AddTransient<Repository<TutorialCourse>>();
+            //services.AddTransient<Repository<ExamCourse>>();
             services
                 .AddMvcCore()
                 .AddDataAnnotations()
