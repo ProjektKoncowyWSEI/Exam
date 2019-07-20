@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamCourseAPI.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190720115405_Init")]
+    [Migration("20190720141723_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,7 +77,9 @@ namespace ExamCourseAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId");
+                    b.HasIndex("CourseId", "Login")
+                        .IsUnique()
+                        .HasFilter("[Login] IS NOT NULL");
 
                     b.ToTable("Users");
                 });

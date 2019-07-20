@@ -15,7 +15,8 @@ namespace ExamCourseAPI.DAL
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //Dodajemy klucze głowne dwukolumnowe.
+            builder.Entity<User>()
+                .HasIndex(table => new { table.CourseId, table.Login }).IsUnique();
             builder.Entity<ExamCourse>().HasKey(table => new {
                 table.CourseId,
                 table.ExamId

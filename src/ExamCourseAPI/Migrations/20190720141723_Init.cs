@@ -81,9 +81,11 @@ namespace ExamCourseAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_CourseId",
+                name: "IX_Users_CourseId_Login",
                 table: "Users",
-                column: "CourseId");
+                columns: new[] { "CourseId", "Login" },
+                unique: true,
+                filter: "[Login] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

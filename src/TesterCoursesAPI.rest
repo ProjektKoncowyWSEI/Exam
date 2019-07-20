@@ -6,21 +6,28 @@ GET {{URL}}/courses
 //api-key: mailKey
 
 ###
-GET {{URL}}/attachments/1
-api-key: mailKey
 
-###
-
-###
-GET {{URL}}/MailWithAttachments/1
-api-key: mailKey
-
-###
-
-POST {{URL}}/sendmail
+POST {{URL}}/courses
 content-type: application/json
-api-key: mailKey
+//api-key: mailKey
 
 {
   "id": 0,
+  "login": "a@a.a",
+  "active" : true,
+  "name" : "Pierwszy kurs",
+  "description": "Opis do kursu"
+}
+
+###
+
+POST {{URL}}/users
+content-type: application/json
+//api-key: mailKey
+
+{
+  "id": 0,
+  "login": "b@b.b",
+  "active" : true,
+  "courseId" : 1
 }
