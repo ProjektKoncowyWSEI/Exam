@@ -333,3 +333,4 @@ ASALocalRun/
 /src/ExamTutorialAPI/Data/ApiTutorials.db
 Logs
 bundle
+/src/ExamCourseAPI/Data/ExamCourses.db

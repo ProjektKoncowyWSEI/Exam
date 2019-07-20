@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExamCourseAPI.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -14,6 +16,8 @@ namespace ExamCourseAPI
 {
     public class Startup
     {
+        const string SQLite = "SQLite";
+        const string SQL = "SQL";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -21,9 +25,17 @@ namespace ExamCourseAPI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            switch (Configuration.GetSection("UseDatabase").Value)
+            {
+                case SQLite:
+                    services.AddDbContext<Context>(o => o.UseSqlite(Configuration.GetConnectionString("SQLiteConnection")));
+                    break;
+                case SQL:
+                    services.AddDbContext<Context>(o => o.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
+                    break;
+            }
             services
                 .AddMvcCore()
                 .AddDataAnnotations()
