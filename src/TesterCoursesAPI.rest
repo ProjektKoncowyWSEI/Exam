@@ -31,3 +31,29 @@ content-type: application/json
   "active" : true,
   "courseId" : 1
 }
+###
+GET {{URL}}/tutorials
+###
+GET {{URL}}/tutorials?course=1
+
+###
+
+POST {{URL}}/tutorials
+content-type: application/json
+//api-key: mailKey
+
+{  
+  "courseId" : 1,
+  "id": 1
+}
+
+###
+
+DELETE {{URL}}/tutorials/1/1
+content-type: application/json
+//api-key: mailKey
+
+{  
+  "courseId" : 1,
+  "id": 1
+}

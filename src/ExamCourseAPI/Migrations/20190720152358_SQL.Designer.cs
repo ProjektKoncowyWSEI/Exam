@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamCourseAPI.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190720141723_Init")]
-    partial class Init
+    [Migration("20190720152358_SQL")]
+    partial class SQL
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,9 +44,9 @@ namespace ExamCourseAPI.Migrations
                 {
                     b.Property<int>("CourseId");
 
-                    b.Property<int>("ExamId");
+                    b.Property<int>("Id");
 
-                    b.HasKey("CourseId", "ExamId");
+                    b.HasKey("CourseId", "Id");
 
                     b.ToTable("ExamCourses");
                 });
@@ -55,9 +55,9 @@ namespace ExamCourseAPI.Migrations
                 {
                     b.Property<int>("CourseId");
 
-                    b.Property<int>("TutorialId");
+                    b.Property<int>("Id");
 
-                    b.HasKey("CourseId", "TutorialId");
+                    b.HasKey("CourseId", "Id");
 
                     b.ToTable("TutorialCourses");
                 });

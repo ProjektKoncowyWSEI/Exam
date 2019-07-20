@@ -4,9 +4,9 @@ using System.Text;
 
 namespace ExamContract.CourseModels
 {
-    public class TutorialCourse
+    public class TutorialCourse : ICourseTwoKey
     {
         public int CourseId { get; set; }
-        public int TutorialId { get; set; }
+        public int Id { get; set; }
     }
 }

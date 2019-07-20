@@ -39,8 +39,9 @@ namespace ExamCourseAPI
             }
             services.AddTransient<Repository<Course>>();
             services.AddTransient<Repository<User>>();
-            //services.AddTransient<Repository<TutorialCourse>>();
-            //services.AddTransient<Repository<ExamCourse>>();
+            services.AddTransient<TwoKeysRepository<TutorialCourse>>();
+            services.AddTransient<TwoKeysRepository<ExamCourse>>();
+            //services.AddTransient<UnitOfWork>();
             services
                 .AddMvcCore()
                 .AddDataAnnotations()

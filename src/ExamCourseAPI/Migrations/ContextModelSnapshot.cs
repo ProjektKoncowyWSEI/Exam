@@ -42,9 +42,9 @@ namespace ExamCourseAPI.Migrations
                 {
                     b.Property<int>("CourseId");
 
-                    b.Property<int>("ExamId");
+                    b.Property<int>("Id");
 
-                    b.HasKey("CourseId", "ExamId");
+                    b.HasKey("CourseId", "Id");
 
                     b.ToTable("ExamCourses");
                 });
@@ -53,9 +53,9 @@ namespace ExamCourseAPI.Migrations
                 {
                     b.Property<int>("CourseId");
 
-                    b.Property<int>("TutorialId");
+                    b.Property<int>("Id");
 
-                    b.HasKey("CourseId", "TutorialId");
+                    b.HasKey("CourseId", "Id");
 
                     b.ToTable("TutorialCourses");
                 });

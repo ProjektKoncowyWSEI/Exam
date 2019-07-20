@@ -19,11 +19,11 @@ namespace ExamCourseAPI.DAL
                 .HasIndex(table => new { table.CourseId, table.Login }).IsUnique();
             builder.Entity<ExamCourse>().HasKey(table => new {
                 table.CourseId,
-                table.ExamId
+                table.Id
             });
             builder.Entity<TutorialCourse>().HasKey(table => new {
                 table.CourseId,
-                table.TutorialId
+                table.Id
             });
         }
         public DbSet<Course> Courses { get; set; }

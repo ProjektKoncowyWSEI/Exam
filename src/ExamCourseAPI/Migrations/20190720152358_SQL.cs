@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ExamCourseAPI.Migrations
 {
-    public partial class Init : Migration
+    public partial class SQL : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,11 +28,11 @@ namespace ExamCourseAPI.Migrations
                 columns: table => new
                 {
                     CourseId = table.Column<int>(nullable: false),
-                    ExamId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExamCourses", x => new { x.CourseId, x.ExamId });
+                    table.PrimaryKey("PK_ExamCourses", x => new { x.CourseId, x.Id });
                     table.ForeignKey(
                         name: "FK_ExamCourses_Courses_CourseId",
                         column: x => x.CourseId,
@@ -46,11 +46,11 @@ namespace ExamCourseAPI.Migrations
                 columns: table => new
                 {
                     CourseId = table.Column<int>(nullable: false),
-                    TutorialId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TutorialCourses", x => new { x.CourseId, x.TutorialId });
+                    table.PrimaryKey("PK_TutorialCourses", x => new { x.CourseId, x.Id });
                     table.ForeignKey(
                         name: "FK_TutorialCourses_Courses_CourseId",
                         column: x => x.CourseId,
