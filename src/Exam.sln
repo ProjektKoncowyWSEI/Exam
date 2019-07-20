@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamTutorialAPI", "ExamTuto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logger", "Logger\Logger.csproj", "{EAE3EE3F-452A-4250-AFAA-1F3C934E7C78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exam.Tests", "Exam.Tests\Exam.Tests.csproj", "{A5142DAD-F081-4BA6-8D11-592F9E1F636C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exam.Tests", "Exam.Tests\Exam.Tests.csproj", "{A5142DAD-F081-4BA6-8D11-592F9E1F636C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamCourseAPI", "ExamCourseAPI\ExamCourseAPI.csproj", "{AA5EF5F6-EAC2-4814-96F6-146BD6FE9DC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{A5142DAD-F081-4BA6-8D11-592F9E1F636C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5142DAD-F081-4BA6-8D11-592F9E1F636C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5142DAD-F081-4BA6-8D11-592F9E1F636C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA5EF5F6-EAC2-4814-96F6-146BD6FE9DC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA5EF5F6-EAC2-4814-96F6-146BD6FE9DC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA5EF5F6-EAC2-4814-96F6-146BD6FE9DC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA5EF5F6-EAC2-4814-96F6-146BD6FE9DC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
