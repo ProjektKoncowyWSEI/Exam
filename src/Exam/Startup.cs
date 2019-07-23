@@ -29,6 +29,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using ExamContract.MainDbModels;
 using Exam.Data.UnitOfWork;
 using Exam.Areas.Identity.Pages.Account.Manage;
+using ExamContract.CourseModels;
 
 namespace Exam
 {
@@ -72,10 +73,12 @@ namespace Exam
             services.AddTransient<WebApiClient<ExamContract.MainDbModels.Exam>, ExamsApiClient>();
             services.AddTransient<WebApiClient<Question>, QuestionsApiClient>();
             services.AddTransient<WebApiClient<Answer>, AnswersApiClient>();             
-            services.AddTransient<WebApiClient<User>, UsersApiClient>();
+            services.AddTransient<WebApiClient<ExamContract.MainDbModels.User>, UsersApiClient>();
+            services.AddTransient<WebApiClient<Course>, CoursesApiClient>();
+            services.AddTransient<CourseTwoKeyApiClient<ExamCourse>, CouorseExamApiClient>();
             services.AddTransient<ExamsQuestionsAnswersApiClient>(); //Wymagamy klasy konkretnej
             services.AddTransient<Exams>();
-
+            
 
             services.ConfigureApplicationCookie(o =>
             {

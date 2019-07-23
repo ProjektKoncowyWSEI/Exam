@@ -1,0 +1,27 @@
+﻿@model  ExamContract.CourseModels.ExamCourse
+@{
+    ViewData["Title"] = "AddExam";
+}
+
+<h1>AddExam</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddExam">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" value="@ViewBag.CourseId" asp-for="CourseId" />
+            <div class="form-group">
+                <label>@Localizer["Select exam"]</label>
+                <select asp-for="Id" asp-items="ViewBag.Exams" selected="selected" class="form-control"></select>
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Localizer["Create"]" class="btn btn-primary btn-sm" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-primary btn-sm">@Localizer["Back to List"]</a>
+</div>

@@ -11,7 +11,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-            
+
             <partial name="_LoginPartial" />
             <ul class="navbar-nav flex-grow-1">
                 <li>
@@ -23,18 +23,29 @@
                 <li class="nav-item">
                     @if (User.IsInRole(RoleEnum.admin) || User.IsInRole(RoleEnum.teacher))
                     {
-                    <a onclick="showLoader();" class="nav-link text-dark" asp-area="" asp-controller="Exams" asp-action="Index">@Localizer["Exams"]</a>
+                        <a onclick="showLoader();" class="nav-link text-dark" asp-area="" asp-controller="Exams" asp-action="Index">@Localizer["Exams"]</a>
                     }
                     else if (User.IsInRole(RoleEnum.student))
                     {
-                    <a onclick="showLoader();" class="nav-link text-dark" asp-area="" asp-controller="UserExams" asp-action="Index">@Localizer["Exams"]</a>
+                        <a onclick="showLoader();" class="nav-link text-dark" asp-area="" asp-controller="UserExams" asp-action="Index">@Localizer["Exams"]</a>
                     }
-                </li>         
+                </li>
+                <li class="nav-item">
+                    @if (User.IsInRole(RoleEnum.admin) || User.IsInRole(RoleEnum.teacher))
+                    {
+                        <a onclick="showLoader();" class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Index">@Localizer["Courses"]</a>
+                    }
+                    else if (User.IsInRole(RoleEnum.student))
+                    {
+                        //TODO dodaæ ob³ugê dla studenta
+                    }
+                </li>
+
                 @if (User.IsInRole(RoleEnum.admin))
                 {
-                <li class="nav-item">
-                    <a onclick="showLoader();" class="nav-link text-dark" asp-area="" asp-controller="EventLogs" asp-action="Index">@Localizer["Logs"]</a>
-                </li>
+                    <li class="nav-item">
+                        <a onclick="showLoader();" class="nav-link text-dark" asp-area="" asp-controller="EventLogs" asp-action="Index">@Localizer["Logs"]</a>
+                    </li>
                 }
 
             </ul>

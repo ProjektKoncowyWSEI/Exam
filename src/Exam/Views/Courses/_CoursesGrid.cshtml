@@ -1,0 +1,91 @@
+﻿@model IEnumerable<ExamContract.ExamDTO.CourseDTO>
+@{
+    string ch = ViewBag.OnlyActive ? "checked" : "";
+    SearchModel searchModel = new SearchModel("coursesGrid", ".mainTr", Localizer.GetString("Search"));      
+}
+<div class="card">
+    <div class="card-header">
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-inline">
+                    <a asp-controller="Courses" asp-action="Create" class="btn btn-primary btn-sm margin5px">@Localizer["Add course"]</a>
+                    <a asp-controller="UserCourses" asp-action="Index" onclick="showLoader();" class="btn btn-primary btn-sm margin5px">@Localizer["Sing up for course"]</a>
+                    <div class="marginLeft10 form-inline">
+                        <form id="setActive" asp-action="SetActive">
+                            <span for="active">@Localizer["Only active"]</span>
+                            @if (ViewBag.OnlyActive)
+                            {
+                                @Html.CheckBox("active", new { @class = "form-control", @onchange = "showLoader();document.getElementById('setActive').submit();", @checked = ch })
+                            }
+                            else
+                            {
+                                @Html.CheckBox("active", new { @class = "form-control", @onchange = "showLoader();document.getElementById('setActive').submit();" })
+                            }
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6"><partial name="_Search" model="@searchModel"></div>
+        </div>
+
+    </div>
+    @if (Model != null && Model.Count() > 0)
+    {
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Course.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Course.Description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Course.Login)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Course.Active)
+                        </th>                     
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="coursesGrid">
+                    @foreach (var item in Model)
+                    {
+                        <tr class="mainTr">                           
+                            <td><button id="arrow_@item.Course.Id" onclick="toggleTr('#exams_@item.Course.Id', '#arrow_@item.Course.Id')" class="btn btn-primary fa fa-chevron-down btn-sm"></button></td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Course.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Course.Description)
+                            </td>                        
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Course.Login)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Course.Active)
+                            </td>                          
+                            <td>
+                                <div class="command">
+                                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.Course.Id">@Localizer["Edit"]</a>
+                                    @*<a id="clone_@item.Id" class="btn btn-primary btn-sm" asp-action="Clone" asp-route-id="@item.Id" onclick="hideElement('#clone_@item.Id')">@Localizer["Clone"]</a>*@
+                                </div>
+                            </td>
+                        </tr>
+                        <tr id="exams_@item.Course.Id" style="display:none">
+                            <td></td>
+                            <td colspan="9">
+                                <a asp-controller="Courses" asp-action="AddExam" asp-route-parentId="@item.Course.Id" class="btn btn-primary btn-sm margin5px">@Localizer["Add exam"]</a>
+                                <partial name="_ExamsGrid" model="@item.Exams">
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

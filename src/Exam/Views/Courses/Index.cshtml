@@ -1,0 +1,11 @@
+﻿@model IEnumerable<ExamContract.ExamDTO.CourseDTO>
+@{
+    ViewData["Title"] = Localizer["Courses"];
+}
+
+<div class="mainImage-index"></div>
+<h3>@ViewBag.Message</h3>
+<div>
+    <partial name="_CoursesGrid" model="Model" />
+</div>
+

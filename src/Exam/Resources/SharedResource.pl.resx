@@ -618,4 +618,31 @@
   <data name="Item cannot be null" xml:space="preserve">
     <value>Item nie może być null</value>
   </data>
+  <data name="Course" xml:space="preserve">
+    <value>Kurs</value>
+  </data>
+  <data name="Courses" xml:space="preserve">
+    <value>Kursy</value>
+  </data>
+  <data name="Add course" xml:space="preserve">
+    <value>Dodaj kurs</value>
+  </data>
+  <data name="All courses" xml:space="preserve">
+    <value>Wszystkie kursy</value>
+  </data>
+  <data name="Sing up for course" xml:space="preserve">
+    <value>Zapisz się na kurs</value>
+  </data>
+  <data name="Your courses" xml:space="preserve">
+    <value>Twoje kursy</value>
+  </data>
+  <data name="Course can not be removed, you can deactivate!" xml:space="preserve">
+    <value>Nie można usuwać kursów, można je dezaktywować!</value>
+  </data>
+  <data name="Exams can not be removed, you can deactivate!" xml:space="preserve">
+    <value>Nie można usuwać egzaminów, można je dezaktywować!</value>
+  </data>
+  <data name="Select exam" xml:space="preserve">
+    <value>Wybierz egzamin</value>
+  </data>
 </root>
