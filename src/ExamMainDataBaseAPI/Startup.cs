@@ -19,8 +19,6 @@ namespace ExamMainDataBaseAPI
 {
     public class Startup
     {
-        const string SQLite = "SQLite";
-        const string SQL = "SQL";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -31,19 +29,11 @@ namespace ExamMainDataBaseAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            switch (Configuration.GetSection("UseDatabase").Value)
-            {
-                case SQLite:
-                    services.AddDbContext<ExamQuestionsDbContext>(o => o.UseSqlite(Configuration.GetConnectionString("SQLiteConnection")));
-                    break;
-                case SQL:
-                    services.AddDbContext<ExamQuestionsDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
-                    break;
-            }
-            services
-                .AddMvcCore()
+            services.AddMvcCore()
                 .AddJsonFormatters()
                 .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
+            string mainDbConnection = Environment.GetEnvironmentVariable("EXAM_MainDBConnection") ?? Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<ExamQuestionsDbContext>(options => options.UseSqlServer(mainDbConnection));
             services.AddTransient<Repository<Answer>>();
             services.AddTransient<Repository<Question>>();           
             services.AddTransient<Repository<Exam>>();
