@@ -34,15 +34,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                <div class="td">@Html.DisplayNameFor(model => model.Name)</div>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
+                <div class="td">@Html.DisplayNameFor(model => model.Image)</div>
                 @Html.DisplayFor(modelItem => item.Image)
             </td>
             <td>
+                <div class="td">@Html.DisplayNameFor(model => model.Description)</div>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
+                <div class="td">@Html.DisplayNameFor(model => model.CategoryId)</div>
                 @Html.DisplayFor(modelItem => item.CategoryId)
             </td>
             @*<td>

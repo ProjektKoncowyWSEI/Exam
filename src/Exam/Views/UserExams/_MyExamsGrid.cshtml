@@ -18,22 +18,22 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>
+                            <th>                               
                                 @Html.DisplayNameFor(model => model.Exam.Name)
                             </th>
-                            <th>
+                            <th>                               
                                 @Html.DisplayNameFor(model => model.Exam.MinStart)
                             </th>
-                            <th>
+                            <th>                                
                                 @Html.DisplayNameFor(model => model.Exam.MaxStart)
                             </th>
-                            <th>
+                            <th>                                
                                 @Html.DisplayNameFor(model => model.Exam.Login)
                             </th>
-                            <th>
+                            <th>                               
                                 @Html.DisplayNameFor(model => model.Active)
                             </th>
-                            <th>
+                            <th>                              
                                 @Html.DisplayNameFor(model => model.Exam.Code)
                             </th>
                             <th></th>
@@ -46,21 +46,27 @@
                             {
                                 <tr>
                                     <td>
+                                        <div class="td">@Html.DisplayNameFor(model => model.Exam.Name)</div>
                                         @Html.DisplayFor(modelItem => item.Exam.Name)
                                     </td>
                                     <td>
+                                        <div class="td">@Html.DisplayNameFor(model => model.Exam.MinStart)</div>
                                         @Html.DisplayFor(modelItem => item.Exam.MinStart)
                                     </td>
                                     <td>
+                                        <div class="td">@Html.DisplayNameFor(model => model.Exam.MaxStart)</div>
                                         @Html.DisplayFor(modelItem => item.Exam.MaxStart)
                                     </td>
                                     <td>
+                                        <div class="td">@Html.DisplayNameFor(model => model.Exam.Login)</div>
                                         @Html.DisplayFor(modelItem => item.Exam.Login)
                                     </td>
                                     <td>
+                                        <div class="td">@Html.DisplayNameFor(model => model.Exam.Active)</div>
                                         @Html.DisplayFor(modelItem => item.Active)
                                     </td>
                                     <td>
+                                        <div class="td">@Html.DisplayNameFor(model => model.Exam.Code)</div>
                                         @if (item.Active)
                                         {
                                             <a asp-controller="ExamApproaches" asp-action="Index" asp-route-code="@item.Exam.Code">@Html.DisplayFor(modelItem => item.Exam.Code)</a>

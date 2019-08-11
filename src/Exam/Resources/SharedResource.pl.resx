@@ -645,4 +645,7 @@
   <data name="Select exam" xml:space="preserve">
     <value>Wybierz egzamin</value>
   </data>
+  <data name="Answers" xml:space="preserve">
+    <value>Odpowiedzi</value>
+  </data>
 </root>

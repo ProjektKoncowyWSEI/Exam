@@ -26,31 +26,36 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td><button id="arrowQuestions_@item.Id" onclick="toggleTr('#answers_@item.Id', '#arrowQuestions_@item.Id')" class="btn btn-primary fa fa-chevron-down btn-sm"></button></td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Content)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AnswerTypesEnum)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Login)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Active)
-                    </td>
-                    <td>
-                        <div class="command">
-                            <a class="btn btn-primary btn-sm" asp-controller="Questions" asp-action="Edit" asp-route-id="@item.Id" asp-route-parentId="@item.ExamId">@Localizer["Edit"]</a>
-                        </div>
-                    </td>
-                </tr>
+            <tr>                
+                <td><button id="arrowQuestions_@item.Id" onclick="toggleTr('#answers_@item.Id', '#arrowQuestions_@item.Id')" class="btn btn-primary fa fa-chevron-down btn-sm"></button></td>
+                <td>
+                    <div class="td">@Html.DisplayNameFor(model => model.Name)</div>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <div class="td">@Html.DisplayNameFor(model => model.Content)</div>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    <div class="td">@Html.DisplayNameFor(model => model.AnswerTypesEnum)</div>
+                    @Html.DisplayFor(modelItem => item.AnswerTypesEnum)
+                </td>
+                <td>
+                    <div class="td">@Html.DisplayNameFor(model => model.Login)</div>
+                    @Html.DisplayFor(modelItem => item.Login)
+                </td>
+                <td>
+                    <div class="td">@Html.DisplayNameFor(model => model.Active)</div>
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td>
+                    <div class="command">
+                        <a class="btn btn-primary btn-sm" asp-controller="Questions" asp-action="Edit" asp-route-id="@item.Id" asp-route-parentId="@item.ExamId">@Localizer["Edit"]</a>
+                    </div>
+                </td>
+            </tr>
                 <tr id="answers_@item.Id" style="display:none">                 
-                    <td></td>
+                    <td><span class="td">@Localizer["Answers"]</span></td>
                     <td colspan="8">
                         <a asp-controller="Answers" asp-action="Create" asp-route-parentId="@item.ExamId" asp-route-questionId="@item.Id" class="btn btn-primary btn-sm margin5px">@Localizer["Add answer"]</a>
                         <partial name="_AnswersGrid" model="@item.Answers">

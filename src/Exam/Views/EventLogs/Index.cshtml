@@ -35,17 +35,20 @@
                 {
                     <tr>
                         <td class="longMessage">
+                            <div class="td">@Html.DisplayNameFor(model => model.Message)</div>
                             @Html.DisplayFor(modelItem => item.Message)
                         </td>
                         @*<td>
                             @Html.DisplayFor(modelItem => item.EventId)
                         </td>*@
-                        <td>
-                            @Html.DisplayFor(modelItem => item.LogLevel)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CreatedTime)
-                        </td>
+                    <td>
+                        <div class="td">@Html.DisplayNameFor(model => model.LogLevel)</div>
+                        @Html.DisplayFor(modelItem => item.LogLevel)
+                    </td>
+                    <td>
+                        <div class="td">@Html.DisplayNameFor(model => model.CreatedTime)</div>
+                        @Html.DisplayFor(modelItem => item.CreatedTime)
+                    </td>
                         <td>
                             <div class="command">
                                 <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.id">@Localizer["Details"]</a>

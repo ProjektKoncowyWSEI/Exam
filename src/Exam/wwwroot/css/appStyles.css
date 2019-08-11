@@ -92,15 +92,44 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
   min-width: 100px;
   display: inline-flex; }
 
-.table {
-  border: 1px solid #dee2e6; }
+@media only screen and (min-width: 1025px) {
+  .table {
+    border: 1px solid #dee2e6; }
+  .table td, .table th {
+    padding: 2px 4px 1px 4px !important;
+    text-align: left;
+    justify-content: center;
+    /*border: 1px solid #dee2e6;*/
+    vertical-align: inherit !important; }
+  .td {
+    display: none; } }
 
-.table td, .table th {
-  padding: 2px 4px 1px 4px !important;
-  text-align: left;
-  justify-content: center;
-  /*border: 1px solid #dee2e6;*/
-  vertical-align: inherit !important; }
+@media only screen and (max-width: 1024px) {
+  .table, thead, tbody, th, td, tr {
+    display: block; }
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px; }
+  tr {
+    border: 1px solid #ccc;
+    margin: 2px; }
+  td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%; }
+  .td {
+    font-weight: bold;
+    display: block; }
+  /*td:before {      
+        position: absolute;        
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+    }*/ }
 
 .alertPosition {
   width: 25%;
