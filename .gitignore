@@ -335,3 +335,4 @@ Logs
 bundle
 /src/ExamCourseAPI/Data/ExamCourses.db
 MainDbSqlLite.db
+*.db
