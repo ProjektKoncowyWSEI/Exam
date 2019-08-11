@@ -3,11 +3,11 @@
     Layout = "/Views/Shared/_Layout.cshtml";
 }
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = Localizer["Tutorials"];
 }
 
 <p>
-    <a asp-action="Create" class="btn btn-default">Add</a>
+    <a asp-action="Create" class="btn btn-default">@Localizer["Add new tutorial"]</a>
 </p>
 
 <partial name="_TutorialsTable" model="@Model" />

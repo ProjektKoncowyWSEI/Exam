@@ -651,4 +651,13 @@
   <data name="Description" xml:space="preserve">
     <value>Opis</value>
   </data>
+  <data name="Add new tutorial" xml:space="preserve">
+    <value>Dodaj nowy tutorial</value>
+  </data>
+  <data name="Create New" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Tutorials" xml:space="preserve">
+    <value>Tutoriale</value>
+  </data>
 </root>
