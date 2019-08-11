@@ -648,4 +648,7 @@
   <data name="Answers" xml:space="preserve">
     <value>Odpowiedzi</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>Opis</value>
+  </data>
 </root>
