@@ -666,7 +666,7 @@
   <data name="Image" xml:space="preserve">
     <value>Zdjęcie</value>
   </data>
-  <data name="Tutorial Name" xml:space="preserve">
-    <value>Nazwa tutoriału</value>
+  <data name="Tutorial name" xml:space="preserve">
+    <value>Nazwa szkolenia</value>
   </data>
 </root>

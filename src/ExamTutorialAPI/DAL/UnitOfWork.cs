@@ -17,8 +17,5 @@ namespace ExamTutorialsAPI.DAL
             this.tutorialsRepo = tutorialsRepo;
             this.categoriesRepo = categoriesRepo;
         }
-
-      
-
     }
 }
