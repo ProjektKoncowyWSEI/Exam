@@ -669,4 +669,22 @@
   <data name="Tutorial name" xml:space="preserve">
     <value>Nazwa szkolenia</value>
   </data>
+  <data name="Name {0}&lt;br/&gt;Code {1}&lt;br/&gt;When {2} - {3}&lt;br/&gt;Duration {4} min" xml:space="preserve">
+    <value>Nazwa {0}&lt;br/&gt;Kod {1}&lt;br/&gt;Kiedy {2} - {3}&lt;br/&gt;Czas trwania {4} min</value>
+  </data>
+  <data name="Start exam" xml:space="preserve">
+    <value>Rozpocznij egzamin</value>
+  </data>
+  <data name="Confirm exam start" xml:space="preserve">
+    <value>Potwierdź start egzaminu</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nie</value>
+  </data>
+  <data name="The exam '{0}' will start now, you have {1} min to take the exam.&lt;br/&gt; Start the exam?" xml:space="preserve">
+    <value>Egzamin '{0}' rozpocznie się teraz, masz {1} min na podejście do egzaminu.&lt;br/&gt; Rozpocznąć egzamin?</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Tak</value>
+  </data>
 </root>

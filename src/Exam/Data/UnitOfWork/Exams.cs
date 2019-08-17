@@ -31,21 +31,27 @@ namespace Exam.Data.UnitOfWork
             foreach (var e in result)
             {
                 var exam = await ExamsWithAllRepo.GetAsync(e.Id);
-                if (onlyActive == true)
-                    e.Questions = exam.Questions.Where(x => x.Active).ToList();
-                else
-                    e.Questions = exam.Questions;
-                
-                foreach (var q in e.Questions)
-                {                  
-                    if (onlyActive == true)                   
-                        q.Answers = q.Answers.Where(x => x.Active).ToList();                   
-                    foreach (var a in q.Answers)                    
-                        a.ExamId = e.Id;                    
-                }
+                setActive(onlyActive, e, exam);
             }
             return result;
         }
+
+        private static void setActive(bool? onlyActive, exam output, exam input)
+        {
+            if (onlyActive == true)
+                output.Questions = input.Questions.Where(x => x.Active).ToList();
+            else
+                output.Questions = input.Questions;
+
+            foreach (var q in output.Questions)
+            {
+                if (onlyActive == true)
+                    q.Answers = q.Answers.Where(x => x.Active).ToList();
+                foreach (var a in q.Answers)
+                    a.ExamId = output.Id;
+            }
+        }
+
         public async Task<List<User>> GetMyExams(string login, bool? onlyActive = null)
         {
             var myExams = await UsersRepo.GetListAsync(login, onlyActive);          
@@ -59,6 +65,13 @@ namespace Exam.Data.UnitOfWork
         {
             var item = await ExamsWithAllRepo.GetAsync(id);
             await ExamsWithAllRepo.AddAsync(item);                     
+        }
+        public async Task<exam> GetExamByCode(string code, bool? onlyActive = null)
+        {            
+            var myExam = await ExamsWithAllRepo.GetByCodeAsync(code);
+            if (onlyActive != null)           
+                setActive(onlyActive, myExam, myExam);
+            return myExam;
         }
     }
 }

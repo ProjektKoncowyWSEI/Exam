@@ -1,0 +1,35 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="homeCenter">
+        @if (User.IsInRole(RoleEnum.admin) || User.IsInRole(RoleEnum.teacher))
+        {
+            <a onclick="showLoader();" class="btn btn-primary box" asp-area="" asp-controller="Exams" asp-action="Index">@Localizer["Exams"]</a>
+        }
+        else if (User.IsInRole(RoleEnum.student))
+        {
+            <a onclick="showLoader();" class="btn btn-primary box" asp-area="" asp-controller="UserExams" asp-action="Index">@Localizer["Exams"]</a>
+        }
+        @if (User.IsInRole(RoleEnum.admin) || User.IsInRole(RoleEnum.teacher))
+        {
+            <a onclick="showLoader();" class="btn btn-primary box" asp-area="" asp-controller="Courses" asp-action="Index">@Localizer["Courses"]</a>
+        }
+        else if (User.IsInRole(RoleEnum.student))
+        {
+            //TODO dodaæ ob³ugê dla studenta
+        }
+        @if (User.IsInRole(RoleEnum.admin))
+        {
+            <a onclick="showLoader();" class="btn btn-primary box" asp-area="" asp-controller="EventLogs" asp-action="Index">@Localizer["Logs"]</a>
+        }
+    </div>
+    <div class="homeCenter">
+        <partial name="_LoginPartialOnPage" />
+    </div>
+}
+else
+{
+    <img class="mainImageWidth" src="~/images/coffee.jpg" />
+}

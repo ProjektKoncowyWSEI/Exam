@@ -1,3 +1,47 @@
-﻿
+﻿@model ExamContract.MainDbModels.Exam
+@{
+    ViewBag.Title = Localizer["Start exam"];
+}
 <div class="mainImage-books"></div>
-@ViewBag.Message
+@if (Model != null)
+{
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">@Localizer["Confirm exam start"]</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @Localizer["The exam '{0}' will start now, you have {1} min to take the exam.<br/> Start the exam?", Model.Name, Model.DurationMinutes]
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">@Localizer["No"]</button>
+
+                    <a class="btn btn-primary btn-sm" onclick="showLoader()" asp-controller="ExamApproaches" asp-action="Start" asp-route-code="@Model.Code">@Localizer["Yes"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-12">
+                        <div>
+                            <span class="bold">@Html.DisplayNameFor(model => model.Name): </span>
+                            <span>@Html.DisplayFor(model => model.Name)</span>
+                        </div>
+                        <div>
+                            <span class="bold">@Html.DisplayNameFor(model => model.MinStart): </span>
+                            <span>@Html.DisplayFor(model => model.MinStart)</span>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="homeCenter"><a class="btn btn-primary box" data-toggle="modal" data-target="#confirmModal">@Localizer["Start exam"]</a></div>
+            </div>
+        </div>
+}

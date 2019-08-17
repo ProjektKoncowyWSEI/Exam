@@ -121,15 +121,7 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
     padding-left: 50%; }
   .td {
     font-weight: bold;
-    display: block; }
-  /*td:before {      
-        position: absolute;        
-        top: 6px;
-        left: 6px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-    }*/ }
+    display: block; } }
 
 .alertPosition {
   width: 25%;
@@ -174,3 +166,32 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
 
 .container {
   max-width: 1440px !important; }
+
+.bold {
+  font-weight: bold !important; }
+
+.box {
+  position: relative;
+  height: 280px;
+  min-width: 280px;
+  max-width: 280px;
+  box-shadow: 3px 3px 3px #e4dddd;
+  word-wrap: break-word;
+  text-align: center;
+  margin: 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex; }
+
+.homeCenter {
+  height: 100%;
+  align-items: center;
+  justify-content: center; }
+
+@media only screen and (max-width: 730px) {
+  .homeCenter {
+    display: block; } }
+
+@media only screen and (min-width: 731px) {
+  .homeCenter {
+    display: flex; } }

@@ -52,16 +52,16 @@ namespace Exam.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async virtual Task<IActionResult> Create(int id)
-        {
+        {            
             if (id > 0)
             {
                 logger.LogInformation($"Create, {id}");
                 User item = new User();
-                logger.LogInformation($"User item = new User();");
+                //logger.LogInformation($"User item = new User();");
                 item.ExamId = id;
-                logger.LogInformation($"item.ExamId = id;");
+                //logger.LogInformation($"item.ExamId = id;");
                 item.Login = HttpContext.User.Identity.Name;
-                logger.LogInformation($"item.Login = HttpContext.User.Identity.Name;");
+                //logger.LogInformation($"item.Login = HttpContext.User.Identity.Name;");
                 User created = null;
                 try
                 {
@@ -75,13 +75,15 @@ namespace Exam.Controllers
                         created = await uow.UsersRepo.AddAsync(item);
                     string examName = "";
                     string message = "";
-                    if (created != null)
+                    if (created != null || dbItem != null)
                     {
                         var temp = await uow.ExamsRepo.GetAsync(id);
                         if (temp != null)
                         {
+                            string examUri = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/StartExam/{temp.Code}";
                             examName = temp.Name;
-                            message = temp.ToString();
+                            message = localizer["Name {0}<br/>Code {1}<br/>When {2} - {3}<br/>Duration {4} min", temp.Name, temp.Code, temp.MinStart, temp.MaxStart, temp.DurationMinutes]
+                                + $"<br/> Link: <a href='{examUri}'>{examUri}</a>";
                         }
                     }
                     await emailSender.SendEmailAsync(item.Login, localizer["User sing up for exam {0}", examName], message); //TODO Dodać link do egzaminu

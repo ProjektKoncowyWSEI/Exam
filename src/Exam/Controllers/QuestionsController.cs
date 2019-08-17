@@ -68,6 +68,6 @@ namespace Exam.Controllers
         {
             logger.LogWarning(Localizer["Questions can not be removed, you can deactivate!"]);
             return RedirectToAction(nameof(Index), new { error = Localizer["Questions can not be removed, you can deactivate!"] });
-        }
+        }     
     }
 }

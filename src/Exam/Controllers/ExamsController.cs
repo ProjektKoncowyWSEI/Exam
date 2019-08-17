@@ -15,9 +15,10 @@ namespace Exam.Controllers
     {        
         private readonly Exams uow;
         private readonly ILogger logger;
-        public ExamsController(IStringLocalizer<SharedResource> localizer, WebApiClient<ExamContract.MainDbModels.Exam> service, Exams uow) : base(localizer, service)
+        public ExamsController(IStringLocalizer<SharedResource> localizer, WebApiClient<ExamContract.MainDbModels.Exam> service, Exams uow, ILogger<ExamsController> logger) : base(localizer, service)
         {
             this.uow = uow;
+            this.logger = logger;
         }     
         public override async Task<IActionResult> Index(int? parentId = null, int? questionId = null, string info = null, string warning = null, string error = null)
         {
@@ -44,7 +45,7 @@ namespace Exam.Controllers
             ViewBag.OnlyActive = onlyActive;
             return View(await uow.GetList(login, onlyActive));
         }
-        public override async Task<IActionResult> Delete(int? id, int? parentId = null)
+        public new async Task<IActionResult> Delete(int? id, int? parentId = null)
         {
             string message = Localizer["Exams can not be removed, you can deactivate!"];
             logger.LogWarning(message);
@@ -52,6 +53,7 @@ namespace Exam.Controllers
         }    
         public IActionResult SetActive(bool active)
         {
+            logger.LogInformation($"Exams - SetActive {active}");
             Response.Cookies.Append(GlobalHelpers.ACTIVE, active.ToString(), new Microsoft.AspNetCore.Http.CookieOptions());
             return RedirectToAction(nameof(Index));
         }
