@@ -13,15 +13,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ExamTutorialsAPI.Models
 {
     [AllowAnonymous]
-    public class Tutorial : PageModel
+    public class Tutorial : Entity
     {
-        ////private readonly IStringLocalizer<SharedResource> localizer;
+        //private readonly IStringLocalizer<SharedResource> localizer;
 
-        ////public Tutorial(IStringLocalizer<SharedResource> localizer)
+        //public Tutorial(IStringLocalizer<SharedResource> localizer)
         //{
         //    this.localizer = localizer;
         //}
-        [MaxLength(100)]
+    [MaxLength(100)]
         [Required]
         [Display(Name = "Tutorial name")]
         public string Name { get; set; }
