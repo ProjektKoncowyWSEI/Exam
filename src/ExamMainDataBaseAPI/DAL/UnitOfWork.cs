@@ -36,6 +36,11 @@ namespace ExamMainDataBaseAPI.DAL
                 q.Answers = await AnswersRepo.FindBy(a => a.QuestionId == q.Id).ToListAsync();
             return exam;
         }
+        public async Task<Exam> GetExamwithQuestionsWithAnswers(string code)
+        {
+            var exam = await ExamRepo.FindBy(a => a.Code == code).FirstOrDefaultAsync();
+            return exam != null ? await GetExamwithQuestionsWithAnswers(exam.Id) : null;           
+        }
         public async Task Clone(Exam item)
         {
             var newItem = new Exam

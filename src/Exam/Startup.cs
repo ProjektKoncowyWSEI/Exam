@@ -30,6 +30,7 @@ using ExamContract.MainDbModels;
 using Exam.Data.UnitOfWork;
 using Exam.Areas.Identity.Pages.Account.Manage;
 using ExamContract.CourseModels;
+using Exam.Controllers;
 
 namespace Exam
 {
@@ -69,6 +70,7 @@ namespace Exam
             services.AddScoped<ILogger, Logger.ExamLogger>();
             services.AddScoped<ILogger<LoginModel>, Logger.ExamLogger<LoginModel>>();
             services.AddScoped<ILogger<ChangePasswordModel>, Logger.ExamLogger<ChangePasswordModel>>();            
+            services.AddScoped<ILogger<ExamsController>, Logger.ExamLogger<ExamsController>>();
             services.AddTransient<ITutorialsRepo, TutorialsRepo>();
             services.AddTransient<WebApiClient<ExamContract.MainDbModels.Exam>, ExamsApiClient>();
             services.AddTransient<WebApiClient<Question>, QuestionsApiClient>();

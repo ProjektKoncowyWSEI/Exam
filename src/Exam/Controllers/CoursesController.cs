@@ -58,7 +58,17 @@ namespace Exam.Controllers
                 var examsCourses = await examCourses.GetListAsync(course.Id);
                 foreach (var ec in examsCourses)
                 {
-                    tempExams.Add(await exams.GetAsync(ec.Id));
+                    exam e = null;
+                    try
+                    {
+                        e = await exams.GetAsync(ec.Id);
+                        tempExams.Add(e);
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogError($"Unknown Exam id: {ec.Id} *** try to delete *** {ex.ToString()}");
+                        await examCourses.DeleteAsync(ec.CourseId, ec.Id);
+                    }                    
                 }
                 model.Add(new CourseDTO
                 {

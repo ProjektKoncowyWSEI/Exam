@@ -30,10 +30,6 @@ namespace ExamContract.MainDbModels
         public decimal MaxPoints { get; set; }       
        
         public ICollection<Question> Questions { get; set; }
-        public ICollection<User> Users { get; set; }
-        public override string ToString()
-        {
-            return $"Name: {Name} ** Code: {Code} ** {MinStart} - {MaxStart} ** Time: {DurationMinutes} min";
-        }
+        public ICollection<User> Users { get; set; }       
     }
 }

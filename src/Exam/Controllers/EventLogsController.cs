@@ -9,6 +9,7 @@ using Logger.Data;
 using Logger.Model;
 using Helpers;
 using Microsoft.Extensions.Logging;
+using System.IO;
 
 namespace Exam.Controllers
 {
@@ -24,6 +25,15 @@ namespace Exam.Controllers
        
         public async Task<IActionResult> Index()
         {
+            try
+            {
+                var file = new FileInfo(_context.Database.GetDbConnection().ConnectionString.Replace("Filename=", ""));
+                ViewBag.kB = file.Length / 1000;
+            }
+            catch (Exception)
+            {
+                ViewBag.kB = "...";
+            }            
             return View(await _context.EventLog.OrderByDescending(o=>o.CreatedTime).ToArrayAsync());
         }
 

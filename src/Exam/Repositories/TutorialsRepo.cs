@@ -22,7 +22,7 @@ namespace Exam.Repositories
         public TutorialsRepo(ILogger logger)
         {
             //nie jestem pewna adresu?
-            client.BaseAddress = new Uri("http://localhost:52039/api/tutorials");
+            client.BaseAddress = new Uri("http://localhost:54321/api/tutorials");
             this.logger = logger;
         }
 
