@@ -24,7 +24,7 @@ namespace Exam.Controllers
         }
         public async Task<IActionResult> Start(string code)
         {
-            uow.StartExam(HttpContext.User.Identity.Name, code);
+            await uow.StartExam(HttpContext.User.Identity.Name, code);
             return RedirectToAction(nameof(Index), new { code });
         }
     }

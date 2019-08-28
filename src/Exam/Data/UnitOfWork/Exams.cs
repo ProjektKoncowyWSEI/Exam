@@ -27,15 +27,14 @@ namespace Exam.Data.UnitOfWork
             ExamApproachesRepo = examApproachesRepo;
         }
 
-        internal void StartExam(string name, string code)
+        public Task<bool> StartExam(string login, string code)
         {
             throw new NotImplementedException();
         }
 
         public async Task<List<exam>> GetList(string login = null, bool? onlyActive = null)
-        {
-            List<exam> result = new List<exam>();
-            result = await ExamsRepo.GetListAsync(login, onlyActive);                  
+        {            
+            List<exam> result = await ExamsRepo.GetListAsync(login, onlyActive);                  
             foreach (var e in result)
             {
                 var exam = await ExamsWithAllRepo.GetAsync(e.Id);
