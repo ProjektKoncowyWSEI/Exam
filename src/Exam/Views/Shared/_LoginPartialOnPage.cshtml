@@ -5,7 +5,7 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <a class="btn btn-primary box" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><span>@Localizer["Hello"] @User.Identity.Name! [@User.CurrentRole()]</span></a>
+    <a class="btn btn-primary box" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><span>@Localizer["Hello"] <br/> @User.Identity.Name! <br />[@User.CurrentRole()]</span></a>
     @if (User.IsInRole(RoleEnum.admin))
     {
         <a class="btn btn-primary box" asp-area="Identity" asp-page="/Account/Register">@Localizer["Add user"]</a>

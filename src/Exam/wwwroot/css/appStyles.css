@@ -172,9 +172,9 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
 
 .box {
   position: relative;
-  height: 280px;
-  min-width: 280px;
-  max-width: 280px;
+  height: 230px;
+  min-width: 230px;
+  max-width: 270px;
   box-shadow: 3px 3px 3px #e4dddd;
   word-wrap: break-word;
   text-align: center;
