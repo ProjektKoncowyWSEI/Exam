@@ -19,4 +19,8 @@
     <Folder Include="Data\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ExamContract\ExamContract.csproj" />
+  </ItemGroup>
+
 </Project>

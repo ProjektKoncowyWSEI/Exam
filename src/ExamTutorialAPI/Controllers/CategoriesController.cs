@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExamContract.TutorialModels;
 using ExamTutorialsAPI.DAL;
-using ExamTutorialsAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExamTutorialAPI.Controllers

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using Exam.TagHelpers;
-using ExamTutorialsAPI.Models;
+using ExamContract.TutorialModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

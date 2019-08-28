@@ -1,8 +1,8 @@
-﻿using ExamTutorialsAPI.DAL;
+﻿using ExamContract;
 using System;
 using System.Collections.Generic;
 
-namespace ExamTutorialsAPI.Models
+namespace ExamContract.TutorialModels
 {
     public class Category : Entity
     {  

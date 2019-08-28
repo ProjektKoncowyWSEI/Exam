@@ -1,4 +1,5 @@
-﻿using ExamTutorialsAPI.Models;
+﻿using ExamContract.TutorialModels;
+using ExamTutorialsAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

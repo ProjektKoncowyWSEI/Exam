@@ -1,7 +1,7 @@
-﻿using ExamTutorialsAPI.DAL;
+﻿using ExamContract;
 using System.ComponentModel.DataAnnotations;
 
-namespace ExamTutorialsAPI.Models
+namespace ExamContract.TutorialModels
 {
     public class Tutorial : Entity
     {       

@@ -1,4 +1,5 @@
 ﻿using ExamContract.MainDbModels;
+using ExamContract.TutorialModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;

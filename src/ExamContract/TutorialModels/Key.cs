@@ -1,9 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ExamTutorialsAPI.Models
-{ 
-    
+namespace ExamContract.TutorialModels
+{    
 	public class Key
 	{
         [Key]

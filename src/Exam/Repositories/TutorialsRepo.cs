@@ -1,5 +1,5 @@
 ﻿using Exam.IRepositories;
-using ExamTutorialsAPI.Models;
+using ExamContract.TutorialModels;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
