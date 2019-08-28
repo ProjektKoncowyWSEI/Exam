@@ -36,10 +36,10 @@ namespace ExamMainDataBaseAPI
             switch (Configuration.GetSection("UseDatabase").Value)
             {
                 case SQLite:
-                    services.AddDbContext<ExamQuestionsDbContext>(o => o.UseSqlite(mainDbConnectionSQLite));
+                    services.AddDbContext<Context>(o => o.UseSqlite(mainDbConnectionSQLite));
                     break;
                 case SQL:
-                    services.AddDbContext<ExamQuestionsDbContext>(o => o.UseSqlServer(mainDbConnection));
+                    services.AddDbContext<Context>(o => o.UseSqlServer(mainDbConnection));
                     break;
             }
 

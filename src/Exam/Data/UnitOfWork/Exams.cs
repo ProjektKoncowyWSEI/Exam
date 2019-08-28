@@ -15,15 +15,23 @@ namespace Exam.Data.UnitOfWork
         public readonly WebApiClient<Answer> AnswersRepo;
         public readonly WebApiClient<User> UsersRepo;
         public readonly ExamsQuestionsAnswersApiClient ExamsWithAllRepo;
+        public readonly ExamApproachesApiClient ExamApproachesRepo;
 
-        public Exams(WebApiClient<exam> exams, WebApiClient<Question> questions, WebApiClient<Answer> answers, ExamsQuestionsAnswersApiClient examsWithAll, WebApiClient<User> users)
+        public Exams(WebApiClient<exam> exams, WebApiClient<Question> questions, WebApiClient<Answer> answers, ExamsQuestionsAnswersApiClient examsWithAll, WebApiClient<User> users, ExamApproachesApiClient examApproachesRepo)
         {
             ExamsRepo = exams;
             QuestionsRepo = questions;
             AnswersRepo = answers;
             ExamsWithAllRepo = examsWithAll;
             UsersRepo = users;
+            ExamApproachesRepo = examApproachesRepo;
         }
+
+        internal void StartExam(string name, string code)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<exam>> GetList(string login = null, bool? onlyActive = null)
         {
             List<exam> result = new List<exam>();

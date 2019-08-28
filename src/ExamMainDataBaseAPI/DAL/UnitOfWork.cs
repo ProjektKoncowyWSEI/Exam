@@ -15,7 +15,7 @@ namespace ExamMainDataBaseAPI.DAL
         public Repository<Question> QuestionRepo { get; private set; }
         public Repository<Answer> AnswersRepo { get; private set; }
 
-        public UnitOfWork(ExamQuestionsDbContext context,Repository<Exam> examRepo, Repository<Question> questionRepo, Repository<Answer> answersRepo)
+        public UnitOfWork(Context context,Repository<Exam> examRepo, Repository<Question> questionRepo, Repository<Answer> answersRepo)
         {           
             this.ExamRepo = examRepo;
             this.QuestionRepo = questionRepo;

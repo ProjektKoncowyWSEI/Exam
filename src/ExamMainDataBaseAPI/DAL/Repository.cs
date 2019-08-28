@@ -11,10 +11,10 @@ namespace ExamMainDataBaseAPI.DAL
 {
     public class Repository<T> : IDisposable where T : Entity
     {
-        private readonly ExamQuestionsDbContext context;
+        private readonly Context context;
         private DbSet<T> dbSet = null;
 
-        public Repository(ExamQuestionsDbContext context)
+        public Repository(Context context)
         {
             this.context = context;
             dbSet = context.Set<T>();
