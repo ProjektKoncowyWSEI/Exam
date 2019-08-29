@@ -687,4 +687,19 @@
   <data name="Yes" xml:space="preserve">
     <value>Tak</value>
   </data>
+  <data name="Course id is not valid" xml:space="preserve">
+    <value>Id kursu nie jest prawidłowe</value>
+  </data>
+  <data name="Join course" xml:space="preserve">
+    <value>Zapisz się na kurs</value>
+  </data>
+  <data name="Name {0}, Login {1}" xml:space="preserve">
+    <value>Nazwa {0}, Login {1}</value>
+  </data>
+  <data name="User signed into course" xml:space="preserve">
+    <value>Użytkownik zapisał się na kurs</value>
+  </data>
+  <data name="User sing up for course {0}" xml:space="preserve">
+    <value>Użytkownik zapisał się na kurs {0}</value>
+  </data>
 </root>

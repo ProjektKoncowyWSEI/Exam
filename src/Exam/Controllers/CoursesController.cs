@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Exam.Data.UnitOfWork;
 using Exam.Services;
 using ExamContract.CourseModels;
 using ExamContract.ExamDTO;
@@ -15,17 +16,20 @@ using examCourse = ExamContract.CourseModels.ExamCourse;
 
 namespace Exam.Controllers
 {
+    [AuthorizeByRoles(RoleEnum.admin, RoleEnum.teacher)]
     public class CoursesController : MyBaseController<ExamContract.CourseModels.Course>
     {
         private readonly WebApiClient<exam> exams;
         private readonly CourseTwoKeyApiClient<examCourse> examCourses;
         private readonly ILogger logger;
+        private readonly Courses uow;
 
-        public CoursesController(IStringLocalizer<SharedResource> localizer, WebApiClient<Course> service, WebApiClient<exam> exams, CourseTwoKeyApiClient<examCourse> examCourses, ILogger logger) : base(localizer, service)
+        public CoursesController(IStringLocalizer<SharedResource> localizer, WebApiClient<Course> service, WebApiClient<exam> exams, CourseTwoKeyApiClient<examCourse> examCourses, ILogger logger, Courses courses) : base(localizer, service)
         {
             this.exams = exams;
             this.examCourses = examCourses;
             this.logger = logger;
+            this.uow = courses;
         }
         public override async Task<IActionResult> Index(int? parentId = null, int? questionId = null, string info = null, string warning = null, string error = null)
         {
@@ -49,33 +53,8 @@ namespace Exam.Controllers
             ViewBag.ExamId = parentId;
             ViewBag.QuestionId = questionId;
             bool onlyActive = Convert.ToBoolean(Request.Cookies[GlobalHelpers.ACTIVE]);
-            ViewBag.OnlyActive = onlyActive;
-            var courses = await Service.GetListAsync(login, onlyActive);
-            var model = new List<CourseDTO>();
-            foreach (var course in courses)
-            {
-                List<exam> tempExams = new List<exam>();
-                var examsCourses = await examCourses.GetListAsync(course.Id);
-                foreach (var ec in examsCourses)
-                {
-                    exam e = null;
-                    try
-                    {
-                        e = await exams.GetAsync(ec.Id);
-                        tempExams.Add(e);
-                    }
-                    catch (Exception ex)
-                    {
-                        logger.LogError($"Unknown Exam id: {ec.Id} *** try to delete *** {ex.ToString()}");
-                        await examCourses.DeleteAsync(ec.CourseId, ec.Id);
-                    }                    
-                }
-                model.Add(new CourseDTO
-                {
-                    Course = course,
-                    Exams = tempExams
-                });
-            }
+            ViewBag.OnlyActive = onlyActive;           
+            var model = await uow.GetListDTO(login, onlyActive);
             return View(model);
         }
         public override async Task<IActionResult> Delete(int? id, int? parentId = null)

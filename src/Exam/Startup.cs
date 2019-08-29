@@ -75,12 +75,14 @@ namespace Exam
             services.AddTransient<WebApiClient<ExamContract.MainDbModels.Exam>, ExamsApiClient>();
             services.AddTransient<WebApiClient<Question>, QuestionsApiClient>();
             services.AddTransient<WebApiClient<Answer>, AnswersApiClient>();             
-            services.AddTransient<WebApiClient<ExamContract.MainDbModels.User>, UsersApiClient>();
+            services.AddTransient<WebApiClient<ExamContract.MainDbModels.User>, UsersMainDbApiClient>();
+            services.AddTransient<WebApiClient<ExamContract.CourseModels.User>, UsersCoursesApiClient>();
             services.AddTransient<WebApiClient<Course>, CoursesApiClient>();
             services.AddTransient<CourseTwoKeyApiClient<ExamCourse>, CouorseExamApiClient>();
             services.AddTransient<ExamsQuestionsAnswersApiClient>(); //Wymagamy klasy konkretnej
             services.AddTransient<Exams>();
-            
+            services.AddTransient<Courses>();
+
 
             services.ConfigureApplicationCookie(o =>
             {

@@ -17,14 +17,14 @@ namespace Exam.Data.UnitOfWork
         public readonly ExamsQuestionsAnswersApiClient ExamsWithAllRepo;
         public readonly ExamApproachesApiClient ExamApproachesRepo;
 
-        public Exams(WebApiClient<exam> exams, WebApiClient<Question> questions, WebApiClient<Answer> answers, ExamsQuestionsAnswersApiClient examsWithAll, WebApiClient<User> users, ExamApproachesApiClient examApproachesRepo)
+        public Exams(WebApiClient<exam> exams, WebApiClient<Question> questions, WebApiClient<Answer> answers, ExamsQuestionsAnswersApiClient examsWithAll, WebApiClient<User> users)//, ExamApproachesApiClient examApproachesRepo)
         {
             ExamsRepo = exams;
             QuestionsRepo = questions;
             AnswersRepo = answers;
             ExamsWithAllRepo = examsWithAll;
             UsersRepo = users;
-            ExamApproachesRepo = examApproachesRepo;
+            //ExamApproachesRepo = examApproachesRepo;
         }
 
         public Task<bool> StartExam(string login, string code)

@@ -1,0 +1,39 @@
+﻿@model ExamContract.ExamDTO.CourseDTO
+@{
+    ViewData["Title"] = "Course";
+}
+
+<div class="mainImage-books"></div>
+@if (Model != null)
+{
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-12">
+                <div>
+                    <span class="bold">@Html.DisplayNameFor(model => model.Course.Name): </span>
+                    <span>@Html.DisplayFor(model => model.Course.Name)</span>
+                </div>
+                <div>
+                    <span class="bold">@Html.DisplayNameFor(model => model.Course.Description): </span>
+                    <span>@Html.DisplayFor(model => model.Course.Description)</span>
+                </div>
+                <div>
+                    <span class="bold">@Html.DisplayNameFor(model => model.Course.Login): </span>
+                    <span>@Html.DisplayFor(model => model.Course.Login)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <partial name="_ExamsGrid" model="Model.Exams" />
+            </div>
+            <div class="col-lg-6 col-md-12">
+                
+            </div>
+        </div>
+    </div>
+</div>
+}

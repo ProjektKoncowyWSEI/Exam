@@ -37,7 +37,7 @@
                     }
                     else if (User.IsInRole(RoleEnum.student))
                     {
-                        //TODO dodaæ ob³ugê dla studenta
+                        <a onclick="showLoader();" class="nav-link text-dark" asp-area="" asp-controller="UserCourses" asp-action="Index">@Localizer["Courses"]</a>
                     }
                 </li>
 

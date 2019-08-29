@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Exam.Services
 {
-    public class UsersApiClient : WebApiClient<User>
+    public class UsersMainDbApiClient : WebApiClient<User>
     {
-        public UsersApiClient(ILogger logger, IConfiguration configuration) : base(logger, configuration, "MainDbAPIConnection", "Users")
+        public UsersMainDbApiClient(ILogger logger, IConfiguration configuration) : base(logger, configuration, "MainDbAPIConnection", "Users")
         {
         }
     }
