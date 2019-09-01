@@ -714,4 +714,19 @@
   <data name="Warning" xml:space="preserve">
     <value>Ostrzeżenie</value>
   </data>
+  <data name="Exam {0} is not active, contact the owner: {1}" xml:space="preserve">
+    <value>Egzamin {0} nie jest aktywny, skontaktuj sie z wlaścicelem: {1}</value>
+  </data>
+  <data name="Go to exam" xml:space="preserve">
+    <value>Przejdź do egzaminu</value>
+  </data>
+  <data name="The exam time has passed" xml:space="preserve">
+    <value>Czas egzaminu minął</value>
+  </data>
+  <data name="You are not registered for the exam, you can do it by clicking the button." xml:space="preserve">
+    <value>Nie jesteś zapisany na egzamin, możesz to zrobic klikając w przycisk.</value>
+  </data>
+  <data name="You can't start the exam right now, you can start the exam between {0} and {1}" xml:space="preserve">
+    <value>Nie możesz teraz rozpocząć podejścia do egzaminu, możesz rozpocząć egzamin miedzy {0}, a {1}</value>
+  </data>
 </root>

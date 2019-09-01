@@ -53,6 +53,7 @@ namespace ExamMainDataBaseAPI
             services.AddTransient<Repository<Exam>>();
             services.AddTransient<Repository<User>>();
             services.AddTransient<UnitOfWork>();       
+            services.AddTransient<ApproachesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

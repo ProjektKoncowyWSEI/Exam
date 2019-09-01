@@ -40,7 +40,6 @@ namespace Exam.Controllers
             {
                 return NotFound();
             }
-
             return View(item);
         }
 

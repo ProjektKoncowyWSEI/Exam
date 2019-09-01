@@ -80,6 +80,7 @@ namespace Exam
             services.AddTransient<WebApiClient<Course>, CoursesApiClient>();
             services.AddTransient<CourseTwoKeyApiClient<ExamCourse>, CouorseExamApiClient>();
             services.AddTransient<ExamsQuestionsAnswersApiClient>(); //Wymagamy klasy konkretnej
+            services.AddTransient<ExamApproachesApiClient>();
             services.AddTransient<Exams>();
             services.AddTransient<Courses>();
 

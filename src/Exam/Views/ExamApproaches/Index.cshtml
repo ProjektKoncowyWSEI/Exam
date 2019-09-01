@@ -49,13 +49,17 @@
                 </div>
             </div>
             <div class="card-body">
-                @if (ViewBag.NotAssigned == true)
+                @if (ViewBag.IsActive == true)
+                {
+                    <div class="homeCenter"><a onclick="showLoader()" asp-controller="ExamApproaches" asp-action="Start" asp-route-code="@Model.Code" class="btn btn-primary box">@Localizer["Go to exam"]</a></div>
+                }
+                else if (ViewBag.NotAssigned == true)
                 {
                     <form asp-action="SignIntoExam" asp-route-code="@Model.Code" asp-route-id="@Model.Id" method="post">
-                        <div class="homeCenter"><button type="submit" class="btn btn-primary box">@Localizer["Join exam"]</button></div>
-                    </form>                    
+                        <div class="homeCenter"><button type="submit" onclick="showLoader()" class="btn btn-primary box">@Localizer["Join exam"]</button></div>
+                    </form>
                 }
-                else if(ViewBag.NotAvailable != true)
+                else if (ViewBag.NotAvailable != true)
                 {
                     <div class="homeCenter"><a class="btn btn-primary box" data-toggle="modal" data-target="#confirmModal">@Localizer["Start exam"]</a></div>
                 }

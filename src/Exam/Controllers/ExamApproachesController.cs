@@ -34,18 +34,17 @@ namespace Exam.Controllers
             ViewBag.Info = info;                               
             ViewBag.Error = error;                     
             ViewBag.NotAvailable = ViewBag.Warning != null;
+            ViewBag.IsActive = await uow.IsActive(model);
             return View(model);
         }
         public async Task<IActionResult> Start(string code)
         {
             var model = await uow.GetExamByCode(code, true);
             var (message, isUserAssigned) = await uow.CheckExam(model);
-            if (message != null || !isUserAssigned)
-            {
+            if (message != null || !isUserAssigned)            
                 return RedirectToAction(nameof(Index), new { code, error = message, notAssigned = !isUserAssigned });
-            }           
-            await uow.StartExam(HttpContext.User.Identity.Name, code);
-            return RedirectToAction(nameof(Index), new { code });
+            ViewBag.StartDate = await uow.StartExam(HttpContext.User.Identity.Name, code);            
+            return View("Exam", model);   
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

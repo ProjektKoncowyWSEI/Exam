@@ -48,7 +48,7 @@ namespace Exam.Services
             catch (Exception ex)
             {
                 logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
-                throw;
+                return null;
             }
         }
         public async virtual Task<List<T>> GetListAsync(string login = null, bool? onlyActive = null)
@@ -78,7 +78,7 @@ namespace Exam.Services
             catch (Exception ex)
             {
                 logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
-                throw;
+                return null;
             }
         }
         public async virtual Task<List<T>> GetListAsync(int parrentId)
@@ -99,30 +99,9 @@ namespace Exam.Services
             catch (Exception ex)
             {
                 logger.LogError(ex, "GetListAsync()");
-                throw;
+                return null;
             }
-        }
-        //public async virtual Task<List<T>> GetListAsync(int page = 1, int? pageLocalSize = null)
-        //{
-        //    try
-        //    {
-        //        var response = await Client.GetAsync($"{uri}/{page}/{pageLocalSize}");
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var content = await response.Content.ReadAsStringAsync();
-        //            return JsonConvert.DeserializeObject<List<T>>(content);
-        //        }
-        //        else
-        //        {
-        //            throw new Exception(response.StatusCode.ToString());
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        logger.LogError(ex, "GetListAsync(int page = 1, int? pageLocalSize = null)");
-        //        throw;
-        //    }
-        //}
+        }        
         public async virtual Task<T> AddAsync(T item)
         {
             try
@@ -139,7 +118,7 @@ namespace Exam.Services
             catch (Exception ex)
             {
                 logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
-                throw;
+                return null;
             }
         }
         public async virtual Task<bool> UpdateAsync(T item)
@@ -156,7 +135,7 @@ namespace Exam.Services
             catch (Exception ex)
             {
                 logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
-                throw;
+                return false;
             }
         }
         public async virtual Task<bool> DeleteAsync(int id)
@@ -173,7 +152,7 @@ namespace Exam.Services
             catch (Exception ex)
             {
                 logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
-                throw;
+                return false;
             }
         }
     }

@@ -23,7 +23,7 @@ namespace Exam.Data.UnitOfWork
         public readonly ExamsQuestionsAnswersApiClient ExamsWithAllRepo;
         public readonly ExamApproachesApiClient ExamApproachesRepo;
 
-        public Exams(WebApiClient<exam> exams, WebApiClient<Question> questions, WebApiClient<Answer> answers, ExamsQuestionsAnswersApiClient examsWithAll, WebApiClient<User> users, IEmailSender emailSender, IStringLocalizer<SharedResource> localizer, IHttpContextAccessor httpContext)
+        public Exams(WebApiClient<exam> exams, WebApiClient<Question> questions, WebApiClient<Answer> answers, ExamsQuestionsAnswersApiClient examsWithAll, WebApiClient<User> users, IEmailSender emailSender, IStringLocalizer<SharedResource> localizer, IHttpContextAccessor httpContext, ExamApproachesApiClient examApproachesRepo)
         {
             ExamsRepo = exams;
             QuestionsRepo = questions;
@@ -33,12 +33,32 @@ namespace Exam.Data.UnitOfWork
             this.emailSender = emailSender;
             this.localizer = localizer;
             this.httpContext = httpContext;
-            //ExamApproachesRepo = examApproachesRepo;
+            ExamApproachesRepo = examApproachesRepo;
         }
 
-        public Task<bool> StartExam(string login, string code)
+        public async Task<DateTime> StartExam(string login, string code)
         {
-            throw new NotImplementedException();
+            var exam = await GetExamByCode(code, true);
+            if (exam != null)
+            {
+                var savedExam = await ExamApproachesRepo.GetAsync(exam.Id, login);
+                if (savedExam == null)
+                {
+                    ExamApproache item = new ExamApproache
+                    {
+                        ExamId = exam.Id,
+                        Start = DateTime.Now,
+                        End = DateTime.Now.AddMinutes(exam.DurationMinutes).AddSeconds(30),
+                        Login = login
+                    };
+                    var result = await ExamApproachesRepo.AddAsync(item);
+                    if (result != null)
+                        return result.Start;
+                }
+                else
+                    return savedExam.Start;
+            }
+            return new DateTime(2000, 1, 1);
         }
 
         public async Task<List<exam>> GetList(string login = null, bool? onlyActive = null)
@@ -99,12 +119,20 @@ namespace Exam.Data.UnitOfWork
         {
             var isUserAssigned = await IsUserAssigned(exam.Code, httpContext.HttpContext.User.Identity.Name);
             if (!exam.Active)
-                return ($"Egzamin {exam.Code} nie jest aktywny, skontaktuj sie z wlaścicelem: {exam.Login}", isUserAssigned);            
+                return (localizer["Exam {0} is not active, contact the owner: {1}", exam.Code, exam.Login], isUserAssigned);
             if (!isUserAssigned)
-                return ("Nie jesteś zapisany na egzamin, możesz to zrobic klikając w przycisk.", isUserAssigned);           
+                return (localizer["You are not registered for the exam, you can do it by clicking the button."], isUserAssigned);
             if (DateTime.Now < exam.MinStart || DateTime.Now > exam.MaxStart)
-                return ($"Nie możesz teraz rozpocząć podejścia do egzaminu, możesz rozpocząć egzamin miedzy {exam.MinStart}, a {exam.MaxStart}", isUserAssigned);
+                return (localizer["You can't start the exam right now, you can start the exam between {0} and {1}", exam.MinStart, exam.MaxStart], isUserAssigned);
+            var savedExam = await ExamApproachesRepo.GetAsync(exam.Id, httpContext.HttpContext.User.Identity.Name);
+            if (savedExam != null && savedExam.Start.AddMinutes(exam.DurationMinutes) < DateTime.Today)
+                return (localizer["The exam time has passed"], isUserAssigned);
             return (null, isUserAssigned);
+        }
+        public async Task<bool> IsActive(exam exam)
+        {
+            var savedExam = await ExamApproachesRepo.GetAsync(exam.Id, httpContext.HttpContext.User.Identity.Name);
+            return (savedExam != null && savedExam.Start.AddMinutes(exam.DurationMinutes) > DateTime.Today);               
         }
         public async Task<User> SignIntoExam(int id)
         {
