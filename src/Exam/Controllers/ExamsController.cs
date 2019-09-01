@@ -49,7 +49,10 @@ namespace Exam.Controllers
         {
             string message = Localizer["Exams can not be removed, you can deactivate!"];
             logger.LogWarning(message);
-            return RedirectToAction(nameof(Index), new { error = message });
+            return await Task.Run<ActionResult>(() =>
+            {
+                return RedirectToAction(nameof(Index), new { error = message });
+            });           
         }    
         public IActionResult SetActive(bool active)
         {
