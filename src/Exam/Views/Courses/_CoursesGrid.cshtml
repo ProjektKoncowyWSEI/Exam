@@ -44,7 +44,7 @@
                             @Html.DisplayNameFor(model => model.Course.Description)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Course.Login)
+                            @Localizer["Owner"]
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Course.Active)
@@ -66,7 +66,7 @@
                                 @Html.DisplayFor(modelItem => item.Course.Description)
                             </td>                        
                             <td>
-                                <div class="td">@Html.DisplayNameFor(model => model.Course.Login)</div>
+                                <div class="td">@Localizer["Owner"]</div>
                                 @Html.DisplayFor(modelItem => item.Course.Login)
                             </td>
                             <td>

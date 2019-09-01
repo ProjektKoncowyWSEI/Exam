@@ -15,86 +15,86 @@
         {
             try
             {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Course.Name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Course.Description)
-                    </th>                  
-                    <th>
-                        @Html.DisplayNameFor(model => model.Course.Login)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Active)
-                    </th>  
-                    <th>Link</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody id="coursesGrid">
-                @foreach (var item in Model)
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Course.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Course.Description)
+                            </th>
+                            <th>
+                                @Localizer["Owner"]
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Active)
+                            </th>
+                            <th>Link</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="coursesGrid">
+                        @foreach (var item in Model)
                         {
                             if (item.Course != null)
                             {
-                <tr>
-                    <td>
-                        <div class="td">@Html.DisplayNameFor(model => model.Course.Name)</div>
-                        @Html.DisplayFor(modelItem => item.Course.Name)
-                    </td>
-                    <td>
-                        <div class="td">@Html.DisplayNameFor(model => model.Course.Description)</div>
-                        @Html.DisplayFor(modelItem => item.Course.Description)
-                    </td>
-                    <td>
-                        <div class="td">@Html.DisplayNameFor(model => model.Course.Login)</div>
-                        @Html.DisplayFor(modelItem => item.Course.Login)
-                    </td>
-                    <td>
-                        <div class="td">@Html.DisplayNameFor(model => model.Course.Active)</div>
-                        @Html.DisplayFor(modelItem => item.Active)
-                    </td>
-                    <td>
-                        <div class="td">Link</div>
-                        @if (item.Active)
-                        {
-                            <a asp-controller="UserCourses" asp-action="Course" asp-route-id="@item.CourseId" class="bold">#</a>
+                                <tr>
+                                    <td>
+                                        <div class="td">@Html.DisplayNameFor(model => model.Course.Name)</div>
+                                        @Html.DisplayFor(modelItem => item.Course.Name)
+                                    </td>
+                                    <td>
+                                        <div class="td">@Html.DisplayNameFor(model => model.Course.Description)</div>
+                                        @Html.DisplayFor(modelItem => item.Course.Description)
+                                    </td>
+                                    <td>
+                                        <div class="td">@Localizer["Owner"]</div>
+                                        @Html.DisplayFor(modelItem => item.Course.Login)
+                                    </td>
+                                    <td>
+                                        <div class="td">@Html.DisplayNameFor(model => model.Course.Active)</div>
+                                        @Html.DisplayFor(modelItem => item.Active)
+                                    </td>
+                                    <td>
+                                        <div class="td">Link</div>
+                                        @if (item.Active)
+                                        {
+                                            <a asp-controller="UserCourses" asp-action="Course" asp-route-id="@item.CourseId" class="bold"><div class="btn btn-primary btn-sm">@Localizer["Go to"]</div></a>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div>
+                                            @if (item.Active)
+                                            {
+                                                <form asp-action="Edit">
+                                                    <input type="hidden" name="id" value="@item.Id" />
+                                                    <button onclick="showLoader()" class="btn btn-primary btn-sm">@Localizer["Sign out"]</button>
+                                                </form>
+                                            }
+                                            else
+                                            {
+                                                <form asp-action="Create">
+                                                    <input type="hidden" name="id" value="@item.Course.Id" />
+                                                    <button onclick="showLoader()" class="btn btn-primary btn-sm">@Localizer["Sign in"]</button>
+                                                </form>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
                         }
-                    </td>
-                    <td>
-                        <div>
-                            @if (item.Active)
-                            {
-                                <form asp-action="Edit">
-                                    <input type="hidden" name="id" value="@item.Id" />
-                                    <button onclick="showLoader()" class="btn btn-primary btn-sm">@Localizer["Sign out"]</button>
-                                </form>
-                            }
-                            else
-                            {
-                                <form asp-action="Create">
-                                    <input type="hidden" name="id" value="@item.Course.Id" />
-                                    <button onclick="showLoader()" class="btn btn-primary btn-sm">@Localizer["Sign in"]</button>
-                                </form>
-                            }
-                        </div>
-                    </td>
-                </tr>
-                            }
-                        }
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
             }
             catch (Exception)
             {
                 if (error < 1)
                 {
                     error++;
-        <script>
-            location.reload();
-        </script>
+                    <script>
+                        location.reload();
+                    </script>
                 }
                 else
                 {

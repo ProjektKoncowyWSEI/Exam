@@ -27,8 +27,8 @@
                             <th>                                
                                 @Html.DisplayNameFor(model => model.Exam.MaxStart)
                             </th>
-                            <th>                                
-                                @Html.DisplayNameFor(model => model.Exam.Login)
+                            <th>
+                                @Localizer["Owner"]
                             </th>
                             <th>                               
                                 @Html.DisplayNameFor(model => model.Active)
@@ -58,7 +58,7 @@
                                         @Html.DisplayFor(modelItem => item.Exam.MaxStart)
                                     </td>
                                     <td>
-                                        <div class="td">@Html.DisplayNameFor(model => model.Exam.Login)</div>
+                                        <div class="td">@Localizer["Owner"]</div>
                                         @Html.DisplayFor(modelItem => item.Exam.Login)
                                     </td>
                                     <td>

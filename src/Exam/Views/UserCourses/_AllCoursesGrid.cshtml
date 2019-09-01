@@ -22,7 +22,7 @@
                                 @Html.DisplayNameFor(model => model.Description)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Login)
+                                @Localizer["Owner"]
                             </th>
                             <th></th>
                         </tr>
@@ -40,7 +40,7 @@
                                     @Html.DisplayFor(modelItem => item.Description)
                                 </td>
                                 <td>
-                                    <div class="td">@Html.DisplayNameFor(model => model.Login)</div>
+                                    <div class="td">@Localizer["Owner"]</div>
                                     @Html.DisplayFor(modelItem => item.Login)
                                 </td>
                                 <td>

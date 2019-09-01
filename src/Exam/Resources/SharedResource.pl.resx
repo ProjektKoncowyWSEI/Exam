@@ -702,4 +702,16 @@
   <data name="User sing up for course {0}" xml:space="preserve">
     <value>Użytkownik zapisał się na kurs {0}</value>
   </data>
+  <data name="Go to" xml:space="preserve">
+    <value>Przejdź</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Właściciel</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Informacja</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Ostrzeżenie</value>
+  </data>
 </root>

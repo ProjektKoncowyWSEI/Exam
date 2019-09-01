@@ -173,14 +173,17 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
     }    
 }
 
-.alertPosition {
-    width: 25%;
-    height: 80px;
+.alertPosition {   
+    position: relative;   
+}
+.alertContainer {
     position: fixed;
     top: 80px;
     right: 0;
     opacity: 0.8;
-    /*margin-left: 20%;*/
+    z-index: 99999;
+    width: 30%;
+    max-height: 300px;
 }
 
 .margin5px {
@@ -232,7 +235,7 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
     position: relative;
     height: 230px;
     min-width: 230px;
-    max-width: 270px;
+    max-width: 320px;
     box-shadow: $boxShadow;
     word-wrap: break-word;
     text-align: center;

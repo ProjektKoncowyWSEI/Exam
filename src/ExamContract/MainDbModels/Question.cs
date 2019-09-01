@@ -30,11 +30,9 @@ namespace ExamContract.MainDbModels
             }
             set
             {
-                AnswerType = (int)value;
-                answerTypesEnum = value;
+                AnswerType = (int)value;           
             }
-        }
-        private AnswerTypesEnum answerTypesEnum;       
+        }              
 
         public ICollection<Answer> Answers { get; set; }
     }

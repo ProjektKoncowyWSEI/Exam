@@ -36,16 +36,29 @@
                         <div>
                             <span class="bold">@Html.DisplayNameFor(model => model.MinStart): </span>
                             <span>@Html.DisplayFor(model => model.MinStart)</span>
-                        </div>  
+                        </div>
                         <div>
                             <span class="bold">@Html.DisplayNameFor(model => model.MaxStart): </span>
                             <span>@Html.DisplayFor(model => model.MaxStart)</span>
+                        </div>
+                        <div>
+                            <span class="bold">@Localizer["Owner"]: </span>
+                            <span>@Html.DisplayFor(model => model.Login)</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <div class="homeCenter"><a class="btn btn-primary box" data-toggle="modal" data-target="#confirmModal">@Localizer["Start exam"]</a></div>
+                @if (ViewBag.NotAssigned == true)
+                {
+                    <form asp-action="SignIntoExam" asp-route-code="@Model.Code" asp-route-id="@Model.Id" method="post">
+                        <div class="homeCenter"><button type="submit" class="btn btn-primary box">@Localizer["Join exam"]</button></div>
+                    </form>                    
+                }
+                else if(ViewBag.NotAvailable != true)
+                {
+                    <div class="homeCenter"><a class="btn btn-primary box" data-toggle="modal" data-target="#confirmModal">@Localizer["Start exam"]</a></div>
+                }
             </div>
         </div>
 }
