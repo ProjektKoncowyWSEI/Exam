@@ -23,7 +23,7 @@ namespace Exam.Controllers
             this.tutorialsRepo = tutorialsRepo;
             this.logger = logger;
         }
-        // GET: Tutorials
+      
         public async Task <IActionResult> Index( int pageId = 1, int? pageSizeLocal = 2)
         {
             try
@@ -43,8 +43,7 @@ namespace Exam.Controllers
                 return View(null);
             }
         }
-
-        // GET: Tutorials/Details/5
+        
         public async Task <IActionResult> Details(int? id)
         {
             if (id == null)
@@ -61,14 +60,12 @@ namespace Exam.Controllers
 
             return View(tutorials);
         }
-
-        // GET: Tutorials/Create
+      
         public ActionResult Create()
         {
             return View();
         }
-
-        // POST: Tutorials/Create
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task <IActionResult> Create(Tutorial tutorial)
@@ -86,9 +83,7 @@ namespace Exam.Controllers
             
             return View(tutorial);
         }
-              
-
-        // GET: Tutorials/Edit/5
+           
         public async Task <IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -105,7 +100,6 @@ namespace Exam.Controllers
             return View(tutorial);
         }
 
-        // POST: Tutorials/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task <IActionResult> Edit(int id, Tutorial tutorial)
@@ -132,7 +126,6 @@ namespace Exam.Controllers
             return View(tutorial);
         }
 
-        // GET: Tutorials/Delete/5
         public async Task <IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -149,7 +142,6 @@ namespace Exam.Controllers
             return View(tutorial);
         }
 
-        // POST: Tutorials/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task <IActionResult> DeleteConfirmed(int id)
