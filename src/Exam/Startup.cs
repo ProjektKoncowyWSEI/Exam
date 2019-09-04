@@ -31,6 +31,7 @@ using Exam.Data.UnitOfWork;
 using Exam.Areas.Identity.Pages.Account.Manage;
 using ExamContract.CourseModels;
 using Exam.Controllers;
+using ExamContract.TutorialModels;
 
 namespace Exam
 {
@@ -71,18 +72,21 @@ namespace Exam
             services.AddScoped<ILogger<LoginModel>, Logger.ExamLogger<LoginModel>>();
             services.AddScoped<ILogger<ChangePasswordModel>, Logger.ExamLogger<ChangePasswordModel>>();            
             services.AddScoped<ILogger<ExamsController>, Logger.ExamLogger<ExamsController>>();
-            services.AddTransient<ITutorialsRepo, TutorialsRepo>();
+            //services.AddTransient<ITutorialsRepo, TutorialsRepo>();
+            services.AddTransient<WebApiClient<Tutorial>, TutorialsApiClient>();
             services.AddTransient<WebApiClient<ExamContract.MainDbModels.Exam>, ExamsApiClient>();
             services.AddTransient<WebApiClient<Question>, QuestionsApiClient>();
             services.AddTransient<WebApiClient<Answer>, AnswersApiClient>();             
             services.AddTransient<WebApiClient<ExamContract.MainDbModels.User>, UsersMainDbApiClient>();
-            services.AddTransient<WebApiClient<ExamContract.CourseModels.User>, UsersCoursesApiClient>();
+            services.AddTransient<WebApiClient<ExamContract.CourseModels.User>, UsersCoursesApiClient>(); 
+            services.AddTransient<WebApiClient<ExamContract.TutorialModels.User>, UsersTutorialsClient>(); 
             services.AddTransient<WebApiClient<Course>, CoursesApiClient>();
             services.AddTransient<CourseTwoKeyApiClient<ExamCourse>, CouorseExamApiClient>();
             services.AddTransient<ExamsQuestionsAnswersApiClient>(); //Wymagamy klasy konkretnej
             services.AddTransient<ExamApproachesApiClient>();
             services.AddTransient<Exams>();
             services.AddTransient<Courses>();
+            services.AddTransient<Tutorials>();
 
 
             services.ConfigureApplicationCookie(o =>

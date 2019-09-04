@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ExamContract.MainDbModels.Exam>
+@{ 
+     SearchModel searchModel = new SearchModel("allExamsGrid", "tr", Localizer.GetString("Search")); 
+}
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-6">@Localizer["All exams"]</div>
+            <div class="col-6"><partial name="_Search" model="@searchModel"></div>
+        </div>
+    </div>
+    <div class="card-body">
+        @if (Model != null && Model.Count() > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MinStart)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaxStart)
+                        </th>
+                        <th>
+                            @Localizer["Owner"]
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Code)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="allExamsGrid">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="td">@Html.DisplayNameFor(model => model.Name)</div>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                <div class="td">@Html.DisplayNameFor(model => model.MinStart)</div>
+                                @Html.DisplayFor(modelItem => item.MinStart)
+                            </td>
+                            <td>
+                                <div class="td">@Html.DisplayNameFor(model => model.MaxStart)</div>
+                                @Html.DisplayFor(modelItem => item.MaxStart)
+                            </td>
+                            <td>
+                                <div class="td">@Localizer["Owner"]</div>
+                                @Html.DisplayFor(modelItem => item.Login)
+                            </td>
+                            <td>
+                                <div class="td">@Html.DisplayNameFor(model => model.Code)</div>
+                                @Html.DisplayFor(modelItem => item.Code)
+                            </td>
+                            <td>
+                                <div>
+                                    <form asp-action="Create">
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button onclick="showLoader()" class="btn btn-primary btn-sm">@Localizer["Sign in"]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+    </div>
+</div>

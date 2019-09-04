@@ -15,8 +15,8 @@ namespace ExamTutorialsAPI.Controllers
     public class KeysController : ControllerBase
     {
 
-        private readonly ExamTutorialsApiContext _context;
-        public KeysController (ExamTutorialsApiContext context)
+        private readonly Context _context;
+        public KeysController (Context context)
         {
             _context = context;
         }

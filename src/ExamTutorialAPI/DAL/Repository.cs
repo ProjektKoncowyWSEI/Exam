@@ -10,13 +10,13 @@ namespace ExamTutorialsAPI.DAL
 {
     public class Repository<T> : IDisposable where T : Entity
     {
-        private readonly ExamTutorialsApiContext examTutorialsApiContext;
+        private readonly Context Context;
         private DbSet<T> dbSet = null;
 
-        public Repository (ExamTutorialsApiContext examTutorialsApiContext)
+        public Repository (Context Context)
         {
-            this.examTutorialsApiContext = examTutorialsApiContext;
-            dbSet = examTutorialsApiContext.Set<T>();
+            this.Context = Context;
+            dbSet = Context.Set<T>();
         }
 
         public async Task<T> GetAsync(int id)
@@ -34,7 +34,7 @@ namespace ExamTutorialsAPI.DAL
                 await dbSet.AddAsync(item);
                 return item.Id;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return -1;
             }
@@ -47,7 +47,7 @@ namespace ExamTutorialsAPI.DAL
                 await Task.Run(() => dbSet.Update(item));
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -62,7 +62,7 @@ namespace ExamTutorialsAPI.DAL
                     await Task.Run(() => dbSet.Remove(item));
                     return true;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return false;
                 }
@@ -75,11 +75,11 @@ namespace ExamTutorialsAPI.DAL
         }
         public async Task SaveChangesAsync()
         {
-            await examTutorialsApiContext.SaveChangesAsync();
+            await Context.SaveChangesAsync();
         }
         public void Dispose()
         {
-            examTutorialsApiContext.Dispose();
+            Context.Dispose();
         }
     }
 

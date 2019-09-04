@@ -36,20 +36,18 @@ namespace ExamTutorialAPI
             switch (Configuration.GetSection("UseDatabase").Value)
             {
                 case SQLite:
-                    services.AddDbContext<ExamTutorialsApiContext>(o => o.UseSqlite(Configuration.GetConnectionString("SQLiteConnection")));
+                    services.AddDbContext<Context>(o => o.UseSqlite(Configuration.GetConnectionString("SQLiteConnection")));
                     break;
                 case SQL:
-                    services.AddDbContext<ExamTutorialsApiContext>(o => o.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
+                    services.AddDbContext<Context>(o => o.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
                     break;
             }
             services
                 .AddMvcCore()
                 .AddDataAnnotations()
                 .AddJsonFormatters()
-                .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
-                //.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddSingleton(Configuration);
-            services.AddTransient<Repository<Category>>();
+                .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);                
+            services.AddSingleton(Configuration);      
             services.AddTransient<Repository<Tutorial>>();
             services.AddTransient<UnitOfWork>();
         }

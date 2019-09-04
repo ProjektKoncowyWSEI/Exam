@@ -1,5 +1,7 @@
 ﻿using ExamContract;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExamContract.TutorialModels
 {
@@ -9,14 +11,22 @@ namespace ExamContract.TutorialModels
         [Required]
         [Display(Name = "Tutorial name")]
         public string Name { get; set; }
-        [Display(Name = "Image")]
-        public byte[] Image { get; set; }
+        [Display(Name = "File")]
+        public byte[] File { get; set; }
+
+        [Display(Name = "File Type")]
+        public string FileType { get; set; }
+
+        [Display(Name = "Content")]
+        public string Content { get; set; }
 
         [Required(ErrorMessage = "Description is required!")]
         [Display(Name = "Description")]
         public string Description { get; set; }
-        public virtual Category Category { get; set; }
-        public int CategoryId { get; set; }
+
+        //[NotMapped]
+        //public IFormFile FormFile { get; set; }
+
     }
 }
 

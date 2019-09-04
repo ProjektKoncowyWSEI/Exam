@@ -20,15 +20,23 @@ namespace ExamTutorialAPI.Controllers
         {
             repo = repository;
         }
-
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<T>>> Get()
+        public virtual async Task<ActionResult<IEnumerable<T>>> Get(string login, bool? onlyActive = null)
         {
-            return await repo.GetListAsync();
+            Expression<Func<T, bool>> predicate;
+            if (onlyActive == true && login == null)
+                predicate = a => a.Active == true;
+            else if (onlyActive != true && login != null)
+                predicate = a => a.Login == login;
+            else if (onlyActive == true && login != null)
+                predicate = a => a.Active == true && a.Login == login;
+            else
+                return await repo.GetListAsync();
+            return await repo.FindBy(predicate).ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<T>> Get(int id)
+        public virtual async Task<ActionResult<T>> Get(int id)
         {
             var item = await repo.GetAsync(id);
             if (item == null)
@@ -37,7 +45,7 @@ namespace ExamTutorialAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, T item)
+        public virtual async Task<IActionResult> Put(int id, T item)
         {
             if (id != item.Id)
             {
@@ -63,7 +71,7 @@ namespace ExamTutorialAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<T>> Post(T item)
+        public virtual async Task<ActionResult<T>> Post(T item)
         {
             await repo.AddAsync(item);
             await repo.SaveChangesAsync();
@@ -71,7 +79,7 @@ namespace ExamTutorialAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<T>> Delete(int id)
+        public virtual async Task<ActionResult<T>> Delete(int id)
         {
             var item = await repo.GetAsync(id);
             if (item == null)

@@ -14,6 +14,14 @@
         }
         @if (User.IsInRole(RoleEnum.admin) || User.IsInRole(RoleEnum.teacher))
         {
+            <a onclick="showLoader();" class="btn btn-primary box" asp-area="" asp-controller="Tutorials" asp-action="Index">@Localizer["Tutorials"]</a>
+        }
+        else if (User.IsInRole(RoleEnum.student))
+        {
+            <a onclick="showLoader();" class="btn btn-primary box" asp-area="" asp-controller="UserTutorials" asp-action="Index">@Localizer["Tutorials"]</a>
+        }
+        @if (User.IsInRole(RoleEnum.admin) || User.IsInRole(RoleEnum.teacher))
+        {
             <a onclick="showLoader();" class="btn btn-primary box" asp-area="" asp-controller="Courses" asp-action="Index">@Localizer["Courses"]</a>
         }
         else if (User.IsInRole(RoleEnum.student))

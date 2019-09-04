@@ -729,4 +729,10 @@
   <data name="You can't start the exam right now, you can start the exam between {0} and {1}" xml:space="preserve">
     <value>Nie możesz teraz rozpocząć podejścia do egzaminu, możesz rozpocząć egzamin miedzy {0}, a {1}</value>
   </data>
+  <data name="Add tutorial" xml:space="preserve">
+    <value>Dodaj szkolenie</value>
+  </data>
+  <data name="Sing up for tutorial" xml:space="preserve">
+    <value>Zapisz się na szkolenie</value>
+  </data>
 </root>

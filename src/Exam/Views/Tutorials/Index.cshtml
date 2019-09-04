@@ -1,15 +1,11 @@
 ﻿@model IEnumerable<ExamContract.TutorialModels.Tutorial>
 @{
-    Layout = "/Views/Shared/_Layout.cshtml";
-}
-@{
     ViewData["Title"] = Localizer["Tutorials"];
 }
 
-<p>
-    <a asp-action="Create" class="btn btn-default">@Localizer["Add new tutorial"]</a>
-</p>
-
-<partial name="_TutorialsTable" model="@Model" />
-<ul page-model="@ViewBag.PageInfo" page-action="Index" page-item-css="page-item" page-link-css="page-link"></ul>
+<div class="mainImage-index"></div>
+<h3>@ViewBag.Message</h3>
+<div>
+    <partial name="_TutorialsGrid" model="Model" />
+</div>
 

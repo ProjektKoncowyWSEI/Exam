@@ -1,10 +1,10 @@
-@URL = http://localhost:63777
+@URL = http://localhost:54321
 
 ###
 GET {{URL}}/api/tutorials
 
 ###
-GET {{URL}}/api/tutorials/45
+GET {{URL}}/api/tutorials/2
 Accept: application/json
 
 ###
@@ -12,23 +12,27 @@ POST {{URL}}/api/tutorials
 content-type: application/json
 
 {
-  "id": 2,C:\Users\Łukasz\source\repos\Exam\src\ExamTutorialsAPI\DAL\Repository.cs
-  "name": "TEST",
-  "category": null,
-  "image": null,
-  "description": "OK"
+  "id": 0,
+  "name": "TEST 2",
+  "file": [123,221,0,1],
+  "fileType": "pdf",
+  "content": "treść",
+  "description" : "Opis",
+  "login" : "a@a.a"
 }
 
 ### 
-PUT {{URL}}/api/tutorials/1
+PUT {{URL}}/api/tutorials/2
 content-type: application/json
 
 {
   "id": 2,
-  "name": "TEST",
-  "category": "PUT",
-  "image": null,
-  "description": "OKi"
+  "name": "TEST 21",
+  "file": [123,221,0,1],
+  "fileType": "pdf",
+  "content": "treść",
+  "description" : "Opis",
+  "login" : "a@a.a"
 }
 
 ###

@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-public class ExamTutorialsApiContext : DbContext
+public class Context : DbContext
 {
-    public ExamTutorialsApiContext(DbContextOptions<ExamTutorialsApiContext> options) : base(options)
+    public Context(DbContextOptions<Context> options) : base(options)
     {
     }
-    public DbSet<Tutorial> Tutorials { get; set; }
-    public DbSet<Category> Categories { get; set; }
+    public DbSet<Tutorial> Tutorials { get; set; }   
+    public DbSet<User> Users { get; set; }
     public DbSet<Key> Keys { get; set; }
 }
