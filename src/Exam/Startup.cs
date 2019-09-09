@@ -81,7 +81,8 @@ namespace Exam
             services.AddTransient<WebApiClient<ExamContract.CourseModels.User>, UsersCoursesApiClient>(); 
             services.AddTransient<WebApiClient<ExamContract.TutorialModels.User>, UsersTutorialsClient>(); 
             services.AddTransient<WebApiClient<Course>, CoursesApiClient>();
-            services.AddTransient<CourseTwoKeyApiClient<ExamCourse>, CouorseExamApiClient>();
+            services.AddTransient<CourseTwoKeyApiClient<ExamCourse>, CourseExamApiClient>();
+            services.AddTransient<CourseTwoKeyApiClient<TutorialCourse>, CourseTutorialApiClient>();            
             services.AddTransient<ExamsQuestionsAnswersApiClient>(); //Wymagamy klasy konkretnej
             services.AddTransient<ExamApproachesApiClient>();
             services.AddTransient<Exams>();

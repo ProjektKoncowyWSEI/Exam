@@ -1,7 +1,7 @@
-@URL = http://localhost:54321
+@URL = http://localhost:22333
 
 ###
-GET {{URL}}/api/users
+GET {{URL}}/api/Tutorials
 
 ###
 GET {{URL}}/api/tutorials/2
@@ -10,6 +10,12 @@ Accept: application/json
 ###
 POST {{URL}}/api/tutorials
 content-type: application/json
+
+{
+    "courseId": 2,
+    "id": 2
+}
+
 
 {
   "id": 0,

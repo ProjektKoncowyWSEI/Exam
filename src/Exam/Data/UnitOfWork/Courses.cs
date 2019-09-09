@@ -1,6 +1,7 @@
 ﻿using Exam.Services;
 using ExamContract.CourseModels;
 using ExamContract.ExamDTO;
+using ExamContract.TutorialModels;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -15,17 +16,23 @@ namespace Exam.Data.UnitOfWork
     public class Courses
     {
         public readonly WebApiClient<Course> CourseRepo;
-        public readonly WebApiClient<User> UsersRepo;
+        public readonly WebApiClient<ExamContract.CourseModels.User> UsersRepo;
         private readonly WebApiClient<exam> ExamsRepo;
+        private readonly WebApiClient<Tutorial> TutorialsRepo;
         private readonly ILogger logger;
         private readonly CourseTwoKeyApiClient<examCourse> examCourses;
+        private readonly CourseTwoKeyApiClient<TutorialCourse> tutorialCourses;
 
-        public Courses(WebApiClient<Course> courses, WebApiClient<User> users, WebApiClient<exam> exams, CourseTwoKeyApiClient<examCourse> examCourses, ILogger logger)
+       
+
+        public Courses(WebApiClient<Course> courses, WebApiClient<Tutorial> tutorials, WebApiClient<ExamContract.CourseModels.User> users, WebApiClient<exam> exams, CourseTwoKeyApiClient<examCourse> examCourses, CourseTwoKeyApiClient<TutorialCourse> tutorialCourses, ILogger logger)
         {
             CourseRepo = courses;
+            TutorialsRepo = tutorials;
             UsersRepo = users;
             ExamsRepo = exams;
             this.examCourses = examCourses;
+            this.tutorialCourses = tutorialCourses;
             this.logger = logger;
         }
         public async Task<List<Course>> GetList(string login = null, bool? onlyActive = null)
@@ -42,6 +49,7 @@ namespace Exam.Data.UnitOfWork
         {            
             CourseDTO result = new CourseDTO();
             List<exam> tempExams = new List<exam>();
+            List<Tutorial> tempTutorials = new List<Tutorial>();
             var examsCourses = await examCourses.GetListAsync(course.Id);
             foreach (var ec in examsCourses)
             {
@@ -57,7 +65,23 @@ namespace Exam.Data.UnitOfWork
                     await examCourses.DeleteAsync(ec.CourseId, ec.Id);
                 }
             }
+            var tutorialsCourses = await tutorialCourses.GetListAsync(course.Id);
+            foreach (var tc in tutorialsCourses)
+            {
+                Tutorial t = null;
+                try
+                {
+                    t = await TutorialsRepo.GetAsync(tc.Id);
+                    tempTutorials.Add(t);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError($"Unknown Tutorial id: {tc.Id} *** try to delete *** {ex.ToString()}");
+                    await tutorialCourses.DeleteAsync(tc.CourseId, tc.Id);
+                }
+            }
             result.Exams = tempExams;
+            result.Tutorials = tempTutorials;
             result.Course = course;
             return result;
         } 
@@ -72,7 +96,7 @@ namespace Exam.Data.UnitOfWork
             return model;
         }
 
-        public async Task<List<User>> GetMyCourses(string login, bool? onlyActive = null)
+        public async Task<List<ExamContract.CourseModels.User>> GetMyCourses(string login, bool? onlyActive = null)
         {
             var myCourses = await UsersRepo.GetListAsync(login, onlyActive);
             myCourses.ForEach(async a =>

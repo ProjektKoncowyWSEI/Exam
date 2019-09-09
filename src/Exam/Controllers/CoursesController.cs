@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Exam.Data.UnitOfWork;
 using Exam.Services;
+using ExamContract;
 using ExamContract.CourseModels;
 using ExamContract.ExamDTO;
+using ExamContract.TutorialModels;
 using Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -20,14 +22,18 @@ namespace Exam.Controllers
     public class CoursesController : MyBaseController<ExamContract.CourseModels.Course>
     {
         private readonly WebApiClient<exam> exams;
+        private readonly WebApiClient<Tutorial> tutorials;
         private readonly CourseTwoKeyApiClient<examCourse> examCourses;
+        private readonly CourseTwoKeyApiClient<TutorialCourse> tutorialCourses;
         private readonly ILogger logger;
         private readonly Courses uow;
 
-        public CoursesController(IStringLocalizer<SharedResource> localizer, WebApiClient<Course> service, WebApiClient<exam> exams, CourseTwoKeyApiClient<examCourse> examCourses, ILogger logger, Courses courses) : base(localizer, service)
+        public CoursesController(IStringLocalizer<SharedResource> localizer, WebApiClient<Course> service, WebApiClient<exam> exams, WebApiClient<Tutorial> tutorials, CourseTwoKeyApiClient<examCourse> examCourses, CourseTwoKeyApiClient<TutorialCourse> tutorialCourses, ILogger logger, Courses courses) : base(localizer, service)
         {
             this.exams = exams;
+            this.tutorials = tutorials;
             this.examCourses = examCourses;
+            this.tutorialCourses = tutorialCourses;
             this.logger = logger;
             this.uow = courses;
         }
@@ -73,10 +79,14 @@ namespace Exam.Controllers
         }
         public async Task<IActionResult> AddExam(int parentId)
         {
-            await fillViewBags(parentId);
+            await fillViewBags(parentId, "Exam");
             return View();
-        }       
-
+        }
+        public async Task<IActionResult> AddTutorial(int parentId)
+        {
+            await fillViewBags(parentId, "Tutorial");
+            return View();
+        }
         [HttpPost]
         public async Task<IActionResult> AddExam(examCourse item)
         {            
@@ -85,13 +95,27 @@ namespace Exam.Controllers
                 await examCourses.AddAsync(item);
                 return RedirectToAction(nameof(Index));
             }
-            await fillViewBags(item.CourseId);
+            await fillViewBags(item.CourseId, "Exam");
             return View(item);
         }
-        private async Task fillViewBags(int parentId)
+        [HttpPost]
+        public async Task<IActionResult> AddTutorial(TutorialCourse item)
+        {
+            if (ModelState.IsValid)
+            {
+                var x = await tutorialCourses.AddAsync(item);
+                return RedirectToAction(nameof(Index));
+            }
+            await fillViewBags(item.CourseId, "Tutorial");
+            return View(item);
+        }
+        private async Task fillViewBags(int parentId, string type)
         {
             ViewBag.CourseId = parentId;
-            ViewBag.Exams = new SelectList(await exams.GetListAsync(onlyActive: true), "Id", "Name");
+            if (type == "Exam")            
+                ViewBag.Exams = new SelectList(await exams.GetListAsync(onlyActive: true), "Id", "Name");
+            if (type == "Tutorial")
+                ViewBag.Tutorials = new SelectList(await tutorials.GetListAsync(onlyActive: true), "Id", "Name");
         }
     }
 }

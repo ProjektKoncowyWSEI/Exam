@@ -55,8 +55,8 @@
                 <tbody id="coursesGrid">
                     @foreach (var item in Model)
                     {
-                        <tr class="mainTr">                           
-                            <td><button id="arrow_@item.Course.Id" onclick="toggleTr('#exams_@item.Course.Id', '#arrow_@item.Course.Id')" class="btn btn-primary fa fa-chevron-down btn-sm"></button></td>
+                        <tr class="mainTr">
+                            <td><button id="arrow_@item.Course.Id" onclick="toggleTrs('#exams_@item.Course.Id','#tutorials_@item.Course.Id', '#arrow_@item.Course.Id')" class="btn btn-primary fa fa-chevron-down btn-sm"></button></td>
                             <td>
                                 <div class="td">@Html.DisplayNameFor(model => model.Course.Name)</div>
                                 @Html.DisplayFor(modelItem => item.Course.Name)
@@ -64,7 +64,7 @@
                             <td>
                                 <div class="td">@Html.DisplayNameFor(model => model.Course.Description)</div>
                                 @Html.DisplayFor(modelItem => item.Course.Description)
-                            </td>                        
+                            </td>
                             <td>
                                 <div class="td">@Localizer["Owner"]</div>
                                 @Html.DisplayFor(modelItem => item.Course.Login)
@@ -72,7 +72,7 @@
                             <td>
                                 <div class="td">@Html.DisplayNameFor(model => model.Course.Active)</div>
                                 @Html.DisplayFor(modelItem => item.Course.Active)
-                            </td>                          
+                            </td>
                             <td>
                                 <div class="command">
                                     <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.Course.Id">@Localizer["Edit"]</a>
@@ -85,6 +85,13 @@
                             <td colspan="9">
                                 <a asp-controller="Courses" asp-action="AddExam" asp-route-parentId="@item.Course.Id" class="btn btn-primary btn-sm margin5px">@Localizer["Add exam"]</a>
                                 <partial name="_ExamsGrid" model="@item.Exams">
+                            </td>
+                        </tr>
+                        <tr id="tutorials_@item.Course.Id" style="display:none">
+                            <td><span class="td">@Localizer["tutorials"]</span></td>
+                            <td colspan="9">
+                                <a asp-controller="Courses" asp-action="AddTutorial" asp-route-parentId="@item.Course.Id" class="btn btn-primary btn-sm margin5px">@Localizer["Add tutorial"]</a>
+                                <partial name="_TutorialsGrid" model="@item.Tutorials">
                             </td>
                         </tr>
                     }

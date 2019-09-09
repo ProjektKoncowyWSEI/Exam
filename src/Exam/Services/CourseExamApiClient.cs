@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Exam.Services
 {
-    public class CouorseExamApiClient : CourseTwoKeyApiClient<ExamCourse>
+    public class CourseExamApiClient : CourseTwoKeyApiClient<ExamCourse>
     {
-        public CouorseExamApiClient(ILogger logger, IConfiguration configuration) : base(logger, configuration, "CoursesAPIConnection", "Exams")
+        public CourseExamApiClient(ILogger logger, IConfiguration configuration) : base(logger, configuration, "CoursesAPIConnection", "Exams")
         {
         }
     }
