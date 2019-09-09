@@ -10,12 +10,7 @@ namespace ExamContract.TutorialModels
         [MaxLength(100)]
         [Required]
         [Display(Name = "Tutorial name")]
-        public string Name { get; set; }
-        [Display(Name = "File")]
-        public byte[] File { get; set; }
-
-        [Display(Name = "File Type")]
-        public string FileType { get; set; }
+        public string Name { get; set; }    
 
         [Display(Name = "Content")]
         public string Content { get; set; }
@@ -23,10 +18,6 @@ namespace ExamContract.TutorialModels
         [Required(ErrorMessage = "Description is required!")]
         [Display(Name = "Description")]
         public string Description { get; set; }
-
-        //[NotMapped]
-        //public IFormFile FormFile { get; set; }
-
     }
 }
 

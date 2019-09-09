@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamTutorialAPI.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190904160036_Init")]
-    partial class Init
+    [Migration("20190909172513_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,10 +43,6 @@ namespace ExamTutorialAPI.Migrations
                     b.Property<string>("Description")
                         .IsRequired();
 
-                    b.Property<byte[]>("File");
-
-                    b.Property<string>("FileType");
-
                     b.Property<string>("Login")
                         .HasMaxLength(256);
 
@@ -57,6 +53,23 @@ namespace ExamTutorialAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tutorials");
+                });
+
+            modelBuilder.Entity("ExamContract.TutorialModels.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Active");
+
+                    b.Property<string>("Login")
+                        .HasMaxLength(256);
+
+                    b.Property<int>("TutorialId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }

@@ -49,6 +49,7 @@ namespace ExamTutorialAPI
                 .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);                
             services.AddSingleton(Configuration);      
             services.AddTransient<Repository<Tutorial>>();
+            services.AddTransient<Repository<User>>();
             services.AddTransient<UnitOfWork>();
         }
 

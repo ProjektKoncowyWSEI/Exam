@@ -1,7 +1,7 @@
 @URL = http://localhost:54321
 
 ###
-GET {{URL}}/api/tutorials
+GET {{URL}}/api/users
 
 ###
 GET {{URL}}/api/tutorials/2
@@ -36,4 +36,4 @@ content-type: application/json
 }
 
 ###
-DELETE  {{URL}}/api/tutorials/1
+DELETE  {{URL}}/api/tutorials/6

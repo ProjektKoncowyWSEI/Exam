@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ExamTutorialAPI.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,14 +29,27 @@ namespace ExamTutorialAPI.Migrations
                     Login = table.Column<string>(maxLength: 256, nullable: true),
                     Active = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(maxLength: 100, nullable: false),
-                    File = table.Column<byte[]>(nullable: true),
-                    FileType = table.Column<string>(nullable: true),
                     Content = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tutorials", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Login = table.Column<string>(maxLength: 256, nullable: true),
+                    Active = table.Column<bool>(nullable: false),
+                    TutorialId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
         }
 
@@ -47,6 +60,9 @@ namespace ExamTutorialAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Tutorials");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

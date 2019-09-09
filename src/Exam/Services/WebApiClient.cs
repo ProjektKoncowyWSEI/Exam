@@ -54,8 +54,7 @@ namespace Exam.Services
         public async virtual Task<List<T>> GetListAsync(string login = null, bool? onlyActive = null)
         {
             try
-            {
-                HttpResponseMessage response;
+            {                
                 string fullUri = uri;
                 if(login != null && onlyActive != true)
                     fullUri += $"?login={login}";
@@ -64,7 +63,7 @@ namespace Exam.Services
                 else if (login == null && onlyActive == true)                
                     fullUri += $"?onlyActive=true";
                 
-                    response = await Client.GetAsync(fullUri);
+                var  response = await Client.GetAsync(fullUri);
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
@@ -78,7 +77,7 @@ namespace Exam.Services
             catch (Exception ex)
             {
                 logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
-                return null;
+                throw;
             }
         }
         public async virtual Task<List<T>> GetListAsync(int parrentId)
@@ -99,7 +98,7 @@ namespace Exam.Services
             catch (Exception ex)
             {
                 logger.LogError(ex, "GetListAsync()");
-                return null;
+                throw;
             }
         }        
         public async virtual Task<T> AddAsync(T item)

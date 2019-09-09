@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using exam = ExamContract.MainDbModels.Exam;
 using examCourse = ExamContract.CourseModels.ExamCourse;
@@ -79,6 +80,14 @@ namespace Exam.Data.UnitOfWork
                 a.Course = await CourseRepo.GetAsync(a.CourseId);
             });
             return myCourses;
+        }
+        public async Task<UserCoursesDTO> GetUserCoursesAsync(string login, bool onlyActive)
+        {
+            var model = new UserCoursesDTO();
+            model.MyCourses = await GetMyCourses(login, onlyActive);
+            Thread.Sleep(50);
+            model.AllCourses = await GetList(null, true);
+            return model;
         }
     }
 }

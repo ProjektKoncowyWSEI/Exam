@@ -41,10 +41,6 @@ namespace ExamTutorialAPI.Migrations
                     b.Property<string>("Description")
                         .IsRequired();
 
-                    b.Property<byte[]>("File");
-
-                    b.Property<string>("FileType");
-
                     b.Property<string>("Login")
                         .HasMaxLength(256);
 

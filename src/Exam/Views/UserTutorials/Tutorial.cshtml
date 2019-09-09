@@ -1,0 +1,37 @@
+﻿@model ExamContract.TutorialModels.Tutorial
+@{
+    ViewData["Title"] = "Tutorial";
+}
+
+<div class="mainImage-books"></div>
+@if (Model != null)
+{
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                        <span class="bold">@Html.DisplayNameFor(model => model.Name): </span>
+                        <span>@Html.DisplayFor(model => model.Name)</span>
+                    </div>
+                    <div>
+                        <span class="bold">@Html.DisplayNameFor(model => model.Description): </span>
+                        <span>@Html.DisplayFor(model => model.Description)</span>
+                    </div>
+                    <div>
+                        <span class="bold">@Html.DisplayNameFor(model => model.Login): </span>
+                        <span>@Html.DisplayFor(model => model.Login)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="bold">@Html.DisplayNameFor(model => model.Content) </div>
+                    <div style="height:100%;">@Html.DisplayFor(model => model.Content)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

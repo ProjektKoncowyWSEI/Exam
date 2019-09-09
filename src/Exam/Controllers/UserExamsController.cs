@@ -38,11 +38,8 @@ namespace Exam.Controllers
             ViewBag.ExamId = parentId;
             ViewBag.QuestionId = questionId;
             bool onlyActive = Convert.ToBoolean(Request.Cookies[GlobalHelpers.ACTIVE]);
-            ViewBag.OnlyActive = onlyActive;
-            var model = new ExamContract.ExamDTO.UserExamsDTO();
-            model.MyExams = await uow.GetMyExams(login, onlyActive);
-            model.AllExams = await uow.GetList(null, true);
-            return View(model);
+            ViewBag.OnlyActive = onlyActive;            
+            return View(await uow.GetUserExamsAsync(login, onlyActive));
         }
         public IActionResult SetActive(bool active)
         {

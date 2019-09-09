@@ -48,20 +48,7 @@ namespace Exam.Controllers
             ViewBag.OnlyActive = onlyActive;
             var model = await Service.GetListAsync(login, onlyActive);
             return View(model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public override async Task<IActionResult> Create(Tutorial item)
-        {
-            //var converter = new FileConverter.Converter();
-            //using (var ms = new MemoryStream())
-            //{
-            //    item.FormFile.CopyTo(ms);
-            //    item.File = await converter.GetByteArrayAsync(ms);
-            //}            
-            return await base.Create(item);
-        }
+        }       
         public new async Task<IActionResult> Delete(int? id, int? parentId = null)
         {
             string message = Localizer["Tutorial can not be removed, you can deactivate!"];

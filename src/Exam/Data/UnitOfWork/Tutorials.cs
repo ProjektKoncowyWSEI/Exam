@@ -1,4 +1,5 @@
 ﻿using Exam.Services;
+using ExamContract.ExamDTO;
 using ExamContract.TutorialModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Exam.Data.UnitOfWork
@@ -71,6 +73,14 @@ namespace Exam.Data.UnitOfWork
             }
             await emailSender.SendEmailAsync(item.Login, localizer["User sing up for tutorial {0}", examName], message);
             return created ?? dbItem;
+        }
+        public async Task<UserTutorialsDTO> GetUserTutorialsAsync(string login, bool onlyActive)
+        {
+            var model = new UserTutorialsDTO();
+            model.MyTutorials = await GetMyTutorials(login, onlyActive);
+            Thread.Sleep(50);
+            model.AllTutorials = await GetList(null, true);
+            return model;
         }
     }
 }

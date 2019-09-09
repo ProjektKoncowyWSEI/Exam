@@ -23,10 +23,7 @@
                             </th>
                             <th>                               
                                 @Html.DisplayNameFor(model => model.Tutorial.Description)
-                            </th>
-                            <th>                                
-                                @Html.DisplayNameFor(model => model.Tutorial.Content)
-                            </th>
+                            </th>                          
                             <th>
                                 @Localizer["Owner"]
                             </th>
@@ -52,11 +49,7 @@
                                     <td>
                                         <div class="td">@Html.DisplayNameFor(model => model.Tutorial.Description)</div>
                                         @Html.DisplayFor(modelItem => item.Tutorial.Description)
-                                    </td>
-                                    <td>
-                                        <div class="td">@Html.DisplayNameFor(model => model.Tutorial.Content)</div>
-                                        @Html.DisplayFor(modelItem => item.Tutorial.Content)
-                                    </td>
+                                    </td>                                   
                                     <td>
                                         <div class="td">@Localizer["Owner"]</div>
                                         @Html.DisplayFor(modelItem => item.Tutorial.Login)
@@ -69,8 +62,8 @@
                                         <div class="td">Link</div>
                                         @if (item.Active)
                                         {
-                                            <a asp-controller="UserTutorials" asp-action="Index" asp-route-id="@item.Tutorial.Id">@Html.DisplayFor(modelItem => item.Tutorial.Id)</a>
-                                        }                                       
+                                            <a asp-controller="UserTutorials" asp-action="Tutorial" asp-route-id="@item.TutorialId" class="bold"><div class="btn btn-primary btn-sm">@Localizer["Go to"]</div></a>
+                                        }
                                     </td>
                                     <td>
                                         <div>

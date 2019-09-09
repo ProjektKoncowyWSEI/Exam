@@ -38,10 +38,12 @@ namespace Exam.Controllers
             ViewBag.TutorialId = parentId;           
             bool onlyActive = Convert.ToBoolean(Request.Cookies[GlobalHelpers.ACTIVE]);
             ViewBag.OnlyActive = onlyActive;
-            var model = new ExamContract.ExamDTO.UserTutorialsDTO();
-            model.MyTutorials = await uow.GetMyTutorials(login, onlyActive);
-            model.AllTutorials = await uow.GetList(null, true);
-            return View(model);
+            //var model = new ExamContract.ExamDTO.UserTutorialsDTO
+            //{
+            //    MyTutorials = await uow.GetMyTutorials(login, onlyActive),
+            //    AllTutorials = await uow.GetList(null, true)
+            //};
+            return View(await uow.GetUserTutorialsAsync(login, onlyActive));
         }
         public IActionResult SetActive(bool active)
         {
@@ -58,7 +60,7 @@ namespace Exam.Controllers
                 try
                 {
                     User created = await uow.SignIntoTutorial(id);
-                    return RedirectToAction(nameof(Index), new { info = localizer["User signed into exam"] });
+                    return RedirectToAction(nameof(Index), new { info = localizer["User signed into tutorial"] });
                 }
                 catch (Exception ex)
                 {
@@ -91,6 +93,10 @@ namespace Exam.Controllers
                 }
             }
             return RedirectToAction(nameof(Index), new { info = localizer["Tutorial id is not valid"] });
+        }
+        public async Task<IActionResult> Tutorial(int id)
+        {
+            return View(await uow.TutorialRepo.GetAsync(id));
         }
     }
 }
