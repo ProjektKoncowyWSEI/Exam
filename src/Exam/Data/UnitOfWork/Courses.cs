@@ -57,6 +57,7 @@ namespace Exam.Data.UnitOfWork
                 try
                 {
                     e = await ExamsRepo.GetAsync(ec.Id);
+                    e.ParentId = ec.CourseId;
                     tempExams.Add(e);
                 }
                 catch (Exception ex)
@@ -72,6 +73,7 @@ namespace Exam.Data.UnitOfWork
                 try
                 {
                     t = await TutorialsRepo.GetAsync(tc.Id);
+                    t.ParentId = tc.CourseId;
                     tempTutorials.Add(t);
                 }
                 catch (Exception ex)

@@ -18,6 +18,9 @@ namespace ExamContract.TutorialModels
         [Required(ErrorMessage = "Description is required!")]
         [Display(Name = "Description")]
         public string Description { get; set; }
+
+        [NotMapped]
+        public int ParentId { get; set; }
     }
 }
 

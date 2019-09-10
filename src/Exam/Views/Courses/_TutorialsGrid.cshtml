@@ -10,14 +10,15 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Description)
-                </th>             
+                </th>
                 <th>
                     @Localizer["Owner"]
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Active)
-                </th>              
+                </th>
                 <th>Link</th>
+                <th></th>
             </tr>
         </thead>
         <tbody id="tutorialsGrid">
@@ -42,6 +43,13 @@
                     </td>
                     <td>
                         <a asp-controller="UserTutorials" asp-action="Tutorial" asp-route-id="@item.Id">Link</a>
+                    </td>
+                    <td>
+                        <form asp-action="DeleteTutorial" method="post">
+                            <input type="hidden" name="courseId" value="@item.ParentId" />
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <input type="submit" value="@Localizer["Delete"]" class="btn btn-danger btn-sm" />
+                        </form>
                     </td>
                 </tr>
             }

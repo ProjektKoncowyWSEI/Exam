@@ -84,7 +84,7 @@ namespace Exam.Services
         {
             try
             {
-                var response = await Client.GetAsync($"{uri}/?parentId={parrentId}");
+                var response = await Client.GetAsync($"{uri}/?courseId={parrentId}");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();

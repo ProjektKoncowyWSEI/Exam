@@ -31,10 +31,10 @@ namespace Exam.Controllers
             switch (currentRole)
             {
                 case RoleEnum.teacher:
-                    ViewBag.Message = Localizer["Your courses"];
+                    ViewBag.Message = Localizer["Your tutorials"];
                     break;
                 case RoleEnum.admin:
-                    ViewBag.Message = Localizer["All courses"];
+                    ViewBag.Message = Localizer["All tutorials"];
                     login = null;
                     break;
                 default:

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace ExamContract.MainDbModels
@@ -30,6 +31,9 @@ namespace ExamContract.MainDbModels
         public decimal MaxPoints { get; set; }       
        
         public ICollection<Question> Questions { get; set; }
-        public ICollection<User> Users { get; set; }       
+        public ICollection<User> Users { get; set; }    
+        
+        [NotMapped]
+        public int ParentId { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ExamContract.ExamDTO.CourseDTO>
 @{
     string ch = ViewBag.OnlyActive ? "checked" : "";
-    SearchModel searchModel = new SearchModel("coursesGrid", ".mainTr", Localizer.GetString("Search"));      
+    SearchModel searchModel = new SearchModel("coursesGrid", ".mainTr", Localizer.GetString("Search"));   
 }
 <div class="card">
     <div class="card-header">
@@ -54,7 +54,7 @@
                 </thead>
                 <tbody id="coursesGrid">
                     @foreach (var item in Model)
-                    {
+                    {                       
                         <tr class="mainTr">
                             <td><button id="arrow_@item.Course.Id" onclick="toggleTrs('#exams_@item.Course.Id','#tutorials_@item.Course.Id', '#arrow_@item.Course.Id')" class="btn btn-primary fa fa-chevron-down btn-sm"></button></td>
                             <td>
@@ -81,19 +81,19 @@
                             </td>
                         </tr>
                         <tr id="exams_@item.Course.Id" style="display:none">
-                            <td><span class="td">@Localizer["Exams"]</span></td>
+                            <td><span class="td">@Localizer["Exams"]</span></td>                           
                             <td colspan="9">
                                 <a asp-controller="Courses" asp-action="AddExam" asp-route-parentId="@item.Course.Id" class="btn btn-primary btn-sm margin5px">@Localizer["Add exam"]</a>
-                                <partial name="_ExamsGrid" model="@item.Exams">
+                                <partial name="_ExamsGrid" model="@item.Exams" view-data="ViewData">
                             </td>
                         </tr>
                         <tr id="tutorials_@item.Course.Id" style="display:none">
-                            <td><span class="td">@Localizer["tutorials"]</span></td>
+                            <td><span class="td">@Localizer["Tutorials"]</span></td>
                             <td colspan="9">
                                 <a asp-controller="Courses" asp-action="AddTutorial" asp-route-parentId="@item.Course.Id" class="btn btn-primary btn-sm margin5px">@Localizer["Add tutorial"]</a>
-                                <partial name="_TutorialsGrid" model="@item.Tutorials">
+                                <partial name="_TutorialsGrid" model="@item.Tutorials" view-data="ViewData">
                             </td>
-                        </tr>
+                        </tr>                       
                     }
                 </tbody>
             </table>
