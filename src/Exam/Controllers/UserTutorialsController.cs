@@ -37,12 +37,7 @@ namespace Exam.Controllers
             ViewBag.Info = info;
             ViewBag.TutorialId = parentId;           
             bool onlyActive = Convert.ToBoolean(Request.Cookies[GlobalHelpers.ACTIVE]);
-            ViewBag.OnlyActive = onlyActive;
-            //var model = new ExamContract.ExamDTO.UserTutorialsDTO
-            //{
-            //    MyTutorials = await uow.GetMyTutorials(login, onlyActive),
-            //    AllTutorials = await uow.GetList(null, true)
-            //};
+            ViewBag.OnlyActive = onlyActive;        
             return View(await uow.GetUserTutorialsAsync(login, onlyActive));
         }
         public IActionResult SetActive(bool active)

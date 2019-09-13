@@ -747,4 +747,10 @@
   <data name="Your tutorials" xml:space="preserve">
     <value>Twoje szkolenia</value>
   </data>
+  <data name="Name: {0}" xml:space="preserve">
+    <value>Nazwa: {0}</value>
+  </data>
+  <data name="User sing up for tutorial {0}" xml:space="preserve">
+    <value>Użytkownik zapisał się na szkolenie {0}</value>
+  </data>
 </root>

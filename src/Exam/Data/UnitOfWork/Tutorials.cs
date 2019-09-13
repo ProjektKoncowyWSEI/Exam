@@ -65,9 +65,9 @@ namespace Exam.Data.UnitOfWork
                 var temp = await TutorialRepo.GetAsync(id);
                 if (temp != null)
                 {
-                    string examUri = $"{httpContext.HttpContext.Request.Scheme}://{httpContext.HttpContext.Request.Host}/Tutorials/{temp.Id}";
+                    string examUri = $"{httpContext.HttpContext.Request.Scheme}://{httpContext.HttpContext.Request.Host}/UserTutorials/Tutorial/{temp.Id}";
                     examName = temp.Name;
-                    message = localizer["Name {0}", temp.Name]
+                    message = localizer["Name: {0}", temp.Name]
                         + $"<br/> Link: <a href='{examUri}'>{examUri}</a>";
                 }
             }
