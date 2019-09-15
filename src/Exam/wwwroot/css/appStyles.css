@@ -1,6 +1,9 @@
 .body {
   margin: 0 10% 0 10%; }
 
+.orange {
+  color: #ff7f28; }
+
 .textShadow {
   text-shadow: 3px 1px 3px white; }
 
@@ -198,3 +201,13 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
 @media only screen and (min-width: 731px) {
   .homeCenter {
     display: flex; } }
+
+.timer {
+  border: 1px solid #ff7f28;
+  border-radius: 5px;
+  padding: 2px;
+  max-width: 235px;
+  float: right; }
+
+.timerSmall {
+  width: 65px; }

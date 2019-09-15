@@ -38,7 +38,7 @@ namespace Exam.Data.UnitOfWork
             ExamApproachesRepo = examApproachesRepo;
         }
 
-        public async Task<DateTime> StartExam(string login, string code)
+        public async Task<(DateTime start, DateTime end)> StartExam(string login, string code)
         {
             var exam = await GetExamByCode(code, true);
             if (exam != null)
@@ -55,12 +55,12 @@ namespace Exam.Data.UnitOfWork
                     };
                     var result = await ExamApproachesRepo.AddAsync(item);
                     if (result != null)
-                        return result.Start;
+                        return (result.Start, result.End);
                 }
                 else
-                    return savedExam.Start;
+                    return (savedExam.Start, savedExam.End);
             }
-            return new DateTime(2000, 1, 1);
+            return (new DateTime(2000, 1, 1), new DateTime(2000, 1, 1));
         }
 
         public async Task<List<exam>> GetList(string login = null, bool? onlyActive = null)

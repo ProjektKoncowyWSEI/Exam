@@ -1,2 +1,15 @@
-﻿
-@ViewBag.StartDate
+﻿@model ExamContract.MainDbModels.Exam
+@{
+    ViewData["Title"] = Model.Name;
+    var end = ViewBag.EndDate;
+}
+
+<div id="timer" class="timer">
+    <i id="arrow" class="orange btn btn-primary btn-sm fa fa-long-arrow-right" onclick="toogleTimer()"></i> <i id="clock" class="orange fa fa-clock-o"></i><span id="counterContent"> @Localizer["Time left:"] <span id="counter"></span></span>
+</div>
+@section Scripts{ 
+    <script>
+        let countDownDate = new Date('@end').getTime();
+        examTimer();
+    </script>
+}

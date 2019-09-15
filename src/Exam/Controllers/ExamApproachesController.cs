@@ -43,7 +43,9 @@ namespace Exam.Controllers
             var (message, isUserAssigned) = await uow.CheckExam(model);
             if (message != null || !isUserAssigned)            
                 return RedirectToAction(nameof(Index), new { code, error = message, notAssigned = !isUserAssigned });
-            ViewBag.StartDate = await uow.StartExam(HttpContext.User.Identity.Name, code);            
+            var (start, end) = await uow.StartExam(HttpContext.User.Identity.Name, code);
+            ViewBag.StartDate = start;
+            ViewBag.EndDate = end.ToString("yyyy-MM-dd HH:mm");
             return View("Exam", model);   
         }
         [HttpPost]

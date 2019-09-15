@@ -5,7 +5,9 @@ $boxShadow: 3px 3px 3px #e4dddd;
 .body {
     margin: 0 10% 0 10%;
 }
-
+.orange{
+    color: $defaultColor;
+}
 .textShadow {
     text-shadow: $textShadow;
 }
@@ -258,4 +260,14 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
     .homeCenter {
         display: flex;
     }
+}
+.timer {
+    border: 1px solid $defaultColor;
+    border-radius: 5px;
+    padding: 2px;
+    max-width: 235px;   
+    float: right;    
+}
+.timerSmall{
+    width: 65px;
 }
