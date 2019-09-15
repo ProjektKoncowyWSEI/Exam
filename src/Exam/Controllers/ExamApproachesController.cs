@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Exam.Data.UnitOfWork;
+using ExamContract.ExamDTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Exam.Controllers
@@ -57,5 +58,13 @@ namespace Exam.Controllers
                 return RedirectToAction(nameof(Index), new { code, info = "Jesteś zapisany na egzamin" });
             return RedirectToAction(nameof(Index), new { code, error = "Nie jesteś zapisany na egzamin" });
         }
+        [HttpPost]        
+        public async virtual Task<JsonResult> FinishExam(ExamApproacheDTO exam)
+        {
+            var result = await uow.FinishExam(exam);
+            if (result != null)
+                return Json("Zakończono egzamin");
+            return Json("Nie udało się zakończyć egzaminu");            
+        }       
     }
 }

@@ -176,5 +176,10 @@ namespace Exam.Data.UnitOfWork
             model.AllExams = await GetList(null, true);
             return model;
         }
+        public async Task<string> FinishExam(ExamApproacheDTO exam)
+        {
+            var login = httpContext.HttpContext.User.Identity.Name;
+            return "";
+        }
     }
 }

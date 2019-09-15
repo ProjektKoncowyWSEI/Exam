@@ -753,4 +753,22 @@
   <data name="User sing up for tutorial {0}" xml:space="preserve">
     <value>Użytkownik zapisał się na szkolenie {0}</value>
   </data>
+  <data name="Question" xml:space="preserve">
+    <value>Pytanie</value>
+  </data>
+  <data name="Time left:" xml:space="preserve">
+    <value>Do końca:</value>
+  </data>
+  <data name="Do you want to end the exam?" xml:space="preserve">
+    <value>Czy chesz zakończyc egzamin</value>
+  </data>
+  <data name="End exam" xml:space="preserve">
+    <value>Konczenie egzaminu</value>
+  </data>
+  <data name="Finish the exam" xml:space="preserve">
+    <value>Zakończ egzamin</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Wymagane</value>
+  </data>
 </root>

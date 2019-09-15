@@ -10,8 +10,8 @@ namespace ExamContract.MainDbModels
     {
         public Exam()
         {
-            Questions = new HashSet<Question>();
-            Users = new HashSet<User>();
+            Questions = new List<Question>();
+            Users = new List<User>();
         }
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(200)]
@@ -30,8 +30,8 @@ namespace ExamContract.MainDbModels
         [Display(Name = "Max points")]
         public decimal MaxPoints { get; set; }       
        
-        public ICollection<Question> Questions { get; set; }
-        public ICollection<User> Users { get; set; }    
+        public List<Question> Questions { get; set; }
+        public List<User> Users { get; set; }    
         
         [NotMapped]
         public int ParentId { get; set; }

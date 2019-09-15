@@ -98,6 +98,10 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
     display: inline-flex;
     float: right;
 }
+.btnRight{
+    float:right;
+    display:flex;
+}
 
 .marginLeft10 {
     margin-left: 10px;
@@ -265,9 +269,36 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
     border: 1px solid $defaultColor;
     border-radius: 5px;
     padding: 2px;
-    max-width: 235px;   
+    max-width: 240px;   
     float: right;    
 }
 .timerSmall{
     width: 65px;
+}
+.questionLabel {
+    padding: 1rem;
+    border-bottom: solid 1px #f7f3f3;
+}
+.questionContent {
+    padding: 1rem;
+    border-bottom: solid 1px #f7f3f3;
+}
+.answerContent {
+    padding: 1rem;
+    border-bottom: solid 1px #f7f3f3;    
+    padding-left: 50px;
+}
+.bigCheckbox {
+    transform: scale(1.5);
+    margin: 10px;
+    display: inline-flex;
+}
+.answer {
+    display: inline-flex;
+}
+.required{
+    color:red;    
+}
+.required:after {
+    content: '*';
 }
