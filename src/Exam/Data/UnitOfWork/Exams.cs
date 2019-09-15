@@ -49,8 +49,8 @@ namespace Exam.Data.UnitOfWork
                     ExamApproache item = new ExamApproache
                     {
                         ExamId = exam.Id,
-                        Start = DateTime.UtcNow,
-                        End = DateTime.UtcNow.AddMinutes(exam.DurationMinutes).AddSeconds(30),
+                        Start = DateTime.Now,
+                        End = DateTime.Now.AddMinutes(exam.DurationMinutes).AddSeconds(30),
                         Login = login
                     };
                     var result = await ExamApproachesRepo.AddAsync(item);
