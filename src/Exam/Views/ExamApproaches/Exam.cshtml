@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = Model.Name;
     var end = ViewBag.EndDate;
+    var now = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
 }
 @inject IJsonHelper Json;
 <div class="card">
@@ -94,6 +95,6 @@
     <script>
         createModel(@Html.Raw(Json.Serialize(Model)));
         let countDownDate = new Date('@end').getTime();
-        examTimer();
+        examTimer(new Date('@now'));
     </script>
 }
