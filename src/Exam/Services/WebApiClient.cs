@@ -105,7 +105,7 @@ namespace Exam.Services
         {
             try
             {
-                var response = await Client.PostAsJsonAsync(uri, item);             
+                var response = await Client.PostAsJsonAsync($"{uri}", item);             
                 if (response.IsSuccessStatusCode)
                 {
                     item.Id = Convert.ToInt32(response.Headers.Location.Segments.LastOrDefault());

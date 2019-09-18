@@ -102,7 +102,7 @@ namespace Exam.Data.UnitOfWork
         public async Task Clone(int id)
         {
             var item = await ExamsWithAllRepo.GetAsync(id);
-            await ExamsWithAllRepo.AddAsync(item);
+            var x = await ExamsWithAllRepo.AddAsync(item);
         }
         public async Task<exam> GetExamByCode(string code, bool? onlyActive = null)
         {
