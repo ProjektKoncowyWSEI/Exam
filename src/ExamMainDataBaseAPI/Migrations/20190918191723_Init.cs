@@ -9,6 +9,37 @@ namespace ExamMainDataBaseAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "ExamApproacheResults",
+                columns: table => new
+                {
+                    Login = table.Column<string>(nullable: false),
+                    ExamId = table.Column<int>(nullable: false),
+                    QuestionId = table.Column<int>(nullable: false),
+                    AnswerId = table.Column<int>(nullable: false),
+                    Checked = table.Column<bool>(nullable: false),
+                    Points = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExamApproacheResults", x => new { x.Login, x.ExamId, x.QuestionId, x.AnswerId });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExamApproaches",
+                columns: table => new
+                {
+                    ExamId = table.Column<int>(nullable: false),
+                    Login = table.Column<string>(nullable: false),
+                    Start = table.Column<DateTime>(nullable: false),
+                    End = table.Column<DateTime>(nullable: false),
+                    DetailsId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExamApproaches", x => new { x.ExamId, x.Login });
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Exams",
                 columns: table => new
                 {
@@ -117,6 +148,12 @@ namespace ExamMainDataBaseAPI.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Answer");
+
+            migrationBuilder.DropTable(
+                name: "ExamApproacheResults");
+
+            migrationBuilder.DropTable(
+                name: "ExamApproaches");
 
             migrationBuilder.DropTable(
                 name: "Users");

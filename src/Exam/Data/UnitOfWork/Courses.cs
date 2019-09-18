@@ -22,9 +22,6 @@ namespace Exam.Data.UnitOfWork
         private readonly ILogger logger;
         private readonly CourseTwoKeyApiClient<examCourse> examCourses;
         private readonly CourseTwoKeyApiClient<TutorialCourse> tutorialCourses;
-
-       
-
         public Courses(WebApiClient<Course> courses, WebApiClient<Tutorial> tutorials, WebApiClient<ExamContract.CourseModels.User> users, WebApiClient<exam> exams, CourseTwoKeyApiClient<examCourse> examCourses, CourseTwoKeyApiClient<TutorialCourse> tutorialCourses, ILogger logger)
         {
             CourseRepo = courses;

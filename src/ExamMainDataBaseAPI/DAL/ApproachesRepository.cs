@@ -12,33 +12,47 @@ namespace ExamMainDataBaseAPI.DAL
     public class ApproachesRepository : IDisposable 
     { 
         private readonly Context context;
-        private DbSet<ExamApproache> dbSet = null;
+        private DbSet<ExamApproache> dbSetExamApproache = null;
+        private DbSet<ExamApproacheResult> dbSetExamApproacheResult = null;
         public ApproachesRepository(Context context)
         {
             this.context = context;
-            dbSet = context.Set<ExamApproache>();
+            dbSetExamApproache = context.Set<ExamApproache>();
+            dbSetExamApproacheResult = context.Set<ExamApproacheResult>();
         }
         public async Task<ExamApproache> GetAsync(int examId, string login)
         {
-            return await dbSet.SingleOrDefaultAsync(a=>a.ExamId == examId && a.Login == login);
+            return await dbSetExamApproache.SingleOrDefaultAsync(a=>a.ExamId == examId && a.Login == login);
+        }
+        public async Task<ExamApproacheResult> GetResultAsync(string login, int examId, int questionId, int answerId)
+        {
+            return await dbSetExamApproacheResult.SingleOrDefaultAsync(a => a.ExamId == examId && a.Login == login && a.QuestionId == questionId && a.AnswerId == answerId);
         }
         public async Task<List<ExamApproache>> GetListAsync()
         {
-            return await dbSet.AsNoTracking().ToListAsync();
+            return await dbSetExamApproache.AsNoTracking().ToListAsync();
+        }
+        public async Task<List<ExamApproacheResult>> GetResultsListAsync()
+        {
+            return await dbSetExamApproacheResult.AsNoTracking().ToListAsync();
+        }
+        public async Task<List<ExamApproacheResult>> GetResultsListAsync(string login, int? examId)
+        {
+            return await dbSetExamApproacheResult.Where(a => a.Login == login && a.ExamId == examId).AsNoTracking().ToListAsync();
         }
         public async Task<List<ExamApproache>> GetListAsync(string login)
         {
-            return await dbSet.Where(a=>a.Login == login).AsNoTracking().ToListAsync();
+            return await dbSetExamApproache.Where(a=>a.Login == login).AsNoTracking().ToListAsync();
         }
         public async Task<List<ExamApproache>> GetListAsync(int examId)
         {
-            return await dbSet.Where(a => a.ExamId == examId).AsNoTracking().ToListAsync();
+            return await dbSetExamApproache.Where(a => a.ExamId == examId).AsNoTracking().ToListAsync();
         }
         public async Task<DateTime> AddAsync(ExamApproache item)
         {
             try
             {
-                await dbSet.AddAsync(item);
+                await dbSetExamApproache.AddAsync(item);
                 return item.Start;
             }
             catch (Exception ex)
@@ -46,11 +60,23 @@ namespace ExamMainDataBaseAPI.DAL
                 return new DateTime(2000,1,1);
             }
         }
+        public async Task<ExamApproacheResult> AddResultAsync(ExamApproacheResult item)
+        {
+            try
+            {
+                await dbSetExamApproacheResult.AddAsync(item);
+                return item;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public async Task<bool> UpdateAsync(ExamApproache item)
         {
             try
             {
-                await Task.Run(() => dbSet.Update(item));
+                await Task.Run(() => dbSetExamApproache.Update(item));
                 return true;
             }
             catch (Exception ex)
@@ -60,7 +86,7 @@ namespace ExamMainDataBaseAPI.DAL
         }
         public IQueryable<ExamApproache> FindBy(Expression<Func<ExamApproache, bool>> predicate)
         {
-            return dbSet.Where(predicate).AsQueryable();
+            return dbSetExamApproache.Where(predicate).AsQueryable();
         }
         public async Task SaveChangesAsync()
         {

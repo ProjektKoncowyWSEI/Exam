@@ -203,10 +203,9 @@ function sendExam() {
         });
     }
 }
-function examTimer() {
+function examTimer(now) {
     document.getElementById("counter").innerHTML = "99h 99m 99s";
-    let counter = setInterval(function () {
-        let now = new Date().getTime();
+    let counter = setInterval(function () {        
         let distance = countDownDate - now;
         //var days = Math.floor(distance / (1000 * 60 * 60 * 24));
         let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));

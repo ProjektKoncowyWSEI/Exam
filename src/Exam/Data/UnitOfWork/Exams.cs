@@ -23,7 +23,7 @@ namespace Exam.Data.UnitOfWork
         private readonly IStringLocalizer<SharedResource> localizer;
         private readonly IHttpContextAccessor httpContext;
         public readonly ExamsQuestionsAnswersApiClient ExamsWithAllRepo;
-        public readonly ExamApproachesApiClient ExamApproachesRepo;
+        public readonly ExamApproachesApiClient ExamApproachesRepo;        
 
         public Exams(WebApiClient<exam> exams, WebApiClient<Question> questions, WebApiClient<Answer> answers, ExamsQuestionsAnswersApiClient examsWithAll, WebApiClient<User> users, IEmailSender emailSender, IStringLocalizer<SharedResource> localizer, IHttpContextAccessor httpContext, ExamApproachesApiClient examApproachesRepo)
         {
@@ -134,7 +134,7 @@ namespace Exam.Data.UnitOfWork
         public async Task<bool> IsActive(exam exam)
         {
             var savedExam = await ExamApproachesRepo.GetAsync(exam.Id, httpContext.HttpContext.User.Identity.Name);
-            return (savedExam != null && savedExam.Start.AddMinutes(exam.DurationMinutes) > DateTime.Today);               
+            return (savedExam != null && savedExam.Start.AddMinutes(exam.DurationMinutes) > DateTime.Today);
         }
         public async Task<User> SignIntoExam(int id)
         {
@@ -176,10 +176,27 @@ namespace Exam.Data.UnitOfWork
             model.AllExams = await GetList(null, true);
             return model;
         }
-        public async Task<string> FinishExam(ExamApproacheDTO exam)
+        public async Task<bool> FinishExam(ExamApproacheDTO exam)
         {
             var login = httpContext.HttpContext.User.Identity.Name;
-            return "";
+            var model = new List<ExamApproacheResult>();
+            var answers = await AnswersRepo.GetListAsync();
+            int answerCount = 0;
+            exam.Questions.ForEach(q => q.Answers.ForEach(a =>
+            {
+                answerCount++;
+                model.Add(new ExamApproacheResult
+                {
+                    Login = login,
+                    ExamId = exam.ExamId,
+                    QuestionId = q.Id,
+                    Points = answers.FirstOrDefault(aa => aa.Id == a.Id)?.Points ?? 0m,
+                    AnswerId = a.Id,
+                    Checked = a.Checked
+                });
+            }));
+            var result = await ExamApproachesRepo.AddResultsAsync(model);
+            return (result == answerCount);   
         }
     }
 }

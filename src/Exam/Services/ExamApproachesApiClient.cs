@@ -11,21 +11,21 @@ using System.Threading.Tasks;
 
 namespace Exam.Services
 {
-    public class ExamApproachesApiClient 
+    public class ExamApproachesApiClient
     {
         protected ILogger logger;
         protected string uri;
-        protected HttpClient Client;
+        protected HttpClient ExamApproachesClient;
         public ExamApproachesApiClient(ILogger logger, IConfiguration configuration, string connectionName = "MainDbAPIConnection", string uri = "ExamApproaches", string apiKey = null)
         {
             string connStr = Environment.GetEnvironmentVariable(connectionName) ?? configuration.GetConnectionString(connectionName);
-            Client = new HttpClient
+            ExamApproachesClient = new HttpClient
             {
                 BaseAddress = new Uri(connStr)
             };
-            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            ExamApproachesClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             if (apiKey != null)
-                Client.DefaultRequestHeaders.Add("api-key", configuration.GetValue<string>(apiKey));
+                ExamApproachesClient.DefaultRequestHeaders.Add("api-key", configuration.GetValue<string>(apiKey));
             this.logger = logger;
             this.uri = uri;
         }
@@ -33,7 +33,7 @@ namespace Exam.Services
         {
             try
             {
-                var response = await Client.GetAsync($"{uri}/Get/{examId}/{login}");
+                var response = await ExamApproachesClient.GetAsync($"{uri}/Get/{examId}/{login}");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
@@ -41,7 +41,8 @@ namespace Exam.Services
                 }
                 else
                 {
-                    throw new Exception(response.StatusCode.ToString());
+                    return null;
+                    //throw new Exception(response.StatusCode.ToString());
                 }
             }
             catch (Exception ex)
@@ -54,7 +55,7 @@ namespace Exam.Services
         {
             try
             {
-                var response = await Client.GetAsync($"{uri}?examId={examId}");
+                var response = await ExamApproachesClient.GetAsync($"{uri}?examId={examId}");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
@@ -75,7 +76,7 @@ namespace Exam.Services
         {
             try
             {
-                var response = await Client.GetAsync($"{uri}?login={login}");
+                var response = await ExamApproachesClient.GetAsync($"{uri}?login={login}");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
@@ -92,13 +93,14 @@ namespace Exam.Services
                 return null;
             }
         }
+
         public async virtual Task<ExamApproache> AddAsync(ExamApproache item)
         {
             try
             {
-                var response = await Client.PostAsJsonAsync($"{uri}/Post", item);
+                var response = await ExamApproachesClient.PostAsJsonAsync($"{uri}/Post", item);
                 if (response.IsSuccessStatusCode)
-                {                    
+                {
                     return item;
                 }
                 return null;
@@ -113,7 +115,7 @@ namespace Exam.Services
         {
             try
             {
-                var response = await Client.PutAsJsonAsync($"{uri}/{item.ExamId}", item);
+                var response = await ExamApproachesClient.PutAsJsonAsync($"{uri}/{item.ExamId}", item);
                 if (response.IsSuccessStatusCode)
                 {
                     return true;
@@ -126,5 +128,43 @@ namespace Exam.Services
                 return false;
             }
         }
+        #region Results
+        public async virtual Task<ExamApproacheResult> AddResultAsync(ExamApproacheResult item)
+        {
+            try
+            {
+                var response = await ExamApproachesClient.PostAsJsonAsync($"{uri}/PostResult", item);
+                if (response.IsSuccessStatusCode)
+                {
+                    return item;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
+                return null;
+            }
+        }
+        public async Task<int> AddResultsAsync(List<ExamApproacheResult> items)
+        {
+            try
+            {
+                var count = 0;
+                foreach (var item in items)
+                {
+                    var response = await ExamApproachesClient.PostAsJsonAsync($"{uri}/PostResult", item);
+                    if (response.IsSuccessStatusCode)
+                        count++;
+                }                
+                return count;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
+                return -1;
+            }
+        }
+        #endregion
     }
 }

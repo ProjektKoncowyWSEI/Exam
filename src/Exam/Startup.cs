@@ -23,8 +23,6 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Localization;
 using Microsoft.Extensions.Logging;
 using Exam.Areas.Identity.Pages.Account;
-using Exam.IRepositories;
-using Exam.Repositories;
 using Microsoft.EntityFrameworkCore.Migrations;
 using ExamContract.MainDbModels;
 using Exam.Data.UnitOfWork;
@@ -71,8 +69,7 @@ namespace Exam
             services.AddScoped<ILogger, Logger.ExamLogger>();
             services.AddScoped<ILogger<LoginModel>, Logger.ExamLogger<LoginModel>>();
             services.AddScoped<ILogger<ChangePasswordModel>, Logger.ExamLogger<ChangePasswordModel>>();            
-            services.AddScoped<ILogger<ExamsController>, Logger.ExamLogger<ExamsController>>();
-            //services.AddTransient<ITutorialsRepo, TutorialsRepo>();
+            services.AddScoped<ILogger<ExamsController>, Logger.ExamLogger<ExamsController>>();            
             services.AddTransient<WebApiClient<Tutorial>, TutorialsApiClient>();
             services.AddTransient<WebApiClient<ExamContract.MainDbModels.Exam>, ExamsApiClient>();
             services.AddTransient<WebApiClient<Question>, QuestionsApiClient>();

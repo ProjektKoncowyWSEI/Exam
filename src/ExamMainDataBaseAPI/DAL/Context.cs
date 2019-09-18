@@ -19,11 +19,18 @@ namespace ExamMainDataBaseAPI.Models
                 table.ExamId,
                 table.Login
             });
+            builder.Entity<ExamApproacheResult>().HasKey(table => new {
+                table.Login,
+                table.ExamId,
+                table.QuestionId,
+                table.AnswerId
+            });
         }
         public DbSet<Exam> Exams { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Answer> Answer { get; set; }      
         public DbSet<Question> Questions { get; set; }       
         public DbSet<ExamApproache> ExamApproaches { get; set; }
+        public DbSet<ExamApproacheResult> ExamApproacheResults { get; set; }
     }
 }
