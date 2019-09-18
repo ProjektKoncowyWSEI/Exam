@@ -193,7 +193,12 @@ function sendExam() {
             },
             success: function (result) {                
                 $('#sendBtn').removeAttr('disabled')
-                location.href = '/StartExam/' + model.code + '/?info=' + result;              
+                if (result[0]) {
+                    location.href = '/StartExam/' + model.code + '/?info=' + result[1];
+                }
+                else {
+                    location.href = '/StartExam/' + model.code + '/?error=' + result[1];
+                }
             },
             error: function (e) {
                 hideLoader();
