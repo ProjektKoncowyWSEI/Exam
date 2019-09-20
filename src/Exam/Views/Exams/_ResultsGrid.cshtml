@@ -41,7 +41,7 @@
                         <div class="td">@Localizer["Percent"]</div>
                         @if (maxPoints != 0 && item.Points >= 0)
                         {
-                            percent = $"{((item.Points / maxPoints) * 100).ToString()} %";                            
+                            percent = $"{(Math.Round((item.Points / maxPoints) * 100), 2).ToString()} %";                            
                         }
                         @percent
                     </td>
