@@ -1,0 +1,20 @@
+﻿@model IEnumerable<ExamContract.MainDbModels.ExamApproacheResult>
+@{
+    ViewData["Title"] = "ExamResults";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if(ViewBag.Exam != null)
+{
+    //Model != null && 
+    <div class="card">
+        <div class="card-header">
+            <h5 class="orange bold">@Localizer["Results"]</h5>
+            <p><span class="bold">@Localizer["Exam"]:</span> @ViewBag.Exam.Name | <span class="bold">@Localizer["Max points"]:</span> @ViewBag.Exam.MaxPoints</p>
+        </div>
+        <div class="card-body">
+            <partial name="_ResultsGrid" model="Model">
+        </div>
+    </div>
+}
+
+

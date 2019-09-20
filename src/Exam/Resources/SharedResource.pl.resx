@@ -451,7 +451,7 @@
     <value>Klucze twojej aplikacji autoryzacji zostałyzresetowane, musisz skonfigurować aplikację autoryzacji przy użyciu nowego klucza.</value>
   </data>
   <data name="Your password has been set." xml:space="preserve">
-    <value>Twoje hasłozostało ustawione.</value>
+    <value>Twoje hasło zostało ustawione.</value>
   </data>
   <data name="Your profile has been updated" xml:space="preserve">
     <value>Twój profil został zaktualizowany</value>
@@ -782,5 +782,20 @@
   </data>
   <data name="Your points" xml:space="preserve">
     <value>Twoje punty</value>
+  </data>
+  <data name="Results" xml:space="preserve">
+    <value>Wyniki</value>
+  </data>
+  <data name="Percent" xml:space="preserve">
+    <value>Procent</value>
+  </data>
+  <data name="Error while ending exam" xml:space="preserve">
+    <value>Błąd zapisu podejścia do egzaminu</value>
+  </data>
+  <data name="You are not sing up for exam" xml:space="preserve">
+    <value>Nie jesteś zapisany na egzamin</value>
+  </data>
+  <data name="You are sing up for exam" xml:space="preserve">
+    <value>Jesteś zapisany na egzamin</value>
   </data>
 </root>

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Exam.Data.UnitOfWork;
 using ExamContract.ExamDTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Newtonsoft.Json;
 
 namespace Exam.Controllers
@@ -12,10 +13,12 @@ namespace Exam.Controllers
     [AuthorizeByRoles]
     public class ExamApproachesController : Controller
     {
+        private readonly IStringLocalizer<SharedResource> localizer;
         private readonly Exams uow;
 
-        public ExamApproachesController(Exams uow)
+        public ExamApproachesController(IStringLocalizer<SharedResource> localizer, Exams uow)
         {
+            this.localizer = localizer;
             this.uow = uow;
         }
 
@@ -64,16 +67,16 @@ namespace Exam.Controllers
         {
             var exam = await uow.SignIntoExam(id);
             if (exam != null)
-                return RedirectToAction(nameof(Index), new { code, info = "Jesteś zapisany na egzamin" });
-            return RedirectToAction(nameof(Index), new { code, error = "Nie jesteś zapisany na egzamin" });
+                return RedirectToAction(nameof(Index), new { code, info = localizer["You are sing up for exam"] });
+            return RedirectToAction(nameof(Index), new { code, error = localizer["You are not sing up for exam"] });
         }
         [HttpPost]
         public async virtual Task<JsonResult> FinishExam(ExamApproacheDTO exam)
         {
             var result = await uow.FinishExam(exam);
             if (result)
-                return Json(new object[] { true, "Zakończono egzamin" });
-            return Json(new object[] { false, "Nie udało się zakończyć egzaminu" });
+                return Json(new object[] { true, localizer["The exam has ended"] });
+            return Json(new object[] { false, localizer["Error while ending exam"] });
         }
     }
 }

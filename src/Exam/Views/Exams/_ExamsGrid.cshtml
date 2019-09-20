@@ -104,16 +104,17 @@
                                 <div class="command">
                                     <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a>
                                     <a id="clone_@item.Id" class="btn btn-primary btn-sm" asp-action="Clone" asp-route-id="@item.Id" onclick="hideElement('#clone_@item.Id')">@Localizer["Clone"]</a>
+                                    <a class="btn btn-primary btn-sm" asp-action="ExamResults" asp-route-id="@item.Id">@Localizer["Results"]</a>
                                 </div>
                             </td>
                         </tr>
                         <tr id="questions_@item.Id" style="display:none">
                             <td><span class="td">@Localizer["Questions"]</span></td>
                             <td colspan="9">
-                                <a asp-controller="Questions" asp-action="Create" asp-route-parentId="@item.Id" class="btn btn-primary btn-sm margin5px">@Localizer["Add question"]</a>                                
+                                <a asp-controller="Questions" asp-action="Create" asp-route-parentId="@item.Id" class="btn btn-primary btn-sm margin5px">@Localizer["Add question"]</a>
                                 <partial name="_QuestionsGrid" model="@item.Questions">
                             </td>
-                        </tr>
+                        </tr>                       
                     }
                 </tbody>
             </table>

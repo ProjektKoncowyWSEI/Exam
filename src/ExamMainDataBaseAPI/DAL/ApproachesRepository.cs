@@ -28,6 +28,18 @@ namespace ExamMainDataBaseAPI.DAL
         {
             return await dbSetExamApproacheResult.SingleOrDefaultAsync(a => a.ExamId == examId && a.Login == login && a.QuestionId == questionId && a.AnswerId == answerId);
         }
+        public async Task<List<ExamApproacheResult>> GetResultsGroupedAsync(int examId)
+        {
+            return await dbSetExamApproacheResult
+                                .Where(a => a.ExamId == examId && a.Checked)
+                                .GroupBy(a => new { a.ExamId, a.Login })
+                                .Select(a => new ExamApproacheResult
+                                {
+                                    Login = a.Key.Login,
+                                    ExamId = a.Key.ExamId,
+                                    Points = a.Sum(x => x.Points)
+                                }).ToListAsync();
+        }
         public async Task<ExamApproacheResult> GetResultGroupedAsync(string login, int examId)
         {
             return await dbSetExamApproacheResult
@@ -38,8 +50,7 @@ namespace ExamMainDataBaseAPI.DAL
                                      Login = a.Key.Login,
                                       ExamId = a.Key.ExamId,
                                        Points = a.Sum(x=>x.Points)
-                                })
-                                .FirstOrDefaultAsync();
+                                }).FirstOrDefaultAsync();
         }
         public async Task<List<ExamApproache>> GetListAsync()
         {

@@ -65,5 +65,11 @@ namespace Exam.Controllers
             await uow.Clone(id);
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> ExamResults(int id)
+        {
+            ViewBag.Exam = await uow.ExamsWithAllRepo.GetAsync(id);
+            var model = await uow.ExamApproachesRepo.GetResultsAsync(id);
+            return View(model);
+        }
     }
 }
