@@ -16,7 +16,7 @@ namespace Exam.Services
         public ExamsQuestionsAnswersApiClient(ILogger logger, IConfiguration configuration) : base(logger, configuration, "MainDbAPIConnection", "ExamsQuestionsAnswers")
         {
         }
-        public override Task<exam> GetAsync(int id)
+        public override Task<exam> GetAsync(int id, string shortUri = "")
         {
             return GetByIdAsync(id);
         }
@@ -62,7 +62,7 @@ namespace Exam.Services
                 throw;
             }
         }
-        public override async Task<exam> AddAsync(exam item)
+        public override async Task<exam> AddAsync(exam item, string shortUri = "")
         {
             try
             {
@@ -81,7 +81,7 @@ namespace Exam.Services
                 return null;
             }
         }
-        public override async Task<bool> UpdateAsync(exam item)
+        public override async Task<bool> UpdateAsync(exam item, string shortUri = "")
         {
             try
             {

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ExamContract.MainDbModels.ExamApproacheResult>
 @{
     decimal maxPoints = @ViewBag.Exam?.MaxPoints ?? 0;
-    int counter = 1;
+    int counter = 1;  
 }
 @if (Model != null && Model.Count() > 0)
 {
@@ -20,7 +20,7 @@
                 </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="resultsGrid">
             @foreach (var item in Model)
             {
                 string percent = "";
@@ -32,11 +32,14 @@
                     </td>
                     <td>
                         <div class="td">@Html.DisplayNameFor(model => model.Points)</div>
-                        @Html.DisplayFor(modelItem => item.Points)
+                        @if (item.Points >= 0)
+                        {
+                            @Html.DisplayFor(modelItem => item.Points)
+                        }
                     </td>
                     <td>
                         <div class="td">@Localizer["Percent"]</div>
-                        @if (maxPoints != 0)
+                        @if (maxPoints != 0 && item.Points >= 0)
                         {
                             percent = $"{((item.Points / maxPoints) * 100).ToString()} %";                            
                         }

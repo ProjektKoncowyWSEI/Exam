@@ -30,11 +30,11 @@ namespace Exam.Services
             this.logger = logger;
             this.uri = uri;
         }
-        public async virtual Task<T> GetAsync(int id)
+        public async virtual Task<T> GetAsync(int id, string shortUri = "")
         {
             try
             {
-                var response = await Client.GetAsync($"{uri}/{id}");
+                var response = await Client.GetAsync($"{uri}{shortUri}/{id}");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
@@ -51,11 +51,11 @@ namespace Exam.Services
                 return null;
             }
         }
-        public async virtual Task<List<T>> GetListAsync(string login = null, bool? onlyActive = null)
+        public async virtual Task<List<T>> GetListAsync(string login = null, bool? onlyActive = null, string shortUri = "")
         {
             try
             {                
-                string fullUri = uri;
+                string fullUri = $"{uri}{shortUri}";
                 if(login != null && onlyActive != true)
                     fullUri += $"?login={login}";
                 else if (login != null && onlyActive == true)                
@@ -80,11 +80,11 @@ namespace Exam.Services
                 throw;
             }
         }
-        public async virtual Task<List<T>> GetListAsync(int parrentId)
+        public async virtual Task<List<T>> GetListAsync(int parentId, string shortUri = "")
         {
             try
             {
-                var response = await Client.GetAsync($"{uri}/?parentId={parrentId}");
+                var response = await Client.GetAsync($"{uri}{shortUri}/?parentId={parentId}");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
@@ -101,11 +101,11 @@ namespace Exam.Services
                 throw;
             }
         }        
-        public async virtual Task<T> AddAsync(T item)
+        public async virtual Task<T> AddAsync(T item, string shortUri = "")
         {
             try
             {
-                var response = await Client.PostAsJsonAsync($"{uri}", item);             
+                var response = await Client.PostAsJsonAsync($"{uri}{shortUri}", item);             
                 if (response.IsSuccessStatusCode)
                 {
                     item.Id = Convert.ToInt32(response.Headers.Location.Segments.LastOrDefault());
@@ -120,11 +120,11 @@ namespace Exam.Services
                 return null;
             }
         }
-        public async virtual Task<bool> UpdateAsync(T item)
+        public async virtual Task<bool> UpdateAsync(T item, string shortUri = "")
         {
             try
             {
-                var response = await Client.PutAsJsonAsync($"{uri}/{item.Id}", item);
+                var response = await Client.PutAsJsonAsync($"{uri}{shortUri}/{item.Id}", item);
                 if (response.IsSuccessStatusCode)
                 {
                     return true;
@@ -137,11 +137,11 @@ namespace Exam.Services
                 return false;
             }
         }
-        public async virtual Task<bool> DeleteAsync(int id)
+        public async virtual Task<bool> DeleteAsync(int id, string shortUri = "")
         {
             try
             {
-                var response = await Client.DeleteAsync($"{uri}/{id}");
+                var response = await Client.DeleteAsync($"{uri}{shortUri}/{id}");
                 if (response.IsSuccessStatusCode)
                 {
                     return true;
