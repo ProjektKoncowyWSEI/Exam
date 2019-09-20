@@ -30,19 +30,27 @@ namespace Exam.Controllers
                 ViewBag.NotAvailable = true;
                 return View(model);
             }
-            var (message, isUserAssigned) = await uow.CheckExam(model);
-            ViewBag.Warning = warning ?? message;
-            ViewBag.NotAssigned = !isUserAssigned;
-            ViewBag.Info = info;
-            ViewBag.Error = error;
-            ViewBag.NotAvailable = ViewBag.Warning != null;
-            ViewBag.IsActive = await uow.IsActive(model);
+            var (message, isUserAssigned, examResult) = await uow.CheckExam(model);
+            model.ExamApproacheResult = examResult;
+            if (model.ExamApproacheResult != null)
+            {
+                ViewBag.Info = message;
+            }
+            else
+            {
+                ViewBag.Warning = warning ?? message;
+                ViewBag.NotAssigned = !isUserAssigned;
+                ViewBag.Info = info;
+                ViewBag.Error = error;
+                ViewBag.NotAvailable = ViewBag.Warning != null;
+                ViewBag.IsActive = await uow.IsActive(model);
+            }
             return View(model);
         }
         public async Task<IActionResult> Start(string code)
         {
             var model = await uow.GetExamByCode(code, true);
-            var (message, isUserAssigned) = await uow.CheckExam(model);
+            var (message, isUserAssigned, examResult) = await uow.CheckExam(model);
             if (message != null || !isUserAssigned)
                 return RedirectToAction(nameof(Index), new { code, error = message, notAssigned = !isUserAssigned });
             var (start, end) = await uow.StartExam(HttpContext.User.Identity.Name, code);
@@ -63,7 +71,7 @@ namespace Exam.Controllers
         public async virtual Task<JsonResult> FinishExam(ExamApproacheDTO exam)
         {
             var result = await uow.FinishExam(exam);
-            if (result)            
+            if (result)
                 return Json(new object[] { true, "Zakończono egzamin" });
             return Json(new object[] { false, "Nie udało się zakończyć egzaminu" });
         }

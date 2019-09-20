@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text;
 
 namespace ExamContract.MainDbModels
@@ -27,13 +28,33 @@ namespace ExamContract.MainDbModels
         public DateTime MaxStart { get; set; }
         [Display(Name = "Duration (minutes)")]
         public int DurationMinutes { get; set; }
+
+        [NotMapped]
+        private decimal? maxPoints = null;
+
+        [NotMapped]
         [Display(Name = "Max points")]
-        public decimal MaxPoints { get; set; }       
-       
+        public decimal? MaxPoints
+        {
+            get
+            {
+                decimal result = 0;
+                Questions.Where(q => q.Active == true).ToList()
+                    .ForEach(q => result += q.Answers.Where(a => a.Active).Sum(x => x.Points));
+                return result;
+            }
+            set
+            {
+                maxPoints = 0; //Na potrzeby bezpieczeństwa. Nie można nadpisać tej właściwości, ale musi być set.                
+            }
+        }
+
         public List<Question> Questions { get; set; }
-        public List<User> Users { get; set; }    
-        
+        public List<User> Users { get; set; }
+
         [NotMapped]
         public int ParentId { get; set; }
+        [NotMapped]
+        public ExamApproacheResult ExamApproacheResult { get; set; }
     }
 }

@@ -49,7 +49,23 @@
                 </div>
             </div>
             <div class="card-body">
-                @if (ViewBag.IsActive == true)
+                @if (Model.ExamApproacheResult != null)
+                {
+                    <div class="row">
+                        <div class="col-12">
+                            <h4 class="orange">@Localizer["Your result"]</h4>
+                            <div>
+                                <span class="bold">@Localizer["Your points"]: </span>
+                                <span>@Html.DisplayFor(model => model.ExamApproacheResult.Points)</span>
+                            </div>
+                            <div>
+                                <span class="bold">@Localizer["Possible to get"]: </span>
+                                <span>@Html.DisplayFor(model => model.MaxPoints)</span>
+                            </div>                           
+                        </div>
+                    </div>
+                }
+                else if (ViewBag.IsActive == true)
                 {
                     <div class="homeCenter"><a onclick="showLoader()" asp-controller="ExamApproaches" asp-action="Start" asp-route-code="@Model.Code" class="btn btn-primary box">@Localizer["Go to exam"]</a></div>
                 }

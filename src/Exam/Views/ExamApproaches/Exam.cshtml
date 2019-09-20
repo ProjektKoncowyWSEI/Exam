@@ -81,7 +81,7 @@
     </div>
 </div>
 @{
-    Model.MaxPoints = 0;
+    Model.MaxPoints = null;
     Model.Login = null;
     Model.Questions.ForEach(q => q.Answers.ForEach(a =>
     {
@@ -94,36 +94,8 @@
 @section Scripts{
     <script>
         createModel(@Html.Raw(Json.Serialize(Model)));
-        var countDownDate = new Date('@end').getTime();
-        examTimer(new Date('@now'));
-        function examTimer(now) {
-            document.getElementById("counter").innerHTML = "99h 99m 99s";
-            var counter = setInterval(function () {
-            var distance = countDownDate - now;
-            //var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            if (distance < 60000) {
-                document.getElementById("counter").classList.add("text-danger")
-                document.getElementById("counter").classList.add("bold")
-                document.getElementById("clock").classList.add("text-danger")
-                document.getElementById("clock").classList.remove("orange")
-            }
-            var h = hours < 10 ? "0" + String(hours) : hours;
-            var m = minutes < 10 ? "0" + String(minutes) : minutes;
-            var s = seconds < 10 ? "0" + String(seconds) : seconds;
-            document.getElementById("counter").innerHTML = h + "h " + m + "m " + s + "s";
-            if (distance < 20000) {
-                if (document.getElementById("counterContent").classList.contains("hidden")) {
-                    toogleTimer();
-                }
-            }
-            if (distance < 0) {
-                clearInterval(counter);
-                document.getElementById("counter").innerHTML = "00h 00m 00s";
-            }
-        }, 1000);
-}
+        let countDownDate = new Date('@end').getTime();
+        examTimer();
+       
     </script>
 }

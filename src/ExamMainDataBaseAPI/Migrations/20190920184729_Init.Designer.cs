@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamMainDataBaseAPI.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190918191723_Init")]
+    [Migration("20190920184729_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,8 +63,6 @@ namespace ExamMainDataBaseAPI.Migrations
 
                     b.Property<string>("Login")
                         .HasMaxLength(256);
-
-                    b.Property<decimal>("MaxPoints");
 
                     b.Property<DateTime>("MaxStart");
 

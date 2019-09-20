@@ -771,4 +771,16 @@
   <data name="Required" xml:space="preserve">
     <value>Wymagane</value>
   </data>
+  <data name="The exam has ended" xml:space="preserve">
+    <value>Egzamin się zakończył</value>
+  </data>
+  <data name="Your result" xml:space="preserve">
+    <value>Twój wynik</value>
+  </data>
+  <data name="Possible to get" xml:space="preserve">
+    <value>Możliwe do zdobycia</value>
+  </data>
+  <data name="Your points" xml:space="preserve">
+    <value>Twoje punty</value>
+  </data>
 </root>

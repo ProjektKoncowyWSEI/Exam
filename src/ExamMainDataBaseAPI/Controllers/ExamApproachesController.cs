@@ -89,6 +89,14 @@ namespace ExamMainDataBaseAPI.Controllers
                 return NotFound();
             return item;
         }
+        [HttpGet("{login}/{examId}")]
+        public virtual async Task<ActionResult<ExamApproacheResult>> GetResultGruoped(string login, int examId)
+        {
+            var item = await repo.GetResultGroupedAsync(login, examId);
+            if (item == null)
+                return NotFound();
+            return item;
+        }
         [HttpGet]
         public virtual async Task<ActionResult<IEnumerable<ExamApproache>>> GetList(int? examId, string login)
         {

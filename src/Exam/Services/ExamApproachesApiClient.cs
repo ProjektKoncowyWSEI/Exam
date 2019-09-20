@@ -129,6 +129,28 @@ namespace Exam.Services
             }
         }
         #region Results
+        public async virtual Task<ExamApproacheResult> GetResultAsync(int examId, string login)
+        {
+            try
+            {
+                var response = await ExamApproachesClient.GetAsync($"{uri}/GetResultGruoped/{login}/{examId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<ExamApproacheResult>(content);
+                }
+                else
+                {
+                    return null;
+                    //throw new Exception(response.StatusCode.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
+                return null;
+            }
+        }
         public async virtual Task<ExamApproacheResult> AddResultAsync(ExamApproacheResult item)
         {
             try

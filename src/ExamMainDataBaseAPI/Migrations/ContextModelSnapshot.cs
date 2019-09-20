@@ -62,8 +62,6 @@ namespace ExamMainDataBaseAPI.Migrations
                     b.Property<string>("Login")
                         .HasMaxLength(256);
 
-                    b.Property<decimal>("MaxPoints");
-
                     b.Property<DateTime>("MaxStart");
 
                     b.Property<DateTime>("MinStart");

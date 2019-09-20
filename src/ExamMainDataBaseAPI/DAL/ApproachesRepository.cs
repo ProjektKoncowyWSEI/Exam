@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace ExamMainDataBaseAPI.DAL
 {
-    public class ApproachesRepository : IDisposable 
-    { 
+    public class ApproachesRepository : IDisposable
+    {
         private readonly Context context;
         private DbSet<ExamApproache> dbSetExamApproache = null;
         private DbSet<ExamApproacheResult> dbSetExamApproacheResult = null;
@@ -22,11 +22,24 @@ namespace ExamMainDataBaseAPI.DAL
         }
         public async Task<ExamApproache> GetAsync(int examId, string login)
         {
-            return await dbSetExamApproache.SingleOrDefaultAsync(a=>a.ExamId == examId && a.Login == login);
+            return await dbSetExamApproache.SingleOrDefaultAsync(a => a.ExamId == examId && a.Login == login);
         }
         public async Task<ExamApproacheResult> GetResultAsync(string login, int examId, int questionId, int answerId)
         {
             return await dbSetExamApproacheResult.SingleOrDefaultAsync(a => a.ExamId == examId && a.Login == login && a.QuestionId == questionId && a.AnswerId == answerId);
+        }
+        public async Task<ExamApproacheResult> GetResultGroupedAsync(string login, int examId)
+        {
+            return await dbSetExamApproacheResult
+                                .Where(a => a.ExamId == examId && a.Login == login && a.Checked)
+                                .GroupBy(a => new { a.ExamId, a.Login })                                
+                                .Select(a => new ExamApproacheResult
+                                {
+                                     Login = a.Key.Login,
+                                      ExamId = a.Key.ExamId,
+                                       Points = a.Sum(x=>x.Points)
+                                })
+                                .FirstOrDefaultAsync();
         }
         public async Task<List<ExamApproache>> GetListAsync()
         {
@@ -42,7 +55,7 @@ namespace ExamMainDataBaseAPI.DAL
         }
         public async Task<List<ExamApproache>> GetListAsync(string login)
         {
-            return await dbSetExamApproache.Where(a=>a.Login == login).AsNoTracking().ToListAsync();
+            return await dbSetExamApproache.Where(a => a.Login == login).AsNoTracking().ToListAsync();
         }
         public async Task<List<ExamApproache>> GetListAsync(int examId)
         {
@@ -57,7 +70,7 @@ namespace ExamMainDataBaseAPI.DAL
             }
             catch (Exception ex)
             {
-                return new DateTime(2000,1,1);
+                return new DateTime(2000, 1, 1);
             }
         }
         public async Task<ExamApproacheResult> AddResultAsync(ExamApproacheResult item)

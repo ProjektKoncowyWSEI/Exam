@@ -18,8 +18,7 @@ POST {{URL}}/Exams
 content-type: application/json
 
 {
-    "name": "Test",
-    "MaxPoints": 2,
+    "name": "Test",  
     "MinStart": "2019-01-01 20:21",
     "MaxStart": "2019-01-02 05:20",
     "DurationMinutes": 90,

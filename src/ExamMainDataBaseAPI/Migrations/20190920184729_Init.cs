@@ -51,8 +51,7 @@ namespace ExamMainDataBaseAPI.Migrations
                     Code = table.Column<string>(maxLength: 5, nullable: true),
                     MinStart = table.Column<DateTime>(nullable: false),
                     MaxStart = table.Column<DateTime>(nullable: false),
-                    DurationMinutes = table.Column<int>(nullable: false),
-                    MaxPoints = table.Column<decimal>(nullable: false)
+                    DurationMinutes = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

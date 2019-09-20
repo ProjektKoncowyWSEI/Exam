@@ -117,19 +117,24 @@ namespace Exam.Data.UnitOfWork
             var myExams = await GetMyExams(login, true);
             return exam != null && myExams != null && myExams.Any(a => a.ExamId == exam.Id);
         }
-        public async Task<(string message, bool isUserAssigned)> CheckExam(exam exam)
+        public async Task<(string message, bool isUserAssigned, ExamApproacheResult examResult)> CheckExam(exam exam)
         {
-            var isUserAssigned = await IsUserAssigned(exam.Code, httpContext.HttpContext.User.Identity.Name);
+            var isUserAssigned = await IsUserAssigned(exam.Code, httpContext.HttpContext.User.Identity.Name); 
+            var examResult = await ExamApproachesRepo.GetResultAsync(exam.Id, httpContext.HttpContext.User.Identity.Name);
+            if (examResult != null)
+            {
+                return (localizer["The exam has ended"], isUserAssigned, examResult);
+            }                       
             if (!exam.Active)
-                return (localizer["Exam {0} is not active, contact the owner: {1}", exam.Code, exam.Login], isUserAssigned);
+                return (localizer["Exam {0} is not active, contact the owner: {1}", exam.Code, exam.Login], isUserAssigned, examResult);
             if (!isUserAssigned)
-                return (localizer["You are not registered for the exam, you can do it by clicking the button."], isUserAssigned);
+                return (localizer["You are not registered for the exam, you can do it by clicking the button."], isUserAssigned, examResult);
             if (DateTime.Now < exam.MinStart || DateTime.Now > exam.MaxStart)
-                return (localizer["You can't start the exam right now, you can start the exam between {0} and {1}", exam.MinStart, exam.MaxStart], isUserAssigned);
+                return (localizer["You can't start the exam right now, you can start the exam between {0} and {1}", exam.MinStart, exam.MaxStart], isUserAssigned, examResult);
             var savedExam = await ExamApproachesRepo.GetAsync(exam.Id, httpContext.HttpContext.User.Identity.Name);
             if (savedExam != null && savedExam.Start.AddMinutes(exam.DurationMinutes) < DateTime.Today)
-                return (localizer["The exam time has passed"], isUserAssigned);
-            return (null, isUserAssigned);
+                return (localizer["The exam time has passed"], isUserAssigned, examResult);
+            return (null, isUserAssigned, examResult);
         }
         public async Task<bool> IsActive(exam exam)
         {
