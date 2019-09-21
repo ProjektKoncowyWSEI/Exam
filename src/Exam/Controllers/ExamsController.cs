@@ -72,20 +72,9 @@ namespace Exam.Controllers
         }
         public async Task<IActionResult> ExamResults(int id)
         {
-            ViewBag.Exam = await uow.ExamsWithAllRepo.GetAsync(id);
-            var model = await uow.ExamApproachesRepo.GetResultsAsync(id);
-            var examUsers = await uow.UsersRepo.GetListAsync(id);
-            if (examUsers.Count > model.Count)
-            {
-                var usersNotOnExam = examUsers
-                    .Where(eu => !model.Any(m => m.Login == eu.Login))
-                    .Select(eu => new ExamApproacheResult
-                    {
-                        Login = eu.Login,
-                        Points = -1
-                    });
-                model.AddRange(usersNotOnExam);
-            }
+            var (exam, examResults) = await uow.GetResultsForExam(id);
+            ViewBag.Exam = exam;
+            var model = examResults;            
             return View(model);
         }
     }

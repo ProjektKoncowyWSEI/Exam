@@ -203,5 +203,24 @@ namespace Exam.Data.UnitOfWork
             var result = await ExamApproachesRepo.AddResultsAsync(model);
             return (result == answerCount);   
         }
+        public async Task<(exam exam, List<ExamApproacheResult> examResults)> GetResultsForExam(int id)
+        {
+            var exam = await ExamsWithAllRepo.GetAsync(id);
+            var examResults = await ExamApproachesRepo.GetResultsAsync(id);
+            var examUsers = await UsersRepo.GetListAsync(id);
+            if (examUsers.Count > examResults.Count)
+            { 
+                //Dodajemy uczestnków egzaminu którzy nie zakończyli egzaminu.
+                var usersNotOnExam = examUsers
+                    .Where(eu => !examResults.Any(m => m.Login == eu.Login))
+                    .Select(eu => new ExamApproacheResult
+                    {
+                        Login = eu.Login,
+                        Points = -1
+                    });
+                examResults.AddRange(usersNotOnExam);
+            }
+            return (exam, examResults);
+        }
     }
 }
