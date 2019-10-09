@@ -45,8 +45,6 @@ namespace ExamMainDataBaseAPI
                 .AddMvcCore()
                 .AddJsonFormatters()
                 .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
-            //string mainDbConnection = Environment.GetEnvironmentVariable("EXAM_MainDBConnection") ?? Configuration.GetConnectionString("DefaultConnection");
-            //services.AddDbContext<ExamQuestionsDbContext>(options => options.UseSqlServer(mainDbConnection));
             services.AddTransient<Repository<Answer>>();
             services.AddTransient<Repository<Question>>();           
             services.AddTransient<Repository<Exam>>();
