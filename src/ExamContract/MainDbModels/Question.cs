@@ -10,7 +10,7 @@ namespace ExamContract.MainDbModels
     {
         public Question()
         {
-            Answers = new HashSet<Answer>();
+            Answers = new List<Answer>();
         }
         public int? ExamId { get; set; }
         [MaxLength(200)]
@@ -30,12 +30,10 @@ namespace ExamContract.MainDbModels
             }
             set
             {
-                AnswerType = (int)value;
-                answerTypesEnum = value;
+                AnswerType = (int)value;           
             }
-        }
-        private AnswerTypesEnum answerTypesEnum;       
+        }              
 
-        public ICollection<Answer> Answers { get; set; }
+        public List<Answer> Answers { get; set; }
     }
 }

@@ -1,0 +1,33 @@
+﻿@model ExamContract.ExamDTO.UserTutorialsDTO
+
+@{
+    ViewData["Title"] = Localizer["Tutorials"];
+    int? questionId = ViewBag.TutorialId;
+    string ch = ViewBag.OnlyActive ? "checked" : "";
+}
+<div class="mainImage-index"></div>
+<h3>@ViewBag.Message</h3>
+<div class="form-inline">
+    <div class="marginLeft10 form-inline">
+        <form id="setActive" asp-action="SetActive">
+            <span for="active">@Localizer["Only active"]</span>
+            @if (ViewBag.OnlyActive)
+            {
+                @Html.CheckBox("active", new { @class = "form-control", @onchange = "showLoader();document.getElementById('setActive').submit();", @checked = ch })
+            }
+            else
+            {
+                @Html.CheckBox("active", new { @class = "form-control", @onchange = "showLoader();document.getElementById('setActive').submit();" })
+            }
+
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-md-12">
+        <partial name="_MyTutorialsGrid" model="Model.MyTutorials" />
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <partial name="_AllTutorialsGrid" model="Model.AllTutorials" />
+    </div>
+</div>

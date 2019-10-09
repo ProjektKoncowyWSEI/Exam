@@ -10,9 +10,9 @@ namespace ExamTutorialsAPI.Models.Repositories
     public class ApiKeyRepo : IApiKeyRepo
 
     {
-        private readonly ExamTutorialsApiContext context;
+        private readonly Context context;
 
-        public ApiKeyRepo(ExamTutorialsApiContext context)
+        public ApiKeyRepo(Context context)
         {
             this.context = context;
         }

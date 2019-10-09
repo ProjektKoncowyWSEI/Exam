@@ -1,0 +1,91 @@
+﻿@model IEnumerable<ExamContract.TutorialModels.Tutorial>
+@{
+    string ch = ViewBag.OnlyActive ? "checked" : "";
+    SearchModel searchModel = new SearchModel("tutorialGrid", ".mainTr", Localizer.GetString("Search"));
+}
+    <div class="card">
+        <div class="card-header">
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-inline">
+                        <a asp-controller="Tutorials" asp-action="Create" class="btn btn-primary btn-sm margin5px">@Localizer["Add tutorial"]</a>
+                        <a asp-controller="UserTutorials" asp-action="Index" onclick="showLoader();" class="btn btn-primary btn-sm margin5px">@Localizer["Sing up for tutorial"]</a>
+                        <div class="marginLeft10 form-inline">
+                            <form id="setActive" asp-action="SetActive">
+                                <span for="active">@Localizer["Only active"]</span>
+                                @if (ViewBag.OnlyActive)
+                                {
+                                    @Html.CheckBox("active", new { @class = "form-control", @onchange = "showLoader();document.getElementById('setActive').submit();", @checked = ch })
+                                }
+                                else
+                                {
+                                    @Html.CheckBox("active", new { @class = "form-control", @onchange = "showLoader();document.getElementById('setActive').submit();" })
+                                }
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6"><partial name="_Search" model="@searchModel"></div>
+            </div>
+
+        </div>
+        <div class=" card-body">
+            @if (Model != null && Model.Count() > 0)
+            {
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>  
+                            <th>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </th>
+                            <th>
+                                @Localizer["Owner"]
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Active)
+                            </th>
+                            <th>Link</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tutorialGrid">
+                        @foreach (var item in Model)
+                        {
+                            <tr class="mainTr">
+                                <td>
+                                    <div class="td">@Html.DisplayNameFor(model => model.Name)</div>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td> 
+                                <td>
+                                    <div class="td">@Html.DisplayNameFor(model => model.Description)</div>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    <div class="td">@Localizer["Owner"]</div>
+                                    @Html.DisplayFor(modelItem => item.Login)
+                                </td>
+                                <td>
+                                    <div class="td">@Html.DisplayNameFor(model => model.Active)</div>
+                                    @Html.DisplayFor(modelItem => item.Active)
+                                </td>
+                                <td>
+                                    <a asp-controller="UserTutorials" asp-action="Tutorial" asp-route-id="@item.Id" class="bold"><div class="btn btn-primary btn-sm">@Localizer["Go to"]</div></a>
+                                </td>
+                                <td>
+                                    <div class="command">
+                                        <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            }
+        </div>
+    </div>

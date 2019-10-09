@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ExamContract.MainDbModels.Exam>
 @{
     string ch = ViewBag.OnlyActive ? "checked" : "";
-    SearchModel searchModel = new SearchModel("examsGrid", ".mainTr", Localizer.GetString("Search"));      
+    SearchModel searchModel = new SearchModel("examsGrid", ".mainTr", Localizer.GetString("Search"));
 }
 <div class="card">
     <div class="card-header">
@@ -53,7 +53,7 @@
                             @Html.DisplayNameFor(model => model.MaxPoints)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Login)
+                            @Localizer["Owner"]
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Active)
@@ -70,43 +70,51 @@
                         <tr class="mainTr">
                             <td><button id="arrow_@item.Id" onclick="toggleTr('#questions_@item.Id', '#arrow_@item.Id')" class="btn btn-primary fa fa-chevron-down btn-sm"></button></td>
                             <td>
+                                <div class="td">@Html.DisplayNameFor(model => model.Name)</div>
                                 @Html.DisplayFor(modelItem => item.Name)
                             </td>
                             <td>
+                                <div class="td">@Html.DisplayNameFor(model => model.MinStart)</div>
                                 @Html.DisplayFor(modelItem => item.MinStart)
                             </td>
                             <td>
+                                <div class="td">@Html.DisplayNameFor(model => model.MaxStart)</div>
                                 @Html.DisplayFor(modelItem => item.MaxStart)
                             </td>
                             <td>
+                                <div class="td">@Html.DisplayNameFor(model => model.DurationMinutes)</div>
                                 @Html.DisplayFor(modelItem => item.DurationMinutes)
                             </td>
                             <td>
+                                <div class="td">@Html.DisplayNameFor(model => model.MaxPoints)</div>
                                 @Html.DisplayFor(modelItem => item.MaxPoints)
                             </td>
                             <td>
+                                <div class="td">@Localizer["Owner"]</div>
                                 @Html.DisplayFor(modelItem => item.Login)
                             </td>
                             <td>
+                                <div class="td">@Html.DisplayNameFor(model => model.Active)</div>
                                 @Html.DisplayFor(modelItem => item.Active)
                             </td>
                             <td>
-                                <a asp-controller="ExamApproaches" asp-action="Index" asp-route-code="@item.Code">@Html.DisplayFor(modelItem => item.Code)</a>                               
+                                <a asp-controller="ExamApproaches" asp-action="Index" asp-route-code="@item.Code">@Html.DisplayFor(modelItem => item.Code)</a>
                             </td>
                             <td>
                                 <div class="command">
                                     <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a>
                                     <a id="clone_@item.Id" class="btn btn-primary btn-sm" asp-action="Clone" asp-route-id="@item.Id" onclick="hideElement('#clone_@item.Id')">@Localizer["Clone"]</a>
+                                    <a class="btn btn-primary btn-sm" asp-action="ExamResults" asp-route-id="@item.Id">@Localizer["Results"]</a>
                                 </div>
                             </td>
                         </tr>
                         <tr id="questions_@item.Id" style="display:none">
-                            <td></td>
+                            <td><span class="td">@Localizer["Questions"]</span></td>
                             <td colspan="9">
                                 <a asp-controller="Questions" asp-action="Create" asp-route-parentId="@item.Id" class="btn btn-primary btn-sm margin5px">@Localizer["Add question"]</a>
                                 <partial name="_QuestionsGrid" model="@item.Questions">
                             </td>
-                        </tr>
+                        </tr>                       
                     }
                 </tbody>
             </table>

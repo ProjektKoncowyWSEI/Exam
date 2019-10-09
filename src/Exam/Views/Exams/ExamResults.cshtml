@@ -1,0 +1,24 @@
+﻿@model IEnumerable<ExamContract.MainDbModels.ExamApproacheResult>
+@{
+    ViewData["Title"] = "ExamResults";
+    SearchModel searchModel = new SearchModel("resultsGrid", "tr", Localizer.GetString("Search"));
+}
+@if (Model != null && ViewBag.Exam != null)
+{
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6">
+                    <h5 class="orange bold">@Localizer["Results"]</h5>
+                    <p><span class="bold">@Localizer["Exam"]:</span> @ViewBag.Exam.Name | <span class="bold">@Localizer["Max points"]:</span> @ViewBag.Exam.MaxPoints</p>
+                </div>
+                <div class="col-6"><partial name="_Search" model="@searchModel"></div>
+            </div>
+        </div>
+        <div class="card-body">
+            <partial name="_ResultsGrid" model="Model">
+        </div>
+    </div>
+}
+
+

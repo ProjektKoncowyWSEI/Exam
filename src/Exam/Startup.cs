@@ -23,13 +23,13 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Localization;
 using Microsoft.Extensions.Logging;
 using Exam.Areas.Identity.Pages.Account;
-using Exam.IRepositories;
-using Exam.Repositories;
 using Microsoft.EntityFrameworkCore.Migrations;
 using ExamContract.MainDbModels;
 using Exam.Data.UnitOfWork;
 using Exam.Areas.Identity.Pages.Account.Manage;
 using ExamContract.CourseModels;
+using Exam.Controllers;
+using ExamContract.TutorialModels;
 
 namespace Exam
 {
@@ -69,16 +69,23 @@ namespace Exam
             services.AddScoped<ILogger, Logger.ExamLogger>();
             services.AddScoped<ILogger<LoginModel>, Logger.ExamLogger<LoginModel>>();
             services.AddScoped<ILogger<ChangePasswordModel>, Logger.ExamLogger<ChangePasswordModel>>();            
-            services.AddTransient<ITutorialsRepo, TutorialsRepo>();
+            services.AddScoped<ILogger<ExamsController>, Logger.ExamLogger<ExamsController>>();            
+            services.AddTransient<WebApiClient<Tutorial>, TutorialsApiClient>();
             services.AddTransient<WebApiClient<ExamContract.MainDbModels.Exam>, ExamsApiClient>();
             services.AddTransient<WebApiClient<Question>, QuestionsApiClient>();
             services.AddTransient<WebApiClient<Answer>, AnswersApiClient>();             
-            services.AddTransient<WebApiClient<ExamContract.MainDbModels.User>, UsersApiClient>();
+            services.AddTransient<WebApiClient<ExamContract.MainDbModels.User>, UsersMainDbApiClient>();
+            services.AddTransient<WebApiClient<ExamContract.CourseModels.User>, UsersCoursesApiClient>(); 
+            services.AddTransient<WebApiClient<ExamContract.TutorialModels.User>, UsersTutorialsClient>(); 
             services.AddTransient<WebApiClient<Course>, CoursesApiClient>();
-            services.AddTransient<CourseTwoKeyApiClient<ExamCourse>, CouorseExamApiClient>();
+            services.AddTransient<CourseTwoKeyApiClient<ExamCourse>, CourseExamApiClient>();
+            services.AddTransient<CourseTwoKeyApiClient<TutorialCourse>, CourseTutorialApiClient>();            
             services.AddTransient<ExamsQuestionsAnswersApiClient>(); //Wymagamy klasy konkretnej
+            services.AddTransient<ExamApproachesApiClient>();
             services.AddTransient<Exams>();
-            
+            services.AddTransient<Courses>();
+            services.AddTransient<Tutorials>();
+
 
             services.ConfigureApplicationCookie(o =>
             {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExamContract.TutorialModels;
 using ExamTutorialsAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,8 +15,8 @@ namespace ExamTutorialsAPI.Controllers
     public class KeysController : ControllerBase
     {
 
-        private readonly ExamTutorialsApiContext _context;
-        public KeysController (ExamTutorialsApiContext context)
+        private readonly Context _context;
+        public KeysController (Context context)
         {
             _context = context;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace ExamContract.CourseModels
@@ -12,7 +13,9 @@ namespace ExamContract.CourseModels
             ExamCourses = new HashSet<ExamCourse>();
             TutorialCourses = new HashSet<TutorialCourse>();
         }
+        [Display(Name = "Name")]
         public string Name { get; set; }
+        [Display(Name = "Description")]
         public string Description { get; set; }
 
         public ICollection<User> Users { get; set; }

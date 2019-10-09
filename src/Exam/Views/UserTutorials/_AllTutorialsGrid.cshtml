@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ExamContract.TutorialModels.Tutorial>
+@{ 
+     SearchModel searchModel = new SearchModel("allTutorislsGrid", "tr", Localizer.GetString("Search")); 
+}
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-6">@Localizer["All tutorials"]</div>
+            <div class="col-6"><partial name="_Search" model="@searchModel"></div>
+        </div>
+    </div>
+    <div class="card-body">
+        @if (Model != null && Model.Count() > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </th>                       
+                        <th>
+                            @Localizer["Owner"]
+                        </th>                        
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="allTutorislsGrid">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="td">@Html.DisplayNameFor(model => model.Name)</div>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                <div class="td">@Html.DisplayNameFor(model => model.Description)</div>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>                         
+                            <td>
+                                <div class="td">@Localizer["Owner"]</div>
+                                @Html.DisplayFor(modelItem => item.Login)
+                            </td>                           
+                            <td>
+                                <div>
+                                    <form asp-action="Create">
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button onclick="showLoader()" class="btn btn-primary btn-sm">@Localizer["Sign in"]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+    </div>
+</div>

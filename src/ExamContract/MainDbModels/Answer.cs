@@ -7,6 +7,10 @@ namespace ExamContract.MainDbModels
 {
     public partial class Answer: Entity
     {
+        public Answer()
+        {
+            Checked = false;
+        }
         [MaxLength(200)]
         [Display(Name = "Name")]
         public string Name { get; set; }
@@ -17,5 +21,7 @@ namespace ExamContract.MainDbModels
         public int QuestionId { get; set; } 
         [NotMapped]
         public int ExamId { get; set; }
+        [NotMapped]
+        public bool Checked { get; set; }
     }
 }

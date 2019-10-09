@@ -1,35 +1,39 @@
-@if (ViewBag.Error != null)
-{
-    <div class="alert alert-danger alert-dismissible fade show alertPosition" role="alert">
-        <strong>@Localizer["Error"]:</strong> @ViewBag.Error
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+@{
+    int timeout = ViewBag.InfoTimeout ?? 3000;
 }
-@if (ViewBag.Warning != null)
-{
-    <div class="alert alert-warning alert-dismissible fade show alertPosition" role="alert">
-        <strong>@Localizer["Warning"]:</strong> @ViewBag.Warning
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+    <div class="alertContainer">
+        @if (ViewBag.Info != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show alertPosition" role="alert">
+                <strong>@Localizer["Info"]:<br /></strong> @ViewBag.Info
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        @if (ViewBag.Warning != null)
+        {
+            <div class="alert alert-warning alert-dismissible fade show alertPosition" role="alert">
+                <strong>@Localizer["Warning"]:<br /></strong> @ViewBag.Warning
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show alertPosition" role="alert">
+                <strong>@Localizer["Error"]:<br /></strong> @ViewBag.Error
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
     </div>
-}
-@if (ViewBag.Info != null)
-{
-    <div class="alert alert-success alert-dismissible fade show alertPosition" role="alert">
-        <strong>@Localizer["Info"]:</strong> @ViewBag.Info
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-}
-
 <script>
     window.setTimeout(function () {
         $(".alert").slideUp(500, function () {
-            $(this).remove();           
+            $(this).remove();
     });
-}, 3000);
+}, @timeout);
 </script>

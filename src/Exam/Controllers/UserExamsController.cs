@@ -38,11 +38,8 @@ namespace Exam.Controllers
             ViewBag.ExamId = parentId;
             ViewBag.QuestionId = questionId;
             bool onlyActive = Convert.ToBoolean(Request.Cookies[GlobalHelpers.ACTIVE]);
-            ViewBag.OnlyActive = onlyActive;
-            var model = new ExamContract.ExamDTO.UserExamsDTO();
-            model.MyExams = await uow.GetMyExams(login, onlyActive);
-            model.AllExams = await uow.GetList(null, true);
-            return View(model);
+            ViewBag.OnlyActive = onlyActive;            
+            return View(await uow.GetUserExamsAsync(login, onlyActive));
         }
         public IActionResult SetActive(bool active)
         {
@@ -52,39 +49,13 @@ namespace Exam.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async virtual Task<IActionResult> Create(int id)
-        {
+        {            
             if (id > 0)
             {
-                logger.LogInformation($"Create, {id}");
-                User item = new User();
-                logger.LogInformation($"User item = new User();");
-                item.ExamId = id;
-                logger.LogInformation($"item.ExamId = id;");
-                item.Login = HttpContext.User.Identity.Name;
-                logger.LogInformation($"item.Login = HttpContext.User.Identity.Name;");
-                User created = null;
+                logger.LogInformation($"Create, {id}");   
                 try
                 {
-                    var dbItem = (await uow.UsersRepo.GetListAsync(item.Login)).Where(a => a.ExamId == item.ExamId).FirstOrDefault();
-                    if (dbItem != null)
-                    {
-                        dbItem.Active = true;
-                        await uow.UsersRepo.UpdateAsync(dbItem);
-                    }
-                    else
-                        created = await uow.UsersRepo.AddAsync(item);
-                    string examName = "";
-                    string message = "";
-                    if (created != null)
-                    {
-                        var temp = await uow.ExamsRepo.GetAsync(id);
-                        if (temp != null)
-                        {
-                            examName = temp.Name;
-                            message = temp.ToString();
-                        }
-                    }
-                    await emailSender.SendEmailAsync(item.Login, localizer["User sing up for exam {0}", examName], message); //TODO Dodać link do egzaminu
+                    User created = await uow.SignIntoExam(id);
                     return RedirectToAction(nameof(Index), new { info = localizer["User signed into exam"] });
                 }
                 catch (Exception ex)
@@ -94,7 +65,8 @@ namespace Exam.Controllers
                 }
             }
             return RedirectToAction(nameof(Index), new { info = localizer["Exam id is not valid"] });
-        }
+        }        
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async virtual Task<IActionResult> Edit(int id)

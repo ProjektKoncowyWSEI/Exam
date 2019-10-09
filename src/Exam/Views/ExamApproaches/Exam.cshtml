@@ -1,0 +1,101 @@
+﻿@model ExamContract.MainDbModels.Exam
+@{
+    ViewData["Title"] = Model.Name;
+    var end = ViewBag.EndDate;
+    var now = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
+}
+@inject IJsonHelper Json;
+<div class="card">
+    <div class="card-header">
+        <div id="timer" class="timer">
+            <i id="arrow" class="orange btn btn-primary btn-sm fa fa-long-arrow-right" onclick="toogleTimer()"></i> <i id="clock" class="orange fa fa-clock-o"></i><span id="counterContent"> @Localizer["Time left:"] <span id="counter"></span></span>
+        </div>
+        <div id="ExamDescription">
+            @if (Model != null)
+            {
+                @Model.Name
+            }
+        </div>
+    </div>
+    <div class="card-body">
+        <div id="ExamQuestions">
+            @if (Model != null && Model.Questions != null && Model.Questions.Count > 0)
+            {
+                for (int i = 0; i < Model.Questions.Count; i++)
+                {
+                    <div class="card margin5px">
+                        <div class="col-12 questionContent">
+                            <div id="question_@i">@Localizer["Question"] @(i + 1)</div>
+                            @Html.DisplayFor(m => Model.Questions[i].Content, new { @class = "form-control" })
+                        </div>
+                        <div class="row">
+                            <div class="answerContent">
+                                @for (int y = 0; y < Model.Questions[i].Answers.Count; y++)
+                                {
+                                    <div class="col-12">
+                                        @if (Model.Questions[i].AnswerTypesEnum == AnswerTypesEnum.single)
+                                        {
+                                            <label>
+                                                <input class="bigCheckbox" type="radio" name="@Model.Questions[i].Name" onchange="setAnswer(@i, @y, this, @Model.Questions[i].AnswerType )"> @Model.Questions[i].Answers[y].Content
+                                            </label>
+                                        }
+                                        else if (Model.Questions[i].AnswerTypesEnum == AnswerTypesEnum.multiple)
+                                        {
+                                            <label>
+                                                <input class="bigCheckbox" type="checkbox" name="@Model.Questions[i].Name" onchange="setAnswer(@i, @y, this, @Model.Questions[i].AnswerType )"> @Model.Questions[i].Answers[y].Content
+                                            </label>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="card-footer">
+        <label> * @Localizer["Required"]</label>
+        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">@Localizer["End exam"]</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @Localizer["Do you want to end the exam?"]
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">@Localizer["No"]</button>
+                        <button id="sendBtn" class="btn btn-primary btn-sm" onclick="sendExam()" data-dismiss="modal">@Localizer["Yes"]</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btnRight">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal">@Localizer["Finish the exam"]</button>
+        </div>
+    </div>
+</div>
+@{
+    Model.MaxPoints = null;
+    Model.Login = null;
+    Model.Questions.ForEach(q => q.Answers.ForEach(a =>
+    {
+        a.Content = null;
+        a.Points = 0;
+        a.Name = null;
+        a.Login = null;
+    })); // Zabezpieczenie przed sprawdzeniem punktacji dla pytań
+}
+@section Scripts{
+    <script>
+        createModel(@Html.Raw(Json.Serialize(Model)));
+        let countDownDate = new Date('@end').getTime();
+        examTimer();
+       
+    </script>
+}

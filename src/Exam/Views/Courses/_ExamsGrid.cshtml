@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<ExamContract.MainDbModels.Exam>
 @if (Model != null && Model.Count() > 0)
 {
-
     <table class="table">
         <thead>
             <tr>
@@ -21,7 +20,7 @@
                     @Html.DisplayNameFor(model => model.MaxPoints)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Login)
+                    @Localizer["Owner"]
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Active)
@@ -29,6 +28,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Code)
                 </th>
+                <th></th>
             </tr>
         </thead>
         <tbody id="examsGrid">
@@ -36,30 +36,44 @@
             {
                 <tr>
                     <td>
+                        <div class="td">@Html.DisplayNameFor(model => model.Name)</div>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
+                        <div class="td">@Html.DisplayNameFor(model => model.MinStart)</div>
                         @Html.DisplayFor(modelItem => item.MinStart)
                     </td>
                     <td>
+                        <div class="td">@Html.DisplayNameFor(model => model.MaxStart)</div>
                         @Html.DisplayFor(modelItem => item.MaxStart)
                     </td>
                     <td>
+                        <div class="td">@Html.DisplayNameFor(model => model.DurationMinutes)</div>
                         @Html.DisplayFor(modelItem => item.DurationMinutes)
                     </td>
                     <td>
+                        <div class="td">@Html.DisplayNameFor(model => model.MaxPoints)</div>
                         @Html.DisplayFor(modelItem => item.MaxPoints)
                     </td>
                     <td>
+                        <div class="td">@Localizer["Owner"]</div>
                         @Html.DisplayFor(modelItem => item.Login)
                     </td>
                     <td>
+                        <div class="td">@Html.DisplayNameFor(model => model.Active)</div>
                         @Html.DisplayFor(modelItem => item.Active)
                     </td>
-                    <td>
-                        <a asp-controller="ExamApproaches" asp-action="Index" asp-route-code="@item.Code">@Html.DisplayFor(modelItem => item.Code)</a>
+                    <td>                       
+                        <a asp-controller="ExamApproaches" asp-action="Index" asp-route-code="@item.Code">@Html.DisplayFor(modelItem => item.Code)</a>                       
                     </td>
-                </tr>
+                    <td>
+                        <form asp-action="DeleteExam" method="post">
+                            <input type="hidden" name="courseId" value="@item.ParentId" />
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <input type="submit" value="@Localizer["Delete"]" class="btn btn-danger btn-sm" />
+                        </form>
+                    </td>
+                </tr>               
             }
         </tbody>
     </table>

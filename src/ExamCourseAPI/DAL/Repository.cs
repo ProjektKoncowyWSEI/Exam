@@ -33,7 +33,7 @@ namespace ExamCourseAPI.DAL
                 await dbSet.AddAsync(item);
                 return item.Id;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return -1;
             }
@@ -46,7 +46,7 @@ namespace ExamCourseAPI.DAL
                 await Task.Run(() => dbSet.Update(item));
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -61,7 +61,7 @@ namespace ExamCourseAPI.DAL
                     await Task.Run(() => dbSet.Remove(item));
                     return true;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return false;
                 }

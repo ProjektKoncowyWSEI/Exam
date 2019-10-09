@@ -80,11 +80,11 @@ namespace Exam.Services
                 throw;
             }
         }
-        public async virtual Task<List<T>> GetListAsync(int parrentId)
+        public async virtual Task<List<T>> GetListAsync(int parentId)
         {
             try
             {
-                var response = await Client.GetAsync($"{uri}/?parentId={parrentId}");
+                var response = await Client.GetAsync($"{uri}/?courseId={parentId}");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();

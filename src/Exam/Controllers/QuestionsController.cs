@@ -66,8 +66,11 @@ namespace Exam.Controllers
         }
         public override async Task<IActionResult> Delete(int? id, int? parentId = null)
         {
-            logger.LogWarning(Localizer["Questions can not be removed, you can deactivate!"]);
-            return RedirectToAction(nameof(Index), new { error = Localizer["Questions can not be removed, you can deactivate!"] });
-        }
+            logger.LogWarning(Localizer["Questions can not be removed, you can deactivate!"]);            
+            return await Task.Run<ActionResult>(() =>
+            {
+                return RedirectToAction(nameof(Index), new { error = Localizer["Questions can not be removed, you can deactivate!"] });
+            });
+        }     
     }
 }

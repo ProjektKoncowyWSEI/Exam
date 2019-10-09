@@ -15,7 +15,7 @@ namespace ExamMainDataBaseAPI.DAL
         public Repository<Question> QuestionRepo { get; private set; }
         public Repository<Answer> AnswersRepo { get; private set; }
 
-        public UnitOfWork(ExamQuestionsDbContext context,Repository<Exam> examRepo, Repository<Question> questionRepo, Repository<Answer> answersRepo)
+        public UnitOfWork(Context context,Repository<Exam> examRepo, Repository<Question> questionRepo, Repository<Answer> answersRepo)
         {           
             this.ExamRepo = examRepo;
             this.QuestionRepo = questionRepo;
@@ -36,6 +36,11 @@ namespace ExamMainDataBaseAPI.DAL
                 q.Answers = await AnswersRepo.FindBy(a => a.QuestionId == q.Id).ToListAsync();
             return exam;
         }
+        public async Task<Exam> GetExamwithQuestionsWithAnswers(string code)
+        {
+            var exam = await ExamRepo.FindBy(a => a.Code == code).FirstOrDefaultAsync();
+            return exam != null ? await GetExamwithQuestionsWithAnswers(exam.Id) : null;           
+        }
         public async Task Clone(Exam item)
         {
             var newItem = new Exam
@@ -43,8 +48,7 @@ namespace ExamMainDataBaseAPI.DAL
                 Id = 0,
                 Active = true,
                 DurationMinutes = item.DurationMinutes,
-                Login = item.Login,
-                MaxPoints = item.MaxPoints,
+                Login = item.Login,                
                 MaxStart = item.MaxStart,
                 MinStart = item.MinStart,
                 Name = $"{item.Name} ({DateTime.Now})",

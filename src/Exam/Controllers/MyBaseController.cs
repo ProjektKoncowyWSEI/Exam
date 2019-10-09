@@ -40,7 +40,6 @@ namespace Exam.Controllers
             {
                 return NotFound();
             }
-
             return View(item);
         }
 
@@ -56,7 +55,7 @@ namespace Exam.Controllers
             if (ModelState.IsValid)
             {
                 item.Login = HttpContext.User.Identity.Name;
-                await Service.AddAsync(item);
+                var x = await Service.AddAsync(item);
                 return RedirectToAction(nameof(Index));
             }
             return View(item);

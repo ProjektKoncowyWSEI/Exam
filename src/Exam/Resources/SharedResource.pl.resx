@@ -451,7 +451,7 @@
     <value>Klucze twojej aplikacji autoryzacji zostałyzresetowane, musisz skonfigurować aplikację autoryzacji przy użyciu nowego klucza.</value>
   </data>
   <data name="Your password has been set." xml:space="preserve">
-    <value>Twoje hasłozostało ustawione.</value>
+    <value>Twoje hasło zostało ustawione.</value>
   </data>
   <data name="Your profile has been updated" xml:space="preserve">
     <value>Twój profil został zaktualizowany</value>
@@ -644,5 +644,158 @@
   </data>
   <data name="Select exam" xml:space="preserve">
     <value>Wybierz egzamin</value>
+  </data>
+  <data name="Answers" xml:space="preserve">
+    <value>Odpowiedzi</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Opis</value>
+  </data>
+  <data name="Add new tutorial" xml:space="preserve">
+    <value>Dodaj nowy tutorial</value>
+  </data>
+  <data name="Create New" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Tutorials" xml:space="preserve">
+    <value>Tutoriale</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Kategoria</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Zdjęcie</value>
+  </data>
+  <data name="Tutorial name" xml:space="preserve">
+    <value>Nazwa szkolenia</value>
+  </data>
+  <data name="Name {0}&lt;br/&gt;Code {1}&lt;br/&gt;When {2} - {3}&lt;br/&gt;Duration {4} min" xml:space="preserve">
+    <value>Nazwa {0}&lt;br/&gt;Kod {1}&lt;br/&gt;Kiedy {2} - {3}&lt;br/&gt;Czas trwania {4} min</value>
+  </data>
+  <data name="Start exam" xml:space="preserve">
+    <value>Rozpocznij egzamin</value>
+  </data>
+  <data name="Confirm exam start" xml:space="preserve">
+    <value>Potwierdź start egzaminu</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nie</value>
+  </data>
+  <data name="The exam '{0}' will start now, you have {1} min to take the exam.&lt;br/&gt; Start the exam?" xml:space="preserve">
+    <value>Egzamin '{0}' rozpocznie się teraz, masz {1} min na podejście do egzaminu.&lt;br/&gt; Rozpocznąć egzamin?</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Tak</value>
+  </data>
+  <data name="Course id is not valid" xml:space="preserve">
+    <value>Id kursu nie jest prawidłowe</value>
+  </data>
+  <data name="Join course" xml:space="preserve">
+    <value>Zapisz się na kurs</value>
+  </data>
+  <data name="Name {0}, Login {1}" xml:space="preserve">
+    <value>Nazwa {0}, Login {1}</value>
+  </data>
+  <data name="User signed into course" xml:space="preserve">
+    <value>Użytkownik zapisał się na kurs</value>
+  </data>
+  <data name="User sing up for course {0}" xml:space="preserve">
+    <value>Użytkownik zapisał się na kurs {0}</value>
+  </data>
+  <data name="Go to" xml:space="preserve">
+    <value>Przejdź</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Właściciel</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Informacja</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Ostrzeżenie</value>
+  </data>
+  <data name="Exam {0} is not active, contact the owner: {1}" xml:space="preserve">
+    <value>Egzamin {0} nie jest aktywny, skontaktuj sie z wlaścicelem: {1}</value>
+  </data>
+  <data name="Go to exam" xml:space="preserve">
+    <value>Przejdź do egzaminu</value>
+  </data>
+  <data name="The exam time has passed" xml:space="preserve">
+    <value>Czas egzaminu minął</value>
+  </data>
+  <data name="You are not registered for the exam, you can do it by clicking the button." xml:space="preserve">
+    <value>Nie jesteś zapisany na egzamin, możesz to zrobic klikając w przycisk.</value>
+  </data>
+  <data name="You can't start the exam right now, you can start the exam between {0} and {1}" xml:space="preserve">
+    <value>Nie możesz teraz rozpocząć podejścia do egzaminu, możesz rozpocząć egzamin miedzy {0}, a {1}</value>
+  </data>
+  <data name="Add tutorial" xml:space="preserve">
+    <value>Dodaj szkolenie</value>
+  </data>
+  <data name="Sing up for tutorial" xml:space="preserve">
+    <value>Zapisz się na szkolenie</value>
+  </data>
+  <data name="All tutorials" xml:space="preserve">
+    <value>Wszystkie szkolenia</value>
+  </data>
+  <data name="Join tutorial" xml:space="preserve">
+    <value>Zapisz się na szkolenie</value>
+  </data>
+  <data name="User signed into tutorial" xml:space="preserve">
+    <value>Użytkownik zapisany na szkolenie</value>
+  </data>
+  <data name="Your tutorials" xml:space="preserve">
+    <value>Twoje szkolenia</value>
+  </data>
+  <data name="Name: {0}" xml:space="preserve">
+    <value>Nazwa: {0}</value>
+  </data>
+  <data name="User sing up for tutorial {0}" xml:space="preserve">
+    <value>Użytkownik zapisał się na szkolenie {0}</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>Pytanie</value>
+  </data>
+  <data name="Time left:" xml:space="preserve">
+    <value>Do końca:</value>
+  </data>
+  <data name="Do you want to end the exam?" xml:space="preserve">
+    <value>Czy chesz zakończyc egzamin</value>
+  </data>
+  <data name="End exam" xml:space="preserve">
+    <value>Konczenie egzaminu</value>
+  </data>
+  <data name="Finish the exam" xml:space="preserve">
+    <value>Zakończ egzamin</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Wymagane</value>
+  </data>
+  <data name="The exam has ended" xml:space="preserve">
+    <value>Egzamin się zakończył</value>
+  </data>
+  <data name="Your result" xml:space="preserve">
+    <value>Twój wynik</value>
+  </data>
+  <data name="Possible to get" xml:space="preserve">
+    <value>Możliwe do zdobycia</value>
+  </data>
+  <data name="Your points" xml:space="preserve">
+    <value>Twoje punty</value>
+  </data>
+  <data name="Results" xml:space="preserve">
+    <value>Wyniki</value>
+  </data>
+  <data name="Percent" xml:space="preserve">
+    <value>Procent</value>
+  </data>
+  <data name="Error while ending exam" xml:space="preserve">
+    <value>Błąd zapisu podejścia do egzaminu</value>
+  </data>
+  <data name="You are not sing up for exam" xml:space="preserve">
+    <value>Nie jesteś zapisany na egzamin</value>
+  </data>
+  <data name="You are sing up for exam" xml:space="preserve">
+    <value>Jesteś zapisany na egzamin</value>
   </data>
 </root>

@@ -2,187 +2,66 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Exam.IRepositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using Exam.TagHelpers;
-using ExamTutorialsAPI.Models;
+using ExamContract.TutorialModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Localization;
+using Exam.Services;
+using Helpers;
 
 namespace Exam.Controllers
 {
-    public class TutorialsController : Controller
+    public class TutorialsController : MyBaseController<Tutorial>
     {
-        private readonly ITutorialsRepo tutorialsRepo;
         private readonly ILogger logger;
-
-        public TutorialsController(ITutorialsRepo tutorialsRepo,ILogger logger)
+        public TutorialsController(IStringLocalizer<SharedResource> localizer, WebApiClient<Tutorial> service, ILogger<ExamsController> logger) : base(localizer, service)
         {
-            this.tutorialsRepo = tutorialsRepo;
+            ///this.uow = uow;
             this.logger = logger;
         }
-        // GET: Tutorials
-        public async Task <IActionResult> Index( int pageId = 1, int? pageSizeLocal = 2)
+        public override async Task<IActionResult> Index(int? parentId = null, int? questionId = null, string info = null, string warning = null, string error = null)
         {
-            try
+            var currentRole = User.CurrentRoleEnum();
+            var login = User.Identity.Name;
+            switch (currentRole)
             {
-                var model = await tutorialsRepo.GetList(pageId, pageSizeLocal);
-                ViewBag.PageInfo = new PageInfo
-                {
-                    CurrentPage = pageId,
-                    ItemPerPage = pageSizeLocal ?? int.MaxValue,
-                    TotalItems = tutorialsRepo.TotalItems
-                };
-                return View(model);
+                case RoleEnum.teacher:
+                    ViewBag.Message = Localizer["Your tutorials"];
+                    break;
+                case RoleEnum.admin:
+                    ViewBag.Message = Localizer["All tutorials"];
+                    login = null;
+                    break;
+                default:
+                    break;
             }
-            catch (Exception ex)
+            ViewBag.Error = error;
+            ViewBag.Warning = warning;
+            ViewBag.Info = info;           
+            ViewBag.TutorialId = parentId;
+            bool onlyActive = Convert.ToBoolean(Request.Cookies[GlobalHelpers.ACTIVE]);
+            ViewBag.OnlyActive = onlyActive;
+            var model = await Service.GetListAsync(login, onlyActive);
+            return View(model);
+        }       
+        public new async Task<IActionResult> Delete(int? id, int? parentId = null)
+        {
+            string message = Localizer["Tutorial can not be removed, you can deactivate!"];
+            logger.LogWarning(message);
+            return await Task.Run<ActionResult>(() =>
             {
-                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
-                return View(null);
-            }
+                return RedirectToAction(nameof(Index), new { error = message });
+            });
         }
-
-        // GET: Tutorials/Details/5
-        public async Task <IActionResult> Details(int? id)
+        public IActionResult SetActive(bool active)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var tutorials = await tutorialsRepo.Get((int)id);
-
-            if (tutorials == null)
-            {
-                return NotFound();
-            }
-
-            return View(tutorials);
-        }
-
-        // GET: Tutorials/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Tutorials/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task <IActionResult> Create(Tutorial tutorial)
-        {
-            //if (tutorial.ImageFile == null || tutorial.ImageFile.Length == 0)
-            //    return View(tutorial);
-            //await convertToBase64Async(tutorial);
-            
-            if (ModelState.IsValid)
-            {
-                 
-                await tutorialsRepo.Add(tutorial);
-                return RedirectToAction(nameof(Index));
-            }
-            
-            return View(tutorial);
-        }
-
-        //private static async Task convertToBase64Async(Tutorial tutorial)
-        //{
-        //    var path = Path.Combine(
-        //                            Directory.GetCurrentDirectory(), "wwwroot/images",
-        //                            tutorial.ImageFile.FileName);
-
-        //    using (var stream = new FileStream(path, FileMode.Create))
-        //    {
-        //        await tutorial.ImageFile.CopyToAsync(stream);
-        //    }
-        //    var byteArray = await System.IO.File.ReadAllBytesAsync(path);
-        //    tutorial.Image = Convert.ToBase64String(byteArray);
-        //}
-
-        // GET: Tutorials/Edit/5
-        public async Task <IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var tutorial = await tutorialsRepo.Get((int)id);
-            if (tutorial == null)
-            {
-                return NotFound();
-            }
-            
-            return View(tutorial);
-        }
-
-        // POST: Tutorials/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task <IActionResult> Edit(int id, Tutorial tutorial)
-        {
-            if (id != tutorial.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    //await convertToBase64Async(tutorial);
-                    await tutorialsRepo.Update(tutorial);  
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    return NotFound();
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            
-            return View(tutorial);
-        }
-
-        // GET: Tutorials/Delete/5
-        public async Task <IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var tutorial = await tutorialsRepo.Get((int)id);
-            if (tutorial == null)
-            {
-                return NotFound();
-            }
-
-            return View(tutorial);
-        }
-
-        // POST: Tutorials/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task <IActionResult> DeleteConfirmed(int id)
-        {
-            await tutorialsRepo.Delete(id);
+            logger.LogInformation($"Tutorials - SetActive {active}");
+            Response.Cookies.Append(GlobalHelpers.ACTIVE, active.ToString(), new Microsoft.AspNetCore.Http.CookieOptions());
             return RedirectToAction(nameof(Index));
-        }
-        [HttpDelete]
-        public async Task<IActionResult> DeleteRow(int id)
-        {
-            try
-            {
-                await tutorialsRepo.Delete(id);
-                return Content("OK");
-            }
-            catch (Exception ex)
-            {
-                return Content(ex.Message);
-                //throw;
-            }
         }
     }
 }

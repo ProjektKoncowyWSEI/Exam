@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<ExamContract.ExamDTO.CourseDTO>
 @{
-    ViewData["Title"] = Localizer["Courses"];
+    ViewData["Title"] = Localizer["Courses"];  
 }
 
 <div class="mainImage-index"></div>
@@ -8,4 +8,10 @@
 <div>
     <partial name="_CoursesGrid" model="Model" />
 </div>
-
+@section scripts {
+    <script>   
+    window.addEventListener('DOMContentLoaded', (event) => {       
+        toggleTrs('#exams_@ViewBag.CourseId','#tutorials_@ViewBag.CourseId', '#arrow_@ViewBag.CourseId')
+    });
+    </script>
+}

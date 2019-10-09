@@ -31,25 +31,29 @@ namespace ExamMainDataBaseAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string mainDbConnection = Environment.GetEnvironmentVariable("EXAM_MainDBConnection") ?? Configuration.GetConnectionString("SQLConnection");
+            string mainDbConnectionSQLite = Environment.GetEnvironmentVariable("EXAM_MainDBConnectionSQLite") ?? Configuration.GetConnectionString("SQLiteConnection");
             switch (Configuration.GetSection("UseDatabase").Value)
             {
                 case SQLite:
-                    services.AddDbContext<ExamQuestionsDbContext>(o => o.UseSqlite(Configuration.GetConnectionString("SQLiteConnection")));
+                    services.AddDbContext<Context>(o => o.UseSqlite(mainDbConnectionSQLite));
                     break;
                 case SQL:
-                    services.AddDbContext<ExamQuestionsDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
+                    services.AddDbContext<Context>(o => o.UseSqlServer(mainDbConnection));
                     break;
             }
 
             services
                 .AddMvcCore()
                 .AddJsonFormatters()
-                .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
+                .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);            
+            
             services.AddTransient<Repository<Answer>>();
             services.AddTransient<Repository<Question>>();           
             services.AddTransient<Repository<Exam>>();
             services.AddTransient<Repository<User>>();
             services.AddTransient<UnitOfWork>();       
+            services.AddTransient<ApproachesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

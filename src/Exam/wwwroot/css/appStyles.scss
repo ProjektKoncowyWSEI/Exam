@@ -1,10 +1,13 @@
 ﻿$defaultColor: rgba(255,127,40,1);
 $textShadow: 3px 1px 3px white;
+$boxShadow: 3px 3px 3px #e4dddd;
 
 .body {
     margin: 0 10% 0 10%;
 }
-
+.orange{
+    color: $defaultColor;
+}
 .textShadow {
     text-shadow: $textShadow;
 }
@@ -88,12 +91,18 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
 }
 
 .language {
-    display: inline-flex;    
+    display: inline-flex;
 }
+
 .right {
     display: inline-flex;
     float: right;
 }
+.btnRight{
+    float:right;
+    display:flex;
+}
+
 .marginLeft10 {
     margin-left: 10px;
 }
@@ -114,9 +123,10 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
 .maxWidth {
     width: 100%;
 }
-.mainImageWidth{
-    width:80%;
-    margin-left:10%;
+
+.mainImageWidth {
+    width: 80%;
+    margin-left: 10%;
 }
 
 .command {
@@ -124,26 +134,62 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
     display: inline-flex;
 }
 
-.table {
-    border: 1px solid #dee2e6;
+@media only screen and (min-width: 1025px) {
+    .table {
+        border: 1px solid #dee2e6;
+    }
+
+    .table td, .table th {
+        padding: 2px 4px 1px 4px !important;
+        text-align: left;
+        justify-content: center;
+        /*border: 1px solid #dee2e6;*/
+        vertical-align: inherit !important;
+    }
+    .td {
+        display:none;        
+    }   
 }
 
-.table td, .table th {
-    padding: 2px 4px 1px 4px !important;
-    text-align: left;
-    justify-content: center;
-    /*border: 1px solid #dee2e6;*/
-    vertical-align: inherit !important;
+@media only screen and (max-width: 1024px) {
+  
+    .table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr {
+        border: 1px solid #ccc;
+        margin:2px;
+    }
+
+    td {       
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+    .td {
+        font-weight: bold;
+        display: block;
+    }    
 }
 
-.alertPosition {
-    width: 25%;
-    height: 80px;
+.alertPosition {   
+    position: relative;   
+}
+.alertContainer {
     position: fixed;
     top: 80px;
     right: 0;
     opacity: 0.8;
-    /*margin-left: 20%;*/
+    z-index: 99999;
+    width: 30%;
+    max-height: 300px;
 }
 
 .margin5px {
@@ -157,8 +203,8 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
     background: white;
     position: absolute;
     opacity: 0.85;
-    display:none;
-    z-index:999999;
+    display: none;
+    z-index: 999999;
 }
 
 #loaderImage {
@@ -166,20 +212,93 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
     align-items: center;
     justify-content: center;
 }
-.hidden{
+
+.hidden {
     display: none;
 }
-.searchPanel {  
+
+.searchPanel {
     display: inline-flex;
     float: right;
 }
-.clearBtn{
+
+.clearBtn {
     margin: 10px 0 0 -20px;
 }
+
 .longMessage {
     word-wrap: break-word;
     max-width: 500px;
 }
+
 .container {
     max-width: 1440px !important;
+}
+.bold{
+    font-weight:bold !important;      
+}
+.box {
+    position: relative;
+    height: 230px;
+    min-width: 230px;
+    max-width: 320px;
+    box-shadow: $boxShadow;
+    word-wrap: break-word;
+    text-align: center;
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;    
+}
+.homeCenter {
+    height: 100%;   
+    align-items: center;
+    justify-content: center;
+}
+@media only screen and (max-width: 730px){
+    .homeCenter {
+        display: block;
+    }
+}
+@media only screen and (min-width: 731px) {
+    .homeCenter {
+        display: flex;
+    }
+}
+.timer {
+    border: 1px solid $defaultColor;
+    border-radius: 5px;
+    padding: 2px;
+    max-width: 240px;   
+    float: right;    
+}
+.timerSmall{
+    width: 65px;
+}
+.questionLabel {
+    padding: 1rem;
+    border-bottom: solid 1px #f7f3f3;
+}
+.questionContent {
+    padding: 1rem;
+    border-bottom: solid 1px #f7f3f3;
+}
+.answerContent {
+    padding: 1rem;
+    border-bottom: solid 1px #f7f3f3;    
+    padding-left: 50px;
+}
+.bigCheckbox {
+    transform: scale(1.5);
+    margin: 10px;
+    display: inline-flex;
+}
+.answer {
+    display: inline-flex;
+}
+.required{
+    color:red;    
+}
+.required:after {
+    content: '*';
 }

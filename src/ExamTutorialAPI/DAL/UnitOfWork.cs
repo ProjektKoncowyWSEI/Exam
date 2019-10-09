@@ -1,4 +1,5 @@
-﻿using ExamTutorialsAPI.Models;
+﻿using ExamContract.TutorialModels;
+using ExamTutorialsAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,16 +10,19 @@ namespace ExamTutorialsAPI.DAL
 {
     public class UnitOfWork
     {
+        private readonly Context context;
         private  Repository<Tutorial> tutorialsRepo;
-        private  Repository<Category> categoriesRepo;
 
-        public UnitOfWork(ExamTutorialsApiContext context, Repository<Tutorial> tutorialsRepo, Repository<Category> categoriesRepo)
+        public UnitOfWork(Context context, Repository<Tutorial> tutorialsRepo)
         {
+            this.context = context;
             this.tutorialsRepo = tutorialsRepo;
-            this.categoriesRepo = categoriesRepo;
         }
-
-      
-
+        public async Task<List<Tutorial>> GetTutorialListAsyncNoContent()
+        {
+            var list = await tutorialsRepo.GetListAsync();
+            list.ForEach(a => a.Content = null);
+            return list;
+        }
     }
 }

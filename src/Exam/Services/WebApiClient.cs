@@ -30,11 +30,11 @@ namespace Exam.Services
             this.logger = logger;
             this.uri = uri;
         }
-        public async virtual Task<T> GetAsync(int id)
+        public async virtual Task<T> GetAsync(int id, string shortUri = "")
         {
             try
             {
-                var response = await Client.GetAsync($"{uri}/{id}");
+                var response = await Client.GetAsync($"{uri}{shortUri}/{id}");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
@@ -48,15 +48,14 @@ namespace Exam.Services
             catch (Exception ex)
             {
                 logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
-                throw;
+                return null;
             }
         }
-        public async virtual Task<List<T>> GetListAsync(string login = null, bool? onlyActive = null)
+        public async virtual Task<List<T>> GetListAsync(string login = null, bool? onlyActive = null, string shortUri = "")
         {
             try
-            {
-                HttpResponseMessage response;
-                string fullUri = uri;
+            {                
+                string fullUri = $"{uri}{shortUri}";
                 if(login != null && onlyActive != true)
                     fullUri += $"?login={login}";
                 else if (login != null && onlyActive == true)                
@@ -64,7 +63,7 @@ namespace Exam.Services
                 else if (login == null && onlyActive == true)                
                     fullUri += $"?onlyActive=true";
                 
-                    response = await Client.GetAsync(fullUri);
+                var  response = await Client.GetAsync(fullUri);
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
@@ -81,11 +80,11 @@ namespace Exam.Services
                 throw;
             }
         }
-        public async virtual Task<List<T>> GetListAsync(int parrentId)
+        public async virtual Task<List<T>> GetListAsync(int parentId, string shortUri = "")
         {
             try
             {
-                var response = await Client.GetAsync($"{uri}/?parentId={parrentId}");
+                var response = await Client.GetAsync($"{uri}{shortUri}/?parentId={parentId}");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
@@ -101,33 +100,12 @@ namespace Exam.Services
                 logger.LogError(ex, "GetListAsync()");
                 throw;
             }
-        }
-        //public async virtual Task<List<T>> GetListAsync(int page = 1, int? pageLocalSize = null)
-        //{
-        //    try
-        //    {
-        //        var response = await Client.GetAsync($"{uri}/{page}/{pageLocalSize}");
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var content = await response.Content.ReadAsStringAsync();
-        //            return JsonConvert.DeserializeObject<List<T>>(content);
-        //        }
-        //        else
-        //        {
-        //            throw new Exception(response.StatusCode.ToString());
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        logger.LogError(ex, "GetListAsync(int page = 1, int? pageLocalSize = null)");
-        //        throw;
-        //    }
-        //}
-        public async virtual Task<T> AddAsync(T item)
+        }        
+        public async virtual Task<T> AddAsync(T item, string shortUri = "")
         {
             try
             {
-                var response = await Client.PostAsJsonAsync(uri, item);             
+                var response = await Client.PostAsJsonAsync($"{uri}{shortUri}", item);             
                 if (response.IsSuccessStatusCode)
                 {
                     item.Id = Convert.ToInt32(response.Headers.Location.Segments.LastOrDefault());
@@ -139,14 +117,14 @@ namespace Exam.Services
             catch (Exception ex)
             {
                 logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
-                throw;
+                return null;
             }
         }
-        public async virtual Task<bool> UpdateAsync(T item)
+        public async virtual Task<bool> UpdateAsync(T item, string shortUri = "")
         {
             try
             {
-                var response = await Client.PutAsJsonAsync($"{uri}/{item.Id}", item);
+                var response = await Client.PutAsJsonAsync($"{uri}{shortUri}/{item.Id}", item);
                 if (response.IsSuccessStatusCode)
                 {
                     return true;
@@ -156,14 +134,14 @@ namespace Exam.Services
             catch (Exception ex)
             {
                 logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
-                throw;
+                return false;
             }
         }
-        public async virtual Task<bool> DeleteAsync(int id)
+        public async virtual Task<bool> DeleteAsync(int id, string shortUri = "")
         {
             try
             {
-                var response = await Client.DeleteAsync($"{uri}/{id}");
+                var response = await Client.DeleteAsync($"{uri}{shortUri}/{id}");
                 if (response.IsSuccessStatusCode)
                 {
                     return true;
@@ -173,7 +151,7 @@ namespace Exam.Services
             catch (Exception ex)
             {
                 logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
-                throw;
+                return false;
             }
         }
     }
