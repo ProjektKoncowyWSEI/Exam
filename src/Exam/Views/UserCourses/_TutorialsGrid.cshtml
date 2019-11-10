@@ -38,8 +38,8 @@
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td> 
                                 <td>
-                                    <div class="td">@Html.DisplayNameFor(model => model.Description)</div>
-                                    @Html.DisplayFor(modelItem => item.Description)
+                                    <div class="td">@Html.Raw(item.Description)</div>
+                                    @Html.Raw(item.Description)
                                 </td>
                                 <td>
                                     <div class="td">@Localizer["Owner"]</div>

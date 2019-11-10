@@ -7,10 +7,7 @@
 @inject IOptions<RequestLocalizationOptions> LocOptions
 
 @{
-    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
-    //var cultureItems = LocOptions.Value.SupportedUICultures
-    //    .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
-    //    .ToList();
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();   
     var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
     string selectedPl = requestCulture.RequestCulture.UICulture.Name == "pl-PL" ? "selectedLanguage" : "";
     string selectedEn = requestCulture.RequestCulture.UICulture.Name == "en-US" ? "selectedLanguage" : "";

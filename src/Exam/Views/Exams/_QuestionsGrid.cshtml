@@ -33,8 +33,8 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    <div class="td">@Html.DisplayNameFor(model => model.Content)</div>
-                    @Html.DisplayFor(modelItem => item.Content)
+                    <div class="td">@Html.Raw(item.Content)</div>
+                    @Html.Raw(item.Content)
                 </td>
                 <td>
                     <div class="td">@Html.DisplayNameFor(model => model.AnswerTypesEnum)</div>

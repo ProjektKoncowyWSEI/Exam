@@ -242,3 +242,7 @@ a:hover, .nav-link:hover, .btn-link:hover, button:hover, .btn-primary:hover {
 
 .required:after {
   content: '*'; }
+
+.nicEdit-main {
+  width: 99.5% !important;
+  background-color: white; }
