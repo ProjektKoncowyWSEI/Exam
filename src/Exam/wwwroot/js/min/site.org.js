@@ -123,8 +123,7 @@ function createModel(input) {
         const q = new Question(input.questions[i].id, a)
         questions.push(q);
         model = new Model(input.id, input.code, questions);
-    }
-    //console.log(input)
+    }    
 }
 function setAnswer(questionIndex, answerIndex, sender, answerType) {
     if (answerType == 8) { //single
@@ -160,12 +159,6 @@ function validInput() {
         }
     }
     return notValidQuestions;   
-}
-function addRequired(questionNumber) {
-    //$('#required_' + questionNumber).addClass('required')
-}
-function removeRequired(questionNumber) {
-    //$('#required_' + questionNumber).removeClass('required')
 }
 function sendExam() {
     let len = validInput().length;
@@ -211,8 +204,7 @@ function sendExam() {
 function examTimer() {
     let counter = setInterval(function () {
         let now = new Date().getTime();
-        let distance = countDownDate - now;
-        //var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        let distance = countDownDate - now;      
         let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((distance % (1000 * 60)) / 1000);
