@@ -1,5 +1,4 @@
 ﻿using ExamContract.MainDbModels;
-using ExamMainDataBaseAPI.Models;
 using Helpers;
 using Microsoft.EntityFrameworkCore;
 using System;

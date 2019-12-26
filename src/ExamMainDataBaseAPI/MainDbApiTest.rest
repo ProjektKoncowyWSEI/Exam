@@ -1,5 +1,5 @@
 ﻿//@URL = https://exammaindatabaseapi.azurewebsites.net/api
-@URL = http://localhost:51037/api
+@URL = http://localhost:12345/api
 
 ###
 GET {{URL}}/Questions
@@ -85,3 +85,38 @@ Delete {{URL}}/exams/3
 GET {{URL}}/QuestionWithAnswers/7
 
 ###
+
+GET {{URL}}/Keys/admin-key1
+api-key: admin-key
+###
+
+
+GET {{URL}}/Keys
+api-key: admin-key
+###
+
+POST {{URL}}/Keys
+content-type: application/json
+api-key: admin-key
+
+{
+  "name": "admin-key7",
+  "role": "admin",
+  "expirationDate": "2020-12-12 00:00:00"
+}
+###
+
+PUT {{URL}}/Keys/admin-key7
+content-type: application/json
+api-key: admin-key
+
+{
+  "name": "admin-key7",
+  "role": "teacher",
+  "expirationDate": "2020-12-31 20:01:00"
+}
+
+###
+
+Delete {{URL}}/Keys/admin-key2
+api-key: admin-key

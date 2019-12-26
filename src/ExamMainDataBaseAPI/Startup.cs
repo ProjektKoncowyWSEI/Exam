@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ExamContract.MainDbModels;
+using ExamMainDataBaseAPI.Auth;
 using ExamMainDataBaseAPI.DAL;
-using ExamMainDataBaseAPI.Models;
+using Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -42,18 +45,33 @@ namespace ExamMainDataBaseAPI
                     services.AddDbContext<Context>(o => o.UseSqlServer(mainDbConnection));
                     break;
             }
+            services.AddHttpContextAccessor();
 
             services
-                .AddMvcCore()
-                .AddJsonFormatters()
-                .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);            
-            
+               .AddMvcCore() //AddMVC przed autoryzacją
+               .AddAuthorization(options =>
+               {
+                   options.AddPolicy(RoleEnum.admin.ToString(), policy =>
+                       policy.Requirements.Add(new KeyRequirement(RoleEnum.admin)));
+                   options.AddPolicy(RoleEnum.teacher.ToString(), policy =>
+                       policy.Requirements.Add(new KeyRequirement(RoleEnum.teacher)));
+                   options.AddPolicy(RoleEnum.student.ToString(), policy =>
+                       policy.Requirements.Add(new KeyRequirement(RoleEnum.student)));
+                   options.AddPolicy(RoleEnum.lack.ToString(), policy =>
+                       policy.Requirements.Add(new KeyRequirement(RoleEnum.lack)));
+               })
+               .AddDataAnnotations()
+               .AddJsonFormatters()
+               .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
+
             services.AddTransient<Repository<Answer>>();
             services.AddTransient<Repository<Question>>();           
             services.AddTransient<Repository<Exam>>();
             services.AddTransient<Repository<User>>();
             services.AddTransient<UnitOfWork>();       
             services.AddTransient<ApproachesRepository>();
+            services.AddTransient<ApiKeyRepo>();
+            services.AddTransient<IAuthorizationHandler, KeyHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,6 +89,11 @@ namespace ExamMainDataBaseAPI
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.Run(async (context) =>
+            {
+                context.Response.StatusCode = 404;
+                await context.Response.WriteAsync(GlobalHelpers.NotFound);
+            });
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ExamMainDataBaseAPI.Migrations
@@ -44,7 +43,7 @@ namespace ExamMainDataBaseAPI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Login = table.Column<string>(maxLength: 256, nullable: true),
                     Active = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(maxLength: 200, nullable: false),
@@ -59,11 +58,24 @@ namespace ExamMainDataBaseAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Keys",
+                columns: table => new
+                {
+                    Name = table.Column<string>(nullable: false),
+                    Role = table.Column<string>(maxLength: 20, nullable: true),
+                    ExpirationDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Keys", x => x.Name);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Questions",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Login = table.Column<string>(maxLength: 256, nullable: true),
                     Active = table.Column<bool>(nullable: false),
                     ExamId = table.Column<int>(nullable: true),
@@ -87,7 +99,7 @@ namespace ExamMainDataBaseAPI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Login = table.Column<string>(maxLength: 256, nullable: true),
                     Active = table.Column<bool>(nullable: false),
                     ExamId = table.Column<int>(nullable: false)
@@ -108,7 +120,7 @@ namespace ExamMainDataBaseAPI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Login = table.Column<string>(maxLength: 256, nullable: true),
                     Active = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(maxLength: 200, nullable: true),
@@ -153,6 +165,9 @@ namespace ExamMainDataBaseAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "ExamApproaches");
+
+            migrationBuilder.DropTable(
+                name: "Keys");
 
             migrationBuilder.DropTable(
                 name: "Users");

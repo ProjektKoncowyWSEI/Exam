@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ExamMainDataBaseAPI.Models;
 using ExamMainDataBaseAPI.DAL;
 using System.Linq.Expressions;
 using Microsoft.Extensions.Logging;

@@ -6,14 +6,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ExamContract.MainDbModels;
-using ExamMainDataBaseAPI.Models;
 using ExamMainDataBaseAPI.DAL;
 using Helpers;
+using ExamMainDataBaseAPI.Auth;
 
 namespace ExamMainDataBaseAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [KeyAuthorize(RoleEnum.admin)]
     public class ExamsController : MyBaseController<Exam>
     {
         UnitOfWork uow;

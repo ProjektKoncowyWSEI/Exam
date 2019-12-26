@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
-using Exam.TagHelpers;
 using ExamContract.TutorialModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

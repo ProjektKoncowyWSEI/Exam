@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using ExamContract.MainDbModels;
 using ExamMainDataBaseAPI.DAL;
-using ExamMainDataBaseAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
