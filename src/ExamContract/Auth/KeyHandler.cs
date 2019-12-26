@@ -1,5 +1,4 @@
-﻿using ExamMainDataBaseAPI.DAL;
-using Helpers;
+﻿using Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -7,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ExamMainDataBaseAPI.Auth
+namespace ExamContract.Auth
 {
     public class KeyHandler : AuthorizationHandler<KeyRequirement>
     {

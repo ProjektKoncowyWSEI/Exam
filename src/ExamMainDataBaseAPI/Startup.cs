@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExamContract.Auth;
 using ExamContract.MainDbModels;
-using ExamMainDataBaseAPI.Auth;
 using ExamMainDataBaseAPI.DAL;
 using Helpers;
 using Microsoft.AspNetCore.Authorization;
@@ -72,6 +72,7 @@ namespace ExamMainDataBaseAPI
             services.AddTransient<ApproachesRepository>();
             services.AddTransient<ApiKeyRepo>();
             services.AddTransient<IAuthorizationHandler, KeyHandler>();
+            services.AddTransient<DbContext, Context>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

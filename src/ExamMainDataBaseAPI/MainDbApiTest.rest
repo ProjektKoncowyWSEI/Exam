@@ -112,11 +112,11 @@ api-key: admin-key
 
 {
   "name": "admin-key7",
-  "role": "teacher",
+  "role": "student",
   "expirationDate": "2020-12-31 20:01:00"
 }
 
 ###
 
-Delete {{URL}}/Keys/admin-key2
+Delete {{URL}}/Keys/admin-key7
 api-key: admin-key

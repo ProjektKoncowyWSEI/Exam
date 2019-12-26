@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ExamContract.MainDbModels;
 using ExamMainDataBaseAPI.DAL;
 using Helpers;
-using ExamMainDataBaseAPI.Auth;
+using ExamContract.Auth;
 
 namespace ExamMainDataBaseAPI.Controllers
 {

@@ -1,6 +1,4 @@
-﻿using ExamContract.Auth;
-using ExamMainDataBaseAPI.Auth;
-using Helpers;
+﻿using Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,32 +6,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ExamMainDataBaseAPI.DAL
+namespace ExamContract.Auth
 {
     [KeyAuthorize(Helpers.RoleEnum.admin)]
-    public class ApiKeyRepo 
+    public sealed class ApiKeyRepo 
     {
-        private readonly Context context;
-        private readonly IHttpContextAccessor contextAccessor;       
+        private readonly DbContext context;
+        private readonly IHttpContextAccessor contextAccessor;
+        private DbSet<Key> dbSet = null;
 
-        public ApiKeyRepo(Context context, IHttpContextAccessor contextAccessor)
+        public ApiKeyRepo(DbContext context, IHttpContextAccessor contextAccessor)
         {
             this.context = context;
             this.contextAccessor = contextAccessor;
+            dbSet = context.Set<Key>();
         }
         public bool CheckApiKey(string key)
         {
-            return context.Keys.Any(k => k.Name == key);
+            return dbSet.Any(k => k.Name == key);
         }    
         private bool isAdmin(string name)
         {
-            return context.Keys.Any(k => k.Name == name && k.Role == RoleEnum.admin.ToString());
+            return dbSet.Any(k => k.Name == name && k.Role == RoleEnum.admin.ToString());
         }
         private string getKey => contextAccessor.HttpContext.Request.Headers[GlobalHelpers.ApiKey];
        
         public Dictionary<string, string> GetDictionary()
         {
-            var list = context.Keys.Where(a => a.ExpirationDate >= DateTime.Now).ToList();
+            var list = dbSet.Where(a => a.ExpirationDate >= DateTime.Now).ToList();
             var names = list.Select(a => a.Name).Distinct().ToList();
             var dictionary = new Dictionary<string, string>();
             names.ForEach(n =>
@@ -47,7 +47,7 @@ namespace ExamMainDataBaseAPI.DAL
         {
             if (!isAdmin(getKey))
                 throw new Exception(GlobalHelpers.AccesDenied);
-            return await context.Keys
+            return await dbSet
                 .Where(a => a.ExpirationDate >= DateTime.Now)
                 .Select(a => a.Name).ToListAsync();
         }
@@ -55,13 +55,13 @@ namespace ExamMainDataBaseAPI.DAL
         {
             if (!isAdmin(getKey))
                 throw new Exception(GlobalHelpers.AccesDenied);
-            return await context.Keys.ToListAsync();
+            return await dbSet.ToListAsync();
         }
         public async Task<Key> GetAsync(string key)
         {
             if (!isAdmin(getKey))
                 throw new Exception(GlobalHelpers.AccesDenied);
-            return await context.Keys.SingleOrDefaultAsync(k => k.Name == key);
+            return await dbSet.SingleOrDefaultAsync(k => k.Name == key);
         }
         public async Task<string> AddAsync(Key item)
         {
@@ -69,7 +69,7 @@ namespace ExamMainDataBaseAPI.DAL
                 throw new Exception(GlobalHelpers.AccesDenied);
             try
             {
-                await context.Keys.AddAsync(item);
+                await dbSet.AddAsync(item);
                 return item.Name;
             }
             catch (Exception ex)
@@ -87,7 +87,7 @@ namespace ExamMainDataBaseAPI.DAL
                 var dbItem = await GetAsync(item.Name);
                 dbItem.Role = item.Role;
                 dbItem.ExpirationDate = item.ExpirationDate;
-                await Task.Run(() => context.Keys.Update(dbItem));
+                await Task.Run(() => dbSet.Update(dbItem));
                 return true;
             }
             catch (Exception ex)
@@ -104,7 +104,7 @@ namespace ExamMainDataBaseAPI.DAL
             {
                 try
                 {
-                    await Task.Run(() => context.Keys.Remove(item));
+                    await Task.Run(() => dbSet.Remove(item));
                     return true;
                 }
                 catch (Exception ex)
