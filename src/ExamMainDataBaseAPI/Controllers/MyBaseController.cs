@@ -4,7 +4,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using ExamContract;
+using ExamContract.Auth;
 using ExamMainDataBaseAPI.DAL;
+using Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +24,7 @@ namespace ExamMainDataBaseAPI.Controllers
             repo = repository;
         }
         [HttpGet]
+        [KeyAuthorize(RoleEnum.admin, RoleEnum.teacher, RoleEnum.student)]
         public virtual async Task<ActionResult<IEnumerable<T>>> Get(string login, bool? onlyActive = null)
         {
             Expression<Func<T, bool>> predicate;
@@ -37,6 +40,7 @@ namespace ExamMainDataBaseAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [KeyAuthorize(RoleEnum.admin, RoleEnum.teacher, RoleEnum.student)]
         public virtual async Task<ActionResult<T>> Get(int id)
         {
             var item = await repo.GetAsync(id);
@@ -46,6 +50,7 @@ namespace ExamMainDataBaseAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [KeyAuthorize(RoleEnum.admin, RoleEnum.teacher)]
         public virtual async Task<IActionResult> Put(int id, T item)
         {
             if (id != item.Id)
@@ -72,6 +77,7 @@ namespace ExamMainDataBaseAPI.Controllers
         }
 
         [HttpPost]
+        [KeyAuthorize(RoleEnum.admin, RoleEnum.teacher)]
         public virtual async Task<ActionResult<T>> Post(T item)
         {
             await repo.AddAsync(item);
@@ -80,6 +86,7 @@ namespace ExamMainDataBaseAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [KeyAuthorize(RoleEnum.admin, RoleEnum.teacher)]
         public virtual async Task<ActionResult<T>> Delete(int id)
         {
             var item = await repo.GetAsync(id);

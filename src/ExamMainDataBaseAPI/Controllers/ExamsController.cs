@@ -22,13 +22,12 @@ namespace ExamMainDataBaseAPI.Controllers
         {
             this.uow = uow;
         }
-        [HttpPost]          
+        [HttpPost]
+        [KeyAuthorize(RoleEnum.admin, RoleEnum.teacher)]
         public override async Task<ActionResult<Exam>> Post(Exam item)
         {
             item.Code = await uow.GetNewGiud();
             return await base.Post(item);
         }
-
-       
     }
 }

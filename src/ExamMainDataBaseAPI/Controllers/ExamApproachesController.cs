@@ -4,8 +4,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using ExamContract;
+using ExamContract.Auth;
 using ExamContract.MainDbModels;
 using ExamMainDataBaseAPI.DAL;
+using Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +17,7 @@ namespace ExamMainDataBaseAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [KeyAuthorize(RoleEnum.admin, RoleEnum.teacher, RoleEnum.student)]
     public class ExamApproachesController : ControllerBase
     {
         private readonly ApproachesRepository repo;
@@ -90,7 +93,7 @@ namespace ExamMainDataBaseAPI.Controllers
             return item;
         }
         [HttpGet("{login}/{examId}")]
-        public virtual async Task<ActionResult<ExamApproacheResult>> GetResultGruoped(string login, int examId)
+        public virtual async Task<ActionResult<ExamApproacheResult>> GetResultGrouped(string login, int examId)
         {
             var item = await repo.GetResultGroupedAsync(login, examId);
             if (item == null)
@@ -98,7 +101,7 @@ namespace ExamMainDataBaseAPI.Controllers
             return item;
         }
         [HttpGet("{examId}")]
-        public virtual async Task<ActionResult<IEnumerable<ExamApproacheResult>>> GetResultsGruoped(int examId)
+        public virtual async Task<ActionResult<IEnumerable<ExamApproacheResult>>> GetResultsGrouped(int examId)
         {
             var item = await repo.GetResultsGroupedAsync(examId);
             if (item == null)

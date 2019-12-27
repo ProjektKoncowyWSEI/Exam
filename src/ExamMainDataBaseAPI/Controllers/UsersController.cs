@@ -9,6 +9,8 @@ using ExamMainDataBaseAPI.DAL;
 using System.Linq.Expressions;
 using Microsoft.Extensions.Logging;
 using ExamContract.MainDbModels;
+using ExamContract.Auth;
+using Helpers;
 
 namespace ExamMainDataBaseAPI.Controllers
 {
@@ -22,7 +24,8 @@ namespace ExamMainDataBaseAPI.Controllers
         {
             this.repo = repo;
         }
-        [HttpGet("{examId}")]        
+        [HttpGet("{examId}")] 
+        [KeyAuthorize(RoleEnum.admin, RoleEnum.teacher, RoleEnum.student)]
         public virtual async Task<ActionResult<IEnumerable<User>>> GetUsersForExam(int examId)
         {
             return await repo.FindBy(a => a.ExamId == examId && a.Active == true).ToListAsync();

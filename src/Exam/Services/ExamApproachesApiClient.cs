@@ -133,7 +133,7 @@ namespace Exam.Services
         {
             try
             {
-                var response = await ExamApproachesClient.GetAsync($"{uri}/GetResultGruoped/{login}/{examId}");
+                var response = await ExamApproachesClient.GetAsync($"{uri}/GetResultGrouped/{login}/{examId}");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
@@ -155,7 +155,7 @@ namespace Exam.Services
         {
             try
             {
-                var response = await ExamApproachesClient.GetAsync($"{uri}/GetResultsGruoped/{examId}");
+                var response = await ExamApproachesClient.GetAsync($"{uri}/GetResultsGrouped/{examId}");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
