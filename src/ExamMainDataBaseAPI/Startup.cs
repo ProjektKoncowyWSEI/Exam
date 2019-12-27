@@ -71,7 +71,7 @@ namespace ExamMainDataBaseAPI
             services.AddTransient<UnitOfWork>();       
             services.AddTransient<ApproachesRepository>();
             services.AddTransient<ApiKeyRepo>();
-            services.AddTransient<IAuthorizationHandler, KeyHandler>();
+            //services.AddTransient<IAuthorizationHandler, KeyHandler>();
             services.AddTransient<DbContext, Context>();
         }
 

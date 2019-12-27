@@ -1,13 +1,16 @@
 ﻿using Helpers;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace ExamContract.Auth
 {
-    public class KeyAuthorizeAttribute : AuthorizeAttribute
-    {   
-        public KeyAuthorizeAttribute(RoleEnum policy)
+    public class KeyAuthorizeAttribute : TypeFilterAttribute
+    {
+        public KeyAuthorizeAttribute(params RoleEnum[] roles) : base(typeof(AuthorizeMultiplePolicyFilter))
         {
-            Policy = policy.ToString();
+            Arguments = new object[] { roles };
         }
     }
 }

@@ -6,7 +6,7 @@ GET {{URL}}/Questions
 
 ###
 GET {{URL}}/Exams
-
+api-key: admin-key
 ###
 
 ###
@@ -86,13 +86,13 @@ GET {{URL}}/QuestionWithAnswers/7
 
 ###
 
-GET {{URL}}/Keys/admin-key1
+GET {{URL}}/Keys/admin-key
 api-key: admin-key
 ###
 
 
 GET {{URL}}/Keys
-api-key: admin-key
+api-key: admin-key7
 ###
 
 POST {{URL}}/Keys
@@ -101,7 +101,7 @@ api-key: admin-key
 
 {
   "name": "admin-key7",
-  "role": "admin",
+  "role": "teacher",
   "expirationDate": "2020-12-12 00:00:00"
 }
 ###

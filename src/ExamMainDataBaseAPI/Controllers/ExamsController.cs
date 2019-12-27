@@ -14,7 +14,7 @@ namespace ExamMainDataBaseAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [KeyAuthorize(RoleEnum.admin)]
+    [KeyAuthorize(RoleEnum.admin, RoleEnum.teacher)]
     public class ExamsController : MyBaseController<Exam>
     {
         UnitOfWork uow;

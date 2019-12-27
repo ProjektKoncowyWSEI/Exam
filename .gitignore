@@ -336,3 +336,4 @@ bundle
 /src/ExamCourseAPI/Data/ExamCourses.db
 MainDbSqlLite.db
 *.db
+/src/ExamMainDataBaseAPI/Data/*.db
