@@ -6,7 +6,7 @@ using Exam.Services;
 using ExamContract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
-using Helpers;
+using ExamContract.Auth;
 using Microsoft.Extensions.Logging;
 
 namespace Exam.Controllers

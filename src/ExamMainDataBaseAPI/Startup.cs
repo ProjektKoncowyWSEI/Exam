@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using ExamContract.Auth;
 using ExamContract.MainDbModels;
 using ExamMainDataBaseAPI.DAL;
-using Helpers;
+using ExamContract.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Helpers;
 
 namespace ExamMainDataBaseAPI
 {
@@ -34,15 +35,15 @@ namespace ExamMainDataBaseAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string mainDbConnection = Environment.GetEnvironmentVariable("EXAM_MainDBConnection") ?? Configuration.GetConnectionString("SQLConnection");
-            string mainDbConnectionSQLite = Environment.GetEnvironmentVariable("EXAM_MainDBConnectionSQLite") ?? Configuration.GetConnectionString("SQLiteConnection");
+            string connectionSQL = Environment.GetEnvironmentVariable("EXAM_MainDBConnection") ?? Configuration.GetConnectionString("SQLConnection");
+            string connectionSQLite = Environment.GetEnvironmentVariable("EXAM_MainDBConnectionSQLite") ?? Configuration.GetConnectionString("SQLiteConnection");
             switch (Configuration.GetSection("UseDatabase").Value)
             {
                 case SQLite:
-                    services.AddDbContext<Context>(o => o.UseSqlite(mainDbConnectionSQLite));
+                    services.AddDbContext<Context>(o => o.UseSqlite(connectionSQLite));
                     break;
                 case SQL:
-                    services.AddDbContext<Context>(o => o.UseSqlServer(mainDbConnection));
+                    services.AddDbContext<Context>(o => o.UseSqlServer(connectionSQL));
                     break;
             }
             services.AddHttpContextAccessor();
@@ -70,12 +71,10 @@ namespace ExamMainDataBaseAPI
             services.AddTransient<Repository<User>>();
             services.AddTransient<UnitOfWork>();       
             services.AddTransient<ApproachesRepository>();
-            services.AddTransient<ApiKeyRepo>();
-            //services.AddTransient<IAuthorizationHandler, KeyHandler>();
+            services.AddTransient<ApiKeyRepo>();        
             services.AddTransient<DbContext, Context>();
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -83,8 +82,7 @@ namespace ExamMainDataBaseAPI
                 app.UseDeveloperExceptionPage();
             }
             else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            {            
                 app.UseHsts();
             }
 

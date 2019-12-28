@@ -11,7 +11,7 @@ namespace Exam.Services
 {
     public class TutorialsApiClient : WebApiClient<Tutorial>
     {
-        public TutorialsApiClient(ILogger logger, IConfiguration configuration) : base(logger, configuration, "TutorialsAPIConnection", "Tutorials")
+        public TutorialsApiClient(ILogger logger, IConfiguration configuration) : base(logger, configuration, "TutorialsAPIConnection", "Tutorials", "Exam_TutorialsApiKey")
         {
         }
     }

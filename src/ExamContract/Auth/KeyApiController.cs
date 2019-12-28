@@ -8,7 +8,7 @@ namespace ExamContract.Auth
 {
     [Route("api/[controller]")]
     [ApiController]
-    [KeyAuthorize(Helpers.RoleEnum.admin)]
+    [KeyAuthorize(RoleEnum.admin)]
     public abstract class KeyApiController : ControllerBase
     {
         private readonly ApiKeyRepo repo;

@@ -7,7 +7,7 @@ using ExamContract;
 using ExamContract.Auth;
 using ExamContract.MainDbModels;
 using ExamMainDataBaseAPI.DAL;
-using Helpers;
+using ExamContract.Auth;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

@@ -13,7 +13,7 @@ namespace Exam.Services
 {
     public class ExamsQuestionsAnswersApiClient : WebApiClient<exam>
     {
-        public ExamsQuestionsAnswersApiClient(ILogger logger, IConfiguration configuration) : base(logger, configuration, "MainDbAPIConnection", "ExamsQuestionsAnswers")
+        public ExamsQuestionsAnswersApiClient(ILogger logger, IConfiguration configuration) : base(logger, configuration, "MainDbAPIConnection", "ExamsQuestionsAnswers", "Exam_MainDbApiKey")
         {
         }
         public override Task<exam> GetAsync(int id, string shortUri = "")

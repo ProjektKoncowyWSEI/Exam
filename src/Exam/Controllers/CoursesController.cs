@@ -8,13 +8,14 @@ using ExamContract;
 using ExamContract.CourseModels;
 using ExamContract.ExamDTO;
 using ExamContract.TutorialModels;
-using Helpers;
+using ExamContract.Auth;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using exam = ExamContract.MainDbModels.Exam;
 using examCourse = ExamContract.CourseModels.ExamCourse;
+using Helpers;
 
 namespace Exam.Controllers
 {

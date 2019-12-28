@@ -10,7 +10,7 @@ namespace Exam.Services
 {
     public class UsersTutorialsClient : WebApiClient<User>
     {
-        public UsersTutorialsClient(ILogger logger, IConfiguration configuration) : base(logger, configuration, "TutorialsAPIConnection", "Users")
+        public UsersTutorialsClient(ILogger logger, IConfiguration configuration) : base(logger, configuration, "TutorialsAPIConnection", "Users", "Exam_TutorialsApiKey")
         {
         }
     }

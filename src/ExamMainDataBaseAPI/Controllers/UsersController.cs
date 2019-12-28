@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 using Microsoft.Extensions.Logging;
 using ExamContract.MainDbModels;
 using ExamContract.Auth;
-using Helpers;
+using ExamContract.Auth;
 
 namespace ExamMainDataBaseAPI.Controllers
 {

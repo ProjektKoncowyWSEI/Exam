@@ -21,9 +21,8 @@ namespace ExamMailSenderAPI.Services
         {
             try
             {
-                IConvertable converter = new Converter();
-                //var apiKey = configuration.GetSection("SENDGRID_API_KEY").Value; Jeśli chcemy trzymać w konfiguracji
-                var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY"); // Jeśli chcemy mieć zapamiętane w systemie
+                IConvertable converter = new Converter();                
+                var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY"); 
                 var client = new SendGridClient(apiKey);
                 var from = new EmailAddress(model.From, model.From);
                 List<EmailAddress> tos = new List<EmailAddress>();

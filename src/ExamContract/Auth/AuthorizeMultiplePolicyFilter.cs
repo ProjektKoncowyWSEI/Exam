@@ -1,4 +1,5 @@
-﻿using Helpers;
+﻿using ExamContract.Auth;
+using Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Filters;

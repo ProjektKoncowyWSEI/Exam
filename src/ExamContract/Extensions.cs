@@ -1,10 +1,11 @@
-﻿using System;
+﻿using ExamContract.Auth;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
-namespace Helpers
+namespace ExamContract
 {
     public static class Extensions
     {

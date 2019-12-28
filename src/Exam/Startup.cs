@@ -15,7 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Exam.Services;
-using Helpers;
+using ExamContract.Auth;
 using Exam.Filters;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;

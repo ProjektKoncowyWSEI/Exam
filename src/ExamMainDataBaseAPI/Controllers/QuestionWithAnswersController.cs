@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using ExamContract.Auth;
 using ExamContract.MainDbModels;
 using ExamMainDataBaseAPI.DAL;
-using Helpers;
+using ExamContract.Auth;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

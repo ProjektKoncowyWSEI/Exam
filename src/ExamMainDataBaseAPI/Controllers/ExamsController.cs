@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ExamContract.MainDbModels;
 using ExamMainDataBaseAPI.DAL;
-using Helpers;
+using ExamContract.Auth;
 using ExamContract.Auth;
 
 namespace ExamMainDataBaseAPI.Controllers

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using ExamContract.Auth;
+using Helpers;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -21,20 +23,21 @@ namespace ExamMailSenderAPI.Middleware
 
         public async Task Invoke(HttpContext context)
         {
-            string key = "api-key";
-            if (!context.Request.Headers.Keys.Contains(key))
+            string key = "Exam_mailApiKey";
+            if (!context.Request.Headers.Keys.Contains(GlobalHelpers.ApiKey))
             {
                 context.Response.StatusCode = 400;
-                await context.Response.WriteAsync("Missing Api Key");
+                await context.Response.WriteAsync(GlobalHelpers.MissingApiKey);
                 return;
             }
             else
             {
-                var isValid = configuration.GetValue(typeof(string), key) == context.Request.Headers[key];
+                var apiKey = Environment.GetEnvironmentVariable(key) ?? configuration.GetValue(typeof(string), key);
+                var isValid = apiKey == context.Request.Headers[GlobalHelpers.ApiKey];
                 if (!isValid)
                 {
                     context.Response.StatusCode = 401;
-                    await context.Response.WriteAsync("Invalid Api Key");
+                    await context.Response.WriteAsync(GlobalHelpers.InvalidApiKey);
                     return;
                 }
             }

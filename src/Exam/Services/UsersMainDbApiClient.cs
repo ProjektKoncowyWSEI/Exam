@@ -11,7 +11,7 @@ namespace Exam.Services
 {
     public class UsersMainDbApiClient : WebApiClient<User>
     {
-        public UsersMainDbApiClient(ILogger logger, IConfiguration configuration) : base(logger, configuration, "MainDbAPIConnection", "Users")
+        public UsersMainDbApiClient(ILogger logger, IConfiguration configuration) : base(logger, configuration, "MainDbAPIConnection", "Users", "Exam_MainDbApiKey")
         {
         }       
         public async override Task<List<User>> GetListAsync(int parentId, string shortUri = "")

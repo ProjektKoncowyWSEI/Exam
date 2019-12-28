@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Localization;
 using Exam.Services;
+using ExamContract.Auth;
+using ExamContract;
 using Helpers;
 
 namespace Exam.Controllers

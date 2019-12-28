@@ -1,4 +1,4 @@
-﻿using Helpers;
+﻿using ExamContract.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using System;

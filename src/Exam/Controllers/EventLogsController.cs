@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Logger.Data;
 using Logger.Model;
-using Helpers;
+using ExamContract.Auth;
 using Microsoft.Extensions.Logging;
 using System.IO;
 

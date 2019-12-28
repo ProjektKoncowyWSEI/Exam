@@ -1,4 +1,5 @@
-﻿using ExamContract.CourseModels;
+﻿using ExamContract.Auth;
+using ExamContract.CourseModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -30,5 +31,6 @@ namespace ExamCourseAPI.DAL
         public DbSet<ExamCourse> ExamCourses { get; set; }
         public DbSet<TutorialCourse> TutorialCourses { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Key> Keys { get; set; }
     }
 }

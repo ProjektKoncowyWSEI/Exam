@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Helpers;
+using ExamContract.Auth;
 using Microsoft.EntityFrameworkCore;
 using ExamContract.MailingModels;
 using Microsoft.Extensions.Logging;

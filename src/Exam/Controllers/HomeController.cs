@@ -8,7 +8,7 @@ using Exam.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Exam.Filters;
-using Helpers;
+using ExamContract.Auth;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Localization;
 using System.Threading;

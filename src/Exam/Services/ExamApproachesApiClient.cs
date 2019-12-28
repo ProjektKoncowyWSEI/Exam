@@ -25,7 +25,7 @@ namespace Exam.Services
             };
             ExamApproachesClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             if (apiKey != null)
-                ExamApproachesClient.DefaultRequestHeaders.Add("api-key", configuration.GetValue<string>(apiKey));
+                ExamApproachesClient.DefaultRequestHeaders.Add("api-key", Environment.GetEnvironmentVariable(apiKey) ?? configuration.GetValue<string>(apiKey));
             this.logger = logger;
             this.uri = uri;
         }

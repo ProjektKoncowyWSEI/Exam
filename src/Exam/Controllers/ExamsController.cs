@@ -1,6 +1,7 @@
 ﻿using Exam.Data.UnitOfWork;
 using Exam.Services;
-using ExamContract.MainDbModels;
+using ExamContract;
+using ExamContract.Auth;
 using Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

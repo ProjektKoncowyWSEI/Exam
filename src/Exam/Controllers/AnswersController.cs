@@ -1,5 +1,5 @@
 ﻿using Exam.Services;
-using Helpers;
+using ExamContract.Auth;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using System.Threading.Tasks;

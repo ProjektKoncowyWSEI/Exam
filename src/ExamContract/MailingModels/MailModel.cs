@@ -1,6 +1,6 @@
 ﻿using ExamContract;
 using ExamContract.MailingModels;
-using Helpers;
+using ExamContract.Auth;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;

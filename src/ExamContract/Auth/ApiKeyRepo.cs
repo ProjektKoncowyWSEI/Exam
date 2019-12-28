@@ -1,4 +1,5 @@
-﻿using Helpers;
+﻿using ExamContract.Auth;
+using Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ExamContract.Auth
 {
-    [KeyAuthorize(Helpers.RoleEnum.admin)]
+    [KeyAuthorize(RoleEnum.admin)]
     public sealed class ApiKeyRepo 
     {
         private readonly DbContext context;

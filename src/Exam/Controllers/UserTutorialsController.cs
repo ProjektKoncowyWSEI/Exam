@@ -1,7 +1,7 @@
 ﻿using Exam.Data.UnitOfWork;
 using Exam.Services;
 using ExamContract.TutorialModels;
-using Helpers;
+using ExamContract.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Helpers;
 
 namespace Exam.Controllers
 {
