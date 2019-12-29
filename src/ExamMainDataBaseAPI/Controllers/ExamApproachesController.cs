@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using ExamContract;
 using ExamContract.Auth;
 using ExamContract.MainDbModels;
 using ExamMainDataBaseAPI.DAL;
-using ExamContract.Auth;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -29,9 +26,17 @@ namespace ExamMainDataBaseAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ExamApproache>> Post(ExamApproache item)
         {
-            await repo.AddAsync(item);
-            await repo.SaveChangesAsync();
-            return CreatedAtAction(nameof(Get), new { examId = item.ExamId, login = item.Login }, item);
+            try
+            {
+                await repo.AddAsync(item);
+                await repo.SaveChangesAsync();
+                return CreatedAtAction(nameof(Get), new { examId = item.ExamId, login = item.Login }, item);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
         }
         [HttpPost]
         public async Task<ActionResult<ExamApproache>> PostResult(ExamApproacheResult item)

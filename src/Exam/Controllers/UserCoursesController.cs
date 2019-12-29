@@ -1,8 +1,6 @@
 ﻿using Exam.Data.UnitOfWork;
-using Exam.Services;
 using ExamContract.CourseModels;
 using ExamContract.Auth;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;

@@ -5,9 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace Exam.Services
@@ -38,6 +36,7 @@ namespace Exam.Services
                 {
                     IsSent = true;
                 }
+                logger.LogWarning($"Email not sent; to: {email}, subject: {subject}, body: {htmlMessage}; status: {response.ReasonPhrase}/{response.StatusCode}");
                 IsSent = false;
             }
             catch (Exception ex)

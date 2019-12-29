@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="bold">@Html.DisplayNameFor(model => model.Content) </div>
-                    <div style="height:100%;">@Html.DisplayFor(model => model.Content)</div>
+                    <div style="height:100%;">@Html.Raw(Model.Content)</div>
                 </div>
             </div>
         </div>

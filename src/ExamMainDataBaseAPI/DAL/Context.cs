@@ -1,9 +1,6 @@
-﻿using System;
-using ExamContract.Auth;
+﻿using ExamContract.Auth;
 using ExamContract.MainDbModels;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ExamMainDataBaseAPI.DAL
 {

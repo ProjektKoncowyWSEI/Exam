@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Exam.Data.UnitOfWork;
 using ExamContract.ExamDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
-using Newtonsoft.Json;
 
 namespace Exam.Controllers
 {

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using ExamContract.Auth;
 using Microsoft.EntityFrameworkCore;
 using ExamContract.MailingModels;
-using Microsoft.Extensions.Logging;
 
 namespace ExamMailSenderAPI.Data
 {
@@ -13,29 +9,29 @@ namespace ExamMailSenderAPI.Data
     {
         private readonly Repository<MailModel> mailsRepo;
         private readonly Repository<Attachment> attachmentsRepo;
-        private readonly ILogger logger;
 
-        public UnitOfWork(Repository<MailModel> mailsRepo, Repository<Attachment> attachmentsRepo, ILogger logger)
+        public UnitOfWork(Repository<MailModel> mailsRepo, Repository<Attachment> attachmentsRepo)
         {
             this.mailsRepo = mailsRepo;
             this.attachmentsRepo = attachmentsRepo;
-            this.logger = logger;
         }
         public async Task<bool> SaveMailWithAttachments(MailModel item)
         {
             try
             {
                 await mailsRepo.AddAsync(item);
-                foreach (var att in item.Attachments)
+                if (item.Attachments != null)
                 {
-                    await attachmentsRepo.AddAsync(att);
+                    foreach (var att in item.Attachments)
+                    {
+                        await attachmentsRepo.AddAsync(att);
+                    }
                 }
                 await mailsRepo.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 throw;
             }
         }

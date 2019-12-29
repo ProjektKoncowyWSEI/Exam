@@ -1,16 +1,9 @@
 ﻿using Exam.Controllers;
-using Exam.Services;
-using ExamContract.MainDbModels;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Exam.Tests.Controllers
 {

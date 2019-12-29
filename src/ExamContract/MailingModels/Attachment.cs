@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ExamContract.MailingModels
+﻿namespace ExamContract.MailingModels
 {
     public partial class Attachment : Entity
     {

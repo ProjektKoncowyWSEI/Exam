@@ -1,9 +1,5 @@
 ﻿using Logger.Model;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 
 namespace Logger.Data
 {

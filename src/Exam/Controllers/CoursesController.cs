@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Exam.Data.UnitOfWork;
 using Exam.Services;
 using ExamContract;
 using ExamContract.CourseModels;
-using ExamContract.ExamDTO;
 using ExamContract.TutorialModels;
 using ExamContract.Auth;
 using Microsoft.AspNetCore.Mvc;

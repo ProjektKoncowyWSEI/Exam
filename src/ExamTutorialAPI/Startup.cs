@@ -1,23 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ExamContract.Auth;
 using ExamContract.TutorialModels;
 using ExamTutorialsAPI.DAL;
-using ExamTutorialsAPI.Helpers;
-using ExamTutorialsAPI.Models;
-using ExamContract.Auth;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Helpers;
 
 namespace ExamTutorialAPI

@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamMailSenderAPI", "ExamMa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamMainDataBaseAPI", "ExamMainDataBaseAPI\ExamMainDataBaseAPI.csproj", "{D44DAB3A-7889-40EE-BC24-DF8639C872B2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileConverter", "FileConverter\FileConverter.csproj", "{C20FB0E8-1A19-4C46-A153-24D3FA8DDB35}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpers", "Helpers\Helpers.csproj", "{5F96A006-7798-4D83-9A51-A25D4A616B6F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamContract", "ExamContract\ExamContract.csproj", "{8994ABB3-7DF3-436C-8A24-DE14A1F8879A}"
@@ -21,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logger", "Logger\Logger.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exam.Tests", "Exam.Tests\Exam.Tests.csproj", "{A5142DAD-F081-4BA6-8D11-592F9E1F636C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamCourseAPI", "ExamCourseAPI\ExamCourseAPI.csproj", "{AA5EF5F6-EAC2-4814-96F6-146BD6FE9DC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExamCourseAPI", "ExamCourseAPI\ExamCourseAPI.csproj", "{AA5EF5F6-EAC2-4814-96F6-146BD6FE9DC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +39,6 @@ Global
 		{D44DAB3A-7889-40EE-BC24-DF8639C872B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D44DAB3A-7889-40EE-BC24-DF8639C872B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D44DAB3A-7889-40EE-BC24-DF8639C872B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C20FB0E8-1A19-4C46-A153-24D3FA8DDB35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C20FB0E8-1A19-4C46-A153-24D3FA8DDB35}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C20FB0E8-1A19-4C46-A153-24D3FA8DDB35}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C20FB0E8-1A19-4C46-A153-24D3FA8DDB35}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5F96A006-7798-4D83-9A51-A25D4A616B6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5F96A006-7798-4D83-9A51-A25D4A616B6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F96A006-7798-4D83-9A51-A25D4A616B6F}.Release|Any CPU.ActiveCfg = Release|Any CPU

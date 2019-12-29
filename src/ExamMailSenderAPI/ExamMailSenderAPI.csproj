@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExamContract\ExamContract.csproj" />
-    <ProjectReference Include="..\FileConverter\FileConverter.csproj" />
     <ProjectReference Include="..\Helpers\Helpers.csproj" />
   </ItemGroup>
 

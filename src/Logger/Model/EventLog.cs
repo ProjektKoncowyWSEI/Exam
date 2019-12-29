@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Logger.Model
 {
-   public class EventLog
+    public class EventLog
     {
         [Key]
         public int id { get; set; }

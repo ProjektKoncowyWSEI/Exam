@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ExamContract.Auth;
-using ExamContract.TutorialModels;
-using ExamTutorialsAPI.Models;
-using Microsoft.AspNetCore.Http;
+﻿using ExamContract.Auth;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace ExamTutorialsAPI.Controllers
 {

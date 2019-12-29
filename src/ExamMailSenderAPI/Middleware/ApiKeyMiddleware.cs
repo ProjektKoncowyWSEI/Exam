@@ -1,11 +1,8 @@
-﻿using ExamContract.Auth;
-using Helpers;
+﻿using Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ExamMailSenderAPI.Middleware

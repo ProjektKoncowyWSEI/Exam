@@ -1,5 +1,4 @@
 ﻿using ExamContract.Auth;
-using ExamContract.Auth;
 
 namespace ExamMainDataBaseAPI.Controllers
 {

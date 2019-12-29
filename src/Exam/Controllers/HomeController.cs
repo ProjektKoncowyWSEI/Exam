@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Exam.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using Exam.Filters;
-using ExamContract.Auth;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Localization;
-using System.Threading;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Diagnostics;
 

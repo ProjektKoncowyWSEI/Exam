@@ -3,13 +3,10 @@ using Exam.Services;
 using ExamContract;
 using ExamContract.Auth;
 using Helpers;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Exam.Controllers

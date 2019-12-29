@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ExamContract.MainDbModels;
+﻿using ExamContract.MainDbModels;
 using ExamMainDataBaseAPI.DAL;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExamMainDataBaseAPI.Controllers

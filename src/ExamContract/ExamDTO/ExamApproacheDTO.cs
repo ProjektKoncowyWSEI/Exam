@@ -1,7 +1,4 @@
-﻿using ExamContract.MainDbModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ExamContract.ExamDTO
 {

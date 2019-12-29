@@ -1,10 +1,5 @@
-﻿using System;
-using ExamContract.TutorialModels;
-using ExamTutorialsAPI.Helpers;
-using ExamTutorialsAPI.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using ExamContract.TutorialModels;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 public class Context : DbContext
 {

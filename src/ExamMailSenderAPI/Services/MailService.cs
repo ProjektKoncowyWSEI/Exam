@@ -1,5 +1,4 @@
 ﻿using ExamContract.MailingModels;
-using FileConverter;
 using Microsoft.Extensions.Configuration;
 using SendGrid;
 using SendGrid.Helpers.Mail;
@@ -20,8 +19,7 @@ namespace ExamMailSenderAPI.Services
         public async Task<string> Send(MailModel model)
         {
             try
-            {
-                IConvertable converter = new Converter();                
+            {                               
                 var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY"); 
                 var client = new SendGridClient(apiKey);
                 var from = new EmailAddress(model.From, model.From);
@@ -36,7 +34,7 @@ namespace ExamMailSenderAPI.Services
                                        msg.AddAttachment(
                                            new SendGrid.Helpers.Mail.Attachment()
                                            {
-                                               Content = converter.GetStringBase64(a.Content),
+                                               Content = Convert.ToBase64String(a.Content),
                                                Disposition = "attachment",
                                                Filename = a.FileName
                                            });

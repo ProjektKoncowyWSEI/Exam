@@ -1,5 +1,4 @@
-﻿using ExamContract.Auth;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 
 namespace ExamContract.Auth
 {

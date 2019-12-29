@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ExamTutorialsAPI.Helpers
+﻿namespace ExamTutorialsAPI.Helpers
 {
     internal static class StaticValues
     {       

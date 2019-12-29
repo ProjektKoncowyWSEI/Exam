@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Exam.Services;
 using ExamContract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
-using ExamContract.Auth;
-using Microsoft.Extensions.Logging;
 
 namespace Exam.Controllers
 {

@@ -1,5 +1,4 @@
-﻿using ExamContract.Auth;
-using Helpers;
+﻿using Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;

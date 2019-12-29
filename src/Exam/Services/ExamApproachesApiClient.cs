@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -16,7 +15,7 @@ namespace Exam.Services
         protected ILogger logger;
         protected string uri;
         protected HttpClient ExamApproachesClient;
-        public ExamApproachesApiClient(ILogger logger, IConfiguration configuration, string connectionName = "MainDbAPIConnection", string uri = "ExamApproaches", string apiKey = null)
+        public ExamApproachesApiClient(ILogger logger, IConfiguration configuration, string connectionName = "MainDbAPIConnection", string uri = "ExamApproaches", string apiKey = "Exam_MainDbApiKey")
         {
             string connStr = Environment.GetEnvironmentVariable(connectionName) ?? configuration.GetConnectionString(connectionName);
             ExamApproachesClient = new HttpClient

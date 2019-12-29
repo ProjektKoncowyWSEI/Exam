@@ -1,14 +1,10 @@
 ﻿using Logger.Data;
 using Logger.Model;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace Logger
 {

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using System.Threading.Tasks;
 using ExamContract.MainDbModels;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using Microsoft.Extensions.Logging;
 

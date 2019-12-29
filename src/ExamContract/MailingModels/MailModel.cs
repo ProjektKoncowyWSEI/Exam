@@ -1,13 +1,9 @@
-﻿using ExamContract;
-using ExamContract.MailingModels;
-using ExamContract.Auth;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace ExamContract.MailingModels
-{   
+{
     public partial class MailModel : Entity
     {
         public MailModel()

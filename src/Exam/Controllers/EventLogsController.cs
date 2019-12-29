@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Logger.Data;
-using Logger.Model;
 using ExamContract.Auth;
-using Microsoft.Extensions.Logging;
 using System.IO;
 
 namespace Exam.Controllers

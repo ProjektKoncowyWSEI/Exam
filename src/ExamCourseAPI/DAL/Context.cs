@@ -1,10 +1,6 @@
 ﻿using ExamContract.Auth;
 using ExamContract.CourseModels;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ExamCourseAPI.DAL
 {

@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using ExamContract;
 using ExamContract.Auth;
 using ExamMainDataBaseAPI.DAL;
-using ExamContract.Auth;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,7 +1,5 @@
 ﻿using ExamContract.TutorialModels;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ExamContract.ExamDTO
 {

@@ -1,9 +1,7 @@
 ﻿using ExamContract.CourseModels;
 using ExamContract.MainDbModels;
 using ExamContract.TutorialModels;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using User = ExamContract.CourseModels.User;
 
 namespace ExamContract.ExamDTO

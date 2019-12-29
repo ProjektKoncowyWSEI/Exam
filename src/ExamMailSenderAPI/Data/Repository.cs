@@ -1,6 +1,5 @@
 ﻿using ExamContract;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +10,12 @@ namespace ExamMailSenderAPI.Data
 {
     public class Repository<T>: IDisposable where T : Entity
     {
-        private readonly Context context;
-        private readonly ILogger logger;
+        private readonly Context context;       
         private DbSet<T> dbSet = null;
 
-        public Repository(Context context, ILogger logger)
+        public Repository(Context context)
         {
-            this.context = context;
-            this.logger = logger;
+            this.context = context;           
             dbSet = context.Set<T>();
         }
         public async Task<T> GetAsync(int id)
@@ -38,7 +35,6 @@ namespace ExamMailSenderAPI.Data
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 return -1;
             }
             
@@ -52,7 +48,6 @@ namespace ExamMailSenderAPI.Data
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
                 return false;
             }
         }
@@ -67,8 +62,7 @@ namespace ExamMailSenderAPI.Data
                     return true;
                 }
                 catch (Exception ex)
-                {
-                    logger.LogError(ex, System.Reflection.MethodBase.GetCurrentMethod().ToString());
+                {                    
                     return false;
                 }                
             }
