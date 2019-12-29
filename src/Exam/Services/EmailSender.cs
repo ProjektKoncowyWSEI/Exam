@@ -35,6 +35,7 @@ namespace Exam.Services
                 if (response.IsSuccessStatusCode)
                 {
                     IsSent = true;
+                    return;
                 }
                 logger.LogWarning($"Email not sent; to: {email}, subject: {subject}, body: {htmlMessage}; status: {response.ReasonPhrase}/{response.StatusCode}");
                 IsSent = false;
