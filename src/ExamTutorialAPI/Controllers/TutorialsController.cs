@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using ExamContract.Auth;
 using ExamContract.TutorialModels;
 using ExamTutorialsAPI.DAL;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,7 @@ namespace ExamTutorialAPI.Controllers
         {
             this.repo = repo;           
         }
+        [KeyAuthorize(RoleEnum.admin, RoleEnum.teacher, RoleEnum.student)]
         public override async Task<ActionResult<IEnumerable<Tutorial>>> Get(string login, bool? onlyActive = null)
         {
             List<Tutorial> list = new List<Tutorial>();

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExamContract.Auth;
 using ExamContract.CourseModels;
 using ExamCourseAPI.DAL;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,7 @@ namespace ExamCourseAPI.Controllers
             this.repo = repo;
         }
         [HttpGet]
+        [KeyAuthorize(RoleEnum.admin, RoleEnum.teacher, RoleEnum.student)]
         public virtual async Task<ActionResult<IEnumerable<T>>> Get(int? courseId = null, int? id = null)
         {
             if (courseId == null && id != null)
@@ -32,6 +34,7 @@ namespace ExamCourseAPI.Controllers
         }
 
         [HttpGet("{course}/{id}")]
+        [KeyAuthorize(RoleEnum.admin, RoleEnum.teacher, RoleEnum.student)]
         public virtual async Task<ActionResult<T>> Get(int course, int id)
         {
             var item = await repo.GetAsync(course, id);
@@ -41,6 +44,7 @@ namespace ExamCourseAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [KeyAuthorize(RoleEnum.admin, RoleEnum.teacher)]
         public virtual async Task<IActionResult> Put(int id, T item)
         {
             if (id != item.Id)
@@ -67,6 +71,7 @@ namespace ExamCourseAPI.Controllers
         }
 
         [HttpPost]
+        [KeyAuthorize(RoleEnum.admin, RoleEnum.teacher)]
         public virtual async Task<ActionResult<T>> Post(T item)
         {
             await repo.AddAsync(item);
@@ -75,6 +80,7 @@ namespace ExamCourseAPI.Controllers
         }
 
         [HttpDelete("{course}/{id}")]
+        [KeyAuthorize(RoleEnum.admin, RoleEnum.teacher)]
         public virtual async Task<ActionResult<T>> Delete(int course, int id)
         {
             var item = await repo.GetAsync(course, id);
