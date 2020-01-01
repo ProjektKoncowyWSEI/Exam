@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExamContract\ExamContract.csproj" />
-    <ProjectReference Include="..\ExamTutorialAPI\ExamTutorialAPI.csproj" />
     <ProjectReference Include="..\Helpers\Helpers.csproj" />
     <ProjectReference Include="..\Logger\Logger.csproj" />
   </ItemGroup>
