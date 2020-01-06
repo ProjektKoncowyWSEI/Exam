@@ -1,5 +1,6 @@
 ﻿using ExamContract.TutorialModels;
 using Microsoft.EntityFrameworkCore;
+using ExamContract.Auth;
 
 public class Context : DbContext
 {
