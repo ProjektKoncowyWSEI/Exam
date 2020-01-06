@@ -57,8 +57,8 @@ namespace ExamCourseAPI
             services.AddTransient<Repository<Course>>();
             services.AddTransient<Repository<User>>();
             services.AddTransient<TwoKeysRepository<TutorialCourse>>();
-            services.AddTransient<TwoKeysRepository<ExamCourse>>();            
-                  
+            services.AddTransient<TwoKeysRepository<ExamCourse>>();
+            services.AddTransient<ApiKeyRepo>();
         }
        
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
