@@ -32,7 +32,7 @@ namespace ExamMailSenderAPI.Controllers
                     {
                         await uow.SaveMailWithAttachments(model);
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
                         message += " - Nie udało się zapisać";
                     }

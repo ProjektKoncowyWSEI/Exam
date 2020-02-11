@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ExamMailSenderAPI.Migrations
@@ -12,7 +13,7 @@ namespace ExamMailSenderAPI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Login = table.Column<string>(maxLength: 256, nullable: true),
                     Active = table.Column<bool>(nullable: false),
                     Title = table.Column<string>(nullable: true),
@@ -32,7 +33,7 @@ namespace ExamMailSenderAPI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Login = table.Column<string>(maxLength: 256, nullable: true),
                     Active = table.Column<bool>(nullable: false),
                     FileName = table.Column<string>(nullable: true),
