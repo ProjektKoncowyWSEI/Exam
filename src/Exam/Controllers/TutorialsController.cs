@@ -11,6 +11,7 @@ using Helpers;
 
 namespace Exam.Controllers
 {
+    [AuthorizeByRoles(RoleEnum.admin, RoleEnum.teacher)]
     public class TutorialsController : MyBaseController<Tutorial>
     {
         private readonly ILogger logger;
