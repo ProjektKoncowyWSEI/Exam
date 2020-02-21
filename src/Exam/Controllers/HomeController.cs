@@ -46,8 +46,8 @@ namespace Exam.Controllers
         public IActionResult Error()
         {
             var exceptionHandlerPathFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-            ViewBag.Message = exceptionHandlerPathFeature.Error.ToString();
-            ViewBag.InnerException = exceptionHandlerPathFeature.Error.InnerException;
+            ViewBag.Message = exceptionHandlerPathFeature.Error.Message.ToString();
+            //ViewBag.InnerException = exceptionHandlerPathFeature.Error.InnerException;
             ViewBag.Path = exceptionHandlerPathFeature.Path;            
             logger.LogError($"{ViewBag.Message} * {ViewBag.InnerException} * {ViewBag.Path}");
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

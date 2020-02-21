@@ -38,18 +38,7 @@ namespace ExamTutorialAPI
             }
             services.AddHttpContextAccessor();
             services
-                .AddMvcCore() //AddMVC przed autoryzacją
-                .AddAuthorization(options =>
-                {
-                    options.AddPolicy(RoleEnum.admin.ToString(), policy =>
-                        policy.Requirements.Add(new KeyRequirement(RoleEnum.admin)));
-                    options.AddPolicy(RoleEnum.teacher.ToString(), policy =>
-                        policy.Requirements.Add(new KeyRequirement(RoleEnum.teacher)));
-                    options.AddPolicy(RoleEnum.student.ToString(), policy =>
-                        policy.Requirements.Add(new KeyRequirement(RoleEnum.student)));
-                    options.AddPolicy(RoleEnum.lack.ToString(), policy =>
-                        policy.Requirements.Add(new KeyRequirement(RoleEnum.lack)));
-                })
+                .AddMvcCore() 
                 .AddDataAnnotations()
                 .AddJsonFormatters()
                 .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
