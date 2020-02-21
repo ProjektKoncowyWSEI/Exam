@@ -29,12 +29,12 @@ namespace ExamContract.Auth
                 return;
             }
 
-            var repoRoles = repo.GetDictionary();
+            //var repoRoles = repo.GetDictionary();
             var httpContext = contextAccessor.HttpContext;
             string key = httpContext.Request.Headers[GlobalHelpers.ApiKey];
             if (key != null)
             {
-                string role = repoRoles.ContainsKey(key) ? repoRoles[key] : RoleEnum.lack.ToString();
+                string role = repo.CheckApiKey(key) ? repo.GetRole(key) : RoleEnum.lack.ToString();
                 if (roles.Select(a => a.ToString()).Contains(role))
                     return;                
                 else

@@ -7,8 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace ExamContract.Auth
-{
-    [KeyAuthorize(RoleEnum.admin)]
+{    
     public sealed class ApiKeyRepo 
     {
         private readonly DbContext context;
@@ -30,19 +29,12 @@ namespace ExamContract.Auth
             return dbSet.Any(k => k.Name == name && k.Role == RoleEnum.admin.ToString());
         }
         private string getKey => contextAccessor.HttpContext.Request.Headers[GlobalHelpers.ApiKey];
-       
-        public Dictionary<string, string> GetDictionary()
+               
+        public string GetRole(string name)
         {
-            var list = dbSet.Where(a => a.ExpirationDate >= DateTime.Now).ToList();
-            var names = list.Select(a => a.Name).Distinct().ToList();
-            var dictionary = new Dictionary<string, string>();
-            names.ForEach(n =>
-            {
-                dictionary.Add(n, list.First(k => k.Name == n).Role);
-            });
-            return dictionary;
+            return dbSet.Where(a => a.ExpirationDate >= DateTime.Now && a.Name == name).Select(a => a.Role).FirstOrDefault();
         }
-
+        [KeyAuthorize(RoleEnum.admin)]
         public async Task<List<string>> GetKeysAsync()
         {
             if (!isAdmin(getKey))
@@ -51,18 +43,21 @@ namespace ExamContract.Auth
                 .Where(a => a.ExpirationDate >= DateTime.Now)
                 .Select(a => a.Name).ToListAsync();
         }
+        [KeyAuthorize(RoleEnum.admin)]
         public async Task<List<Key>> GetListAsync()
         {
             if (!isAdmin(getKey))
                 throw new Exception(GlobalHelpers.AccesDenied);
             return await dbSet.ToListAsync();
         }
+        [KeyAuthorize(RoleEnum.admin)]
         public async Task<Key> GetAsync(string key)
         {
             if (!isAdmin(getKey))
                 throw new Exception(GlobalHelpers.AccesDenied);
             return await dbSet.SingleOrDefaultAsync(k => k.Name == key);
         }
+        [KeyAuthorize(RoleEnum.admin)]
         public async Task<string> AddAsync(Key item)
         {
             if (!isAdmin(getKey))
@@ -78,6 +73,7 @@ namespace ExamContract.Auth
             }
 
         }
+        [KeyAuthorize(RoleEnum.admin)]
         public async Task<bool> UpdateAsync(Key item)
         {
             if (!isAdmin(getKey))
@@ -95,6 +91,7 @@ namespace ExamContract.Auth
                 throw;
             }
         }
+        [KeyAuthorize(RoleEnum.admin)]
         public async Task<bool> DeleteAsync(string name)
         {
             if (!isAdmin(getKey))
@@ -114,6 +111,7 @@ namespace ExamContract.Auth
             }
             return false;
         }
+        [KeyAuthorize(RoleEnum.admin)]
         public async Task SaveChangesAsync()
         {
             if (!isAdmin(getKey))
