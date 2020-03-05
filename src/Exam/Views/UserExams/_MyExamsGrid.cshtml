@@ -46,8 +46,14 @@
                             {
                                 <tr>
                                     <td>
-                                        <div class="td">@Html.DisplayNameFor(model => model.Exam.Name)</div>
-                                        @Html.DisplayFor(modelItem => item.Exam.Name)
+                                        @if (item.Active)
+                                        {
+                                            <a asp-controller="ExamApproaches" asp-action="Index" asp-route-code="@item.Exam.Code">@Html.DisplayFor(modelItem => item.Exam.Name)</a>
+                                        }
+                                        else
+                                        {
+                                            @Html.DisplayFor(modelItem => item.Exam.Name)
+                                        }
                                     </td>
                                     <td>
                                         <div class="td">@Html.DisplayNameFor(model => model.Exam.MinStart)</div>
@@ -67,14 +73,7 @@
                                     </td>
                                     <td>
                                         <div class="td">@Html.DisplayNameFor(model => model.Exam.Code)</div>
-                                        @if (item.Active)
-                                        {
-                                            <a asp-controller="ExamApproaches" asp-action="Index" asp-route-code="@item.Exam.Code">@Html.DisplayFor(modelItem => item.Exam.Code)</a>
-                                        }
-                                        else
-                                        {
-                                            @Html.DisplayFor(modelItem => item.Exam.Code)
-                                        }
+                                        @Html.DisplayFor(modelItem => item.Exam.Code)
                                     </td>
                                     <td>
                                         <div>

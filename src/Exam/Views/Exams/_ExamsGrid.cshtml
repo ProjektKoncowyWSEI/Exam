@@ -70,8 +70,7 @@
                         <tr class="mainTr">
                             <td><button id="arrow_@item.Id" onclick="toggleTr('#questions_@item.Id', '#arrow_@item.Id')" class="btn btn-primary fa fa-chevron-down btn-sm"></button></td>
                             <td>
-                                <div class="td">@Html.DisplayNameFor(model => model.Name)</div>
-                                @Html.DisplayFor(modelItem => item.Name)
+                                <a asp-controller="ExamApproaches" asp-action="Index" asp-route-code="@item.Code">@Html.DisplayFor(modelItem => item.Name)</a>
                             </td>
                             <td>
                                 <div class="td">@Html.DisplayNameFor(model => model.MinStart)</div>
@@ -98,7 +97,8 @@
                                 @Html.DisplayFor(modelItem => item.Active)
                             </td>
                             <td>
-                                <a asp-controller="ExamApproaches" asp-action="Index" asp-route-code="@item.Code">@Html.DisplayFor(modelItem => item.Code)</a>
+                                <div class="td">@Html.DisplayNameFor(model => model.Code)</div>
+                                @Html.DisplayFor(modelItem => item.Code)
                             </td>
                             <td>
                                 <div class="command">
