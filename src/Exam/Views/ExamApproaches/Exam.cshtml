@@ -26,7 +26,7 @@
                     <div class="card margin5px">
                         <div class="col-12 questionContent">
                             <div id="question_@i">@Localizer["Question"] @(i + 1)</div>
-                            @Html.DisplayFor(m => Model.Questions[i].Content, new { @class = "form-control" })
+                            @Html.Raw(Model.Questions[i].Content)
                         </div>
                         <div class="row">
                             <div class="answerContent">
@@ -35,14 +35,21 @@
                                     <div class="col-12">
                                         @if (Model.Questions[i].AnswerTypesEnum == AnswerTypesEnum.single)
                                         {
+                                            
                                             <label>
-                                                <input class="bigCheckbox" type="radio" name="@Model.Questions[i].Name" onchange="setAnswer(@i, @y, this, @Model.Questions[i].AnswerType )"> @Model.Questions[i].Answers[y].Content
+                                                <input class="bigCheckbox" type="radio" name="@Model.Questions[i].Name" onchange="setAnswer(@i, @y, this, @Model.Questions[i].AnswerType )"> 
+                                            </label>
+                                            <label>
+                                                @Html.Raw(@Model.Questions[i].Answers[y].Content)
                                             </label>
                                         }
                                         else if (Model.Questions[i].AnswerTypesEnum == AnswerTypesEnum.multiple)
                                         {
                                             <label>
-                                                <input class="bigCheckbox" type="checkbox" name="@Model.Questions[i].Name" onchange="setAnswer(@i, @y, this, @Model.Questions[i].AnswerType )"> @Model.Questions[i].Answers[y].Content
+                                                <input class="bigCheckbox" type="checkbox" name="@Model.Questions[i].Name" onchange="setAnswer(@i, @y, this, @Model.Questions[i].AnswerType )"> 
+                                            </label>
+                                            <label>
+                                                @Html.Raw(@Model.Questions[i].Answers[y].Content)
                                             </label>
                                         }
                                     </div>
