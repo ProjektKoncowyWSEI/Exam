@@ -28,28 +28,36 @@ namespace ExamMainDataBaseAPI.DAL
             return await dbSetExamApproacheResult.SingleOrDefaultAsync(a => a.ExamId == examId && a.Login == login && a.QuestionId == questionId && a.AnswerId == answerId);
         }
         public async Task<List<ExamApproacheResult>> GetResultsGroupedAsync(int examId)
-        {
-            return await dbSetExamApproacheResult
-                                .Where(a => a.ExamId == examId && a.Checked)
-                                .GroupBy(a => new { a.ExamId, a.Login })
-                                .Select(a => new ExamApproacheResult
-                                {
-                                    Login = a.Key.Login,
-                                    ExamId = a.Key.ExamId,
-                                    Points = a.Sum(x => x.Points)
-                                }).ToListAsync();
+        {          
+            var results = await Task.Run(() => dbSetExamApproacheResult
+                               .Where(a => a.ExamId == examId && a.Checked)
+                               .Select(a => new ExamApproacheResult
+                               {
+                                   Login = a.Login,
+                                   ExamId = a.ExamId,
+                                   Points = a.Points
+                               }).ToListAsync());
+            var grouped = results.GroupBy(a => new { a.ExamId, a.Login })
+                .Select(a => new ExamApproacheResult
+                {
+                    Login = a.Key.Login,
+                    ExamId = a.Key.ExamId,
+                    Points = a.Sum(x => x.Points)
+                }).ToList();
+            return grouped;
         }
         public async Task<ExamApproacheResult> GetResultGroupedAsync(string login, int examId)
         {
-            return await dbSetExamApproacheResult
+            var points = await Task.Run(() => dbSetExamApproacheResult
                                 .Where(a => a.ExamId == examId && a.Login == login && a.Checked)
-                                .GroupBy(a => new { a.ExamId, a.Login })                                
-                                .Select(a => new ExamApproacheResult
-                                {
-                                     Login = a.Key.Login,
-                                      ExamId = a.Key.ExamId,
-                                       Points = a.Sum(x=>x.Points)
-                                }).FirstOrDefaultAsync();
+                                .Select(a => a.Points)
+                                .Sum(a => a));
+            return new ExamApproacheResult
+            {
+                Login = login,
+                ExamId = examId,
+                Points = points
+            };          
         }
         public async Task<List<ExamApproache>> GetListAsync()
         {

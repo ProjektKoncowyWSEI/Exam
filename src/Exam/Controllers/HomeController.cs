@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Diagnostics;
+using Exam.Data.UnitOfWork;
+using System.Threading.Tasks;
 
 namespace Exam.Controllers
 {
@@ -14,14 +16,17 @@ namespace Exam.Controllers
     {
         private readonly IStringLocalizer<SharedResource> localizer;
         private readonly ILogger logger;
+        private readonly ApiStrarter apiStrarter;
 
-        public HomeController(IStringLocalizer<SharedResource> localizer, ILogger logger)
+        public HomeController(IStringLocalizer<SharedResource> localizer, ILogger logger, ApiStrarter apiStrarter)
         {
             this.localizer = localizer;
             this.logger = logger;
+            this.apiStrarter = apiStrarter;
         }
-        public IActionResult Index()
-        {           
+        public async Task<IActionResult> Index()
+        {
+            await apiStrarter.WakeUp();
             return View(nameof(Index));
         }     
         public IActionResult About()

@@ -59,6 +59,7 @@ namespace Exam
               .AddDefaultTokenProviders();
 
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<EmailSender>();
             services.AddTransient<UserInitializer>();
             services.AddScoped<ILogger, Logger.ExamLogger>();
             services.AddScoped<ILogger<LoginModel>, Logger.ExamLogger<LoginModel>>();
@@ -79,6 +80,7 @@ namespace Exam
             services.AddTransient<Exams>();
             services.AddTransient<Courses>();
             services.AddTransient<Tutorials>();
+            services.AddTransient<ApiStrarter>();
 
 
             services.ConfigureApplicationCookie(o =>
