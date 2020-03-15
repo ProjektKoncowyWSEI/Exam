@@ -43,7 +43,7 @@ namespace Exam
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             string userConnection = Environment.GetEnvironmentVariable("EXAM_UsersConnection") ?? Configuration.GetConnectionString("UsersConnection");
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(userConnection));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(userConnection));
 
             services.AddDbContext<Logger.Data.LoggerDbContext>(options =>
                options.UseSqlite(
