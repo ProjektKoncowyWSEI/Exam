@@ -156,6 +156,7 @@ namespace Exam
             var initializer = new UserInitializer(roleMenager, userManager, Configuration);
             initializer.CreateRolesAsync().Wait();
             initializer.CreateDefaultUser().Wait();
+
         }
     }
 }
