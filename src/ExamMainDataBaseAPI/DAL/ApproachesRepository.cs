@@ -48,16 +48,21 @@ namespace ExamMainDataBaseAPI.DAL
         }
         public async Task<ExamApproacheResult> GetResultGroupedAsync(string login, int examId)
         {
-            var points = await Task.Run(() => dbSetExamApproacheResult
+            var approachExists = await dbSetExamApproacheResult.FirstOrDefaultAsync(a => a.ExamId == examId && a.Login == login);
+            if (approachExists != null)
+            {
+                var points = await Task.Run(() => dbSetExamApproacheResult
                                 .Where(a => a.ExamId == examId && a.Login == login && a.Checked)
                                 .Select(a => a.Points)
                                 .Sum(a => a));
-            return new ExamApproacheResult
-            {
-                Login = login,
-                ExamId = examId,
-                Points = points
-            };          
+                return new ExamApproacheResult
+                {
+                    Login = login,
+                    ExamId = examId,
+                    Points = points
+                };
+            }
+            return null;     
         }
         public async Task<List<ExamApproache>> GetListAsync()
         {
