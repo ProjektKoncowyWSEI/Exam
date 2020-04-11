@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Localization;
 
 namespace Exam.Areas.Identity.Pages.Account
 {
@@ -20,6 +21,7 @@ namespace Exam.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IStringLocalizer<SharedResource> Localizer;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
@@ -27,7 +29,8 @@ namespace Exam.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             RoleManager<IdentityRole> roleManager,
-            UserInitializer initializer)
+            UserInitializer initializer,
+            IStringLocalizer<SharedResource> localizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -35,6 +38,7 @@ namespace Exam.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _roleManager = roleManager;
             _initializer = initializer;
+            Localizer = localizer;
         }
 
         [BindProperty]
@@ -96,7 +100,7 @@ namespace Exam.Areas.Identity.Pages.Account
 
                     //await _signInManager.SignInAsync(user, isPersistent: false);
                     //return LocalRedirect(returnUrl);
-                    Message = "User created";
+                    Message = Localizer["User created"];
                     return Page();
                 }
                 foreach (var error in result.Errors)
