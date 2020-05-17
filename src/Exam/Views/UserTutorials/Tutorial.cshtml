@@ -16,7 +16,7 @@
                     </div>
                     <div>
                         <span class="bold">@Html.DisplayNameFor(model => model.Description): </span>
-                        <span>@Html.DisplayFor(model => model.Description)</span>
+                        <span>@Html.Raw(Model.Description)</span>
                     </div>
                     <div>
                         <span class="bold">@Html.DisplayNameFor(model => model.Login): </span>
