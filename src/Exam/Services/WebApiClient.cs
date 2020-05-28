@@ -153,5 +153,10 @@ namespace Exam.Services
                 return false;
             }
         }
+        public async virtual Task<bool> WakeUp()
+        {
+            var response = await Client.GetAsync($"{uri}");
+            return (response.IsSuccessStatusCode);            
+        }
     }
 }

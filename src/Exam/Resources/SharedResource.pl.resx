@@ -798,4 +798,7 @@
   <data name="You are sing up for exam" xml:space="preserve">
     <value>Jesteś zapisany na egzamin</value>
   </data>
+  <data name="User created" xml:space="preserve">
+    <value>Utworzono użytkownika</value>
+  </data>
 </root>

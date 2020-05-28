@@ -43,7 +43,7 @@ namespace Exam
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             string userConnection = Environment.GetEnvironmentVariable("EXAM_UsersConnection") ?? Configuration.GetConnectionString("UsersConnection");
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(userConnection));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(userConnection));
 
             services.AddDbContext<Logger.Data.LoggerDbContext>(options =>
                options.UseSqlite(
@@ -59,6 +59,7 @@ namespace Exam
               .AddDefaultTokenProviders();
 
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<EmailSender>();
             services.AddTransient<UserInitializer>();
             services.AddScoped<ILogger, Logger.ExamLogger>();
             services.AddScoped<ILogger<LoginModel>, Logger.ExamLogger<LoginModel>>();
@@ -79,6 +80,7 @@ namespace Exam
             services.AddTransient<Exams>();
             services.AddTransient<Courses>();
             services.AddTransient<Tutorials>();
+            services.AddTransient<ApiStrarter>();
 
 
             services.ConfigureApplicationCookie(o =>
@@ -154,6 +156,7 @@ namespace Exam
             var initializer = new UserInitializer(roleMenager, userManager, Configuration);
             initializer.CreateRolesAsync().Wait();
             initializer.CreateDefaultUser().Wait();
+
         }
     }
 }
