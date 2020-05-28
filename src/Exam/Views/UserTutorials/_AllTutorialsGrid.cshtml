@@ -37,7 +37,7 @@
                             </td>
                             <td>
                                 <div class="td">@Html.DisplayNameFor(model => model.Description)</div>
-                                @Html.DisplayFor(modelItem => item.Description)
+                                @Html.Raw(item.Description)
                             </td>                         
                             <td>
                                 <div class="td">@Localizer["Owner"]</div>
