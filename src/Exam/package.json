@@ -8,7 +8,7 @@
     "jquery-geolocate": "0.1.4",
     "globalize": "1.4.2",
     "jquery-validation-globalize": "0.1.1",
-    "jquery-ui": "1.12.1",
+    "jquery-ui": "1.13.0",
     "shufflejs": "^4.0.2",
     "bootstrap": "4.3.1"
   },
